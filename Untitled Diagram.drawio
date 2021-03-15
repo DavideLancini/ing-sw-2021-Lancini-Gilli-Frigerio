@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-03-15T16:31:05.045Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36" etag="OcNbB-zSj66qJ8ACiXjt" version="14.4.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-03-15T16:32:06.325Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36" etag="jzooDiTSH4YU7vbu4T_V" version="14.4.8" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="2580" dy="954" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
@@ -41,7 +41,7 @@
         <mxCell id="oog7lrOWCa2fzUTYI8c2-20" value="&lt;span style=&quot;text-align: left&quot;&gt;+ punti vittoria: int&lt;br&gt;+ attiva: boolean&amp;nbsp;&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="oog7lrOWCa2fzUTYI8c2-9" vertex="1">
           <mxGeometry y="26" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="35oZMmhd7yD35cJpi1J_-1" value="Standard Rules Set" style="swimlane;html=1;startSize=20;horizontal=1;containerType=tree;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};strokeColor=#000000;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="35oZMmhd7yD35cJpi1J_-1" value="Standard Rules Set" style="swimlane;html=1;startSize=20;horizontal=1;containerType=tree;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};strokeColor=#000000;swimlaneFillColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="1120" y="160" width="280" height="160" as="geometry" />
         </mxCell>
         <mxCell id="s9a0PcFc4wz41X3oclvl-4" value="+TODO: inserire tutti i settaggi standard" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="35oZMmhd7yD35cJpi1J_-1" vertex="1">
@@ -54,7 +54,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="35oZMmhd7yD35cJpi1J_-7" value="Custom Rules Set" style="swimlane;strokeColor=#000000;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="35oZMmhd7yD35cJpi1J_-7" value="Custom Rules Set" style="swimlane;strokeColor=#000000;swimlaneFillColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="1120" y="360" width="280" height="160" as="geometry" />
         </mxCell>
         <mxCell id="s9a0PcFc4wz41X3oclvl-5" value="-name: string&#xa;-TODO: inserire tutti i settaggi vuoti" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="35oZMmhd7yD35cJpi1J_-7" vertex="1">
@@ -102,7 +102,7 @@
         <mxCell id="NfzXFvAN2sLwhFyiHCVM-3" value="BIANCA&#xa;BLU&#xa;GRIGIO&#xa;GIALLO&#xa;VIOLA&#xa;ROSSO&#xa;VUOTO" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="NfzXFvAN2sLwhFyiHCVM-0" vertex="1">
           <mxGeometry y="26" width="140" height="114" as="geometry" />
         </mxCell>
-        <mxCell id="35oZMmhd7yD35cJpi1J_-8" value="Interface (commandLine)" style="swimlane;strokeColor=#000000;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="35oZMmhd7yD35cJpi1J_-8" value="Interface (commandLine)" style="swimlane;strokeColor=#000000;swimlaneFillColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="840" y="160" width="240" height="280" as="geometry" />
         </mxCell>
         <mxCell id="s9a0PcFc4wz41X3oclvl-0" value="+login()&#xa;&#xa;+createMatch()&#xa;+joinMatch()&#xa;+continueMatch()&#xa;&#xa;+enterRuleEditor()&#xa;+serverInteraction()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="35oZMmhd7yD35cJpi1J_-8" vertex="1">
@@ -208,7 +208,7 @@
         <mxCell id="yiOMKS7E3EkovL9F9Eef-16" value="&lt;&lt;interface&gt;&gt;&#xa;KeyListener" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="840" y="30" width="140" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="7LExhrsFtb4krhW59dAO-0" value="Deposito" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="7LExhrsFtb4krhW59dAO-0" value="Deposito" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="320" y="720" width="380" height="140" as="geometry" />
         </mxCell>
         <mxCell id="7LExhrsFtb4krhW59dAO-1" value="+ prima riga: Risorsa&#xa;+ seconda riga: Risorsa[2]&#xa;+ terza riga: Risorsa [3]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7LExhrsFtb4krhW59dAO-0">
@@ -229,13 +229,13 @@
         <mxCell id="yiOMKS7E3EkovL9F9Eef-21" value="Implements" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="yiOMKS7E3EkovL9F9Eef-20">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="yiOMKS7E3EkovL9F9Eef-22" value="SERVER" style="swimlane;fillColor=none;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="yiOMKS7E3EkovL9F9Eef-22" value="SERVER" style="swimlane;fillColor=#f8cecc;strokeColor=#b85450;swimlaneFillColor=#ffffff;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="840" y="560" width="520" height="440" as="geometry" />
         </mxCell>
-        <mxCell id="yiOMKS7E3EkovL9F9Eef-7" value="IN MATCH LOGIC&#xa;&#xa;LOOP&#xa;  G1 Prendere risorse Mercatro&#xa;  G1 Comprare Carta Sviluppo&#xa;  G1 Attivare la Produzione&#xa;&#xa;  G2 Prendere risorse Mercatro&#xa;  G2 Comprare Carta Sviluppo&#xa;  G2 Attivare la Produzione&#xa;&#xa;  G3 Prendere risorse Mercatro&#xa;  G3 Comprare Carta Sviluppo&#xa;  G3 Attivare la Produzione&#xa;&#xa;  G4 Prendere risorse Mercatro&#xa;  G4 Comprare Carta Sviluppo&#xa;  G4 Attivare la Produzione&#xa;  &#xa;  Controlla se è finita la partita&#xa;" style="text;strokeColor=#b85450;fillColor=#f8cecc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="yiOMKS7E3EkovL9F9Eef-22">
+        <mxCell id="yiOMKS7E3EkovL9F9Eef-7" value="IN MATCH LOGIC&#xa;&#xa;LOOP&#xa;  G1 Prendere risorse Mercatro&#xa;  G1 Comprare Carta Sviluppo&#xa;  G1 Attivare la Produzione&#xa;&#xa;  G2 Prendere risorse Mercatro&#xa;  G2 Comprare Carta Sviluppo&#xa;  G2 Attivare la Produzione&#xa;&#xa;  G3 Prendere risorse Mercatro&#xa;  G3 Comprare Carta Sviluppo&#xa;  G3 Attivare la Produzione&#xa;&#xa;  G4 Prendere risorse Mercatro&#xa;  G4 Comprare Carta Sviluppo&#xa;  G4 Attivare la Produzione&#xa;  &#xa;  Controlla se è finita la partita&#xa;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="yiOMKS7E3EkovL9F9Eef-22">
           <mxGeometry x="270" y="34" width="240" height="396" as="geometry" />
         </mxCell>
-        <mxCell id="35oZMmhd7yD35cJpi1J_-9" value="Game Logic" style="swimlane;strokeColor=#b85450;fillColor=#f8cecc;startSize=23;" parent="yiOMKS7E3EkovL9F9Eef-22" vertex="1">
+        <mxCell id="35oZMmhd7yD35cJpi1J_-9" value="Game Logic" style="swimlane;startSize=23;" parent="yiOMKS7E3EkovL9F9Eef-22" vertex="1">
           <mxGeometry x="10" y="34" width="240" height="400" as="geometry" />
         </mxCell>
         <mxCell id="yiOMKS7E3EkovL9F9Eef-13" value="-username1: string&#xa;-password1: string&#xa;-adress1: int&#xa;&#xa;-username2: string&#xa;-password2: string&#xa;-adress2: int&#xa;&#xa;-username3: string&#xa;-password3: string&#xa;-adress3: int&#xa;&#xa;-username4: string&#xa;-password4: string&#xa;-adress4: int&#xa;&#xa;-idMatch: int&#xa;-nameMatch: string&#xa;-isEnded: boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="35oZMmhd7yD35cJpi1J_-9">
