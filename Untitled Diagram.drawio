@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-03-15T15:46:46.393Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36" etag="ZFP9t8xNH28B6bxbckug" version="14.4.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-03-15T15:47:00.996Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36" etag="4Qv6rDgXzqPNG85fnfF0" version="14.4.8" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="2249" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -175,7 +175,7 @@
           <mxGeometry y="160" width="200" height="200" as="geometry" />
         </mxCell>
         <mxCell id="kXcpg0YlyU-LXUACbQBH-1" value="&lt;&lt;enum&gt;&gt;&#xa;Risorsa" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="-240" y="30" width="140" height="104" as="geometry" />
+          <mxGeometry x="-220" y="80" width="140" height="104" as="geometry" />
         </mxCell>
         <mxCell id="kXcpg0YlyU-LXUACbQBH-4" value="PIETRA&#xa;MONETA&#xa;SCUDO&#xa;SERVITORE" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="kXcpg0YlyU-LXUACbQBH-1">
           <mxGeometry y="30" width="140" height="74" as="geometry" />
