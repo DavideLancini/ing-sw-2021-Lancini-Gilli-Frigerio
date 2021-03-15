@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-03-15T15:01:31.597Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36" etag="GBrSxMfmcIw5QkyE4SPk" version="14.4.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-03-15T15:01:48.474Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36" etag="Gx0K6jGHHXgu2c6upXjC" version="14.4.8" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1877" dy="764" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -86,13 +86,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="35oZMmhd7yD35cJpi1J_-1" value="Parametri Statici" style="swimlane;html=1;startSize=20;horizontal=1;containerType=tree;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};strokeColor=#000000;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="600" y="70" width="280" height="220" as="geometry" />
-        </mxCell>
-        <mxCell id="NfzXFvAN2sLwhFyiHCVM-0" value="&lt;&lt;enumeration&gt;&gt;&#xa;Biglia" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="35oZMmhd7yD35cJpi1J_-1">
-          <mxGeometry x="10" y="29" width="140" height="140" as="geometry" />
-        </mxCell>
-        <mxCell id="NfzXFvAN2sLwhFyiHCVM-3" value="BIANCA&#xa;BLU&#xa;GRIGIO&#xa;GIALLO&#xa;VIOLA&#xa;ROSSO&#xa;VUOTO" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="NfzXFvAN2sLwhFyiHCVM-0">
-          <mxGeometry y="26" width="140" height="114" as="geometry" />
+          <mxGeometry x="780" y="50" width="280" height="220" as="geometry" />
         </mxCell>
         <mxCell id="35oZMmhd7yD35cJpi1J_-7" value="Parametri Partita" style="swimlane;strokeColor=#000000;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="600" y="320" width="280" height="200" as="geometry" />
@@ -108,6 +102,12 @@
         </mxCell>
         <mxCell id="6qONtpnG5qTaz_-XZDPJ-5" value="BLU&#xa;GIALLO&#xa;VERDE&#xa;VIOLA" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="6qONtpnG5qTaz_-XZDPJ-4">
           <mxGeometry y="26" width="140" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="NfzXFvAN2sLwhFyiHCVM-0" value="&lt;&lt;enumeration&gt;&gt;&#xa;Biglia" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="490" y="70" width="140" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="NfzXFvAN2sLwhFyiHCVM-3" value="BIANCA&#xa;BLU&#xa;GRIGIO&#xa;GIALLO&#xa;VIOLA&#xa;ROSSO&#xa;VUOTO" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="NfzXFvAN2sLwhFyiHCVM-0">
+          <mxGeometry y="26" width="140" height="114" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
