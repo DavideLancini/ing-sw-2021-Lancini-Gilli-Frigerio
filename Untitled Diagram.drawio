@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-03-15T17:29:43.527Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36" etag="w-P4JsLPcHIKsxGtmjAw" version="14.4.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-03-15T17:29:53.701Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36" etag="HzCmCy3N_euRyQYDip9z" version="14.4.8" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="2031" dy="1159" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
       <root>
@@ -326,7 +326,7 @@
           <mxGeometry y="68" width="220" height="26" as="geometry" />
         </mxCell>
         <mxCell id="tiEvfuk5Gu6jawJiWm_S-5" value="CartaSviluppo" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;fillColor=#d5e8d4;strokeColor=#82b366;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1270" y="1580" width="280" height="250" as="geometry" />
+          <mxGeometry x="1260" y="1370" width="280" height="250" as="geometry" />
         </mxCell>
         <mxCell id="tiEvfuk5Gu6jawJiWm_S-6" value="- costo: Array risorsa&#xa;- livello: Livello&#xa;- colore: ColoreCarta&#xa;- punti vittoria: int&#xa;- produzione: Produzione" style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tiEvfuk5Gu6jawJiWm_S-5" vertex="1">
           <mxGeometry y="26" width="280" height="114" as="geometry" />
@@ -338,7 +338,7 @@
           <mxGeometry y="148" width="280" height="102" as="geometry" />
         </mxCell>
         <mxCell id="tiEvfuk5Gu6jawJiWm_S-9" value="Carta Leader {abstract}" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;fillColor=#d5e8d4;strokeColor=#82b366;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="2260" y="1800" width="210" height="76" as="geometry">
+          <mxGeometry x="1740" y="1390" width="210" height="76" as="geometry">
             <mxRectangle x="-220" y="610" width="170" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -346,7 +346,7 @@
           <mxGeometry y="26" width="210" height="50" as="geometry" />
         </mxCell>
         <mxCell id="tiEvfuk5Gu6jawJiWm_S-79" value="Carta Leader {abstract}" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="2100" y="1780" width="160" height="140" as="geometry" />
+          <mxGeometry x="1580" y="1370" width="160" height="140" as="geometry" />
         </mxCell>
         <mxCell id="tiEvfuk5Gu6jawJiWm_S-80" value="- punti vittoria: int&#xa;- attiva: boolean&#xa;- tipo: Risorsa " style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tiEvfuk5Gu6jawJiWm_S-79" vertex="1">
           <mxGeometry y="26" width="160" height="54" as="geometry" />
