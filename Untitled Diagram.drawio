@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-03-15T17:34:58.696Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36" etag="PjGHLTdOm848VIgCsD25" version="14.4.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-03-15T17:35:21.595Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36" etag="MPGFqdsFe-j4gdIAi3Kh" version="14.4.8" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="253" dy="811" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+    <mxGraphModel dx="862" dy="1159" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -316,54 +316,16 @@
         <mxCell id="qD7D_m39awc1MZy7WmdB-3" value="+GetPV(): int&#xa;+IsActive(): boolean&#xa;+ Attiva(): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="qD7D_m39awc1MZy7WmdB-0" vertex="1">
           <mxGeometry y="88" width="220" height="62" as="geometry" />
         </mxCell>
-        <mxCell id="tiEvfuk5Gu6jawJiWm_S-5" value="CartaSviluppo" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;fillColor=#d5e8d4;strokeColor=#82b366;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1260" y="1370" width="280" height="148" as="geometry" />
-        </mxCell>
-        <mxCell id="tiEvfuk5Gu6jawJiWm_S-6" value="- costo: Array risorsa&#xa;- livello: Livello&#xa;- colore: ColoreCarta&#xa;- punti vittoria: int&#xa;- produzione: Produzione" style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tiEvfuk5Gu6jawJiWm_S-5" vertex="1">
-          <mxGeometry y="26" width="280" height="114" as="geometry" />
-        </mxCell>
-        <mxCell id="tiEvfuk5Gu6jawJiWm_S-7" value="" style="line;strokeWidth=1;fillColor=#d5e8d4;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#82b366;" parent="tiEvfuk5Gu6jawJiWm_S-5" vertex="1">
-          <mxGeometry y="140" width="280" height="8" as="geometry" />
-        </mxCell>
-        <mxCell id="tiEvfuk5Gu6jawJiWm_S-9" value="Carta Leader {abstract}" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;fillColor=#d5e8d4;strokeColor=#82b366;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1740" y="1390" width="210" height="76" as="geometry">
-            <mxRectangle x="-220" y="610" width="170" height="26" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="tiEvfuk5Gu6jawJiWm_S-10" value="&lt;span style=&quot;text-align: left&quot;&gt;+ punti vittoria: int&lt;br&gt;+ attiva: boolean&lt;br&gt;+ tipo: Risorsa&amp;nbsp;&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="tiEvfuk5Gu6jawJiWm_S-9" vertex="1">
-          <mxGeometry y="26" width="210" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="tiEvfuk5Gu6jawJiWm_S-79" value="Carta Leader {abstract}" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1580" y="1370" width="160" height="140" as="geometry" />
-        </mxCell>
-        <mxCell id="tiEvfuk5Gu6jawJiWm_S-80" value="- punti vittoria: int&#xa;- attiva: boolean&#xa;- tipo: Risorsa " style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tiEvfuk5Gu6jawJiWm_S-79" vertex="1">
-          <mxGeometry y="26" width="160" height="54" as="geometry" />
-        </mxCell>
-        <mxCell id="tiEvfuk5Gu6jawJiWm_S-81" value="" style="line;strokeWidth=1;fillColor=#d5e8d4;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#82b366;" parent="tiEvfuk5Gu6jawJiWm_S-79" vertex="1">
-          <mxGeometry y="80" width="160" height="8" as="geometry" />
-        </mxCell>
-        <mxCell id="tiEvfuk5Gu6jawJiWm_S-82" value="+ GetPV(): int&#xa;+ isActive(): boolean&#xa;+ Attiva(): void" style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tiEvfuk5Gu6jawJiWm_S-79" vertex="1">
-          <mxGeometry y="88" width="160" height="52" as="geometry" />
-        </mxCell>
-        <mxCell id="tiEvfuk5Gu6jawJiWm_S-83" value="" style="endArrow=none;html=1;strokeWidth=9;" parent="WIyWlLk6GJQsqaUBKTNV-1" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1180" y="1310" as="sourcePoint" />
-            <mxPoint x="2830" y="1310" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="UYXELn-aznjXGJklCHjd-0" value="+ GetCosto(): Array Risorsa&#xa;+ GetLivello(): Livello&#xa;+ GetPV(): int&#xa;+ GetInputProduzione(): Array Risorsa&#xa;+ GetOutputProduzione(): Array Risorsa" style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="1270" y="1528" width="280" height="102" as="geometry" />
-        </mxCell>
-        <mxCell id="UYXELn-aznjXGJklCHjd-2" value="CartaSviluppo" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="UYXELn-aznjXGJklCHjd-2" value="CartaSviluppo" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="2410" y="413" width="260" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="UYXELn-aznjXGJklCHjd-3" value="- costo: Array risorsa&#xa;- livello: Livello&#xa;- colore: ColoreCarta&#xa;- punti vittoria: int&#xa;- produzione: Produzione" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="UYXELn-aznjXGJklCHjd-2">
+        <mxCell id="UYXELn-aznjXGJklCHjd-3" value="- costo: Array risorsa&#xa;- livello: Livello&#xa;- colore: ColoreCarta&#xa;- punti vittoria: int&#xa;- produzione: Produzione" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="UYXELn-aznjXGJklCHjd-2" vertex="1">
           <mxGeometry y="26" width="260" height="84" as="geometry" />
         </mxCell>
-        <mxCell id="UYXELn-aznjXGJklCHjd-4" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="UYXELn-aznjXGJklCHjd-2">
+        <mxCell id="UYXELn-aznjXGJklCHjd-4" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="UYXELn-aznjXGJklCHjd-2" vertex="1">
           <mxGeometry y="110" width="260" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="UYXELn-aznjXGJklCHjd-5" value="+ GetCosto(): Array Risorsa&#xa;+ GetLivello(): Livello&#xa;+ GetPV(): int&#xa;+ GetInputProduzione(): Array Risorsa&#xa;+ GetOutputProduzione(): Array Risorsa" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="UYXELn-aznjXGJklCHjd-2">
+        <mxCell id="UYXELn-aznjXGJklCHjd-5" value="+ GetCosto(): Array Risorsa&#xa;+ GetLivello(): Livello&#xa;+ GetPV(): int&#xa;+ GetInputProduzione(): Array Risorsa&#xa;+ GetOutputProduzione(): Array Risorsa" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="UYXELn-aznjXGJklCHjd-2" vertex="1">
           <mxGeometry y="118" width="260" height="82" as="geometry" />
         </mxCell>
       </root>
