@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-03-15T14:55:57.424Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36" etag="aUzh4zcRdh6KelESxED4" version="14.4.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-03-15T14:56:30.558Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36" etag="-aMF1P1aixnViy8Rv5LB" version="14.4.8" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1877" dy="764" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2249" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -24,7 +24,7 @@
         <mxCell id="yBSryTIjgCuIUiby8R88-0" value="Carta Sviluppo" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-250" y="320" width="210" height="228" as="geometry" />
         </mxCell>
-        <mxCell id="yBSryTIjgCuIUiby8R88-1" value="+ costo: Array risorsa&#xa;+ livello: int&#xa;+ colore: int&#xa;+ punti vittoria: int&#xa;+ input produzione: Array risorsa&#xa;+ output produzione: Array risorsa" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="yBSryTIjgCuIUiby8R88-0" vertex="1">
+        <mxCell id="yBSryTIjgCuIUiby8R88-1" value="+ costo: Array risorsa&#xa;+ livello: int&#xa;+ colore: int&#xa;+ punti vittoria: int&#xa;+ produzione: Produzione" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="yBSryTIjgCuIUiby8R88-0" vertex="1">
           <mxGeometry y="26" width="210" height="114" as="geometry" />
         </mxCell>
         <mxCell id="yBSryTIjgCuIUiby8R88-2" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="yBSryTIjgCuIUiby8R88-0" vertex="1">
