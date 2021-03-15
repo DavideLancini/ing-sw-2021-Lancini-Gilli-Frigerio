@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-03-15T16:55:11.979Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36" etag="eiUrtEDUuFkHIL13zT4g" version="14.4.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-03-15T16:56:11.322Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36" etag="maK4jehodXScjW-EoSBe" version="14.4.8" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="2249" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+    <mxGraphModel dx="2249" dy="811" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -54,17 +54,19 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="35oZMmhd7yD35cJpi1J_-7" value="Custom Rules Set" style="swimlane;strokeColor=#000000;swimlaneFillColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1160" y="280" width="280" height="160" as="geometry" />
+        <mxCell id="35oZMmhd7yD35cJpi1J_-7" value="Custom Rules Set" style="swimlane;swimlaneFillColor=#ffffff;startSize=23;swimlaneLine=1;rounded=0;glass=0;sketch=0;perimeterSpacing=1;align=center;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="1160" y="280" width="280" height="130" as="geometry">
+            <mxRectangle x="1160" y="280" width="140" height="23" as="alternateBounds" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="s9a0PcFc4wz41X3oclvl-5" value="-name: string&#xa;-TODO: inserire tutti i settaggi vuoti" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="35oZMmhd7yD35cJpi1J_-7" vertex="1">
-          <mxGeometry y="30" width="280" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="yiOMKS7E3EkovL9F9Eef-9" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="35oZMmhd7yD35cJpi1J_-7" vertex="1">
-          <mxGeometry y="82" width="280" height="8" as="geometry" />
+        <mxCell id="s9a0PcFc4wz41X3oclvl-5" value="-name: string&lt;br&gt;-TODO: inserire tutti i settaggi vuoti" style="text;align=left;verticalAlign=top;spacingLeft=2;spacingRight=0;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;whiteSpace=wrap;labelBorderColor=none;labelBackgroundColor=none;textDirection=ltr;labelPosition=center;verticalLabelPosition=middle;shadow=0;" parent="35oZMmhd7yD35cJpi1J_-7" vertex="1">
+          <mxGeometry y="23" width="280" height="37" as="geometry" />
         </mxCell>
         <mxCell id="yiOMKS7E3EkovL9F9Eef-10" value="+load()&#xa;+edit()&#xa;+save()&#xa;+delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="35oZMmhd7yD35cJpi1J_-7" vertex="1">
-          <mxGeometry y="90" width="280" height="70" as="geometry" />
+          <mxGeometry y="60" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="yiOMKS7E3EkovL9F9Eef-9" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="35oZMmhd7yD35cJpi1J_-7" vertex="1">
+          <mxGeometry y="56" width="280" height="8" as="geometry" />
         </mxCell>
         <mxCell id="oog7lrOWCa2fzUTYI8c2-11" value="LeaderSconto" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-430" y="760" width="140" height="52" as="geometry" />
@@ -230,7 +232,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="yiOMKS7E3EkovL9F9Eef-22" value="SERVER" style="swimlane;fillColor=#f8cecc;strokeColor=#b85450;swimlaneFillColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="840" y="560" width="520" height="440" as="geometry" />
+          <mxGeometry x="1160" y="480" width="520" height="440" as="geometry" />
         </mxCell>
         <mxCell id="yiOMKS7E3EkovL9F9Eef-7" value="IN MATCH LOGIC&#xa;&#xa;LOOP&#xa;  G1 Prendere risorse Mercatro&#xa;  G1 Comprare Carta Sviluppo&#xa;  G1 Attivare la Produzione&#xa;&#xa;  G2 Prendere risorse Mercatro&#xa;  G2 Comprare Carta Sviluppo&#xa;  G2 Attivare la Produzione&#xa;&#xa;  G3 Prendere risorse Mercatro&#xa;  G3 Comprare Carta Sviluppo&#xa;  G3 Attivare la Produzione&#xa;&#xa;  G4 Prendere risorse Mercatro&#xa;  G4 Comprare Carta Sviluppo&#xa;  G4 Attivare la Produzione&#xa;  &#xa;  Controlla se è finita la partita&#xa;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="yiOMKS7E3EkovL9F9Eef-22" vertex="1">
           <mxGeometry x="270" y="34" width="240" height="396" as="geometry" />
