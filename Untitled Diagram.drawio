@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-03-15T16:16:13.946Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36" etag="IannsUhx-ypxDU-Y-BD-" version="14.4.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-03-15T16:17:26.285Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36" etag="kUIYIOFYAtBR6Gzw9Thr" version="14.4.8" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="2580" dy="954" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
@@ -105,7 +105,7 @@
         <mxCell id="35oZMmhd7yD35cJpi1J_-8" value="Interface (commandLine)" style="swimlane;strokeColor=#000000;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="840" y="40" width="240" height="280" as="geometry" />
         </mxCell>
-        <mxCell id="s9a0PcFc4wz41X3oclvl-0" value="+login()&#xa;&#xa;+createMatch()&#xa;+joinMatch()&#xa;+continueMatch()&#xa;&#xa;+enterRuleEditor()&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="35oZMmhd7yD35cJpi1J_-8" vertex="1">
+        <mxCell id="s9a0PcFc4wz41X3oclvl-0" value="+login()&#xa;&#xa;+createMatch()&#xa;+joinMatch()&#xa;+continueMatch()&#xa;&#xa;+enterRuleEditor()&#xa;+serverInteraction()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="35oZMmhd7yD35cJpi1J_-8" vertex="1">
           <mxGeometry y="160" width="240" height="120" as="geometry" />
         </mxCell>
         <mxCell id="s9a0PcFc4wz41X3oclvl-2" value="-username: string&#xa;-password: string&#xa;&#xa;-idMatch: int&#xa;-serverAdress: int&#xa;-nameMatch: string&#xa;-isEnded: boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="35oZMmhd7yD35cJpi1J_-8" vertex="1">
