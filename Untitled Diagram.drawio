@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-03-15T16:15:30.089Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36" etag="ZAPG476Ku-XoIEsedqwk" version="14.4.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-03-15T16:16:13.946Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36" etag="IannsUhx-ypxDU-Y-BD-" version="14.4.8" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="2317" dy="811" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+    <mxGraphModel dx="2580" dy="954" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -117,8 +117,8 @@
         <mxCell id="oog7lrOWCa2fzUTYI8c2-14" value="LeaderDeposito" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-290" y="760" width="140" height="52" as="geometry" />
         </mxCell>
-        <mxCell id="35oZMmhd7yD35cJpi1J_-9" value="Logic SERVER" style="swimlane;strokeColor=#b85450;fillColor=#f8cecc;startSize=23;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="840" y="360" width="240" height="700" as="geometry" />
+        <mxCell id="35oZMmhd7yD35cJpi1J_-9" value="Logic (server)" style="swimlane;strokeColor=#b85450;fillColor=#f8cecc;startSize=23;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="840" y="360" width="240" height="420" as="geometry" />
         </mxCell>
         <mxCell id="yiOMKS7E3EkovL9F9Eef-13" value="-username1: string&#xa;-password1: string&#xa;-adress1: int&#xa;&#xa;-username2: string&#xa;-password2: string&#xa;-adress2: int&#xa;&#xa;-username3: string&#xa;-password3: string&#xa;-adress3: int&#xa;&#xa;-username4: string&#xa;-password4: string&#xa;-adress4: int&#xa;&#xa;-idMatch: int&#xa;-nameMatch: string&#xa;-isEnded: boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="35oZMmhd7yD35cJpi1J_-9">
           <mxGeometry y="30" width="240" height="280" as="geometry" />
@@ -127,7 +127,7 @@
           <mxGeometry y="312" width="240" height="8" as="geometry" />
         </mxCell>
         <mxCell id="yiOMKS7E3EkovL9F9Eef-15" value="+setupMatch(StandardRulesSet,RulesSet)&#xa;+matchLogic()&#xa;+saveGame()&#xa;" style="text;strokeColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="35oZMmhd7yD35cJpi1J_-9">
-          <mxGeometry y="320" width="240" height="80" as="geometry" />
+          <mxGeometry y="320" width="240" height="100" as="geometry" />
         </mxCell>
         <mxCell id="6qONtpnG5qTaz_-XZDPJ-6" value="Produzione" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="40" y="560" width="260" height="120" as="geometry" />
