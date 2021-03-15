@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-03-15T17:34:44.564Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36" etag="GIWJV9Hq-ZabsIxDPboR" version="14.4.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-03-15T17:34:58.696Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36" etag="PjGHLTdOm848VIgCsD25" version="14.4.8" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="493" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+    <mxGraphModel dx="253" dy="811" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -20,15 +20,6 @@
         </mxCell>
         <mxCell id="3G_JpGnnki6wpbxw6Dh9-0" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;Plancia Giocatore&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;- TracciatoFede: int&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ deposito: Deposito&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ Forziere: Risorsa[]&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ PlanciaCarteSviluppo: CartaSviluppo [3][3]&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ CarteLeader: LeaderCard[2]&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ hasActiveConversionLeader(): boolean&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ AggiungiFede(int): void&lt;br&gt;+ GetFede(): int&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="1840" y="590" width="250" height="230" as="geometry" />
-        </mxCell>
-        <mxCell id="yBSryTIjgCuIUiby8R88-0" value="CartaSviluppo" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="2400" y="394" width="280" height="250" as="geometry" />
-        </mxCell>
-        <mxCell id="yBSryTIjgCuIUiby8R88-1" value="- costo: Array risorsa&#xa;- livello: Livello&#xa;- colore: ColoreCarta&#xa;- punti vittoria: int&#xa;- produzione: Produzione" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="yBSryTIjgCuIUiby8R88-0" vertex="1">
-          <mxGeometry y="26" width="280" height="114" as="geometry" />
-        </mxCell>
-        <mxCell id="yBSryTIjgCuIUiby8R88-2" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="yBSryTIjgCuIUiby8R88-0" vertex="1">
-          <mxGeometry y="140" width="280" height="110" as="geometry" />
         </mxCell>
         <mxCell id="35oZMmhd7yD35cJpi1J_-1" value="Standard Rules Set" style="swimlane;html=1;startSize=20;horizontal=1;containerType=tree;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};strokeColor=#000000;swimlaneFillColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="1480" y="118" width="280" height="80" as="geometry" />
@@ -177,9 +168,9 @@
         <mxCell id="5tt3_I8p8CxLFxKSJom4-7" value="+ pesca ( colore: ColoreCarta, livello: Livello): CartaSviluppo&#xa;+ getPublicDeck(): CartaSviluppo[3][4]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="5tt3_I8p8CxLFxKSJom4-4" vertex="1">
           <mxGeometry y="60" width="360" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="0VNQlhb-g9pjLVwxSI6Z-0" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="yBSryTIjgCuIUiby8R88-0" target="5tt3_I8p8CxLFxKSJom4-4" edge="1">
+        <mxCell id="0VNQlhb-g9pjLVwxSI6Z-0" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="UYXELn-aznjXGJklCHjd-2" target="5tt3_I8p8CxLFxKSJom4-4" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="1870" y="240" as="sourcePoint" />
+            <mxPoint x="2587.644376899696" y="394" as="sourcePoint" />
             <mxPoint x="2030" y="240" as="targetPoint" />
           </mxGeometry>
         </mxCell>
@@ -262,22 +253,22 @@
         <mxCell id="ixDbQM82O41a-iaO3_Ok-1" value="Use" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" parent="ixDbQM82O41a-iaO3_Ok-0" connectable="0" vertex="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="kyalHROY1WXBSIkxGTPj-1" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="yBSryTIjgCuIUiby8R88-0" target="kXcpg0YlyU-LXUACbQBH-1" edge="1">
+        <mxCell id="kyalHROY1WXBSIkxGTPj-1" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="UYXELn-aznjXGJklCHjd-2" target="kXcpg0YlyU-LXUACbQBH-1" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="1630" y="310" as="sourcePoint" />
+            <mxPoint x="2680" y="413.6111111111111" as="sourcePoint" />
             <mxPoint x="1790" y="310" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="kyalHROY1WXBSIkxGTPj-3" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="yBSryTIjgCuIUiby8R88-0" target="6qONtpnG5qTaz_-XZDPJ-0" edge="1">
+        <mxCell id="kyalHROY1WXBSIkxGTPj-3" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=1;exitY=0.308;exitDx=0;exitDy=0;exitPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="UYXELn-aznjXGJklCHjd-5" target="6qONtpnG5qTaz_-XZDPJ-0" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="1520" y="550" as="sourcePoint" />
+            <mxPoint x="2680" y="499.16666666666674" as="sourcePoint" />
             <mxPoint x="1680" y="550" as="targetPoint" />
             <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="kyalHROY1WXBSIkxGTPj-4" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="yBSryTIjgCuIUiby8R88-0" target="6qONtpnG5qTaz_-XZDPJ-4" edge="1">
+        <mxCell id="kyalHROY1WXBSIkxGTPj-4" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="UYXELn-aznjXGJklCHjd-3" target="6qONtpnG5qTaz_-XZDPJ-4" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="2080" y="450" as="sourcePoint" />
+            <mxPoint x="2680" y="458.33333333333326" as="sourcePoint" />
             <mxPoint x="2240" y="450" as="targetPoint" />
           </mxGeometry>
         </mxCell>
@@ -307,9 +298,9 @@
             <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="uatotxejLEeenUt5TC5e-4" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="yBSryTIjgCuIUiby8R88-1" edge="1">
+        <mxCell id="uatotxejLEeenUt5TC5e-4" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;exitX=-0.008;exitY=0.133;exitDx=0;exitDy=0;exitPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="UYXELn-aznjXGJklCHjd-2" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="1880" y="470" as="sourcePoint" />
+            <mxPoint x="2398.04" y="437.808" as="sourcePoint" />
             <mxPoint x="1760" y="490" as="targetPoint" />
           </mxGeometry>
         </mxCell>
@@ -326,16 +317,13 @@
           <mxGeometry y="88" width="220" height="62" as="geometry" />
         </mxCell>
         <mxCell id="tiEvfuk5Gu6jawJiWm_S-5" value="CartaSviluppo" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;fillColor=#d5e8d4;strokeColor=#82b366;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1260" y="1370" width="280" height="250" as="geometry" />
+          <mxGeometry x="1260" y="1370" width="280" height="148" as="geometry" />
         </mxCell>
         <mxCell id="tiEvfuk5Gu6jawJiWm_S-6" value="- costo: Array risorsa&#xa;- livello: Livello&#xa;- colore: ColoreCarta&#xa;- punti vittoria: int&#xa;- produzione: Produzione" style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tiEvfuk5Gu6jawJiWm_S-5" vertex="1">
           <mxGeometry y="26" width="280" height="114" as="geometry" />
         </mxCell>
         <mxCell id="tiEvfuk5Gu6jawJiWm_S-7" value="" style="line;strokeWidth=1;fillColor=#d5e8d4;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#82b366;" parent="tiEvfuk5Gu6jawJiWm_S-5" vertex="1">
           <mxGeometry y="140" width="280" height="8" as="geometry" />
-        </mxCell>
-        <mxCell id="tiEvfuk5Gu6jawJiWm_S-8" value="+ GetCosto(): Array Risorsa&#xa;+ GetLivello(): Livello&#xa;+ GetPV(): int&#xa;+ GetInputProduzione(): Array Risorsa&#xa;+ GetOutputProduzione(): Array Risorsa" style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tiEvfuk5Gu6jawJiWm_S-5" vertex="1">
-          <mxGeometry y="148" width="280" height="102" as="geometry" />
         </mxCell>
         <mxCell id="tiEvfuk5Gu6jawJiWm_S-9" value="Carta Leader {abstract}" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;fillColor=#d5e8d4;strokeColor=#82b366;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="1740" y="1390" width="210" height="76" as="geometry">
@@ -362,6 +350,21 @@
             <mxPoint x="1180" y="1310" as="sourcePoint" />
             <mxPoint x="2830" y="1310" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="UYXELn-aznjXGJklCHjd-0" value="+ GetCosto(): Array Risorsa&#xa;+ GetLivello(): Livello&#xa;+ GetPV(): int&#xa;+ GetInputProduzione(): Array Risorsa&#xa;+ GetOutputProduzione(): Array Risorsa" style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1270" y="1528" width="280" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="UYXELn-aznjXGJklCHjd-2" value="CartaSviluppo" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="2410" y="413" width="260" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="UYXELn-aznjXGJklCHjd-3" value="- costo: Array risorsa&#xa;- livello: Livello&#xa;- colore: ColoreCarta&#xa;- punti vittoria: int&#xa;- produzione: Produzione" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="UYXELn-aznjXGJklCHjd-2">
+          <mxGeometry y="26" width="260" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="UYXELn-aznjXGJklCHjd-4" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="UYXELn-aznjXGJklCHjd-2">
+          <mxGeometry y="110" width="260" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="UYXELn-aznjXGJklCHjd-5" value="+ GetCosto(): Array Risorsa&#xa;+ GetLivello(): Livello&#xa;+ GetPV(): int&#xa;+ GetInputProduzione(): Array Risorsa&#xa;+ GetOutputProduzione(): Array Risorsa" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="UYXELn-aznjXGJklCHjd-2">
+          <mxGeometry y="118" width="260" height="82" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
