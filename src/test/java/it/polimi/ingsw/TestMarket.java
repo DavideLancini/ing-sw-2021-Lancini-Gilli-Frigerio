@@ -8,18 +8,20 @@ public class TestMarket
 {
     @Test
     public void trySetSideMarble() {
+        Market testMarket = new Market();
         Marble testSide = Marble.WHITE;
-        Market.setSideMarble(testSide);
-        Marble returnedSide = Market.getSideMarble();
+        testMarket.setSideMarble(testSide);
+        Marble returnedSide = testMarket.getSideMarble();
 
         assertSame(testSide, returnedSide);
     }
     @Test
     public void trySetSideMarbleToEMPTY()
     {
+        Market testMarket = new Market();
         Marble testSide = Marble.EMPTY;
         try {
-            Market.setSideMarble(testSide);
+            testMarket.setSideMarble(testSide);
         }
         catch (Exception ignored){
         }
