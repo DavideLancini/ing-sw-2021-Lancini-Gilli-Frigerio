@@ -2,14 +2,15 @@ package it.polimi.ingsw;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Unit test for Market Class
  */
 public class TestMarket
 {
+
+    /** Try setSideMarble & getSideMarble with a correct implementation*/
     @Test
     public void trySetMarbleWithCorrectValue()
     {
@@ -19,10 +20,16 @@ public class TestMarket
 
         assertSame(testSide, returnedSide);
     }
+    /** Try setSideMarble to a non Marble object*/
     @Test
     public void trySetMarbleWithWrongValue()
     {
-        assertTrue( true );
+        String testSide = "WHITE";
+        try {
+            Market.setSideMarble(testSide);
+        }
+        catch (Exception ignored){
+        }
     }
     @Test
     public void trySetMarbleWithArray()
