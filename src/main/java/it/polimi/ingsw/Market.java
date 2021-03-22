@@ -34,7 +34,7 @@ public class Market {
                 else
                     marketBoard[position][i-1]=marketBoard[position][i]; //left scrolling all Marbles in the row
             }
-            getMarketBoard()[position][3]=getSideMarble();// insert the old sideMarble in the market
+            marketBoard[position][3]=oldSideMarble;// insert the old sideMarble in the market
             return taken;
         }
         for (int i=0;i<3;i++){
@@ -44,7 +44,7 @@ public class Market {
                 else
                     marketBoard[i-1][position]=marketBoard[i][position]; //up scrolling all Marbles in the column
             }
-        getMarketBoard()[position][2]=getSideMarble();
+        marketBoard[2][position]=oldSideMarble;
         return taken;
     }
 }
