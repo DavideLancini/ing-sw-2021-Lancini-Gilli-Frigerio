@@ -2,16 +2,16 @@ package it.polimi.ingsw;
 
 public class Market {
 
-    private static Marble sideMarble;
+    private Marble sideMarble;
     private Marble[][] marketBoard = new Marble[4][3] ;
     /** Return marble out of the market board  */
-    public static Marble getSideMarble() {
+    public Marble getSideMarble() {
         return sideMarble;
     }
     /** Set marble out of the market board*/
-    public static void setSideMarble(Marble sideMarble) {
+    public void setSideMarble(Marble sideMarble) {
         //TODO: a marble cannot be set to EMPTY
-        Market.sideMarble = sideMarble;
+        this.sideMarble = sideMarble;
     }
     /** Show the current market board */
     public Marble[][] getMarketBoard() {
