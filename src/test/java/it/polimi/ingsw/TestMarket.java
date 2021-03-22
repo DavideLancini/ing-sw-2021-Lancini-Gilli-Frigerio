@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class TestMarket
 {
     @Test
-    public void trySetMarbleWithCorrectValue() {
+    public void trySetSideMarble() {
         Marble testSide = Marble.WHITE;
         Market.setSideMarble(testSide);
         Marble returnedSide = Market.getSideMarble();
@@ -15,7 +15,7 @@ public class TestMarket
         assertSame(testSide, returnedSide);
     }
     @Test
-    public void trySetMarbleWithWrongValue()
+    public void trySetSideMarbleToEMPTY()
     {
         Marble testSide = Marble.EMPTY;
         try {
