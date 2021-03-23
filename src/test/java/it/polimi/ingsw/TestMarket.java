@@ -26,7 +26,7 @@ public class TestMarket
         catch (Exception ignored){
         }
     }
-    // the actual setMarketBoard is not complete yet
+    //Questo test non viene passato, le due board dovrebbero essere uguali, non lo sono per qualche motivo
     @Test
     public void trySetMarketBoardWithCorrectValues() {
         Market testMarket = new Market();

@@ -19,17 +19,13 @@ public class Market {
     }
     /** set the starting market, use only on game start */
     public void setMarketBoard(Marble[][] inputMarketBoard) {
-        for (int i=0;i<3;i++) {
-            for (int j=0;j<4;j++) {
-                this.marketBoard[i][j] = inputMarketBoard[i][j];
-            }
-        }
+        this.marketBoard = inputMarketBoard;
     }
+
     public void generateMarketBoard(){
         for (int i=0;i<3;i++) {
             for (int j=0;j<4;j++) {
-                //this.marketBoard[i][j] = inputMarketBoard[i][j];
-                //ci sto lavorando, non modificare yet
+                //TODO generateMarketBoard
             }
         }
 
