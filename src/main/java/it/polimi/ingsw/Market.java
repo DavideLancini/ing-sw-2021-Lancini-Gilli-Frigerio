@@ -15,17 +15,24 @@ public class Market {
     }
     /** Show the current market board */
     public Marble[][] getMarketBoard() {
-        return marketBoard;
+        return this.marketBoard;
     }
     /** set the starting market, use only on game start */
-    public void setMarketBoard() {
-        //TODO: set starting market board
+    public void setMarketBoard(Marble[][] inputMarketBoard) {
         for (int i=0;i<3;i++) {
             for (int j=0;j<4;j++) {
-                this.marketBoard[i][j] = Marble.WHITE;
+                this.marketBoard[i][j] = inputMarketBoard[i][j];
             }
         }
-        setSideMarble(Marble.RED);
+    }
+    public void generateMarketBoard(){
+        for (int i=0;i<3;i++) {
+            for (int j=0;j<4;j++) {
+                //this.marketBoard[i][j] = inputMarketBoard[i][j];
+                //ci sto lavorando, non modificare yet
+            }
+        }
+
     }
     /** take 3 or 4 marbles from current market and insert sideMarble in the
      * new market

@@ -7,23 +7,37 @@ import static org.junit.Assert.*;
 public class TestMarket
 {
     @Test
-    public void trySetMarbleWithCorrectValue() {
-        Market market = new Market();
+    public void trySetSideMarbleWithCorrectValue() {
+        Market testMarket = new Market();
         Marble testSideMarble = Marble.WHITE;
-        market.setSideMarble(testSideMarble);
-        Marble returnedSideMarble = market.getSideMarble();
+        testMarket.setSideMarble(testSideMarble);
+        Marble returnedSideMarble = testMarket.getSideMarble();
 
         assertSame(testSideMarble, returnedSideMarble);
     }
     @Test
-    public void trySetMarbleWithWrongValue()
+    public void trySetSideMarbletoEMPTY()
     {
-        Market market = new Market();
+        Market testMarket = new Market();
         Marble testSideMarble = Marble.EMPTY;
         try {
-            market.setSideMarble(testSideMarble);
+            testMarket.setSideMarble(testSideMarble);
         }
         catch (Exception ignored){
         }
+    }
+    // the actual setMarketBoard is not complete yet
+    @Test
+    public void trySetMarketBoardWithCorrectValues() {
+        Market testMarket = new Market();
+        Marble[][] testMarketBoard = {
+                {Marble.WHITE, Marble.BLUE, Marble.GRAY, Marble.YELLOW},
+                {Marble.PURPLE, Marble.RED, Marble.WHITE, Marble.BLUE},
+                {Marble.GRAY, Marble.YELLOW, Marble.PURPLE, Marble.RED}
+        };
+        testMarket.setMarketBoard(testMarketBoard);
+        Marble[][] returnedMarketBoard = testMarket.getMarketBoard();
+
+        assertSame(testMarketBoard, returnedMarketBoard);
     }
 }
