@@ -7,21 +7,21 @@ import static org.junit.Assert.*;
 public class TestMarket
 {
     @Test
-    public void trySetSideMarble() {
-        Market testMarket = new Market();
+    public void trySetMarbleWithCorrectValue() {
+        Market market = new Market();
         Marble testSide = Marble.WHITE;
-        testMarket.setSideMarble(testSide);
-        Marble returnedSide = testMarket.getSideMarble();
+        market.setSideMarble(testSide);
+        Marble returnedSide = market.getSideMarble();
 
         assertSame(testSide, returnedSide);
     }
     @Test
-    public void trySetSideMarbleToEMPTY()
+    public void trySetMarbleWithWrongValue()
     {
-        Market testMarket = new Market();
+        Market market = new Market();
         Marble testSide = Marble.EMPTY;
         try {
-            testMarket.setSideMarble(testSide);
+            market.setSideMarble(testSide);
         }
         catch (Exception ignored){
         }
