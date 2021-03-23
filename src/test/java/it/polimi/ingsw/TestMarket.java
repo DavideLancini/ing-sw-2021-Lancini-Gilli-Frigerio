@@ -9,19 +9,19 @@ public class TestMarket
     @Test
     public void trySetMarbleWithCorrectValue() {
         Market market = new Market();
-        Marble testSide = Marble.WHITE;
-        market.setSideMarble(testSide);
-        Marble returnedSide = market.getSideMarble();
+        Marble testSideMarble = Marble.WHITE;
+        market.setSideMarble(testSideMarble);
+        Marble returnedSideMarble = market.getSideMarble();
 
-        assertSame(testSide, returnedSide);
+        assertSame(testSideMarble, returnedSideMarble);
     }
     @Test
     public void trySetMarbleWithWrongValue()
     {
         Market market = new Market();
-        Marble testSide = Marble.EMPTY;
+        Marble testSideMarble = Marble.EMPTY;
         try {
-            market.setSideMarble(testSide);
+            market.setSideMarble(testSideMarble);
         }
         catch (Exception ignored){
         }
