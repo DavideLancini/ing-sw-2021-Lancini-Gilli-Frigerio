@@ -10,7 +10,6 @@ public class Market {
     }
     /** Set marble out of the market board*/
     public void setSideMarble(Marble sideMarble) {
-        //TODO: a marble cannot be set to EMPTY
         this.sideMarble = sideMarble;
     }
     /** Show the current market board */

@@ -16,18 +16,6 @@ public class TestMarket
         assertSame(testSideMarble, returnedSideMarble);
     }
     @Test
-    public void trySetSideMarbletoEMPTY()
-    {
-        Market testMarket = new Market();
-        Marble testSideMarble = Marble.EMPTY;
-        try {
-            testMarket.setSideMarble(testSideMarble);
-        }
-        catch (Exception ignored){
-        }
-    }
-    //Questo test non viene passato, le due board dovrebbero essere uguali, non lo sono per qualche motivo
-    @Test
     public void trySetMarketBoardWithCorrectValues() {
         Market testMarket = new Market();
         Marble[][] testMarketBoard = {
@@ -40,4 +28,5 @@ public class TestMarket
 
         assertSame(testMarketBoard, returnedMarketBoard);
     }
+    //TODO add test for takeResources
 }
