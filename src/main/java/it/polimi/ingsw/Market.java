@@ -22,14 +22,6 @@ public class Market {
         this.marketBoard = inputMarketBoard;
     }
 
-    public void generateMarketBoard(){
-        for (int i=0;i<3;i++) {
-            for (int j=0;j<4;j++) {
-                //TODO generateMarketBoard
-            }
-        }
-
-    }
     /** take 3 or 4 marbles from current market and insert sideMarble in the
      * new market
      */
