@@ -4,26 +4,28 @@ public class Market {
 
     private Marble sideMarble;
     private Marble[][] marketBoard = new Marble[3][4] ;
-    /** Return marble out of the market board  */
+
+    // Return marble out of the market board
     public Marble getSideMarble() {
         return sideMarble;
     }
-    /** Set marble out of the market board*/
+
+    //Set marble out of the market board
     public void setSideMarble(Marble sideMarble) {
         this.sideMarble = sideMarble;
     }
-    /** Show the current market board */
+
+    // Show the current market board
     public Marble[][] getMarketBoard() {
         return this.marketBoard;
     }
-    /** set the starting market, use only on game start */
+
+    // set the starting market, use only on game start
     public void setMarketBoard(Marble[][] inputMarketBoard) {
         this.marketBoard = inputMarketBoard;
     }
 
-    /** take 3 or 4 marbles from current market and insert sideMarble in the
-     * new market
-     */
+    // take 3 or 4 marbles from current market and insert sideMarble in the new market
     public Marble[] takeResources(boolean isRow,int position){
         Marble[] taken=new Marble[4];
         Marble oldSideMarble=this.sideMarble;
