@@ -1,17 +1,27 @@
 package it.polimi.ingsw;
 
 public class LeaderCard {
-    /*
-    - VPs: int
-    - IsActive: boolean
-    - type: Resource
-     */
+    private int VP;
+    private boolean isActive;
+    private Resource type;
 
-    /*
-    + getVP(): int
-    + isActive(): boolean
-    + activate(): void
-     */
+    public int getVP(){
+        return this.VP;
+    }
+
+    public int getType(){
+        return this.type;
+    }
+
+    public int getIsActive(){
+        return this.isActive;
+    }
+
+    public void toggleActive(){
+        if(this.isActive) {
+            this.isActive = false;
+        } else this.isActive = true;
+    }
 
     //TODO aggiungere le extension
 }
