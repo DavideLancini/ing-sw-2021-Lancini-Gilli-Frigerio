@@ -7,10 +7,7 @@ public class Depot {
     private Resource[] leadRow1 = new Resource[2];
     private Resource[] leadRow2 = new Resource[2];
 
-    //TODO remove e deposit sono necessari? No: correggere UML; Sì: aggiungerli
-    public void move(){
-        //TODO move (position1: int[2], position: int[2]): void
-    }
+    //TODO modifiche al Depot
 
     public Resource getResource(int[2] position){
         //TODO
