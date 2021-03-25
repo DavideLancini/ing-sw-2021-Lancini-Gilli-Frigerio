@@ -20,11 +20,11 @@ public class DevCard {
     }
 
     public Resource[] getInputProduction(){
-        //TODO manca la classe resource
+        //TODO manca la classe production
     }
 
     public Resource[] getOutputProduction(){
-        //TODO manca la classe resource
+        //TODO manca la classe production
     }
 
     public void initializeCard(){
