@@ -1,16 +1,12 @@
 package it.polimi.ingsw;
 
 public class Depot {
-    private Resource row1;
-    private Resource[] row2 = new Resource[2];
-    private Resource[] row3 = new Resource[3];
-    private Resource[] leadRow1 = new Resource[2];
-    private Resource[] leadRow2 = new Resource[2];
+    private Resource contents[];
 
     //TODO modifiche al Depot
 
-    public Resource getResource(int[2] position){
-        //TODO
+    public Resource getResource(int position){
+        return contents[position];
     }
 
     private void activateLeadRow1(){

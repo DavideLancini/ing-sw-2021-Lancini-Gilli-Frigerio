@@ -9,11 +9,11 @@ public class LeaderCard {
         return this.VP;
     }
 
-    public int getType(){
+    public Resource getType(){
         return this.type;
     }
 
-    public int getIsActive(){
+    public boolean getIsActive(){
         return this.isActive;
     }
 

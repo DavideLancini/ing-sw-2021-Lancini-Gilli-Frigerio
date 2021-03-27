@@ -12,7 +12,7 @@ public class Production {
         return this.output;
     }
 
-    public Resource[] produce(Resource[] inResource){
+  /*  public Resource[] produce(Resource[] inResource){
         //TODO entire produce method
-    }
+    }*/
 }

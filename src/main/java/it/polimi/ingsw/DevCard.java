@@ -7,7 +7,7 @@ public class DevCard {
     private int VP;
     private Production production;
 
-    public Resource getCost(){
+    public Resource[] getCost(){
         return this.cost;
     }
 
@@ -19,13 +19,14 @@ public class DevCard {
         return this.VP;
     }
 
-    public Resource[] getInputProduction(){
+    /*   public Resource[] getInputProduction(){
         //TODO manca la classe production
     }
 
     public Resource[] getOutputProduction(){
         //TODO manca la classe production
     }
+    */
 
     public void initializeCard(){
         // forse serve, forse no
