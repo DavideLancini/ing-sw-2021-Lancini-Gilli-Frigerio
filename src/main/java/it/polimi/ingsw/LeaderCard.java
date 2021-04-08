@@ -18,9 +18,7 @@ public class LeaderCard {
     }
 
     public void toggleActive(){
-        if(this.isActive) {
-            this.isActive = false;
-        } else this.isActive = true;
+        this.isActive = !this.isActive;
     }
 
     //TODO aggiungere le extension

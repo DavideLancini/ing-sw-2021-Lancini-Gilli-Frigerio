@@ -19,14 +19,7 @@ public class DevCard {
         return this.VP;
     }
 
-    /*   public Resource[] getInputProduction(){
-        //TODO manca la classe production
-    }
-
-    public Resource[] getOutputProduction(){
-        //TODO manca la classe production
-    }
-    */
+    public Production getProduction() { return production; }
 
     public void initializeCard(){
         // forse serve, forse no

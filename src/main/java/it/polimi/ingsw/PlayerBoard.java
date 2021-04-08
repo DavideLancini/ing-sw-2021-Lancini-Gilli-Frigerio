@@ -5,7 +5,7 @@ import java.util.Collection;
 public class PlayerBoard {
 
     private int faithTrack = 0;
-    private Collection<Resource> strongbox;
+    private Strongbox strongbox;
     private LeaderCard leaderCards[];
     private Depot depot;
     private DevCard devCards[][];
@@ -20,7 +20,7 @@ public class PlayerBoard {
         return this.faithTrack;
     }
 
-    public Collection<Resource> getStrongbox(){
+    public Strongbox getStrongbox(){
         return this.strongbox;
     }
 
