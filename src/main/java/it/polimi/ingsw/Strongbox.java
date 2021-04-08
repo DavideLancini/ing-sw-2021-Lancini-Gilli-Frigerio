@@ -10,18 +10,18 @@ public class Strongbox {
     //TODO: Handle Exception
     //removes cost elements from resources if all are contained within, otherwise throws exception
     public void extract(Collection<Resource> cost) throws Exception{
-        if (resources.containsAll(cost)){
-            resources.remove(cost);
+        if (this.resources.containsAll(cost)){
+            this.resources.remove(cost);
         }
         else throw new Exception("");
     }
 
     public Collection<Resource> deposit(Collection<Resource> new_resources) {
-        resources.addAll(new_resources);
-        return resources;
+        this.resources.addAll(new_resources);
+        return this.resources;
     }
 
     public boolean has(Collection<Resource> cost){
-        return resources.containsAll(cost);
+        return this.resources.containsAll(cost);
     }
 }

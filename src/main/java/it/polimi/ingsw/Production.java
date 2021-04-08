@@ -16,9 +16,9 @@ public class Production {
 
 
     public Resource[] produce(Resource[] inResource) throws Exception{
-        Arrays.sort(input);
+        Arrays.sort(this.input);
         Arrays.sort(inResource);
-        if(!Arrays.equals(input, inResource)) throw new Exception("");
-        return output;
+        if(!Arrays.equals(this.input, inResource)) throw new Exception("");
+        return this.output;
     }
 }
