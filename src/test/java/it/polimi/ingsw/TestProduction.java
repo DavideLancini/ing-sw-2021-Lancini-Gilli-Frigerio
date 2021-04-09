@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.model.Production;
 import it.polimi.ingsw.model.Resource;
 import org.junit.Test;
 

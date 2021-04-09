@@ -1,8 +1,4 @@
-package it.polimi.ingsw;
-
-import it.polimi.ingsw.model.CardColor;
-import it.polimi.ingsw.model.Level;
-import it.polimi.ingsw.model.Resource;
+package it.polimi.ingsw.model;
 
 public class DevCard {
     private Resource[] cost;
