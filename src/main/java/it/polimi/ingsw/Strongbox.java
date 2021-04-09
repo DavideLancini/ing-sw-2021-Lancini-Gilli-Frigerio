@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-import com.sun.management.GarbageCollectionNotificationInfo;
+import it.polimi.ingsw.model.Resource;
 
 import java.util.Collection;
 

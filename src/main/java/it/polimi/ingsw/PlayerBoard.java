@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-import java.util.Collection;
+import it.polimi.ingsw.model.Level;
 
 public class PlayerBoard {
 

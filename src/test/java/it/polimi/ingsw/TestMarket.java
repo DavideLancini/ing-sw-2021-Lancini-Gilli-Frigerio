@@ -1,5 +1,7 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.model.Marble;
+import it.polimi.ingsw.model.Market;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

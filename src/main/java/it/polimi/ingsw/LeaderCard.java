@@ -1,5 +1,7 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.model.Resource;
+
 public class LeaderCard {
     private int VP;
     private boolean isActive;
