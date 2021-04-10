@@ -19,5 +19,16 @@ public class TestStrongbox {
 
         boolean returnedbool = strongbox.contains(check);
         assertSame(true, returnedbool);
+
+        Strongbox strongbox2 = new Strongbox();
+
+        ArrayList<Resource> input2 = new ArrayList(Arrays.asList(Resource.COIN, Resource.STONE, Resource.COIN, Resource.SHIELD));
+        strongbox2.deposit(input2);
+        ArrayList<Resource> check2 = new ArrayList(Arrays.asList(Resource.COIN, Resource.STONE, Resource.STONE));
+
+
+        boolean returnedbool2 = strongbox2.contains(check2);
+        assertSame(false, returnedbool2);
+
     }
 }
