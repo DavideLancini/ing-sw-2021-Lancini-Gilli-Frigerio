@@ -4,9 +4,9 @@ import it.polimi.ingsw.model.Marble;
 import it.polimi.ingsw.model.Resource;
 
 public abstract class LeaderCard {
-    private int VP;
-    private boolean isActive= false;
-    private Resource type;
+    protected int VP;
+    protected boolean isActive= false;
+    protected Resource type;
 
     public void setVP(int VP) {
         this.VP = VP;
@@ -51,8 +51,8 @@ class LeaderSale extends LeaderCard{
 
 class LeaderDepot extends LeaderCard{
 
-    public void ActiveDepot(Resource type){
-        //TODO depot.active
+    public void activateDepot(Depot depot){
+        depot.activateLeader(this.type);
     }
 }
 

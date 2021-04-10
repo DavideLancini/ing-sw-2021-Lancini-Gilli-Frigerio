@@ -1,7 +1,15 @@
 package it.polimi.ingsw;
 
+import java.util.Stack;
+
 public class DevCardDeck {
-    // private DevCard[][][] decks;
-    // draw (color: CardColor, level: Level): DevCard
-    // getTopCards(): DevCard[3][4]
+     private Stack<DevCard> deck;
+
+     public DevCard draw(){
+         return this.deck.pop();
+     }
+
+     public DevCard peek(){
+         return this.deck.peek();
+     }
 }
