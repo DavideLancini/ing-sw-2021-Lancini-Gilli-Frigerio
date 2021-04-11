@@ -36,8 +36,8 @@ public abstract class LeaderCard {
 class LeaderSale extends LeaderCard{
 
     public void DownPrice(Resource[] cost){
-        int i = 0;
-        boolean done = false;
+        var i = 0;
+        var done = false;
         //remove 1 resource based on type
         while(cost[i]!=null && !done) {
             if (cost[i].equals(getType())) {
@@ -58,7 +58,7 @@ class LeaderDepot extends LeaderCard{
 
 class LeaderTransform extends LeaderCard{
 
-    public Resource WhiteTo(Marble white) throws Exception{
+    public Resource WhiteTo(Marble white) throws Exception{/*return right resource for marble type given*/;
         if (white.equals(Marble.WHITE))
             return getType();
         else throw new Exception("not White");
