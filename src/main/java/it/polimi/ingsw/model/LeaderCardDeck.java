@@ -26,7 +26,8 @@ private LeaderCard[] given = new LeaderCard[4];
     }
 
     public void DrawTwo(){
-        //Show 4 given
+
+        //todo: Show 4 given
         //User select 2 from given
         //set playerBoard.leaderCards
     }
