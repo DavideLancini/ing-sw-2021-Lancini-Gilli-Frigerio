@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.Strongbox;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Depot;
 import it.polimi.ingsw.model.Marble;
 import it.polimi.ingsw.model.Resource;
 
