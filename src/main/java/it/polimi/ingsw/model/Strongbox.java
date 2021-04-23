@@ -1,10 +1,7 @@
-package it.polimi.ingsw;
-
-import it.polimi.ingsw.model.Resource;
+package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.ListIterator;
 
 public class Strongbox {
     private Collection<Resource> resources;

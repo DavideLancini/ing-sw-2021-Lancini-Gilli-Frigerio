@@ -1,8 +1,10 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.model.CardColor;
+import it.polimi.ingsw.model.DevCard;
 import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.DevCardDeck;
 
 import java.util.Arrays;
 import java.util.Collection;

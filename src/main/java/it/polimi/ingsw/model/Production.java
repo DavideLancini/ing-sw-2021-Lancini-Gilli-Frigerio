@@ -1,6 +1,4 @@
-package it.polimi.ingsw;
-
-import it.polimi.ingsw.model.Resource;
+package it.polimi.ingsw.model;
 
 import java.util.Arrays;
 

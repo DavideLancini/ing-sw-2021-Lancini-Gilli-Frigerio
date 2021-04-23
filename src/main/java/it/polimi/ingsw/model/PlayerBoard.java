@@ -1,6 +1,4 @@
-package it.polimi.ingsw;
-
-import it.polimi.ingsw.model.Level;
+package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Depot;
 
