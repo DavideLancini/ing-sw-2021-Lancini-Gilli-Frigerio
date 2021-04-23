@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.DevCard;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -40,10 +41,16 @@ public class DevCardBoard {
     public DevCard buy(CardColor color, Level level, Collection<Resource> cost) throws Exception {
 
         DevCard card = this.getCard(color, level);
-        //Todo: change containsAll method with duplicate-proof variant similar to the one declared in Strongbox
-        if(!cost.containsAll(Arrays.asList(card.getCost()))) throw new Exception("cost requirements not matched");
+        ArrayList<Resource> costcopy = new ArrayList(cost);
+
+        for(Resource elem : card.getCost()){if(!costcopy.remove(elem))throw new Exception("cost requirements not matched");}
+        //if(!cost.containsAll(Arrays.asList(card.getCost()))) throw new Exception("cost requirements not matched");
 
         return this.board[color.ordinal()][level.ordinal()].draw();
     }
 
+
 }
+
+
+

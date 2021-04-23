@@ -2,6 +2,8 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.model.Resource;
 
+import java.util.Arrays;
+
 public class Depot {
     private Resource[] contents;
     private Resource[] leaderType;
@@ -23,6 +25,11 @@ public class Depot {
         if(this.contents[position] != null){throw new Exception("slot already occupied");}
         else if( ( (position == 6 || position == 7) && !resource.equals(this.leaderType[0])) || ( (position == 8 || position == 9) && !resource.equals(this.leaderType[1]))) throw new Exception("invalid resource type");
         this.contents[position] = resource;
+    }
+
+    //Check for input length and valid resource types is perfomed by controller
+    public void setContents(Resource[] input){
+        System.arraycopy(input, 0, contents, 0, 10);
     }
 
     public Resource extract(int position){
