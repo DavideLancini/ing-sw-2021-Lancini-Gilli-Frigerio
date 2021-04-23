@@ -2,6 +2,8 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.model.Level;
 
+import it.polimi.ingsw.Depot;
+
 public class PlayerBoard {
 
     private int faithTrack = 0;
