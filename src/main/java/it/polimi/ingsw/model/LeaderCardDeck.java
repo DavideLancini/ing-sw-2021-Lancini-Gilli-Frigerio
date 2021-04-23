@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw;
 
 import java.util.Arrays;
 
@@ -26,8 +26,7 @@ private LeaderCard[] given = new LeaderCard[4];
     }
 
     public void DrawTwo(){
-
-        //todo: Show 4 given
+        //Show 4 given
         //User select 2 from given
         //set playerBoard.leaderCards
     }
