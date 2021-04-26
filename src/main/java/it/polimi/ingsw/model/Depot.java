@@ -1,8 +1,4 @@
-package it.polimi.ingsw;
-
-import it.polimi.ingsw.model.Resource;
-
-import java.util.Arrays;
+package it.polimi.ingsw.model;
 
 public class Depot {
     private Resource[] contents;

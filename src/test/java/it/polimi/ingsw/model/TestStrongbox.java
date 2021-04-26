@@ -1,13 +1,11 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.model.Strongbox;
 import org.junit.Test;
-import static org.junit.Assert.*;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static org.junit.Assert.assertSame;
 
 public class TestStrongbox {
     @Test

@@ -1,10 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model.singlePlayer;
 
 import it.polimi.ingsw.model.CardColor;
 
 public abstract class ActionToken {
-    int requires;
-    // TODO: requirements
 }
 
 class ActionFaith extends ActionToken{

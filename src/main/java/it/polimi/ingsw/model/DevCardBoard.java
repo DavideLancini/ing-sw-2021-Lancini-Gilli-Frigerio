@@ -1,13 +1,6 @@
-package it.polimi.ingsw;
-
-import it.polimi.ingsw.model.CardColor;
-import it.polimi.ingsw.model.DevCard;
-import it.polimi.ingsw.model.Level;
-import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.model.DevCardDeck;
+package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 public class DevCardBoard {

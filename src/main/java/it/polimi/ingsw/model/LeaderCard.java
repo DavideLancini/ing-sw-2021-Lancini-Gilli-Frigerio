@@ -1,11 +1,9 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.Depot;
-
 public abstract class LeaderCard {
-    protected int VP;
-    protected boolean isActive= false;
-    protected Resource type;
+    private int VP;
+    private boolean isActive= false;
+    private Resource type;
 
     public void setVP(int VP) {
         this.VP = VP;
@@ -51,13 +49,13 @@ class LeaderSale extends LeaderCard{
 class LeaderDepot extends LeaderCard{
 
     public void activateDepot(Depot depot){
-        depot.activateLeader(this.type);
+        depot.activateLeader(getType());
     }
 }
 
 class LeaderTransform extends LeaderCard{
 
-    public Resource WhiteTo(Marble white) throws Exception{/*return right resource for marble type given*/;
+    public Resource WhiteTo(Marble white) throws Exception{/*return right resource for marble type given*/
         if (white.equals(Marble.WHITE))
             return getType();
         else throw new Exception("not White");

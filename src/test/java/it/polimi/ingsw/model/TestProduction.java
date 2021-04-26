@@ -1,10 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.Production;
-import it.polimi.ingsw.model.Resource;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
 
 public class TestProduction {
     @Test

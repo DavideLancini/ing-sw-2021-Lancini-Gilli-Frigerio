@@ -1,8 +1,5 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.Marble;
-import it.polimi.ingsw.model.Market;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 

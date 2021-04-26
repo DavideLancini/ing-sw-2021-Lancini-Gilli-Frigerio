@@ -1,6 +1,4 @@
-package it.polimi.ingsw;
-
-import it.polimi.ingsw.ActionToken;
+package it.polimi.ingsw.model.singlePlayer;
 
 import java.util.Collections;
 import java.util.Stack;
