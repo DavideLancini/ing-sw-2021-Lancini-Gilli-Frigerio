@@ -13,6 +13,9 @@ public class Depot {
     public Depot(){
         Resource[] empty = {null, null, null, null, null, null, null, null, null, null};
         this.contents = empty;
+
+        Resource[] empty2 = {null ,null};
+        this.leaderType = empty2;
     }
 
     public void activateLeader(Resource type){

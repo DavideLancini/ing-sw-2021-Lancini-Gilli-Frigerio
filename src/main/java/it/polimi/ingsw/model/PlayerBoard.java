@@ -5,7 +5,7 @@ public class PlayerBoard {
 
     private int faithTrack = 0;
     private Strongbox strongbox;
-    private LeaderCard leaderCards[];
+    private LeaderCard[] leaderCards;
     private Depot depot;
     //DevCard[colonna][livello]
     private DevCard devCards[][];
@@ -19,6 +19,9 @@ public class PlayerBoard {
     public PlayerBoard(){
         DevCard[][] empty = {{null,null,null},{null,null,null},{null,null,null}};
         this.devCards = empty;
+
+        LeaderCard[] empty2 = {null, null};
+        this.leaderCards = empty2;
     }
 
     public int getFaith(){
