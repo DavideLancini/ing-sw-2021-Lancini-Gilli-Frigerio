@@ -9,7 +9,7 @@ import static org.junit.Assert.assertSame;
 
 public class TestStrongbox {
     @Test
-    public void testHas(){
+    public void testContains(){
         Strongbox strongbox = new Strongbox();
         ArrayList<Resource> input = new ArrayList(Arrays.asList(Resource.COIN, Resource.STONE, Resource.COIN, Resource.STONE, Resource.SHIELD));
         strongbox.deposit(input);

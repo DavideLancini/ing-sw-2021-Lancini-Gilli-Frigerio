@@ -23,7 +23,7 @@ public class Strongbox {
         this.resources.addAll(new_resources);
         return this.resources;
     }
-//TODO: declare globally for all Arraylists
+
     public boolean contains(Collection<Resource> subset){
         ArrayList<Resource> main = new ArrayList(this.resources);
 
