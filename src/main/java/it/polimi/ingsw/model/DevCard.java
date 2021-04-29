@@ -21,7 +21,11 @@ public class DevCard {
 
     public Production getProduction() { return production; }
 
-    public void initializeCard(){
-        // forse serve, forse no
+    public DevCard(Level level, CardColor color, int VP, Resource[] cost, Production production){
+        this.cost = cost;
+        this.level = level;
+        this.color = color;
+        this.VP = VP;
+        this.production = production;
     }
 }

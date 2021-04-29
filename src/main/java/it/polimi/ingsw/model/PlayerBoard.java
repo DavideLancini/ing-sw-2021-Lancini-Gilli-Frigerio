@@ -7,12 +7,18 @@ public class PlayerBoard {
     private Strongbox strongbox;
     private LeaderCard leaderCards[];
     private Depot depot;
+    //DevCard[colonna][livello]
     private DevCard devCards[][];
 
     // Return new faith for easy access
     public int addFaith(int newFaith){
         this.faithTrack += newFaith;
         return this.faithTrack;
+    }
+
+    public PlayerBoard(){
+        DevCard[][] empty = {{null,null,null},{null,null,null},{null,null,null}};
+        this.devCards = empty;
     }
 
     public int getFaith(){
@@ -23,6 +29,7 @@ public class PlayerBoard {
         return this.strongbox;
     }
 
+    public DevCard getDevCard(int column, int level){return this.devCards[column][level];}
 
     //TODO Exceptions and handling
     public void addDevCard(DevCard newDevCard, int position) throws Exception{

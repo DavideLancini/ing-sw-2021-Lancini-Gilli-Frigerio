@@ -24,6 +24,11 @@ public class TestDepot {
 
     @Test
     public void testExtract(){
+        try {
+            depot.deposit(resource, 0);
+        }
+        catch (Exception e) {}
+
         Resource extracted = depot.extract(0);
         assertSame(resource,extracted);
         assertSame(null,depot.getResource(0));

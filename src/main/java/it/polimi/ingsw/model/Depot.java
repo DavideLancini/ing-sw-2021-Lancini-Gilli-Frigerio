@@ -10,6 +10,11 @@ public class Depot {
 
     public Resource[] getLeaderType(){return this.leaderType;}
 
+    public Depot(){
+        Resource[] empty = {null, null, null, null, null, null, null, null, null, null};
+        this.contents = empty;
+    }
+
     public void activateLeader(Resource type){
         if(this.leaderType[0] == null){this.leaderType[0] = type;}
         else if(this.leaderType[1] == null){this.leaderType[1] = type;}
