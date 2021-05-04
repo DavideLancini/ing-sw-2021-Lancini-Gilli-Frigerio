@@ -28,6 +28,10 @@ public class PlayerBoard {
         return this.faithTrack;
     }
 
+    public LeaderCard getLeaderCard (int position) {
+        return this.leaderCards[position];
+    }
+
     public Strongbox getStrongbox(){
         return this.strongbox;
     }

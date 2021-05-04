@@ -53,15 +53,6 @@ class LeaderDepot extends LeaderCard{
     }
 }
 
-class LeaderTransform extends LeaderCard{
-
-    public Resource WhiteTo(Marble white) throws Exception{/*return right resource for marble type given*/
-        if (white.equals(Marble.WHITE))
-            return getType();
-        else throw new Exception("not White");
-    }
-}
-
 class LeaderProduction extends LeaderCard{
     public Production production;
     private Resource choice;
