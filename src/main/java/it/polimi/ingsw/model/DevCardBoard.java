@@ -2,11 +2,18 @@ package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
+/**
+ * Class DevCardBoard
+ * @author Gruppo 12
+ */
 public class DevCardBoard {
     //First index x for color, second index y for level
     private DevCardDeck[][] board;
 
+    /**
+     * getTop
+     * @return view of 12 DevCards you could buy
+     */
     public DevCard[][] getTop(){
         DevCard[][] top = {
                 {null, null, null},
@@ -24,6 +31,12 @@ public class DevCardBoard {
         return top;
     }
 
+    /**
+     * getCard
+     * @param color color of DevCard
+     * @param level level of DevCard
+     * @return show select card on top
+     */
     public DevCard getCard(CardColor color, Level level){
         int x = color.ordinal();
         int y = level.ordinal();
@@ -31,6 +44,14 @@ public class DevCardBoard {
         return this.board[x][y].peek();
     }
 
+    /**
+     * buy
+     * @param color color of DevCard
+     * @param level level of DevCard
+     * @param cost resource given to pay DevCard
+     * @return DevCard bought
+     * @throws Exception resource given not matching cost
+     */
     public DevCard buy(CardColor color, Level level, Collection<Resource> cost) throws Exception {
 
         DevCard card = this.getCard(color, level);
