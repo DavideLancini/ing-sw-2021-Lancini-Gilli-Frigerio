@@ -1,5 +1,9 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.model.*;
+
+import java.util.Collection;
+
 public abstract class Message {
     public void resolve(Controller controller){}
 }
@@ -11,8 +15,8 @@ class MessageLeaderActivation extends Message{
         this.position = position;
     }
 
-    public void resolve(BoardController controller){
-        controller.ActivateLeader(this.position);
+    public void resolve(Controller controller){
+        controller.activateLeader(this.position);
     }
 
 }
@@ -26,7 +30,29 @@ class MessageTakeResources extends Message{
         this.isRow = isRow;
     }
 
-    public void resolve(MarketController controller) {
+    public void resolve(Controller controller) {
         controller.takeResources(this.isRow, this.position);
     }
+}
+
+class MessageBuyDevCard extends Message{
+    private Level level;
+    private CardColor color;
+
+    public MessageBuyDevCard(Level level, CardColor color){
+        this.level = level;
+        this.color = color;
+    }
+
+    public void resolve(Controller controller){ controller.buyDevCard(this.level, this.color);}
+}
+
+class MessageTryDepotConfiguration extends Message {
+    private Resource[] input = {null, null, null, null, null, null, null, null, null, null};
+
+    public MessageTryDepotConfiguration(Resource[] input){
+        System.arraycopy(input, 0, this.input, 0, input.length);
+    }
+
+    public void resolve(Controller controller){ controller.tryDepotConfiguration(this.input);}
 }

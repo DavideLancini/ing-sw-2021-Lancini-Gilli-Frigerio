@@ -9,36 +9,89 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Controller {
-}
 
-
-
-class BoardController extends Controller{
     private PlayerBoard pb;
+    private DevCardBoard board;
+    private Market market;
 
-    public BoardController(PlayerBoard pb){
+    public Controller(PlayerBoard pb, DevCardBoard board, Market market){
         this.pb = pb;
+        this.board = board;
+        this.market = market;
     }
 
-    public void ActivateLeader (int position) {
+    public void activateLeader (int position) {
         LeaderCard leader = this.pb.getLeaderCard(position);
         if(!leader.getIsActive()) {leader.toggleActive();} //then send message of success
         else ; //send message back with failure notice
 
     }
 
-}
+    public void tryDepotConfiguration(Resource[] input){
+        //input length is built to be 10, padded with nulls if necessary
+        if(valid(Arrays.copyOfRange(input, 1, 2))
+        && valid(Arrays.copyOfRange(input, 3, 5))
+        && valid(Arrays.copyOfRange(input, 6, 7))
+        && valid(Arrays.copyOfRange(input, 8, 9))
+        ){
+            // return depotisLegal
+        }
+        else{
+            //return depotisIllegal
+        }
+    }
+
+    private boolean valid(Resource[] subset){
+        Resource type = null;
+        for(Resource elem : subset){
+            if(elem == null)continue;
+            if(type == null){type = elem; continue;}
+            if(type != null && !type.equals(elem))return false;
+        }
+        return true;
+    }
+
+    public void buyDevCard(Level level, CardColor color){
+        DevCard newCard;
+
+        ArrayList<Resource> cost = extractCost(board.getCard(color, level).getCost());
+
+        try{ newCard = board.buy(level, color, cost);}
+        catch (Exception e ){/* send error message back to user*/}
+    }
+
+    private ArrayList<Resource> extractCost(Resource[] cost){
+        ArrayList<Resource> resources= new ArrayList<>();
+        Resource[] depotCopy = {null, null, null, null, null, null, null, null, null, null};
+        for(int i=0; i<10; i++){
+            depotCopy[i] = pb.getDepot().getResource(i);
+        }
+
+        //check if there are enough resources
+        ArrayList<Resource> aldepot = new ArrayList(Arrays.asList(depotCopy));
+        ArrayList<Resource> alsb = new ArrayList(pb.getStrongbox().getResources());
 
 
+        for(Resource elem : cost){
+            if(!aldepot.remove(elem)){
+                if(!alsb.remove(elem)){
+                    //send error, not enough resources
+                }
+            }
+        }
 
 
-class MarketController extends Controller{
-    private PlayerBoard pb;
-    private Market market;
+        //try extracting the resource from the depot, if unavaible extract from the strongbox
+        for(Resource elem : cost){
+            try{resources.add(pb.getDepot().extract(Arrays.asList(depotCopy).indexOf(elem)));}
+            catch(Exception e){
+                resources.add(elem);
+                try {pb.getStrongbox().extract(elem);}
+                catch (Exception e2) {}
+            }
+        }
 
-    public MarketController(PlayerBoard pb, Market market){
-        this.market = market;
-        this.pb = pb;
+        return resources;
     }
 
     public void takeResources(boolean isRow, int position){
@@ -58,8 +111,8 @@ class MarketController extends Controller{
     }
 
     private Collection<Resource> convert (Marble[] marbles){
-        ArrayList<Resource> resources = new ArrayList<Resource>();
-        ArrayList<LeaderCard> leaders = new ArrayList<LeaderCard>(Arrays.asList(pb.getLeaderCard(0), pb.getLeaderCard(1)));
+        ArrayList<Resource> resources = new ArrayList<>();
+        ArrayList<LeaderCard> leaders = new ArrayList<>(Arrays.asList(pb.getLeaderCard(0), pb.getLeaderCard(1)));
 
         //filter leader cards for only actives and Transform type
         List<LeaderCard> listleaders = leaders.stream().filter(x -> x.getIsActive() && x instanceof LeaderTransform).collect(Collectors.toList());

@@ -29,7 +29,10 @@ public class TestDepot {
         }
         catch (Exception e) {}
 
-        Resource extracted = depot.extract(0);
+        Resource extracted = null;
+        try {extracted = depot.extract(0);}
+        catch (Exception e){}
+
         assertSame(resource,extracted);
         assertSame(null,depot.getResource(0));
 

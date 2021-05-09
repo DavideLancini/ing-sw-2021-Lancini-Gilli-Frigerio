@@ -14,7 +14,7 @@ public class PlayerBoard {
     private DevCard[][] devCards;
     /**
      * class constructor
-     * devCards and leaderCards set to empty and faith track to =
+     * devCards and leaderCards set to empty and faith track to 0
      */
     public PlayerBoard(){
         this.devCards = new DevCard[][]{{null,null,null},{null,null,null},{null,null,null}};
@@ -57,6 +57,14 @@ public class PlayerBoard {
      */
     public Strongbox getStrongbox(){
         return this.strongbox;
+    }
+
+    /**
+     * getDepot
+     * @return Player Depot
+     */
+    public Depot getDepot(){
+        return this.depot;
     }
 
     /**

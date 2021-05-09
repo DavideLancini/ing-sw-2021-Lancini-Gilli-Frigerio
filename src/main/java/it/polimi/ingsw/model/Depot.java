@@ -56,7 +56,7 @@ public class Depot {
      */
     //Check for input length and valid resource types is perfomed by controller
     public void setContents(Resource[] input){
-        System.arraycopy(input, 0, contents, 0, 10);
+        System.arraycopy(input, 0, this.contents, 0, 10);
     }
 
     /**
@@ -64,9 +64,11 @@ public class Depot {
      * take resource from depot to start production
      * @param position position of resource needed
      * @return resource
+     * @throws Exception if index is out of bounds
      */
 
-    public Resource extract(int position){
+    public Resource extract(int position) throws Exception{
+        if(position < 0 || position > 9) throw new Exception("invalid position");
         Resource resource = this.contents[position];
         this.contents[position] = null;
         return resource;

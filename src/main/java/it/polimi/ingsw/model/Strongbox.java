@@ -17,9 +17,12 @@ public class Strongbox {
         this.resources = new ArrayList<>();
     }
 
+    //Temporary, would be better without giving access
+    public Collection<Resource> getResources() {return this.resources;}
+
     /**
      * extract
-     * @param cost resources to remove from strongbox to buy new devCard
+     * @param cost resources to remove from strongbox
      * @throws Exception if all cost elements aren't contained within resources collection
      */
     //TODO: Handle Exception
@@ -30,6 +33,18 @@ public class Strongbox {
         }
         else throw new Exception("");
     }
+
+    /**
+     * extract
+     * @param elem singular resource to remove from strongbox
+     * @throws Exception if the element isn't contained within resources collection
+     */
+    public void extract(Resource elem) throws Exception{
+        if(this.resources.contains(elem)){this.resources.remove(elem);}
+        else throw new Exception("");
+
+    }
+
 
     /**
      * deposit

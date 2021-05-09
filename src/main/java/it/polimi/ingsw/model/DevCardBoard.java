@@ -10,6 +10,23 @@ public class DevCardBoard {
     //First index x for color, second index y for level
     private DevCardDeck[][] board;
 
+
+    /**
+     * class constructor
+     * @param board set initial decks of DevCards
+     */
+    public DevCardBoard(DevCardDeck[][] board){
+
+        this.board = new DevCardDeck[][]{{null,null,null},{null,null,null},{null,null,null},{null,null,null}};
+        int i=0;
+
+        for(DevCardDeck[] row : board){
+            System.arraycopy(row, 0, this.board[i], 0, row.length);
+            i++;
+        }
+
+    }
+
     /**
      * getTop
      * @return view of 12 DevCards you could buy
@@ -52,7 +69,7 @@ public class DevCardBoard {
      * @return DevCard bought
      * @throws Exception resource given not matching cost
      */
-    public DevCard buy(CardColor color, Level level, Collection<Resource> cost) throws Exception {
+    public DevCard buy(Level level, CardColor color, Collection<Resource> cost) throws Exception {
 
         DevCard card = this.getCard(color, level);
         ArrayList<Resource> costcopy = new ArrayList(cost);
