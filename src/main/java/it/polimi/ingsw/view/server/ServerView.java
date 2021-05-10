@@ -1,5 +1,7 @@
 package it.polimi.ingsw.view.server;
 
+import it.polimi.ingsw.Server;
+
 /**
  * Interface for the Server
  * @author Lancini Davide
@@ -7,20 +9,21 @@ package it.polimi.ingsw.view.server;
 public class ServerView {
     /**
      * Simple feature to keep the console clean, tested on windows, mac os and son linux distros
+     * if the logLevel is set to Verbose the Console will not be cleaned
      * @author Lancini Davide
      */
     public static void clearConsole(){
-        try{
-            final String os = System.getProperty("os.name");
-            if (os.contains("Windows")){
-                Runtime.getRuntime().exec("cls");
+        if(Server.logLevel != 2) {
+            try {
+                final String os = System.getProperty("os.name");
+                if (os.contains("Windows")) {
+                    Runtime.getRuntime().exec("cls");
+                } else {
+                    Runtime.getRuntime().exec("clear");
+                }
+            } catch (final Exception e) {
+                // TODO Handle exceptions.
             }
-            else{
-                Runtime.getRuntime().exec("clear");
-            }
-        }
-        catch (final Exception e){
-            // TODO Handle exceptions.
         }
     }
     /**
@@ -28,13 +31,14 @@ public class ServerView {
      * @author Lancini Davide
      */
     public static void loadParameters(){
-        // TODO
+        // TODO load parameters from file
+
     }
     /**
      * Print server status and the available commands
      * @author Lancini Davide
      */
-    public static void serverStatus(int logLevel){
+    public static void serverStatus(){
         if(checkServerActivity()){
             System.out.println( "The server is ON" );
             // TODO print server parameters
