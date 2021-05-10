@@ -4,6 +4,7 @@ package it.polimi.ingsw.model;
  * @author Gruppo 12
  */
 public class Depot {
+
     private Resource[] contents;
     private Resource[] leaderType;
     /**
@@ -15,20 +16,26 @@ public class Depot {
         return this.contents[position];
     }
 
+    public void setLeaderType(Resource[] leaderType) {
+        this.leaderType = leaderType;
+    }
+
     /**
      * getLeaderType
      * @return resources in LeaderDepot
      */
     public Resource[] getLeaderType(){return this.leaderType;}
+
     /**
      * Class constructor
      * setting initial depot and leader depot to empty
      */
     public Depot(){
-        this.contents = new Resource[]{null, null, null, null, null, null, null, null, null, null};
+        this.contents = new Resource[]{Resource.EMPTY, Resource.EMPTY, Resource.EMPTY, Resource.EMPTY, Resource.EMPTY, Resource.EMPTY, Resource.EMPTY, Resource.EMPTY,Resource.EMPTY, Resource.EMPTY};
 
-        this.leaderType = new Resource[]{null ,null};
+        this.leaderType = new Resource[]{Resource.EMPTY,Resource.EMPTY};
     }
+
     /**
      * activateLeader
      * Enables leader depot
@@ -38,6 +45,7 @@ public class Depot {
         if(this.leaderType[0] == null){this.leaderType[0] = type;}
         else if(this.leaderType[1] == null){this.leaderType[1] = type;}
     }
+
     /**
      * deposit
      * Deposit Resource taken form Market
@@ -47,11 +55,12 @@ public class Depot {
      */
     //TODO: Exception handling
     public void deposit(Resource resource, int position) throws Exception{
-        if(position<0 || position>9 || resource == null) throw new Exception("invalid position or null resource");
-        if(this.contents[position] != null){throw new Exception("slot already occupied");}
+        if(position<0 || position>9 || resource == Resource.EMPTY) throw new Exception("invalid position or null resource");
+        if(this.contents[position] != Resource.EMPTY){throw new Exception("slot already occupied");}
         else if( ( (position == 6 || position == 7) && !resource.equals(this.leaderType[0])) || ( (position == 8 || position == 9) && !resource.equals(this.leaderType[1]))) throw new Exception("invalid resource type");
         this.contents[position] = resource;
     }
+
     /**
      */
     //Check for input length and valid resource types is perfomed by controller
@@ -72,5 +81,13 @@ public class Depot {
         Resource resource = this.contents[position];
         this.contents[position] = null;
         return resource;
+    }
+
+    public void depotView(){
+        System.out.println("   /╲");
+        System.out.println("  /"+contents[0]+"╲");
+        System.out.println(" /"+contents[1]+" "+contents[2]+"╲");
+        System.out.println("/"+contents[3]+" "+contents[4]+" "+contents[5]+"╲");
+
     }
 }

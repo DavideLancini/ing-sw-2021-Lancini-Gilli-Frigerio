@@ -8,12 +8,12 @@ import java.util.Arrays;
 import static org.junit.Assert.assertSame;
 
 public class TestPlayerBoard {
+    PlayerBoard pb = new PlayerBoard();
+    Resource[] cost = {Resource.COIN, Resource.STONE};
+    Production production = new Production(cost, cost);
+    DevCard newCard = new DevCard(Level.ONE, CardColor.BLUE, 5, cost, production);
     @Test
     public void testAddDevCard(){
-        PlayerBoard pb = new PlayerBoard();
-        Resource[] cost = {Resource.COIN, Resource.STONE};
-        Production production = new Production(cost, cost);
-        DevCard newCard = new DevCard(Level.ONE, CardColor.BLUE, 5, cost, production);
 
         try {
             pb.addDevCard(newCard, 0);
@@ -32,5 +32,9 @@ public class TestPlayerBoard {
         assertSame(newCard2, pb.getDevCard(0,1));
         assertSame(newCard, pb.getDevCard(0,0));
 
+    }
+    @Test
+    public void testPlayerView(){
+        pb.playerBoardView();
     }
 }

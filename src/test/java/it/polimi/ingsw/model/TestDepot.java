@@ -12,6 +12,11 @@ public class TestDepot {
     @Test
     public void testDeposit(){
 
+        System.out.println(Resource.SERVANT);
+        System.out.println(Resource.COIN);
+        System.out.println(Resource.SHIELD);
+        System.out.println(Resource.STONE);
+
         try {
             depot.deposit(resource, 0);
         }
@@ -29,12 +34,18 @@ public class TestDepot {
         }
         catch (Exception e) {}
 
-        Resource extracted = null;
+        Resource extracted = Resource.EMPTY;
         try {extracted = depot.extract(0);}
         catch (Exception e){}
 
         assertSame(resource,extracted);
-        assertSame(null,depot.getResource(0));
+        assertSame(Resource.EMPTY,depot.getResource(0));
 
+    }
+    @Test
+    public void testDepotView(){
+        Resource[] contents= {Resource.COIN, Resource.STONE, Resource.SHIELD, Resource.SHIELD, Resource.EMPTY, Resource.SERVANT, Resource.EMPTY, Resource.EMPTY, Resource.EMPTY, Resource.EMPTY};
+        depot.setContents(contents);
+        depot.depotView();
     }
 }

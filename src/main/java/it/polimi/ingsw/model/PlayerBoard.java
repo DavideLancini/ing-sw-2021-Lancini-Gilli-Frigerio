@@ -100,4 +100,11 @@ public class PlayerBoard {
         }
 
     }
+
+    public void playerBoardView(){
+        System.out.println("player");
+        //faith track
+        //deposit
+        //strongbox
+    }
 }
