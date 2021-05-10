@@ -79,7 +79,7 @@ public class Depot {
     public Resource extract(int position) throws Exception{
         if(position < 0 || position > 9) throw new Exception("invalid position");
         Resource resource = this.contents[position];
-        this.contents[position] = null;
+        this.contents[position] = Resource.EMPTY;
         return resource;
     }
 

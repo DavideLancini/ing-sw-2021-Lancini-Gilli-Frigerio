@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertSame;
 
+
 public class TestDepot {
     Depot depot = new Depot();
     Resource resource = Resource.COIN;

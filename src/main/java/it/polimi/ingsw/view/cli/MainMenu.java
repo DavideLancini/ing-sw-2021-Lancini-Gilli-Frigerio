@@ -1,5 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.model.Market;
+
 public class MainMenu {
 
     public void showMenu(){
@@ -9,5 +11,9 @@ public class MainMenu {
         System.out.println( "4. Create Custom Rule Set" );
         System.out.println( "5. Settings" );
         System.out.println( "6. Credits" );
+    }
+
+    public void showGame(){
+        Market.marketView();
     }
 }
