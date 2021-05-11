@@ -12,6 +12,8 @@ public class PlayerBoard {
     private Depot depot;
     //DevCard[colonna][livello]
     private DevCard[][] devCards;
+    private DefaultProduction defaultProduction;
+
     /**
      * class constructor
      * devCards and leaderCards set to empty and faith track to 0
@@ -22,6 +24,8 @@ public class PlayerBoard {
         this.leaderCards = new LeaderCard[]{null, null};
 
         this.faithTrack=0;
+
+        this.defaultProduction = new DefaultProduction();
     }
 
     /**
@@ -41,6 +45,15 @@ public class PlayerBoard {
     public int getFaith(){
         return this.faithTrack;
     }
+
+    /**
+     * getDefaultProduction
+     * @return default Production
+     */
+    public DefaultProduction getDefaultProduction(){
+        return this.defaultProduction;
+    }
+
 
     /**
      * getLeaderCards
@@ -74,6 +87,11 @@ public class PlayerBoard {
      * @return devCard
      */
     public DevCard getDevCard(int column, int level){return this.devCards[column][level];}
+
+    public DevCard getDevCard(int column){
+        return this.devCards[column][2] != null ? this.devCards[column][2] : this.devCards[column][1] != null ? this.devCards[column][1] : this.devCards[column][0];
+    }
+
 
     //TODO Exceptions and handling
 

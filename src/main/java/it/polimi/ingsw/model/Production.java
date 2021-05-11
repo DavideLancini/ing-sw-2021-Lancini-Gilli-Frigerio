@@ -6,8 +6,9 @@ import java.util.Arrays;
  * @author Gruppo 12
  */
 public class Production {
-    private Resource[] input;
-    private Resource[] output;
+    protected Resource[] input;
+    protected Resource[] output;
+    private int faithOutput;
 
     /**
      * class constructor
@@ -17,6 +18,19 @@ public class Production {
     public Production(Resource[] input, Resource[] output){
         this.input = input;
         this.output = output;
+        this.faithOutput = 0;
+    }
+
+    /**
+     * class constructor
+     * @param input resources needed for production
+     * @param output resources returned after production
+     * @param faith amount of faith produced
+     */
+    public Production(Resource[] input, Resource[] output, int faith){
+        this.input = input;
+        this.output = output;
+        this.faithOutput = faith;
     }
 
     /**
@@ -31,6 +45,13 @@ public class Production {
      */
     public Resource[] getOutput(){
         return this.output;
+    }
+
+    /**
+     * @return faith
+     */
+    public int getFaith(){
+        return this.faithOutput;
     }
 
     /**
@@ -58,4 +79,8 @@ public class Production {
         new ResourceCounter(this.output);
         System.out.println("]");
     }
+
 }
+
+
+

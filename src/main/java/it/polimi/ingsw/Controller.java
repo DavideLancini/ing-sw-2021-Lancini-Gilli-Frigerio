@@ -51,16 +51,86 @@ public class Controller {
         return true;
     }
 
+
+
+
     public void buyDevCard(Level level, CardColor color){
         DevCard newCard;
 
-        ArrayList<Resource> cost = extractCost(board.getCard(color, level).getCost());
+        try{
+            ArrayList<Resource> cost = extractCost(board.getCard(color, level).getCost());
+            newCard = board.buy(level, color, cost);}
 
-        try{ newCard = board.buy(level, color, cost);}
-        catch (Exception e ){/* send error message back to user*/}
+        catch (Exception e ){/* send error message back to user, insufficient resources*/}
     }
 
-    private ArrayList<Resource> extractCost(Resource[] cost){
+    /**
+     * @param activated array of booleans corrisponding to which productions are to be activated this action, 0 being the default,
+     *                 1 to 3 the corresponding cards, and 4 to 5 the leader cards
+     */
+
+    public void produce(boolean[] activated){
+        ArrayList<Resource> totalinput = new ArrayList<>();
+        ArrayList<Resource> totaloutput = new ArrayList<>();
+        int totalfaith = 0;
+
+        Production[] leaderproductions = new Production[]{null, null};
+        LeaderCard[] leaders = {pb.getLeaderCard(0), pb.getLeaderCard(1)};
+        for(int i = 0; i<2 && activated[4+i]; i++){
+            LeaderCard each = pb.getLeaderCard(i);
+            if(each.getIsActive() && each instanceof LeaderProduction) leaderproductions[i] = ((LeaderProduction) each).getProduction();
+            else {/*send error message  back, activated production does not exist or is unavailable*/}
+        }
+
+        Production[] productions = new Production[]{pb.getDefaultProduction(), pb.getDevCard(0).getProduction(), pb.getDevCard(1).getProduction(),
+                pb.getDevCard(2).getProduction(), leaderproductions[0], leaderproductions[1]};
+
+
+        try {
+            for(int i = 0; i<activated.length; i++) {
+                if(activated[i]){
+                    totalinput.addAll(Arrays.asList(productions[i].getInput()));
+                    totaloutput.addAll(Arrays.asList(productions[i].getOutput()));
+                    totalfaith += productions[i].getFaith();
+                }
+            }
+
+            totalinput = extractCost(totalinput.toArray(new Resource[totalinput.size()])  );
+
+            pb.getStrongbox().deposit(totaloutput);
+            pb.addFaith(totalfaith);
+
+        }
+        catch (Exception e){/* send error message back to user, insufficient resources*/}
+    }
+
+
+    /**
+     *
+     * @param position 0 to 1 for defaultProduciton input, 2 for output, 3 to 4 for LeaderProduction choice
+     * @param resource Resource to be set
+     */
+    public void setResource(int position, Resource resource){
+        if(position == 0 || position == 1) {pb.getDefaultProduction().setInput(resource, position); return;}
+        if(position == 2) {pb.getDefaultProduction().setOutput(resource); return;}
+
+        LeaderCard leader = pb.getLeaderCard(position-3);
+        if((position == 3 || position == 4) && leader instanceof LeaderProduction) ((LeaderProduction) leader).setChoice(resource);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private ArrayList<Resource> extractCost(Resource[] cost) throws Exception{
         ArrayList<Resource> resources= new ArrayList<>();
         Resource[] depotCopy = {null, null, null, null, null, null, null, null, null, null};
         for(int i=0; i<10; i++){
@@ -75,7 +145,7 @@ public class Controller {
         for(Resource elem : cost){
             if(!aldepot.remove(elem)){
                 if(!alsb.remove(elem)){
-                    //send error, not enough resources
+                   throw new Exception("not enough resources in storage");
                 }
             }
         }

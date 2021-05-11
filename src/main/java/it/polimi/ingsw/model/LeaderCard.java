@@ -94,19 +94,3 @@ class LeaderDepot extends LeaderCard{
         depot.activateLeader(getType());
     }
 }
-/**
- * Class LeaderProduction extends LeaderCard
- * @author Gruppo 12
- */
-class LeaderProduction extends LeaderCard{
-    public Production production;
-    private Resource choice;
-
-    /**
-     * setChoice
-     * @param choice resource player wants to produce
-     */
-    public void setChoice(Resource choice) {
-        this.choice = choice;
-    }
-}

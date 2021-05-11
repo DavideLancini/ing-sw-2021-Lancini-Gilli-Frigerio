@@ -2,7 +2,6 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.model.*;
 
-import java.util.Collection;
 
 public abstract class Message {
     public void resolve(Controller controller){}
@@ -47,12 +46,33 @@ class MessageBuyDevCard extends Message{
     public void resolve(Controller controller){ controller.buyDevCard(this.level, this.color);}
 }
 
-class MessageTryDepotConfiguration extends Message {
-    private Resource[] input = {null, null, null, null, null, null, null, null, null, null};
+class MessageTryDepotConfiguration extends Message{
+    private Resource[] input = new Resource[10];
 
     public MessageTryDepotConfiguration(Resource[] input){
         System.arraycopy(input, 0, this.input, 0, input.length);
     }
 
     public void resolve(Controller controller){ controller.tryDepotConfiguration(this.input);}
+}
+
+class MessageProduce extends Message{
+    private boolean[] activated = new boolean[6];
+
+    public MessageProduce(boolean[] activated){ System.arraycopy(activated, 0, this.activated, 0 ,activated.length);}
+
+    public void resolve(Controller controller){ controller.produce(this.activated);}
+
+}
+
+class MessageSetResource extends Message{
+    private Resource resource;
+    private int position;
+
+    public MessageSetResource(Resource resource, int position){
+        this.resource = resource;
+        this.position = position;
+    }
+
+    public void resolve(Controller controller){controller.setResource(position, resource);}
 }
