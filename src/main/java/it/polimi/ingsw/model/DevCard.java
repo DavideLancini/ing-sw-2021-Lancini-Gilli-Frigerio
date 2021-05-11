@@ -1,4 +1,7 @@
 package it.polimi.ingsw.model;
+
+import java.util.Arrays;
+
 /**
  * Class DevCard
  * @author Gruppo 12
@@ -54,5 +57,16 @@ public class DevCard {
         this.color = color;
         this.VP = VP;
         this.production = production;
+    }
+
+    /**
+     * devCardView
+     */
+    public void devCardView(){
+        System.out.print("Price[");
+        new ResourceCounter(this.cost);
+        System.out.println("]");
+        this.production.productionView();
+        System.out.println("  "+this.level+" "+this.color+" {"+this.VP+"}");// covered card possible view
     }
 }

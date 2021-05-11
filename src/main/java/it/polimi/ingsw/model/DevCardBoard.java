@@ -8,7 +8,7 @@ import java.util.Collection;
  */
 public class DevCardBoard {
     //First index x for color, second index y for level
-    private DevCardDeck[][] board;
+    private static DevCardDeck[][] board;
 
 
     /**
@@ -17,11 +17,11 @@ public class DevCardBoard {
      */
     public DevCardBoard(DevCardDeck[][] board){
 
-        this.board = new DevCardDeck[][]{{null,null,null},{null,null,null},{null,null,null},{null,null,null}};
+        DevCardBoard.board = new DevCardDeck[][]{{null,null,null},{null,null,null},{null,null,null},{null,null,null}};
         int i=0;
 
         for(DevCardDeck[] row : board){
-            System.arraycopy(row, 0, this.board[i], 0, row.length);
+            System.arraycopy(row, 0, DevCardBoard.board[i], 0, row.length);
             i++;
         }
 
@@ -48,6 +48,16 @@ public class DevCardBoard {
         return top;
     }
 
+    public static void topView(DevCard[][] top) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 3; j++) {
+                top[i][j].devCardView();
+                System.out.print("\u001b[13B ");
+            }
+
+        }
+    }
+
     /**
      * getCard
      * @param color color of DevCard
@@ -58,7 +68,7 @@ public class DevCardBoard {
         int x = color.ordinal();
         int y = level.ordinal();
 
-        return this.board[x][y].peek();
+        return board[x][y].peek();
     }
 
     /**
@@ -77,7 +87,7 @@ public class DevCardBoard {
         for(Resource elem : card.getCost()){if(!costcopy.remove(elem))throw new Exception("cost requirements not matched");}
         //if(!cost.containsAll(Arrays.asList(card.getCost()))) throw new Exception("cost requirements not matched");
 
-        return this.board[color.ordinal()][level.ordinal()].draw();
+        return board[color.ordinal()][level.ordinal()].draw();
     }
 
 

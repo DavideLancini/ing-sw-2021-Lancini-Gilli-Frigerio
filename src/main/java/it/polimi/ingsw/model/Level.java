@@ -4,9 +4,9 @@ package it.polimi.ingsw.model;
  * @author Gruppo 12
  */
 public enum Level {
-    ONE("①"),
-    TWO("②"),
-    THREE("③");
+    ONE("."),
+    TWO(":"),
+    THREE("⋮");
 
     Level(String escape) { this.escape = escape; }
 

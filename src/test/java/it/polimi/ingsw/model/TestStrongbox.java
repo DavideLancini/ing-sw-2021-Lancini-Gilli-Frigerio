@@ -1,10 +1,8 @@
 package it.polimi.ingsw.model;
 
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import static org.junit.Assert.assertSame;
 
 public class TestStrongbox {

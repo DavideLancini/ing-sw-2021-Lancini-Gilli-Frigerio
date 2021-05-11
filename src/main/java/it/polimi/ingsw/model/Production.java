@@ -47,4 +47,15 @@ public class Production {
         if(!Arrays.equals(a,b)) throw new Exception("");
         return this.output;
     }
+
+    /**
+     * productionView
+     */
+    public void productionView(){
+        System.out.print("[");
+        new ResourceCounter(this.input);
+        System.out.print("]→[");
+        new ResourceCounter(this.output);
+        System.out.println("]");
+    }
 }
