@@ -51,9 +51,6 @@ public class Controller {
         return true;
     }
 
-
-
-
     public void buyDevCard(Level level, CardColor color){
         DevCard newCard;
 

@@ -3,9 +3,21 @@ package it.polimi.ingsw.network;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.*;
 
-
 public abstract class Message {
+    private String[] Token = new String[12]; //used to identify player and match
+    private int Index; //used to keep message in order (the socket will discard messages too old)
+    private MessageType Type; //used to identify the type of message
+
+    public void serialize(){}
+    public void send(){}
     public void resolve(Controller controller){}
+}
+
+class MessagePing extends Message{
+    private String[] Serialized = new String[32];
+    public MessagePing(){
+        // initialize
+    }
 }
 
 class MessageLeaderActivation extends Message{
