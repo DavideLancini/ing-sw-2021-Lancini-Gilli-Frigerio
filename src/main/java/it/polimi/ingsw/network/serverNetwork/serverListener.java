@@ -7,15 +7,17 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class serverListener {
-    private int port;
+    private static int port;
+    private static int slot;
     private Socket socket;
     private ServerSocket server;
     private DataInputStream stream;
     /**
      * TO COMMENT
      */
-    public void setListenerPort(int port) {
-        this.port = port;
+    public static void setListenerParameters(int port, int slot) {
+        serverListener.port = port;
+        serverListener.slot = slot;
     }
     /**
      * TO COMMENT Open the Listener and start recording
