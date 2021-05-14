@@ -1,5 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.network;
 
+import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.*;
 
 
