@@ -1,5 +1,7 @@
 package it.polimi.ingsw.network.serverNetwork;
 
+import it.polimi.ingsw.Server;
+
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -7,37 +9,63 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class serverListener {
+    private static boolean isON = false;
     private static int port;
-    private static int slot;
-    private Socket socket;
-    private ServerSocket server;
-    private DataInputStream stream;
+    private static int maxSlot;
+    private static Socket socket;
+    private static ServerSocket server;
+    private static DataInputStream stream;
     /**
      * TO COMMENT
      */
-    public static void setListenerParameters(int port, int slot) {
-        serverListener.port = port;
-        serverListener.slot = slot;
+    public static void setListenerParameters(int listenerPort, int listenerMaxSlot){
+        if(isON){
+            if (Server.logLevel > 0) { System.out.println("WARNING: ListenerOccupied, parameters are locked if the Listener is Running"); }
+        }else{
+            port = listenerPort;
+            maxSlot = listenerMaxSlot;
+        }
+    }
+    public static void setPort(int listenerPort){
+        if(isON){
+            if (Server.logLevel > 0) { System.out.println("WARNING: ListenerOccupied, parameters are locked if the Listener is Running"); }
+        }else{
+            port = listenerPort;
+        }
+    }
+    public static void setMaxSlot(int listenerMaxSlot){
+        if(isON){
+            //check if the slot requested are enough to keep every connection open
+        }else{
+            maxSlot = listenerMaxSlot;
+        }
     }
     /**
      * TO COMMENT Open the Listener and start recording
      */
-    public void initializeListener(){
-        try {
-            this.server = new ServerSocket(port);
-        } catch (IOException e) {
-            System.err.println("Listener: opening failed");
-        }
-        try {
-            socket = this.server.accept();
-        } catch (IOException e) {
-            System.err.println("Listener: waiting failed");
-        }
-        //i don't think is a good idea to keep the stream always in record mode
-        try {
-            this.stream = new DataInputStream( new BufferedInputStream(socket.getInputStream()));
-        } catch (IOException e) {
-            System.err.println("Listener: stream creation failed");
+    public static void startListener(){
+        if(isON){
+            if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) ListenerOccupied, listener is already ON"); }
+        }else{
+            try {
+                server = new ServerSocket(port);
+            } catch (IOException e) {
+                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) IOException, opening failed"); }
+                isON = false;
+            }
+            try {
+                socket = server.accept();
+            } catch (IOException e) {
+                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) IOException, waiting failed"); }
+                isON = false;
+            }
+            try {
+                stream = new DataInputStream( new BufferedInputStream(socket.getInputStream()));
+                isON = true; // now the Listener is considered Open
+            } catch (IOException e) {
+                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) IOException, stream opening failed"); }
+                isON = false;
+            }
         }
     }
     /**
@@ -47,7 +75,7 @@ public class serverListener {
         String message = null;
         try
         {
-            message = this.stream.readUTF();
+            message = stream.readUTF();
         }
         catch(IOException i)
         {

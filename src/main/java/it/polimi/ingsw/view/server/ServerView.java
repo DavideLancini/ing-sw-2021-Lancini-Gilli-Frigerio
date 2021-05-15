@@ -100,7 +100,9 @@ public class ServerView {
         action = System.console().readLine(); //TODO: input does not work
         switch (action) {
             case "1":
-                // toggle server on/off
+                if(checkServerActivity()){
+                    serverListener.startListener();
+                }
                 break;
             case "2":
                 // edit parameters
