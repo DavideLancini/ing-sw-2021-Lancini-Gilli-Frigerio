@@ -5,11 +5,9 @@ import static it.polimi.ingsw.view.cli.MainMenu.*;
 public class Client {
 
     public static void main( String[] args ) {
-        String action;
         boolean isON = true;
         while(isON){
-            action = showMainMenu();
-            switch (action){
+            switch (showMainMenu()){
                 case "1":
                     //enter create match
                     break;
