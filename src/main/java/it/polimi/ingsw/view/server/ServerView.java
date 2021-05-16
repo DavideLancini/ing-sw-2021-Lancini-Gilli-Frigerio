@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.server;
 
 import it.polimi.ingsw.Server;
+import it.polimi.ingsw.network.serverNetwork.ListenerOccupiedExeption;
 import it.polimi.ingsw.network.serverNetwork.serverListener;
 
 import java.io.FileInputStream;
@@ -40,22 +41,51 @@ public class ServerView {
     /**
      * Load preferred port number and max slot for match
      *
-     * @warning FNF: Load standard parameters
-     * @warning IOE: Load standard parameters
+     * @warning InstantiationException: Do Nothing
+     * @warning ListenerOccupiedException: Do Nothing
+     * @warning FileNotFoundException: Load standard parameters
+     * @warning IOException: Load standard parameters
      * @author Lancini Davide
      */
-    public static void loadParameters() {
+    public static void loadParameters() { //TODO CleanUp (It works Though)
         try {
             FileInputStream file = new FileInputStream("src/main/resources/server.properties");
             Properties serverProperties = new Properties();
             serverProperties.load(file);
-            serverListener.setListenerParameters(parseInt(serverProperties.getProperty("port")), parseInt(serverProperties.getProperty("slot")));
+            try {
+                serverListener.setMaxSlots(parseInt(serverProperties.getProperty("slot")));
+            } catch (InstantiationException InstantiationException) {
+                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) Active Slots exceed Requested Max Slots"); }
+            }
+            try {
+                serverListener.setPort(parseInt(serverProperties.getProperty("port")));
+            } catch (ListenerOccupiedExeption listenerOccupiedExeption) {
+                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) The Listener is ON, the port cannot be changed"); }
+            }
             file.close();
-        } catch (FileNotFoundException e1) {
-            serverListener.setListenerParameters(1000, 5);
+        } catch (FileNotFoundException FileNotFoundException) {
+            try {
+                serverListener.setMaxSlots(1000);
+            } catch (InstantiationException InstantiationException) {
+                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) Active Slots exceed Requested Max Slots"); }
+            }
+            try {
+                serverListener.setPort(5);
+            } catch (ListenerOccupiedExeption listenerOccupiedExeption) {
+                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) The Listener is ON, the port cannot be changed"); }
+            }
             if (Server.logLevel > 0) { System.out.println("WARNING: (server.properties) Not Found, loaded standard parameters"); }
-        } catch (IOException e2) {
-            serverListener.setListenerParameters(1000, 5);
+        } catch (IOException IOException) {
+            try {
+                serverListener.setMaxSlots(1000);
+            } catch (InstantiationException InstantiationException) {
+                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) Active Slots exceed Requested Max Slots"); }
+            }
+            try {
+                serverListener.setPort(5);
+            } catch (ListenerOccupiedExeption listenerOccupiedExeption) {
+                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) The Listener is ON, the port cannot be changed"); }
+            }
             if (Server.logLevel > 0) { System.out.println("WARNING: (server.properties) IO Error, loaded standard parameters"); }
         }
     }
@@ -81,8 +111,7 @@ public class ServerView {
     /**
      * Check if the sockets are online
      *
-     * @return true if both sockets are online
-     * if only one is online the server will be considered offline
+     * @return true if both sockets are online, if only one is online the server will be considered offline
      * @author Lancini Davide
      */
     public static boolean checkServerActivity() {

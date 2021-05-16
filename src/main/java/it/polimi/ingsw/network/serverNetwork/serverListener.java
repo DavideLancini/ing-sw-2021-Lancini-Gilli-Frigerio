@@ -9,36 +9,38 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class serverListener {
-    private static boolean isON = false;
     private static int port;
-    private static int maxSlot;
+    private static int maxSlots;
+    private static boolean isON = false;
+    private static final int activeSlots = 0;
     private static Socket socket;
     private static ServerSocket server;
     private static DataInputStream stream;
     /**
-     * TO COMMENT
+     * Setter for the Server Port.
+     *
+     *
+     * @author Lancini Davide
      */
-    public static void setListenerParameters(int listenerPort, int listenerMaxSlot){
+    public static void setPort(int listenerPort) throws ListenerOccupiedExeption{
         if(isON){
-            if (Server.logLevel > 0) { System.out.println("WARNING: ListenerOccupied, parameters are locked if the Listener is Running"); }
-        }else{
-            port = listenerPort;
-            maxSlot = listenerMaxSlot;
-        }
-    }
-    public static void setPort(int listenerPort){
-        if(isON){
-            if (Server.logLevel > 0) { System.out.println("WARNING: ListenerOccupied, parameters are locked if the Listener is Running"); }
+            throw new ListenerOccupiedExeption("ERROR: Listener occupied, the port cannot be modified");
         }else{
             port = listenerPort;
         }
     }
-    public static void setMaxSlot(int listenerMaxSlot){
-        if(isON){
-            //check if the slot requested are enough to keep every connection open
+    public static int getPort(){
+        return port;
+    }
+    public static void setMaxSlots(int listenerMaxSlot) throws InstantiationException {
+        if(isON & activeSlots > listenerMaxSlot){
+            throw new InstantiationException();
         }else{
-            maxSlot = listenerMaxSlot;
+            maxSlots = listenerMaxSlot;
         }
+    }
+    public static int getMaxSlots() {
+        return maxSlots;
     }
     /**
      * TO COMMENT Open the Listener and start recording
@@ -68,6 +70,7 @@ public class serverListener {
             }
         }
     }
+
     /**
      * TO COMMENT take the first message in the recording pile
      */
