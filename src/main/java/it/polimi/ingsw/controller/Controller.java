@@ -20,7 +20,9 @@ public class Controller {
         this.market = market;
     }
 
+
     public void activateLeader (int position) {
+
         LeaderCard leader = this.pb.getLeaderCard(position);
         if(!leader.getIsActive()) {leader.toggleActive();} //then send message of success
         else ; //send message back with failure notice
