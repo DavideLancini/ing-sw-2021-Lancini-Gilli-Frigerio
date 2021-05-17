@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.cli;
 
-import it.polimi.ingsw.model.Market;
 /**
  * Main Menu Cli
  * @author Lancini Davide
@@ -25,8 +24,4 @@ public class MainMenu {
         return action;
     }
 
-    //is this part used??
-    public void showGame(){
-        Market.marketView();
-    }
 }

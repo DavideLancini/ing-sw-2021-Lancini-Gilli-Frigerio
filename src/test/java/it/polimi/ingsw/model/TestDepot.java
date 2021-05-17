@@ -13,10 +13,7 @@ public class TestDepot {
     @Test
     public void testDeposit(){
 
-        System.out.println(Resource.SERVANT);
-        System.out.println(Resource.COIN);
-        System.out.println(Resource.SHIELD);
-        System.out.println(Resource.STONE);
+
 
         try {
             depot.deposit(resource, 0);

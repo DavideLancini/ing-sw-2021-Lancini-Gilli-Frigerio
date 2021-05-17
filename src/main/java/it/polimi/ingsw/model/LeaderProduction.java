@@ -6,19 +6,19 @@ package it.polimi.ingsw.model;
  * @author Gruppo 12
  */
 public class LeaderProduction extends LeaderCard {
-    private Production production;
-    private Resource choice;
-
-    public Production getProduction() {
-        return this.production;
+    public LeaderProduction(int vp,Resource type,Resource[] require,Production production) {
+        this.setVP(vp);
+        this.setType(type);
+        this.setRequire(require);
+        this.setProduction(production);
     }
 
-    /**
-     * setChoice
-     *
-     * @param choice resource player wants to produce
-     */
-    public void setChoice(Resource choice) {
-        this.choice = choice;
+    public void leaderCardView() {
+        System.out.print("Requires[");
+        new ResourceCounter(this.getRequire());
+        System.out.println("]");
+        this.getProduction().productionView();
+        System.out.println("\b+"+this.getChoice());
+        System.out.println("\u001b[38:5:221m {"+this.getVP()+"}\u001b[m");
     }
 }

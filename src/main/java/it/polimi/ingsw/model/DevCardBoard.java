@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 /**
  * Class DevCardBoard
@@ -49,12 +50,16 @@ public class DevCardBoard {
     }
 
     public static void topView(DevCard[][] top) {
+        System.out.println("══════════════╗");
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 3; j++) {
-                top[i][j].devCardView();
-                System.out.print("\u001b[13B ");
+                top[i][j].toString();
+                if(j!=2)System.out.println("--------------");
             }
-
+            if(i!=3)
+            System.out.println("══════════════╣");
+            else
+                System.out.println("══════════════╝");
         }
     }
 

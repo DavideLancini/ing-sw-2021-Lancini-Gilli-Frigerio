@@ -85,9 +85,9 @@ public class Depot {
 
     public void depotView(){
         System.out.println("   /╲");
-        System.out.println("  /"+contents[0]+"╲");
-        System.out.println(" /"+contents[1]+" "+contents[2]+"╲");
-        System.out.println("/"+contents[3]+" "+contents[4]+" "+contents[5]+"╲");
+        System.out.println("  /"+contents[0]+" ╲");
+        System.out.println(" /"+contents[1]+" "+contents[2]+" ╲");
+        System.out.println("/"+contents[3]+" "+contents[4]+" "+contents[5]+" ╲");
 
     }
 }

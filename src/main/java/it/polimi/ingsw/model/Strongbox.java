@@ -70,4 +70,10 @@ public class Strongbox {
         catch (Exception e){return false;}
         return true;
     }
+
+    public void StrongboxView(){
+        System.out.print("╔════════════╗\n╚═════╚╝═════╝\n  ");
+        new ResourceCounter(this.resources);
+        System.out.println("\n╚════════════╝");
+    }
 }

@@ -7,9 +7,9 @@ package it.polimi.ingsw.model;
 public class PlayerBoard {
 
     private int faithTrack;
-    private Strongbox strongbox;
+    private Strongbox strongbox = new Strongbox();
     private LeaderCard[] leaderCards;
-    private Depot depot;
+    private Depot depot= new Depot();
     //DevCard[colonna][livello]
     private DevCard[][] devCards;
     private DefaultProduction defaultProduction;
@@ -19,6 +19,7 @@ public class PlayerBoard {
      * devCards and leaderCards set to empty and faith track to 0
      */
     public PlayerBoard(){
+
         this.devCards = new DevCard[][]{{null,null,null},{null,null,null},{null,null,null}};
 
         this.leaderCards = new LeaderCard[]{null, null};
@@ -121,8 +122,9 @@ public class PlayerBoard {
 
     public void playerBoardView(){
         System.out.println("player");
-        //faith track
-        //deposit
-        //strongbox
+        //fait track
+        this.depot.depotView();//deposit
+        this.strongbox.StrongboxView();//strongbox
+        //devCards
     }
 }

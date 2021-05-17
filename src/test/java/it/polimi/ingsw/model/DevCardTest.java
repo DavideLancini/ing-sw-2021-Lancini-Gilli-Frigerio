@@ -17,6 +17,6 @@ public class DevCardTest {
 
     @Test
     public void devCardView() {
-        d1.devCardView();
+        System.out.println(d1);
     }
 }

@@ -7,7 +7,7 @@ public  class LeaderTransformTest {
 
     @Test
     public void whiteTo() throws Exception {
-        LeaderTransform leaderCard = new LeaderTransform();
+        LeaderCard leaderCard = new LeaderTransform(12,Resource.COIN, new Resource[]{Resource.STONE, Resource.STONE});
         leaderCard.setType(Resource.COIN);
         Resource output = leaderCard.WhiteTo(Marble.WHITE);
         Resource exOutput = Resource.COIN;
