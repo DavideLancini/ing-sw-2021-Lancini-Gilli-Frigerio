@@ -9,7 +9,7 @@ import java.util.Collection;
  */
 public class DevCardBoard {
     //First index x for color, second index y for level
-    private static DevCardDeck[][] board;
+    private DevCardDeck[][] board;
 
 
     /**
@@ -18,11 +18,11 @@ public class DevCardBoard {
      */
     public DevCardBoard(DevCardDeck[][] board){
 
-        DevCardBoard.board = new DevCardDeck[][]{{null,null,null},{null,null,null},{null,null,null},{null,null,null}};
+        this.board = new DevCardDeck[][]{{null,null,null},{null,null,null},{null,null,null},{null,null,null}};
         int i=0;
 
         for(DevCardDeck[] row : board){
-            System.arraycopy(row, 0, DevCardBoard.board[i], 0, row.length);
+            System.arraycopy(row, 0, this.board[i], 0, row.length);
             i++;
         }
 

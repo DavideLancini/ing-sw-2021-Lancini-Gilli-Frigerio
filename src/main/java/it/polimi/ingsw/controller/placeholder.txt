@@ -1,3 +1,0 @@
-Git does not synchronize empty folders
-This file is here to preserve the folder structure
-Delete this after the first file is created

@@ -20,7 +20,7 @@ public class serverSocket {
      */
     public void connect() {
         try {
-            this.socket = new Socket(hostname, port);
+            this.socket = new Socket(this.hostname, this.port);
         } catch (IOException e) {
             System.err.println("Socket: connection failed");
             //trying to close the socket in case of failed connection

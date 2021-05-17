@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.*;
 
@@ -20,7 +20,9 @@ public class Controller {
         this.market = market;
     }
 
+
     public void activateLeader (int position) {
+
         LeaderCard leader = this.pb.getLeaderCard(position);
         if(!leader.getIsActive()) {leader.toggleActive();} //then send message of success
         else ; //send message back with failure notice
@@ -50,9 +52,6 @@ public class Controller {
         }
         return true;
     }
-
-
-
 
     public void buyDevCard(Level level, CardColor color){
         DevCard newCard;
