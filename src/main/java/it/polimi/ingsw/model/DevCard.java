@@ -29,6 +29,15 @@ public class DevCard {
     }
 
     /**
+     * getColor
+     * @return color of devCard
+     */
+    public CardColor getColor(){
+        return this.color;
+    }
+
+
+    /**
      * getVP
      * @return victory points
      */

@@ -24,10 +24,72 @@ public class Controller {
     public void activateLeader (int position) {
 
         LeaderCard leader = this.pb.getLeaderCard(position);
-        if(!leader.getIsActive()) {leader.toggleActive();} //then send message of success
+
+        if(!checkRequirements(leader)) {return; /*send message back with failure notice*/ }
+
+        if(!leader.getIsActive()) {
+
+            if (leader instanceof LeaderDepot)((LeaderDepot)leader).toggleActive(pb.getDepot());
+            else leader.toggleActive();
+            
+        } //then send message of success
+
         else ; //send message back with failure notice
 
     }
+
+    private boolean checkRequirements(LeaderCard leader){
+        if(leader instanceof LeaderProduction){
+            for(int i=0; i<3; i++) {
+                DevCard card = this.pb.getDevCard(i, 1);
+                if(card != null && card.getColor() == ((LeaderProduction) leader).getRequirements())return true;
+            }
+            return  false;
+
+        }
+
+
+        else if(leader instanceof LeaderDepot){
+            int check = 0;
+            Resource requirements = ((LeaderDepot) leader).getRequirements();
+
+            for (int i = 0; i<10; i++){
+                if(pb.getDepot().getResource(i) == requirements) check++;
+            }
+            if (check>=5) return true;
+            else {
+                ArrayList<Resource> left = null;
+                for(int i = 0; i< 5-check; i++) left.add(requirements);
+                if(this.pb.getStrongbox().contains(left)) return  true;
+                else{return false;}
+            }
+
+        }
+
+        else {
+
+            CardColor[] requirements;
+
+            if(leader instanceof  LeaderTransform) requirements = ((LeaderTransform) leader).getRequirements();
+            else requirements = ((LeaderSale) leader).getRequirements();
+
+            ArrayList<DevCard> devCards = new ArrayList<>();
+            for (int i = 0; i<3; i++){
+                for (int j = 0; j<3; j++){
+                       devCards.add(pb.getDevCard(i,j));
+                }
+            }
+
+            for(CardColor each : requirements){
+                if(!devCards.remove(each))return false;
+            }
+            return true;
+
+        }
+
+    }
+
+
 
     public void tryDepotConfiguration(Resource[] input){
         //input length is built to be 10, padded with nulls if necessary
@@ -53,12 +115,25 @@ public class Controller {
         return true;
     }
 
-    public void buyDevCard(Level level, CardColor color){
+    public void buyDevCard(Level level, CardColor color, int column){
         DevCard newCard;
+        Resource[] stdCost = board.getCard(color, level).getCost();
 
+        //LeaderSale effect
+        if (pb.getLeaderCard(0) != null && pb.getLeaderCard(0).getIsActive() && pb.getLeaderCard(0) instanceof LeaderSale){
+            stdCost = ((LeaderSale) pb.getLeaderCard(0)).downPrice(stdCost);
+        }
+        if (pb.getLeaderCard(1) != null &&pb.getLeaderCard(1).getIsActive() && pb.getLeaderCard(1) instanceof LeaderSale){
+            stdCost = ((LeaderSale) pb.getLeaderCard(0)).downPrice(stdCost);
+        }
+
+
+        // Buy Card
         try{
-            ArrayList<Resource> cost = extractCost(board.getCard(color, level).getCost());
-            newCard = board.buy(level, color, cost);}
+            ArrayList<Resource> cost = extractCost(stdCost);
+            newCard = board.buy(level, color, cost);
+            pb.addDevCard(newCard, column);
+        }
 
         catch (Exception e ){/* send error message back to user, insufficient resources*/}
     }
