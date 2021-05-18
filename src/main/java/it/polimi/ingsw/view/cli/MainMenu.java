@@ -1,5 +1,8 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.model.Reader;
+
+
 /**
  * Main Menu Cli
  * @author Lancini Davide
@@ -19,7 +22,7 @@ public class MainMenu {
         System.out.println( "6. Credits" );
 
         String action;
-        action = System.console().readLine();
+        action = Reader.in.nextLine();
 
         return action;
     }

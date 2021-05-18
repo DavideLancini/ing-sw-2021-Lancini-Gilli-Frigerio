@@ -122,9 +122,30 @@ public class PlayerBoard {
 
     public void playerBoardView(){
         System.out.println("player");
-        //fait track
-        this.depot.depotView();//deposit
-        this.strongbox.StrongboxView();//strongbox
-        //devCards
+        ShowFaithTrack();
+        this.depot.depotView();
+        this.strongbox.StrongboxView();
+        devCardsView();
+
+    }
+
+    private void devCardsView() {
+        boolean first=false;
+        for(int i=0;i<3;i++){
+            for(int j=2;j>-1;j--){
+                if (first)
+                devCards[i][j].coveredView();
+                else if (devCards[i][j]!=null) {
+                    devCards[i][j].toString();
+                    first=true;
+                    }
+            }
+            first=false;
+            }
+    }
+
+
+    private void ShowFaithTrack() {
+        System.out.println(faithTrack+""+Resource.FAITH);
     }
 }

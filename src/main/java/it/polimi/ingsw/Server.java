@@ -9,7 +9,7 @@ import static it.polimi.ingsw.view.server.ServerView.*;
  * @author Lancini Davide
  */
 public class Server {
-    public static int logLevel = 2;
+    public static int logLevel = 1;
     public static void main( String[] args )
     {
         boolean isON = true;

@@ -21,7 +21,7 @@ public class DevCardBoardTest {
 
     DevCard[][] top={{d1,d2,d3},{d2,d3,d1},{d2,d1,d3},{d3,d2,d1}};
     @Test
-    public void topViewTest() {
-        DevCardBoard.topView(this.top);
-    }
+    public void DevCardBordViewTest(){
+    DevCardBoard.topView(top);
+}
 }

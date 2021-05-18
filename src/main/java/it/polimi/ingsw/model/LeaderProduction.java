@@ -36,9 +36,11 @@ public class LeaderProduction extends LeaderCard {
     }
 
     public void leaderCardView() {
-        System.out.print("Requires[ DevCard of color " + requirements.toString() + "and level 2]");
+        System.out.println("══════════════╗");
+        System.out.println("   [" + requirements.toString()+"+"+Level.TWO+ "]");
         this.getProduction().productionView();
-        System.out.println("\b+"+this.choice);
-        System.out.println("\u001b[38:5:221m {"+this.getVP()+"}\u001b[m");
+        System.out.println("   +["+Resource.EMPTY+"]");
+        System.out.println("  \u001b[38:5:221m {"+this.getVP()+"}\u001b[m");
+        System.out.println("══════════════╝");
     }
 }

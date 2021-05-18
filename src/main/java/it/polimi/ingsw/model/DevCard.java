@@ -82,4 +82,9 @@ public class DevCard {
     public String toString(){
         return devCardView();
     }
+
+    public void coveredView(){
+        System.out.println("━━━━━━━━━━━━━━");
+        System.out.println("  "+this.level+" "+this.color+"\u001b[38:5:221m {"+this.VP+"}\u001b[m");// covered card possible view
+    }
 }

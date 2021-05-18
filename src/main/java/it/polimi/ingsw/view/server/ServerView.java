@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.server;
 
 import it.polimi.ingsw.Server;
+import it.polimi.ingsw.model.Reader;
 import it.polimi.ingsw.network.serverNetwork.ListenerOccupiedExeption;
 import it.polimi.ingsw.network.serverNetwork.serverListener;
 
@@ -8,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
@@ -126,7 +128,7 @@ public class ServerView {
      */
     public static void takeAction() {
         String action;
-        action = System.console().readLine(); //TODO: input does not work
+        action = Reader.in.nextLine(); //TODO: input does not work
         switch (action) {
             case "1":
                 if(checkServerActivity()){

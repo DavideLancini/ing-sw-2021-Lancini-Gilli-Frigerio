@@ -30,8 +30,10 @@ public class LeaderDepot extends LeaderCard {
 
 
     public void leaderCardView() {
-        System.out.print("Requires[5" + this.requirements + "]");
-        System.out.println(getType() + "" + getType());
-        System.out.println("\u001b[38:5:221m {" + this.getVP() + "}\u001b[m");
+        System.out.println("══════════════╗");
+        System.out.println("   [5" + this.requirements + "]");
+        System.out.println("   "+getType() + " " + getType());
+        System.out.println("   \u001b[38:5:221m{" + this.getVP() + "}\u001b[m");
+        System.out.println("══════════════╝");
     }
 }

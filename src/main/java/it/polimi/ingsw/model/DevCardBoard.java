@@ -8,8 +8,9 @@ import java.util.Collection;
  * @author Gruppo 12
  */
 public class DevCardBoard {
+
     //First index x for color, second index y for level
-    private DevCardDeck[][] board;
+    public static DevCardDeck[][] board;
 
 
     /**
@@ -18,21 +19,25 @@ public class DevCardBoard {
      */
     public DevCardBoard(DevCardDeck[][] board){
 
-        this.board = new DevCardDeck[][]{{null,null,null},{null,null,null},{null,null,null},{null,null,null}};
+        DevCardBoard.board = new DevCardDeck[][]{{null,null,null},{null,null,null},{null,null,null},{null,null,null}};
         int i=0;
 
         for(DevCardDeck[] row : board){
-            System.arraycopy(row, 0, this.board[i], 0, row.length);
+            System.arraycopy(row, 0, DevCardBoard.board[i], 0, row.length);
             i++;
         }
 
+    }
+
+    public static DevCardDeck[][] getBoard() {
+        return board;
     }
 
     /**
      * getTop
      * @return view of 12 DevCards you could buy
      */
-    public DevCard[][] getTop(){
+    public static DevCard[][] getTop(DevCardDeck[][] board){
         DevCard[][] top = {
                 {null, null, null},
                 {null, null, null},
@@ -40,8 +45,8 @@ public class DevCardBoard {
                 {null, null, null}
         };
 
-        for(int i=0;i<3;i++){
-            for(int j=0;j<4;j++){
+        for(int i=0;i<4;i++){
+            for(int j=0;j<3;j++){
                 top[i][j] = board[i][j].peek();
             }
         }
