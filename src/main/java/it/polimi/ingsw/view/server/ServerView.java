@@ -9,7 +9,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
@@ -19,26 +18,6 @@ import static java.lang.Integer.parseInt;
  * @author Lancini Davide
  */
 public class ServerView {
-    /**
-     * Simple feature to keep the console clean, tested on windows, mac os and some linux distros.
-     * If the logLevel is set to VERBOSE the Console will NOT be cleaned
-     *
-     * @author Lancini Davide
-     */
-    public static void clearConsole(){
-        if (Server.logLevel < 2) {
-            try {
-                if (System.getProperty("os.name").contains("Windows")) {
-                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                }
-                else {
-                    System.out.print("\033\143");
-                }
-            } catch (IOException | InterruptedException e1) {
-                if (Server.logLevel > 0) { System.out.println("WARNING: (clearConsole) IOException, console not cleaned"); }
-            }
-        }
-    }
 
     /**
      * Load preferred port number and max slot for match
@@ -97,7 +76,8 @@ public class ServerView {
      *
      * @author Lancini Davide
      */
-    public static void serverStatus() {
+    public static String serverMenu() {
+        clearConsole();
         if (checkServerActivity()) {
             System.out.println("The server is ON");
             // TODO print server parameters (hostname, port, max slots, open slots)
@@ -108,42 +88,79 @@ public class ServerView {
         }
         System.out.println("2. Edit server parameters");
         System.out.println("3. Exit");
+        return Reader.in.nextLine();
+    }
+
+    /**
+     * Toggle Server ON/OFF
+     *
+     * @author Lancini Davide
+     */
+    public static void toggleServer(){
+        if(checkServerActivity()){
+            startServer();
+        }else{
+            stopServer();
+        }
+    }
+
+    /**
+     * Edit the standard parameters for the server.
+     * Most parameters can be modified with the Server Online.
+     * Parameters that need a reboot to be activated will still be saved in the properties file (with no effect)
+     *
+     * @author Lancini Davide
+     */
+    public static void editParameters(){
+        //TODO editParameters(): for now edit the properties file
+    }
+
+    /**
+     * Simple feature to keep the console clean, tested on windows, mac os and some linux distros.
+     * If the logLevel is set to VERBOSE the Console will NOT be cleaned
+     *
+     * @author Lancini Davide
+     */
+    private static void clearConsole(){
+        if (Server.logLevel < 2) {
+            try {
+                if (System.getProperty("os.name").contains("Windows")) {
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                }
+                else {
+                    System.out.print("\033\143");
+                }
+            } catch (IOException | InterruptedException e1) {
+                if (Server.logLevel > 0) { System.out.println("WARNING: (clearConsole) IOException, console not cleaned"); }
+            }
+        }
     }
 
     /**
      * Check if the sockets are online
      *
-     * @return true if both sockets are online, if only one is online the server will be considered offline
+     * @return true if both sockets are online
      * @author Lancini Davide
      */
-    public static boolean checkServerActivity() {
-        // TODO check if the socket are (both) online
-        return true; // temporary
+    private static boolean checkServerActivity() {
+        return serverListener.getStatus();
     }
 
     /**
-     * Take input from the user and do what is asked
+     * Start Server
      *
      * @author Lancini Davide
      */
-    public static void takeAction() {
-        String action;
-        action = Reader.in.nextLine(); //TODO: input does not work
-        switch (action) {
-            case "1":
-                if(checkServerActivity()){
-                    serverListener.startListener();
-                }
-                break;
-            case "2":
-                // edit parameters
-                break;
-            case "3":
-                // close without save
-                break;
-            default:
-                // error in input, just refresh
-                break;
-        }
+    private static void startServer(){
+        //TODO
+    }
+
+    /**
+     * Stop Server
+     *
+     * @author Lancini Davide
+     */
+    private static void stopServer(){
+        //TODO
     }
 }

@@ -16,6 +16,7 @@ public class serverListener {
     private static Socket socket;
     private static ServerSocket server;
     private static DataInputStream stream;
+
     /**
      * Setter for the Server Port.
      *
@@ -29,9 +30,23 @@ public class serverListener {
             port = listenerPort;
         }
     }
+
+    /**
+     * Getter for the Server Port.
+     *
+     *
+     * @author Lancini Davide
+     */
     public static int getPort(){
         return port;
     }
+
+    /**
+     * Setter for the Server Max Slot.
+     *
+     *
+     * @author Lancini Davide
+     */
     public static void setMaxSlots(int listenerMaxSlot) throws InstantiationException {
         if(isON & activeSlots > listenerMaxSlot){
             throw new InstantiationException();
@@ -39,11 +54,31 @@ public class serverListener {
             maxSlots = listenerMaxSlot;
         }
     }
+
+    /**
+     * Getter for the Server Max Slot.
+     *
+     *
+     * @author Lancini Davide
+     */
     public static int getMaxSlots() {
         return maxSlots;
     }
+
     /**
-     * TO COMMENT Open the Listener and start recording
+     * Getter for the Status
+     *
+     *
+     * @author Lancini Davide
+     */
+    public static boolean getStatus(){ return isON;}
+
+
+    /**
+     * Main Listener Method
+     *
+     *
+     * @author Lancini Davide
      */
     public static void startListener(){
         if(isON){
@@ -86,10 +121,14 @@ public class serverListener {
         }
         return message;
     }
+
     /**
-     * TO COMMENT Close the listener (but not the server)
+     * Stop Listener without save (for now)
+     *
+     *
+     * @author Lancini Davide
      */
-    public void closeListener(){
+    public static void stopListener(){
         try {
             socket.close();
         } catch (IOException e) {
