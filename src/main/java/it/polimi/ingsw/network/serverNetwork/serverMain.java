@@ -2,17 +2,17 @@ package it.polimi.ingsw.network.serverNetwork;
 
 import it.polimi.ingsw.Server;
 
-import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class serverListener {
+public class serverMain {
     private static int port;
     private static int maxSlots;
     private static boolean isON = false;
     private static final int activeSlots = 0;
+
     private static Socket socket;
     private static ServerSocket server;
     private static DataInputStream stream;
@@ -73,16 +73,15 @@ public class serverListener {
      */
     public static boolean getStatus(){ return isON;}
 
-
     /**
      * Main Listener Method
      *
      *
      * @author Lancini Davide
      */
-    public static void startListener(){
+    public static void startMain(){
         if(isON){
-            if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) ListenerOccupied, listener is already ON"); }
+            if (Server.logLevel > 0) { System.out.println("WARNING: (serverMain) The server is already ON"); }
         }else{
             try {
                 server = new ServerSocket(port);
@@ -90,36 +89,16 @@ public class serverListener {
                 if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) IOException, opening failed"); }
                 isON = false;
             }
-            try {
-                socket = server.accept();
-            } catch (IOException e) {
-                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) IOException, waiting failed"); }
-                isON = false;
-            }
-            try {
-                stream = new DataInputStream( new BufferedInputStream(socket.getInputStream()));
-                isON = true; // now the Listener is considered Open
-            } catch (IOException e) {
-                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) IOException, stream opening failed"); }
-                isON = false;
-            }
         }
-    }
 
-    /**
-     * TO COMMENT take the first message in the recording pile
-     */
-    public String listen(){
-        String message = null;
-        try
-        {
-            message = stream.readUTF();
+        serverListenerSocket a = new serverListenerSocket(server);
+
+        int i;
+        for(i=0;i<maxSlots;i++){
+            Thread t = new Thread(a);
+            t.start();
         }
-        catch(IOException i)
-        {
-            System.err.println("Listener: message collection failed");
-        }
-        return message;
+
     }
 
     /**
@@ -128,7 +107,7 @@ public class serverListener {
      *
      * @author Lancini Davide
      */
-    public static void stopListener(){
+    public static void stopMain(){
         try {
             socket.close();
         } catch (IOException e) {

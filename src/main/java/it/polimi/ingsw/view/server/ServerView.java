@@ -3,7 +3,7 @@ package it.polimi.ingsw.view.server;
 import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.Reader;
 import it.polimi.ingsw.network.serverNetwork.ListenerOccupiedExeption;
-import it.polimi.ingsw.network.serverNetwork.serverListener;
+import it.polimi.ingsw.network.serverNetwork.serverMain;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,40 +34,56 @@ public class ServerView {
             Properties serverProperties = new Properties();
             serverProperties.load(file);
             try {
-                serverListener.setMaxSlots(parseInt(serverProperties.getProperty("slot")));
+                serverMain.setMaxSlots(parseInt(serverProperties.getProperty("slot")));
             } catch (InstantiationException InstantiationException) {
-                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) Active Slots exceed Requested Max Slots"); }
+                if (Server.logLevel > 0) {
+                    System.out.println("WARNING: (serverListener) Active Slots exceed Requested Max Slots");
+                }
             }
             try {
-                serverListener.setPort(parseInt(serverProperties.getProperty("port")));
+                serverMain.setPort(parseInt(serverProperties.getProperty("port")));
             } catch (ListenerOccupiedExeption listenerOccupiedExeption) {
-                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) The Listener is ON, the port cannot be changed"); }
+                if (Server.logLevel > 0) {
+                    System.out.println("WARNING: (serverListener) The Listener is ON, the port cannot be changed");
+                }
             }
             file.close();
         } catch (FileNotFoundException FileNotFoundException) {
             try {
-                serverListener.setMaxSlots(1000);
+                serverMain.setMaxSlots(1000);
             } catch (InstantiationException InstantiationException) {
-                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) Active Slots exceed Requested Max Slots"); }
+                if (Server.logLevel > 0) {
+                    System.out.println("WARNING: (serverListener) Active Slots exceed Requested Max Slots");
+                }
             }
             try {
-                serverListener.setPort(5);
+                serverMain.setPort(5);
             } catch (ListenerOccupiedExeption listenerOccupiedExeption) {
-                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) The Listener is ON, the port cannot be changed"); }
+                if (Server.logLevel > 0) {
+                    System.out.println("WARNING: (serverListener) The Listener is ON, the port cannot be changed");
+                }
             }
-            if (Server.logLevel > 0) { System.out.println("WARNING: (server.properties) Not Found, loaded standard parameters"); }
+            if (Server.logLevel > 0) {
+                System.out.println("WARNING: (server.properties) Not Found, loaded standard parameters");
+            }
         } catch (IOException IOException) {
             try {
-                serverListener.setMaxSlots(1000);
+                serverMain.setMaxSlots(1000);
             } catch (InstantiationException InstantiationException) {
-                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) Active Slots exceed Requested Max Slots"); }
+                if (Server.logLevel > 0) {
+                    System.out.println("WARNING: (serverListener) Active Slots exceed Requested Max Slots");
+                }
             }
             try {
-                serverListener.setPort(5);
+                serverMain.setPort(5);
             } catch (ListenerOccupiedExeption listenerOccupiedExeption) {
-                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) The Listener is ON, the port cannot be changed"); }
+                if (Server.logLevel > 0) {
+                    System.out.println("WARNING: (serverListener) The Listener is ON, the port cannot be changed");
+                }
             }
-            if (Server.logLevel > 0) { System.out.println("WARNING: (server.properties) IO Error, loaded standard parameters"); }
+            if (Server.logLevel > 0) {
+                System.out.println("WARNING: (server.properties) IO Error, loaded standard parameters");
+            }
         }
     }
 
@@ -96,11 +112,11 @@ public class ServerView {
      *
      * @author Lancini Davide
      */
-    public static void toggleServer(){
-        if(checkServerActivity()){
-            startServer();
-        }else{
-            stopServer();
+    public static void toggleServer() {
+        if (checkServerActivity()) {
+            serverMain.startMain();
+        } else {
+            serverMain.stopMain();
         }
     }
 
@@ -111,7 +127,7 @@ public class ServerView {
      *
      * @author Lancini Davide
      */
-    public static void editParameters(){
+    public static void editParameters() {
         //TODO editParameters(): for now edit the properties file
     }
 
@@ -121,17 +137,18 @@ public class ServerView {
      *
      * @author Lancini Davide
      */
-    private static void clearConsole(){
+    private static void clearConsole() {
         if (Server.logLevel < 2) {
             try {
                 if (System.getProperty("os.name").contains("Windows")) {
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                }
-                else {
+                } else {
                     System.out.print("\033\143");
                 }
             } catch (IOException | InterruptedException e1) {
-                if (Server.logLevel > 0) { System.out.println("WARNING: (clearConsole) IOException, console not cleaned"); }
+                if (Server.logLevel > 0) {
+                    System.out.println("WARNING: (clearConsole) IOException, console not cleaned");
+                }
             }
         }
     }
@@ -143,24 +160,6 @@ public class ServerView {
      * @author Lancini Davide
      */
     private static boolean checkServerActivity() {
-        return serverListener.getStatus();
-    }
-
-    /**
-     * Start Server
-     *
-     * @author Lancini Davide
-     */
-    private static void startServer(){
-        //TODO
-    }
-
-    /**
-     * Stop Server
-     *
-     * @author Lancini Davide
-     */
-    private static void stopServer(){
-        //TODO
+        return serverMain.getStatus();
     }
 }
