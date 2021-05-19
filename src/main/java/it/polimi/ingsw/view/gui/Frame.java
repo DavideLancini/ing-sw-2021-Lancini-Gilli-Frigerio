@@ -1,9 +1,5 @@
 package it.polimi.ingsw.view.gui;
 
-
-
-import com.sun.glass.ui.Screen;
-
 import javax.swing.*;
 import java.awt.*;
 
