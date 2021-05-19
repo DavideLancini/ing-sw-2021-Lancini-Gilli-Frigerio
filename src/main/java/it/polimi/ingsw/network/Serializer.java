@@ -8,9 +8,15 @@ public class Serializer {
         return gson.toJson(o);
     }
 
-    public static Object deserialize(String s){
+    public static Message deserializeMessage(String s){
         Gson gson = new GsonBuilder().registerTypeAdapter(Message.class, new MessageJsonDeserializer()).create();
         return gson.fromJson(s, Message.class);
     }
+
+    public static ServerMessage deserializeServerMessage(String s){
+        Gson gson = new GsonBuilder().registerTypeAdapter(ServerMessage.class, new ServerMessageJsonDeserializer()).create();
+        return gson.fromJson(s, ServerMessage.class);
+    }
+
 
 }

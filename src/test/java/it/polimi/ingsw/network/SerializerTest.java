@@ -11,17 +11,21 @@ public class SerializerTest {
         MessageLeaderActivation message = new MessageLeaderActivation(1);
 
         String serialized = Serializer.serialize(message);
-        Message deserialized = (Message) Serializer.deserialize(serialized);
+        Message deserialized = (Message) Serializer.deserializeMessage(serialized);
 
         assertSame(message.position, ((MessageLeaderActivation)deserialized).position);
 
         MessageTakeResources message2 = new MessageTakeResources(false, 2);
         serialized = Serializer.serialize(message2);
-        deserialized = (Message) Serializer.deserialize(serialized);
+        deserialized = (Message) Serializer.deserializeMessage(serialized);
 
         assertSame(message2.position, ((MessageTakeResources)deserialized).position);
 
+        ServerMessageError message3 = new ServerMessageError("Test123");
+        serialized = Serializer.serialize(message3);
+        ServerMessage deserialized2 = (ServerMessage) Serializer.deserializeServerMessage(serialized);
 
+        assertSame(true, message3.getError().equals(((ServerMessageError)deserialized2).getError()));
 
     }
 

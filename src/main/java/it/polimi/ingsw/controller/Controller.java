@@ -1,6 +1,9 @@
 package it.polimi.ingsw.controller;
 
+
+import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.network.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,16 +28,23 @@ public class Controller {
 
         LeaderCard leader = this.pb.getLeaderCard(position);
 
-        if(!checkRequirements(leader)) {return; /*send message back with failure notice*/ }
+        if(!checkRequirements(leader)) {
+            ServerMessageError message = new ServerMessageError("Leader requirements not met");
+            return; /*TODO: send message back with failure notice*/
+        }
 
         if(!leader.getIsActive()) {
 
             if (leader instanceof LeaderDepot)((LeaderDepot)leader).toggleActive(pb.getDepot());
             else leader.toggleActive();
-            
-        } //then send message of success
 
-        else ; //send message back with failure notice
+            ServerMessageOK message = new ServerMessageOK();
+        } //TODO: then send message of success
+
+        else {
+            ServerMessageError message = new ServerMessageError("Leader already active"); //TODO: send message back with failure notice
+
+        }
 
     }
 
@@ -98,10 +108,12 @@ public class Controller {
         && valid(Arrays.copyOfRange(input, 6, 7))
         && valid(Arrays.copyOfRange(input, 8, 9))
         ){
-            // return depotisLegal
+            ServerMessageOK message = new ServerMessageOK();
+            //TODO: return depotisLegal
         }
         else{
-            //return depotisIllegal
+            ServerMessageError message = new ServerMessageError("Invalid Depot Configuration");
+            //TODO: return depotisIllegal
         }
     }
 
@@ -135,7 +147,10 @@ public class Controller {
             pb.addDevCard(newCard, column);
         }
 
-        catch (Exception e ){/* send error message back to user, insufficient resources*/}
+        catch (Exception e ){
+            ServerMessageError message = new ServerMessageError("Insufficient resources");
+            /*TODO: send error message back to user, insufficient resources*/
+        }
     }
 
     /**
@@ -153,7 +168,11 @@ public class Controller {
         for(int i = 0; i<2 && activated[4+i]; i++){
             LeaderCard each = pb.getLeaderCard(i);
             if(each.getIsActive() && each instanceof LeaderProduction) leaderproductions[i] = ((LeaderProduction) each).getProduction();
-            else {/*send error message  back, activated production does not exist or is unavailable*/}
+
+            else {
+                ServerMessageError message = new ServerMessageError("Invalid Production");
+                /*TODO: send error message back to user*/
+            }
         }
 
         Production[] productions = new Production[]{pb.getDefaultProduction(), pb.getDevCard(0).getProduction(), pb.getDevCard(1).getProduction(),
@@ -175,7 +194,10 @@ public class Controller {
             pb.addFaith(totalfaith);
 
         }
-        catch (Exception e){/* send error message back to user, insufficient resources*/}
+        catch (Exception e){
+            ServerMessageError message = new ServerMessageError("Insufficient resources");
+            /*TODO: send error message back to user, insufficient resources*/
+        }
     }
 
 
@@ -245,13 +267,14 @@ public class Controller {
             try {marbles = this.market.takeResources(isRow, position);}
             catch (Exception e) {} //send back failure message
         }
-        else {} //send back failure message
+        else {ServerMessageError message = new ServerMessageError("Unable to acquire Market Resources.");} //TODO: send back failure message
 
         Collection<Resource> resources;
 
         resources = this.convert(marbles);
 
-        //send back to client message with resources serialized
+        //TODO: send back to client message with resources serialized
+        ServerMessageMarketReturn message = new ServerMessageMarketReturn(resources);
     }
 
     private Collection<Resource> convert (Marble[] marbles){
