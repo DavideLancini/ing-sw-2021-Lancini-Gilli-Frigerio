@@ -1,53 +1,88 @@
 package it.polimi.ingsw.network.serverNetwork;
 
+import it.polimi.ingsw.Server;
+
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
 
+/**
+ * Connection Thread Class
+ *
+ *
+ *
+ * @author Lancini Davide
+ */
 public class serverListenerSocket extends Thread {
-    private ServerSocket listener = null;
+    private ServerSocket serverSocket = null;
 
-    public serverListenerSocket(ServerSocket serverSocket){
-        listener = serverSocket;
+    private Socket listener = null;
+
+    private DataInputStream inputStream = null;
+
+    private Socket sender = null;
+
+
+    public serverListenerSocket(ServerSocket serverSocketName){
+        serverSocket = serverSocketName;
     }
 
     public void run(){
-        Socket clientSock = null;
+        openListener();
+        activateListener();
+        getClientAddress();
+
+        //TODO Open listener from serverMain (to keep everything clean)
+
+        openSender();
+        waitLogin();
+    }
+
+    private void openListener() {
         try {
-            clientSock = listener.accept();
+            listener = serverSocket.accept();
+        } catch (IOException e) {
+            Server.logger.log(Level.WARNING,"serverListenerSocket>run> This Thread cannot accept connections");
+            // TODO restart thread
+        }
+    }
+
+    private void activateListener() {
+        try {
+            inputStream = new DataInputStream(new BufferedInputStream(listener.getInputStream()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        DataInputStream in = null;
         while(true){
-            // TODO while End with a timeout (restart the thread)
+            // TODO while end with a timeout (then restart thread)
+            String message = "";
             try {
-                in = new DataInputStream(new BufferedInputStream(clientSock.getInputStream()));
+                message = inputStream.readUTF();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            String line = "";
-            try {
-                line = in.readUTF();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            System.out.println(line);
 
 
+            System.out.println(message);
 
-
-            //TODO decode message (line)
-
-            //TODO after first message open sending socket
-
-
-
+            //TODO decode message (message)
         }
+    }
+
+    private void getClientAddress() {
+        String clientName;
+        int clientPort;
 
     }
 
+    public void openSender(){
 
+    }
+
+    private void waitLogin() {
+
+    }
 }

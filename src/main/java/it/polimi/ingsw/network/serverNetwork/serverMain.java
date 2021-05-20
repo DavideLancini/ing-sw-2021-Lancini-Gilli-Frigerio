@@ -2,20 +2,24 @@ package it.polimi.ingsw.network.serverNetwork;
 
 import it.polimi.ingsw.Server;
 
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
+import java.util.logging.Level;
 
+/**
+ * Main Node for the server.
+ * Start thread for every connection.
+ *
+ *
+ * @author Lancini Davide
+ */
 public class serverMain {
     private static int port;
     private static int maxSlots;
     private static boolean isON = false;
     private static final int activeSlots = 0;
 
-    private static Socket socket;
-    private static ServerSocket server;
-    private static DataInputStream stream;
+    private static ServerSocket serverSocket;
 
     /**
      * Setter for the Server Port.
@@ -52,6 +56,7 @@ public class serverMain {
             throw new InstantiationException();
         }else{
             maxSlots = listenerMaxSlot;
+            //TODO start missing threads
         }
     }
 
@@ -74,44 +79,45 @@ public class serverMain {
     public static boolean getStatus(){ return isON;}
 
     /**
-     * Main Listener Method
+     * Main Server Method
      *
      *
      * @author Lancini Davide
      */
     public static void startMain(){
         if(isON){
-            if (Server.logLevel > 0) { System.out.println("WARNING: (serverMain) The server is already ON"); }
+            Server.logger.log(Level.WARNING,"serverMain>startMain> The server is already ON");
         }else{
             try {
-                server = new ServerSocket(port);
+                serverSocket = new ServerSocket(port);
             } catch (IOException e) {
-                if (Server.logLevel > 0) { System.out.println("WARNING: (serverListener) IOException, opening failed"); }
+                Server.logger.log(Level.WARNING,"serverMain>startMain> Opening failed");
                 isON = false;
             }
         }
 
-        serverListenerSocket a = new serverListenerSocket(server);
+        serverListenerSocket connection = new serverListenerSocket(serverSocket);
 
+        //TODO Start a small percentage of threads to use less resources (open th. when open one is successfully connected)
         int i;
         for(i=0;i<maxSlots;i++){
-            Thread t = new Thread(a);
+            Thread t = new Thread(connection);
             t.start();
         }
 
     }
 
     /**
-     * Stop Listener without save (for now)
+     * Stop Listener without save (for now).
      *
      *
      * @author Lancini Davide
      */
     public static void stopMain(){
         try {
-            socket.close();
+            serverSocket.close();
         } catch (IOException e) {
-            System.err.println("Listener: termination failed");
+            Server.logger.log(Level.WARNING,"serverMain>stopMain> Closing failed");
         }
     }
 }

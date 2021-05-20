@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
 
 import static java.lang.Integer.parseInt;
 
@@ -28,62 +29,40 @@ public class ServerView {
      * @warning IOException: Load standard parameters
      * @author Lancini Davide
      */
-    public static void loadParameters() { //TODO CleanUp (It works Though)
+    public static void loadParameters() {
+        int port;
+        int maxSlots;
         try {
             FileInputStream file = new FileInputStream("src/main/resources/server.properties");
             Properties serverProperties = new Properties();
             serverProperties.load(file);
-            try {
-                serverMain.setMaxSlots(parseInt(serverProperties.getProperty("slot")));
-            } catch (InstantiationException InstantiationException) {
-                if (Server.logLevel > 0) {
-                    System.out.println("WARNING: (serverListener) Active Slots exceed Requested Max Slots");
-                }
-            }
-            try {
-                serverMain.setPort(parseInt(serverProperties.getProperty("port")));
-            } catch (ListenerOccupiedExeption listenerOccupiedExeption) {
-                if (Server.logLevel > 0) {
-                    System.out.println("WARNING: (serverListener) The Listener is ON, the port cannot be changed");
-                }
-            }
+            maxSlots = parseInt(serverProperties.getProperty("maxSlots"));
+            port = parseInt(serverProperties.getProperty("port"));
             file.close();
-        } catch (FileNotFoundException FileNotFoundException) {
-            try {
-                serverMain.setMaxSlots(1000);
-            } catch (InstantiationException InstantiationException) {
-                if (Server.logLevel > 0) {
-                    System.out.println("WARNING: (serverListener) Active Slots exceed Requested Max Slots");
-                }
-            }
-            try {
-                serverMain.setPort(5);
-            } catch (ListenerOccupiedExeption listenerOccupiedExeption) {
-                if (Server.logLevel > 0) {
-                    System.out.println("WARNING: (serverListener) The Listener is ON, the port cannot be changed");
-                }
-            }
-            if (Server.logLevel > 0) {
-                System.out.println("WARNING: (server.properties) Not Found, loaded standard parameters");
-            }
-        } catch (IOException IOException) {
-            try {
-                serverMain.setMaxSlots(1000);
-            } catch (InstantiationException InstantiationException) {
-                if (Server.logLevel > 0) {
-                    System.out.println("WARNING: (serverListener) Active Slots exceed Requested Max Slots");
-                }
-            }
-            try {
-                serverMain.setPort(5);
-            } catch (ListenerOccupiedExeption listenerOccupiedExeption) {
-                if (Server.logLevel > 0) {
-                    System.out.println("WARNING: (serverListener) The Listener is ON, the port cannot be changed");
-                }
-            }
-            if (Server.logLevel > 0) {
-                System.out.println("WARNING: (server.properties) IO Error, loaded standard parameters");
-            }
+        }
+        catch (FileNotFoundException FileNotFoundException) {
+            Server.logger.log(Level.WARNING,"ServerView>LoadParameters> Server.properties not found, loaded standard parameters");
+            maxSlots = 1000;
+            port = 4;
+        }
+        catch (IOException IOException){
+            Server.logger.log(Level.WARNING,"ServerView>LoadParameters> IO Error, loaded standard parameters");
+            maxSlots = 1000;
+            port = 4;
+        }
+
+        try {
+            serverMain.setMaxSlots(maxSlots);
+        }
+        catch (InstantiationException InstantiationException) {
+            Server.logger.log(Level.WARNING,"ServerView>LoadParameters> Active Slots exceed Requested Max Slots");
+        }
+
+        try {
+            serverMain.setPort(port);
+        }
+        catch (ListenerOccupiedExeption listenerOccupiedExeption) {
+            Server.logger.log(Level.WARNING,"ServerView>LoadParameters> The Listener is ON, the port cannot be changed");
         }
     }
 
@@ -133,23 +112,19 @@ public class ServerView {
 
     /**
      * Simple feature to keep the console clean, tested on windows, mac os and some linux distros.
-     * If the logLevel is set to VERBOSE the Console will NOT be cleaned
      *
      * @author Lancini Davide
      */
     private static void clearConsole() {
-        if (Server.logLevel < 2) {
-            try {
-                if (System.getProperty("os.name").contains("Windows")) {
-                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                } else {
-                    System.out.print("\033\143");
-                }
-            } catch (IOException | InterruptedException e1) {
-                if (Server.logLevel > 0) {
-                    System.out.println("WARNING: (clearConsole) IOException, console not cleaned");
-                }
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                System.out.print("\033\143");
             }
+        }
+        catch (IOException | InterruptedException e1) {
+            Server.logger.log(Level.WARNING,"ServerView>clearConsole> IOException, console not cleaned");
         }
     }
 
