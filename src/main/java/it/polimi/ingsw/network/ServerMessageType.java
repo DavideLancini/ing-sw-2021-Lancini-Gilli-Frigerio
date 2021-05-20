@@ -1,5 +1,5 @@
 package it.polimi.ingsw.network;
 
 public enum ServerMessageType {
-    Error, OK, Turn, MarketReturn;
+    Error, OK, Turn, MarketReturn, View;
 }

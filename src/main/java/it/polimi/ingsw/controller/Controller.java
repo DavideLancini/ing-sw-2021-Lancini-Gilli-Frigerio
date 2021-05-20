@@ -24,6 +24,22 @@ public class Controller {
     }
 
 
+    public void sellLeader (int position) {
+        if (!pb.getLeaderCard(position).getIsActive()) {
+            pb.sellLeader(position);
+
+            ServerMessageOK message = new ServerMessageOK();
+            //TODO: send success
+            return;
+        }
+        else {
+            ServerMessageError message = new ServerMessageError("Cannot sell Active Leaders");
+            //TODO: send failure
+            return;
+        }
+    }
+
+
     public void activateLeader (int position) {
 
         LeaderCard leader = this.pb.getLeaderCard(position);
@@ -110,6 +126,8 @@ public class Controller {
         ){
             ServerMessageOK message = new ServerMessageOK();
             //TODO: return depotisLegal
+            //TODO: add faith to other players
+
         }
         else{
             ServerMessageError message = new ServerMessageError("Invalid Depot Configuration");
