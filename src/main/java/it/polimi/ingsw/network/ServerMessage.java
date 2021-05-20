@@ -17,3 +17,12 @@ class ServerMessaggeTurn extends ServerMessage{
 
 }
 
+class ServerMessaggeView extends ServerMessage{
+    String view;
+
+    public ServerMessaggeView(String view){
+        this.type = ServerMessageType.View;
+        this.view = view;
+    }
+
+}

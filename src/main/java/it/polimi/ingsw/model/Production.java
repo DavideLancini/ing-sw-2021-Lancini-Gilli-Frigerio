@@ -77,6 +77,7 @@ public class Production {
         new ResourceCounter(this.input);
         System.out.print("]→[");
         new ResourceCounter(this.output);
+        for(int i = 0; i<this.faithOutput; i++)System.out.print(Resource.FAITH.toString());
         System.out.println("]");
     }
 

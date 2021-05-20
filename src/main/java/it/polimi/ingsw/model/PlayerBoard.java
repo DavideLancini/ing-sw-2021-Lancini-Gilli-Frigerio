@@ -65,6 +65,12 @@ public class PlayerBoard {
         return this.leaderCards[position];
     }
 
+    public void sellLeader (int position) {
+        this.leaderCards[position] = null;
+        addFaith(1);
+    }
+
+
     /**
      * getStrongbox
      * @return Player Strongbox
