@@ -2,7 +2,7 @@ package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.network.Message;
+
 
 import java.util.Collection;
 
@@ -50,7 +50,7 @@ public class CLIActionManager {
                         System.out.println("Enter number of "+(isRow ? "row" : "column")+":");
                         int position = parseToInt(Reader.in.nextLine());
                         ClientController.takeResources(isRow, position);
-                        //TODO: wait for server response. If OK, over = true, else display error and restart loop
+
                         over = true;
 
                         break;
@@ -67,7 +67,7 @@ public class CLIActionManager {
                         int column = parseToInt(Reader.in.nextLine());
 
                         ClientController.buyDevCard(level, color, column);
-                        //TODO: wait for server response. If OK, over = true, else display error and restart loop
+
                         over = true;
 
                         break;
@@ -89,7 +89,7 @@ public class CLIActionManager {
                         }
 
                         ClientController.produce(activated);
-                        //TODO: wait for server response. If OK, over = true, else display error and restart loop
+
                         over = true;
 
                         break;
@@ -98,14 +98,16 @@ public class CLIActionManager {
                         System.out.println("Enter number of Leader Card to be activated");
                         int pos = parseToInt(Reader.in.nextLine());
                         ClientController.activateLeader(pos);
-                        //TODO: wait for server response. If OK or error display and restart loop
+
+                        over = true;
 
                         break;
                     case 5:
                         System.out.println("Enter number of Leader Card to be sold");
                         int number = parseToInt(Reader.in.nextLine());
                         ClientController.sellLeader(number);
-                        //TODO: wait for server response. If OK or error display and restart loop
+
+                        over = true;
 
                         break;
                     case 6:
@@ -117,7 +119,8 @@ public class CLIActionManager {
                         Resource resource = Resource.values()[parseToInt(Reader.in.nextLine())];
 
                         ClientController.setResource(resource, res);
-                        //TODO: wait for server response. If OK or error display and restart loop
+
+                        over = true;
 
                         break;
                     default:
@@ -129,7 +132,7 @@ public class CLIActionManager {
             catch(Exception e){continue;}
         }
 
-        //TODO:  send message to server notifying current player turn is over
+        return;
 
 
 

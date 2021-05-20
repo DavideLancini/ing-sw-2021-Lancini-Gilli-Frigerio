@@ -7,13 +7,6 @@ import it.polimi.ingsw.network.*;
 public class ClientController {
 
 
-
-
-
-
-
-
-
     public static void takeResources(boolean isRow, int position){
         //TODO: send
         Message message = new MessageTakeResources(isRow, position);
