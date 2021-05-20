@@ -1,0 +1,841 @@
+[
+ [
+  {"deck":[
+    {
+     "cost":[
+      "COIN", "COIN"
+     ],
+     "level":"ONE",
+     "color":"BLUE",
+     "VP":1,
+     "production":{
+      "input":[
+       "SHIELD"
+      ],
+      "output":[
+       "FAITH"
+      ],
+      "faithOutput":1
+     }
+    }, {
+     "cost":[
+      "COIN", "STONE", "SERVANT"
+     ],
+     "level":"ONE",
+     "color":"BLUE",
+     "VP":2,
+     "production":{
+      "input":[
+       "SERVANT"
+      ],
+      "output":[
+       "STONE"
+      ],
+      "faithOutput":0
+     }
+    }, {
+     "cost":[
+      "COIN", "COIN", "COIN"
+     ],
+     "level":"ONE",
+     "color":"BLUE",
+     "VP":3,
+     "production":{
+      "input":[
+       "STONE", "STONE"
+      ],
+      "output":[
+       "SHIELD", "SERVANT", "COIN"
+      ],
+      "faithOutput":0
+     }
+    }, {
+     "cost":[
+      "COIN", "COIN", "SERVANT", "SERVANT"
+     ],
+     "level":"ONE",
+     "color":"BLUE",
+     "VP":4,
+     "production":{
+      "input":[
+       "STONE", "SHIELD"
+      ],
+      "output":[
+       "SERVANT", "SERVANT", "FAITH"
+      ],
+      "faithOutput":1
+     }
+    }
+   ]},
+  {"deck":[
+   {
+    "cost":[
+     "COIN", "COIN", "COIN", "COIN"
+    ],
+    "level":"TWO",
+    "color":"BLUE",
+    "VP":5,
+    "production":{
+     "input":[
+      "SERVANT"
+     ],
+     "output":[
+      "FAITH", "FAITH"
+     ],
+     "faithOutput":2
+    }
+   }, {
+    "cost":[
+     "COIN", "COIN", "COIN", "STONE", "STONE"
+    ],
+    "level":"TWO",
+    "color":"BLUE",
+    "VP":6,
+    "production":{
+     "input":[
+      "COIN", "STONE"
+     ],
+     "output":[
+      "SERVANT", "SERVANT", "SERVANT"
+     ],
+     "faithOutput":0
+    }
+   }, {
+    "cost":[
+     "COIN", "COIN", "COIN", "STONE", "STONE", "STONE"
+    ],
+    "level":"TWO",
+    "color":"BLUE",
+    "VP":8,
+    "production":{
+     "input":[
+      "SERVANT"
+     ],
+     "output":[
+      "STONE", "STONE", "FAITH"
+     ],
+     "faithOutput":1
+    }
+   }, {
+    "cost":[
+     "COIN", "COIN", "COIN", "COIN", "COIN"
+    ],
+    "level":"TWO",
+    "color":"BLUE",
+    "VP":7,
+    "production":{
+     "input":[
+      "SERVANT", "SERVANT"
+     ],
+     "output":[
+      "SHIELD", "SHIELD", "FAITH", "FAITH"
+     ],
+     "faithOutput":2
+    }
+   }
+  ]},
+  {"deck":[
+   {
+    "cost":[
+     "COIN", "COIN", "COIN", "COIN", "COIN", "COIN", "COIN"
+    ],
+    "level":"THREE",
+    "color":"BLUE",
+    "VP":11,
+    "production":{
+     "input":[
+      "STONE"
+     ],
+     "output":[
+      "SHIELD", "FAITH", "FAITH", "FAITH"
+     ],
+     "faithOutput":3
+    }
+   }, {
+    "cost":[
+     "COIN", "COIN", "COIN", "COIN", "COIN", "STONE", "STONE"
+    ],
+    "level":"THREE",
+    "color":"BLUE",
+    "VP":10,
+    "production":{
+     "input":[
+      "COIN", "SHIELD"
+     ],
+     "output":[
+      "SERVANT", "SERVANT", "STONE", "STONE", "FAITH"
+     ],
+     "faithOutput":1
+    }
+   }, {
+    "cost":[
+     "COIN", "COIN", "COIN", "COIN", "COIN", "COIN"
+    ],
+    "level":"THREE",
+    "color":"BLUE",
+    "VP":9,
+    "production":{
+     "input":[
+      "SERVANT", "SERVANT"
+     ],
+     "output":[
+      "SHIELD", "SHIELD", "SHIELD", "FAITH", "FAITH"
+     ],
+     "faithOutput":2
+    }
+   }, {
+    "cost":[
+     "COIN", "COIN", "COIN", "COIN", "STONE", "STONE", "STONE", "STONE"
+    ],
+    "level":"THREE",
+    "color":"BLUE",
+    "VP":12,
+    "production":{
+     "input":[
+      "SERVANT"
+     ],
+     "output":[
+      "COIN", "SHIELD", "SHIELD", "SHIELD"
+     ],
+     "faithOutput":0
+    }
+   }
+  ]}
+ ],
+ [
+  {"deck":[
+   {
+    "cost":[
+     "STONE","STONE","STONE"
+    ],
+    "level":"ONE",
+    "color":"YELLOW",
+    "VP":3,
+    "production":{
+     "input":[
+      "SHIELD","SHIELD"
+     ],
+     "output":[
+      "COIN","SERVANT","STONE"
+     ],
+     "faithOutput":0
+    }
+   },
+   {
+    "cost":[
+     "STONE","STONE","SHIELD", "SHIELD"
+    ],
+    "level":"ONE",
+    "color":"YELLOW",
+    "VP":4,
+    "production":{
+     "input":[
+      "COIN","SERVANT"
+     ],
+     "output":[
+      "SHIELD", "SHIELD", "FAITH"
+     ],
+     "faithOutput":1
+    }
+   },
+   {
+    "cost":[
+     "SHIELD", "COIN","STONE"
+    ],
+    "level":"ONE",
+    "color":"YELLOW",
+    "VP":2,
+    "production":{
+     "input":[
+      "SHIELD"
+     ],
+     "output":[
+       "COIN"
+     ],
+     "faithOutput":0
+    }
+   },
+   {
+    "cost":[
+     "STONE","STONE"
+    ],
+    "level":"ONE",
+    "color":"YELLOW",
+    "VP":1,
+    "production":{
+     "input":[
+      "SERVANT"
+     ],
+     "output":[
+      "FAITH"
+     ],
+     "faithOutput":1
+    }
+   }
+  ]},
+  {"deck":[
+   {
+    "cost":[
+     "STONE","STONE","STONE","STONE"
+    ],
+    "level":"TWO",
+    "color":"YELLOW",
+    "VP":5,
+    "production":{
+     "input":[
+      "SHIELD"
+     ],
+     "output":[
+      "FAITH", "FAITH"
+     ],
+     "faithOutput":2
+    }
+   },
+   {
+    "cost":[
+     "STONE","STONE","STONE","STONE","STONE"
+    ],
+    "level":"TWO",
+    "color":"YELLOW",
+    "VP":7,
+    "production":{
+     "input":[
+      "SHIELD","SHIELD"
+     ],
+     "output":[
+      "SERVANT","SERVANT", "FAITH", "FAITH"
+     ],
+     "faithOutput":2
+    }
+   },
+   {
+    "cost":[
+     "STONE","STONE","STONE","SHIELD", "SHIELD"
+    ],
+    "level":"TWO",
+    "color":"YELLOW",
+    "VP":6,
+    "production":{
+     "input":[
+      "STONE", "SHIELD"
+     ],
+     "output":[
+      "COIN","COIN","COIN"
+     ],
+     "faithOutput":0
+    }
+   },
+   {
+    "cost":[
+     "STONE","STONE","STONE","SERVANT","SERVANT","SERVANT"
+    ],
+    "level":"TWO",
+    "color":"YELLOW",
+    "VP":8,
+    "production":{
+     "input":[
+      "SHIELD"
+     ],
+     "output":[
+      "COIN", "COIN", "FAITH"
+     ],
+     "faithOutput":1
+    }
+   }
+  ]},
+  {"deck":[
+   {
+    "cost":[
+     "STONE","STONE","STONE","STONE","STONE","STONE"
+    ],
+    "level":"THREE",
+    "color":"YELLOW",
+    "VP":11,
+    "production":{
+     "input":[
+      "SHIELD"
+     ],
+     "output":[
+     "SERVANT" , "FAITH", "FAITH","FAITH"
+     ],
+     "faithOutput":3
+    }
+   },
+   {
+    "cost":[
+     "STONE","STONE","STONE","STONE","STONE","STONE"
+    ],
+    "level":"THREE",
+    "color":"YELLOW",
+    "VP":9,
+    "production":{
+     "input":[
+      "SHIELD","SHIELD"
+     ],
+     "output":[
+      "SERVANT","SERVANT","SERVANT", "FAITH", "FAITH"
+     ],
+     "faithOutput":2
+    }
+   },
+   {
+    "cost":[
+     "STONE","STONE","STONE", "STONE","STONE","SERVANT", "SERVANT"
+    ],
+    "level":"THREE",
+    "color":"YELLOW",
+    "VP":10,
+    "production":{
+     "input":[
+      "STONE", "SERVANT"
+     ],
+     "output":[
+      "COIN","COIN","SHIELD", "SHIELD", "FAITH"
+     ],
+     "faithOutput":1
+    }
+   },
+   {
+    "cost":[
+     "STONE","STONE","STONE","STONE", "SERVANT", "SERVANT", "SERVANT", "SERVANT"
+    ],
+    "level":"THREE",
+    "color":"YELLOW",
+    "VP":12,
+    "production":{
+     "input":[
+      "SHIELD"
+     ],
+     "output":[
+      "STONE","SERVANT", "SERVANT", "SERVANT"
+     ],
+     "faithOutput":0
+    }
+   }
+  ]}
+ ],
+ [
+  {"deck":[
+   {
+    "cost":[
+    "SHIELD", "SHIELD"
+    ],
+    "level":"ONE",
+    "color":"GREEN",
+    "VP":1,
+    "production":{
+     "input":[
+      "COIN"
+     ],
+     "output":[
+       "FAITH"
+     ],
+     "faithOutput":1
+    }
+   },
+   {
+    "cost":[
+     "SHIELD", "SERVANT", "STONE"
+    ],
+    "level":"ONE",
+    "color":"GREEN",
+    "VP":2,
+    "production":{
+     "input":[
+      "STONE"
+     ],
+     "output":[
+      "SERVANT"
+     ],
+     "faithOutput":0
+    }
+   },
+   {
+    "cost":[
+      "SHIELD", "SHIELD","COIN","COIN"
+    ],
+    "level":"ONE",
+    "color":"GREEN",
+    "VP":4,
+    "production":{
+     "input":[
+      "STONE", "SERVANT"
+     ],
+     "output":[
+      "COIN","COIN", "FAITH"
+     ],
+     "faithOutput":1
+    }
+   },
+   {
+    "cost":[
+     "SHIELD", "SHIELD", "SHIELD"
+    ],
+    "level":"ONE",
+    "color":"GREEN",
+    "VP":3,
+    "production":{
+     "input":[
+      "SERVANT","SERVANT"
+     ],
+     "output":[
+      "COIN","SHIELD", "STONE"
+     ],
+     "faithOutput":0
+    }
+   }
+  ]},
+  {"deck":[
+   {
+    "cost":[
+     "SHIELD", "SHIELD", "SHIELD","COIN","COIN","COIN"
+    ],
+    "level":"TWO",
+    "color":"GREEN",
+    "VP":8,
+    "production":{
+     "input":[
+      "COIN"
+     ],
+     "output":[
+      "SHIELD", "SHIELD", "FAITH"
+     ],
+     "faithOutput":1
+    }
+   },
+   {
+    "cost":[
+     "SHIELD", "SHIELD", "SHIELD","SHIELD","SHIELD"
+    ],
+    "level":"TWO",
+    "color":"GREEN",
+    "VP":7,
+    "production":{
+     "input":[
+      "COIN","COIN"
+     ],
+     "output":[
+      "STONE", "STONE", "FAITH", "FAITH"
+     ],
+     "faithOutput":2
+    }
+   },
+   {
+    "cost":[
+     "SHIELD", "SERVANT", "SHIELD", "SHIELD","SERVANT"
+    ],
+    "level":"TWO",
+    "color":"GREEN",
+    "VP":6,
+    "production":{
+     "input":[
+      "SHIELD","SERVANT"
+     ],
+     "output":[
+       "STONE","STONE","STONE"
+     ],
+     "faithOutput":0
+    }
+   },
+   {
+    "cost":[
+     "SHIELD", "SHIELD", "SHIELD", "SHIELD"
+    ],
+    "level":"TWO",
+    "color":"GREEN",
+    "VP":5,
+    "production":{
+     "input":[
+      "STONE"
+     ],
+     "output":[
+       "FAITH", "FAITH"
+     ],
+     "faithOutput":2
+    }
+   }
+  ]},
+  {"deck":[
+   {
+    "cost":[
+     "SHIELD",  "SHIELD", "SHIELD","SHIELD",  "SHIELD", "SHIELD"
+    ],
+    "level":"THREE",
+    "color":"GREEN",
+    "VP":9,
+    "production":{
+     "input":[
+      "SERVANT","SERVANT"
+     ],
+     "output":[
+      "STONE","STONE","STONE", "FAITH", "FAITH"
+     ],
+     "faithOutput":2
+    }
+   },
+   {
+    "cost":[
+     "SHIELD",  "SHIELD", "SHIELD","SHIELD",  "SHIELD", "SHIELD", "SHIELD"
+    ],
+    "level":"THREE",
+    "color":"GREEN",
+    "VP":11,
+    "production":{
+     "input":[
+      "SERVANT"
+     ],
+     "output":[
+      "COIN", "FAITH", "FAITH","FAITH"
+     ],
+     "faithOutput":3
+    }
+   },
+   {
+    "cost":[
+     "SHIELD", "SHIELD" , "SHIELD", "SHIELD","COIN","COIN","COIN","COIN"
+    ],
+    "level":"THREE",
+    "color":"GREEN",
+    "VP":12,
+    "production":{
+     "input":[
+      "STONE"
+     ],
+     "output":[
+      "SHIELD","COIN","COIN","COIN"
+     ],
+     "faithOutput":0
+    }
+   },
+   {
+    "cost":[
+     "SHIELD", "SHIELD", "SHIELD","SHIELD", "SHIELD","SERVANT","SERVANT"
+    ],
+    "level":"THREE",
+    "color":"GREEN",
+    "VP":10,
+    "production":{
+     "input":[
+      "COIN","SERVANT"
+     ],
+     "output":[
+      "SHIELD","SHIELD","STONE", "STONE", "FAITH"
+     ],
+     "faithOutput":1
+    }
+   }
+  ]}
+],
+ [
+  {"deck":[
+   {
+    "cost":[
+      "SERVANT", "SERVANT", "STONE", "STONE"
+    ],
+    "level":"ONE",
+    "color":"PURPLE",
+    "VP":4,
+    "production":{
+     "input":[
+      "COIN","SHIELD"
+     ],
+     "output":[
+      "STONE", "STONE", "FAITH"
+     ],
+     "faithOutput":0
+    }
+   },
+   {
+    "cost":[
+     "SHIELD", "SERVANT", "COIN"
+    ],
+    "level":"ONE",
+    "color":"PURPLE",
+    "VP":2,
+    "production":{
+     "input":[
+      "COIN"
+     ],
+     "output":[
+      "SHIELD"
+     ],
+     "faithOutput":0
+    }
+   },
+   {
+    "cost":[
+      "SERVANT","SERVANT"
+    ],
+    "level":"ONE",
+    "color":"PURPLE",
+    "VP":1,
+    "production":{
+     "input":[
+      "STONE"
+     ],
+     "output":[
+       "FAITH"
+     ],
+     "faithOutput":1
+    }
+   },
+   {
+    "cost":[
+      "SERVANT","SERVANT","SERVANT"
+    ],
+    "level":"ONE",
+    "color":"PURPLE",
+    "VP":3,
+    "production":{
+     "input":[
+      "COIN","COIN"
+     ],
+     "output":[
+      "SHIELD", "SERVANT","STONE"
+     ],
+     "faithOutput":0
+    }
+   }
+  ]},
+  {"deck":[
+   {
+    "cost":[
+     "SERVANT","SERVANT","SERVANT","SHIELD",  "SHIELD", "SHIELD"
+    ],
+    "level":"TWO",
+    "color":"PURPLE",
+    "VP":8,
+    "production":{
+     "input":[
+      "STONE"
+     ],
+     "output":[
+      "SERVANT","SERVANT", "FAITH"
+     ],
+     "faithOutput":1
+    }
+   },
+   {
+    "cost":[
+     "SERVANT","SERVANT","SERVANT","SERVANT","SERVANT"
+    ],
+    "level":"TWO",
+    "color":"PURPLE",
+    "VP":7,
+    "production":{
+     "input":[
+      "STONE", "STONE"
+     ],
+     "output":[
+      "COIN","COIN", "FAITH", "FAITH"
+     ],
+     "faithOutput":2
+    }
+   },
+   {
+    "cost":[
+     "SERVANT","SERVANT","SERVANT","SERVANT"
+    ],
+    "level":"TWO",
+    "color":"PURPLE",
+    "VP":5,
+    "production":{
+     "input":[
+      "COIN"
+     ],
+     "output":[
+       "FAITH", "FAITH"
+     ],
+     "faithOutput":2
+    }
+   },
+   {
+    "cost":[
+     "SERVANT","SERVANT","SERVANT","COIN","COIN"
+    ],
+    "level":"TWO",
+    "color":"PURPLE",
+    "VP":6,
+    "production":{
+     "input":[
+      "SERVANT","COIN"
+     ],
+     "output":[
+      "SHIELD", "SHIELD","SHIELD"
+     ],
+     "faithOutput":0
+    }
+   }
+  ]},
+  {"deck":[
+   {
+    "cost":[
+     "SERVANT","SERVANT","SERVANT","SERVANT","SERVANT","SERVANT"
+    ],
+    "level":"THREE",
+    "color":"PURPLE",
+    "VP":9,
+    "production":{
+     "input":[
+      "STONE", "STONE"
+     ],
+     "output":[
+      "COIN","COIN","COIN", "FAITH", "FAITH"
+     ],
+     "faithOutput":2
+    }
+   },
+   {
+    "cost":[
+     "SERVANT","SERVANT","SERVANT","SERVANT","SERVANT","COIN","COIN"
+    ],
+    "level":"THREE",
+    "color":"PURPLE",
+    "VP":10,
+    "production":{
+     "input":[
+      "STONE", "SHIELD"
+     ],
+     "output":[
+      "COIN","COIN", "SERVANT","SERVANT", "FAITH"
+     ],
+     "faithOutput":1
+    }
+   },
+   {
+    "cost":[
+     "SERVANT","SERVANT","SERVANT","SERVANT","SERVANT","SERVANT","SERVANT"
+    ],
+    "level":"THREE",
+    "color":"PURPLE",
+    "VP":11,
+    "production":{
+     "input":[
+      "COIN"
+     ],
+     "output":[
+      "STONE","FAITH", "FAITH", "FAITH"
+     ],
+     "faithOutput":3
+    }
+   },
+   {
+    "cost":[
+     "SERVANT","SERVANT","SERVANT","SERVANT","SHIELD",  "SHIELD", "SHIELD", "SHIELD"
+    ],
+    "level":"THREE",
+    "color":"PURPLE",
+    "VP":12,
+    "production":{
+     "input":[
+      "COIN"
+     ],
+     "output":[
+      "STONE", "STONE","STONE", "FAITH"
+     ],
+     "faithOutput":1
+    }
+   }
+  ]}
+]
+]

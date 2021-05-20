@@ -1,8 +1,7 @@
 package it.polimi.ingsw.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
+
 /**
  * Class DevCardBoard
  * @author Gruppo 12
@@ -18,8 +17,11 @@ public class DevCardBoard {
      * @param board set initial decks of DevCards
      */
     public DevCardBoard(DevCardDeck[][] board){
-
-        DevCardBoard.board = new DevCardDeck[][]{{null,null,null},{null,null,null},{null,null,null},{null,null,null}};
+        shuffleDecks(board);
+        DevCardBoard.board = new DevCardDeck[][]{{null,null,null},
+                                                 {null,null,null},
+                                                 {null,null,null},
+                                                 {null,null,null}};
         int i=0;
 
         for(DevCardDeck[] row : board){
@@ -100,6 +102,14 @@ public class DevCardBoard {
         return board[color.ordinal()][level.ordinal()].draw();
     }
 
+    private void shuffleDecks(DevCardDeck[][] board){
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 3; j++) {
+                Collections.shuffle(board[i][j].getDeck());
+            }
+        }
+
+    }
 
 }
 
