@@ -1,4 +1,10 @@
 package it.polimi.ingsw.model;
+
+import com.google.gson.Gson;
+
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * Class Market
  * @author Gruppo 12
@@ -7,6 +13,22 @@ public class Market {
 
     private static Marble sideMarble;
     private static Marble[][] marketBoard = new Marble[3][4] ;
+
+    /**
+     * Market constructor
+     * @param marbles 13 marbles(4 white,2 blue,2 gray,2 yellow,2 purple,1 red)
+     */
+    public Market(Marble[] marbles) {
+        Collections.shuffle(Arrays.asList(marbles));
+       int k=0;
+           for(int i=0;i<3;i++){
+            for (int j=0;j<4;j++){
+                marketBoard[i][j]=marbles[k];
+                k++;
+            }
+        }
+       sideMarble=marbles[12];
+    }
 
     /**
      * getSideMarble

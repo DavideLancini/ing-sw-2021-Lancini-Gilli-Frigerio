@@ -1,0 +1,6 @@
+[
+ {"requirements":["BLUE","PURPLE"],"vp":2,"isActive":false,"type":"SHIELD"},
+ {"requirements":["BLUE","GREEN"],"vp":2,"isActive":false,"type":"STONE"},
+ {"requirements":["YELLOW","PURPLE"],"vp":2,"isActive":false,"type":"COIN"},
+ {"requirements":["YELLOW","GREEN"],"vp":2,"isActive":false,"type":"SERVANT"}
+]

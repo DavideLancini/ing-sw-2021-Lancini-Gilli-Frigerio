@@ -1,21 +1,24 @@
 package it.polimi.ingsw.model;
 
 import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * Class LeaderCardDeck
  * @author Gruppo 12
  */
 public class LeaderCardDeck {
 
-public LeaderCard[] deck = new LeaderCard[16];
-private LeaderCard[] given = new LeaderCard[4];
-
+public  static  LeaderCard[] deck = new LeaderCard[16];
+private static LeaderCard[] given = new LeaderCard[4];
+private static int k=0;
     /**
-     * setDeck
-     * @param deck initialized leaderCards for the deck
+     * LeaderCardDeck constructor
+     * @param leaderCards initialized leaderCards for the deck
      */
-    public void setDeck(LeaderCard[] deck) {
-        this.deck = deck;
+    public LeaderCardDeck(LeaderCard[] leaderCards) {
+        Collections.shuffle(Arrays.asList(leaderCards));
+        deck = leaderCards;
     }
 
     /**
@@ -28,17 +31,23 @@ private LeaderCard[] given = new LeaderCard[4];
 
     /**
      * setGiven
-     * @param given 4 leaderCard from deck
+     * 4 leaderCard from deck
      */
-    public void setGiven(LeaderCard[] given) {
-        this.given = given;
+    private static void setGiven() {
+       int i=0;
+        while ( i<4) {
+            given[i] = deck[k];
+            i++;
+            k++;
+        }
+
     }
 
     /**
      * getGiven
      * @return 4 leaderCards
      */
-    public LeaderCard[] getGiven() {
+    private LeaderCard[] getGiven() {
         return given;
     }
 
@@ -46,9 +55,25 @@ private LeaderCard[] given = new LeaderCard[4];
      * DrawTwo
      * select two cards to place in playerBoard
      */
-    public void DrawTwo(){
-        //Show 4 given
-        //User select 2 from given
+    public static LeaderCard[] DrawTwo(){
+        LeaderCard[] chosen = new LeaderCard[2];
+        int i=1;
+        LeaderCardDeck.setGiven();
+        for(LeaderCard show : given){
+            System.out.println(i+":");
+            i++;
+            show.leaderCardView();//Show 4 given
+        }
+        System.out.println("select first card: ");
+        int selected1 = Reader.in.nextInt();
+        chosen[0]=given[selected1-1];
+        int selected2 =selected1;
+        while (selected2==selected1){
+        System.out.println("select second card: ");
+        selected2 = Reader.in.nextInt();
+        }
+        chosen[1]=given[selected2-1];
         //set playerBoard.leaderCards
+        return chosen;
     }
 }

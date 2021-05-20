@@ -1,0 +1,6 @@
+[
+{"requirements":["YELLOW", "YELLOW","BLUE"], "vp":5, "isActive":false, "type":"SERVANT"},
+{"requirements":["GREEN","GREEN","PURPLE"], "vp":5, "isActive":false, "type":"SHIELD"},
+{"requirements":["BLUE","BLUE", "YELLOW"], "vp":5, "isActive":false, "type":"STONE"},
+{"requirements":["PURPLE","PURPLE", "GREEN"], "vp":5, "isActive":false, "type":"COIN"}
+]

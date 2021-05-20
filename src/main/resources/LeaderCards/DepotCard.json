@@ -1,0 +1,6 @@
+[
+ {"requirements":"COIN","vp":3,"isActive":false,"type":"STONE"},
+ {"requirements":"STONE","vp":3,"isActive":false,"type":"SERVANT"},
+ {"requirements":"SHIELD","vp":3,"isActive":false,"type":"COIN"},
+ {"requirements":"SERVANT","vp":3,"isActive":false,"type":"SHIELD"}
+]
