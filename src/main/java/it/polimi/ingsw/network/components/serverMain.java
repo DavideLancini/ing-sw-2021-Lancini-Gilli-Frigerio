@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network.serverNetwork;
+package it.polimi.ingsw.network.components;
 
 import it.polimi.ingsw.Server;
 

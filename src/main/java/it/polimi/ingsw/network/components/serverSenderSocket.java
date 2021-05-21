@@ -1,15 +1,13 @@
-package it.polimi.ingsw.network.clientNetwork;
+package it.polimi.ingsw.network.components;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class clientSocket {
+public class serverSenderSocket {
     private String hostname;
     private int port;
     private Socket socket;
-    //do not delete connectionToken
-    private String connectionToken;
     /**
      * TO COMMENT Set parameters for the Client Sender Socket
      */
@@ -22,7 +20,7 @@ public class clientSocket {
      */
     public void connect() {
         try {
-            this.socket = new Socket(hostname, port);
+            this.socket = new Socket(this.hostname, this.port);
         } catch (IOException e) {
             System.err.println("Socket: connection failed");
             //trying to close the socket in case of failed connection
@@ -33,19 +31,7 @@ public class clientSocket {
             }
         }
     }
-    /**
-     * TO COMMENT wait for connection token
-     */
-    public void connected(){
-        //TODO
-    }
-    /**
-     * TO COMMENT Login
-     */
-    public void login(String username){
-        //TODO
-    }
-    public boolean sendMessage(String message){
+    public boolean sendMessage(String message) {
         DataOutputStream stream = null;
         try {
             stream = new DataOutputStream(socket.getOutputStream());

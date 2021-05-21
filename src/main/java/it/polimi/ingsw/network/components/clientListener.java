@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network.clientNetwork;
+package it.polimi.ingsw.network.components;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;

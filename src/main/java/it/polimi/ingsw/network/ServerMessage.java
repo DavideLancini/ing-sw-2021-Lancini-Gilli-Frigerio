@@ -1,9 +1,6 @@
 package it.polimi.ingsw.network;
 
-import it.polimi.ingsw.model.Resource;
-
-import java.util.Arrays;
-import java.util.Collection;
+import it.polimi.ingsw.network.components.ServerMessageType;
 
 public abstract class ServerMessage {
     protected ServerMessageType type;

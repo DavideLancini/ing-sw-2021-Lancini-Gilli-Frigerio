@@ -1,4 +1,6 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.network.components;
+
+import it.polimi.ingsw.network.ServerMessage;
 
 public class ServerMessageOK extends ServerMessage {
 

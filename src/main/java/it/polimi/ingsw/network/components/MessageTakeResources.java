@@ -1,10 +1,12 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.network.components;
 
 import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.network.Message;
+import it.polimi.ingsw.network.components.MessageType;
 
 public class MessageTakeResources extends Message {
     private boolean isRow;
-    protected int position;
+    public int position;
 
     public MessageTakeResources(boolean isRow, int position) {
         this.position = position;

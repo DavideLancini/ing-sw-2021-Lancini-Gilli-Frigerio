@@ -2,8 +2,8 @@ package it.polimi.ingsw.view.server;
 
 import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.Reader;
-import it.polimi.ingsw.network.serverNetwork.ListenerOccupiedExeption;
-import it.polimi.ingsw.network.serverNetwork.serverMain;
+import it.polimi.ingsw.network.components.ListenerOccupiedExeption;
+import it.polimi.ingsw.network.components.serverMain;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

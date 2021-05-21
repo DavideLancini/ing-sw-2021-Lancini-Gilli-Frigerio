@@ -1,7 +1,9 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.network.components;
 
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.network.Message;
+import it.polimi.ingsw.network.components.MessageType;
 
 public class MessageTryDepotConfiguration extends Message {
     private Resource[] input = new Resource[10];

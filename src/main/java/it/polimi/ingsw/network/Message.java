@@ -1,7 +1,7 @@
 package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.network.components.MessageType;
 
 public abstract class Message {
 
@@ -11,13 +11,5 @@ public abstract class Message {
 
     public void send(){}
     public void resolve(Controller controller){}
-}
-
-class MessagePing extends Message{
-    private String[] Serialized = new String[32];
-
-    public void send(){
-        this.type = MessageType.PING;
-    }
 }
 
