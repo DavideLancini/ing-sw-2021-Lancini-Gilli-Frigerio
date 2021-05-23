@@ -12,8 +12,9 @@ public class MessageLeaderActivation extends Message {
         this.type = MessageType.LeaderActivation;
     }
 
-    public void resolve(Controller controller) {
+    public boolean resolve(Controller controller) {
         controller.activateLeader(this.position);
+        return false;
     }
 
 }

@@ -14,7 +14,7 @@ public class MessageTakeResources extends Message {
         this.type = MessageType.TakeResources;
     }
 
-    public void resolve(Controller controller) {
-        controller.takeResources(this.isRow, this.position);
+    public boolean resolve(Controller controller) {
+        return controller.takeResources(this.isRow, this.position);
     }
 }

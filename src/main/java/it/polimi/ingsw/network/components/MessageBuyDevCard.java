@@ -18,7 +18,7 @@ public class MessageBuyDevCard extends Message {
         this.column = column;
     }
 
-    public void resolve(Controller controller) {
-        controller.buyDevCard(this.level, this.color, this.column);
+    public boolean resolve(Controller controller) {
+        return controller.buyDevCard(this.level, this.color, this.column);
     }
 }

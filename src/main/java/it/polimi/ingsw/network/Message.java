@@ -10,6 +10,12 @@ public abstract class Message {
     protected MessageType type; //used to identify the type of message
 
     public void send(){}
-    public void resolve(Controller controller){}
+
+    /**
+     *
+     * @param controller
+     * @return true if an action has been correctly performed
+     */
+    public boolean resolve(Controller controller){return false;}
 }
 

@@ -4,49 +4,90 @@ import it.polimi.ingsw.model.CardColor;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.*;
 import it.polimi.ingsw.network.components.*;
+import it.polimi.ingsw.view.Manager;
+import it.polimi.ingsw.view.cli.CLIActionManager;
+import it.polimi.ingsw.view.gui.GUIActionManager;
 
 public class ClientController {
+    private netBridge net;
+    private Manager manager;
+
+    public void setup (netBridge net){
+        this.net = net;
+    }
+
+    public ClientController(boolean cli) {
+        this.manager = cli? new CLIActionManager(this) : new GUIActionManager(this);
+    }
+
+    //implements thread?
+    public void main(){
 
 
-    public static void takeResources(boolean isRow, int position){
-        //TODO: send
-        Message message = new MessageTakeResources(isRow, position);
+        while (true){
+            Message message = net.receive();
+            //TODO: check if there is actually a message, otherwise wait
+
+            switch(((ServerMessage)message).getType()){
+                case Turn:
+                    manager.Turn(((ServerMessageTurn)message).getAction());
+                    break;
+
+                case MarketReturn:
+                    manager.ArrangeDepot(((ServerMessageMarketReturn)message).getResources());
+                    break;
+
+                case View:
+                    manager.View(((ServerMessageView)message).view);
+                    break;
+
+                case Error:
+                    manager.DisplayError(((ServerMessageError)message).getError());
+                    break;
+
+
+
+            }
+
+
+        }
 
     }
 
-    public static void buyDevCard(Level level, CardColor color, int column){
-        //TODO: send
-        Message message = new MessageBuyDevCard(level, color, column);
 
+
+
+
+    public void endTurn(){
+        net.send(new MessageEndTurn());
     }
 
-    public static void produce(boolean[] activated){
-        //TODO: send
-        Message message = new MessageProduce(activated);
+    public void takeResources(boolean isRow, int position){
+        net.send(new MessageTakeResources(isRow, position));
 
     }
-
-    public static void activateLeader(int position){
-        //TODO: send
-        Message message = new MessageLeaderActivation(position);
+    public void buyDevCard(Level level, CardColor color, int column){
+        net.send(new MessageBuyDevCard(level, color, column));
 
     }
-
-    public static void sellLeader(int position){
-        //TODO: send
-        Message message = new MessageSellLeader(position);
+    public void produce(boolean[] activated){
+        net.send(new MessageProduce(activated));
 
     }
-
-    public static void setResource(Resource resource, int position){
-        //TODO: send
-        Message message = new MessageSetResource(resource, position);
+    public void activateLeader(int position){
+        net.send(new MessageLeaderActivation(position));
 
     }
+    public void sellLeader(int position){
+        net.send(new MessageSellLeader(position));
 
-    public static void tryDepot(Resource[] resource){
-        //TODO: send
-        Message message = new MessageTryDepotConfiguration(resource);
+    }
+    public void setResource(Resource resource, int position){
+        net.send(new MessageSetResource(resource, position));
+
+    }
+    public void tryDepot(Resource[] resource){
+        net.send(new MessageTryDepotConfiguration(resource));
 
     }
 

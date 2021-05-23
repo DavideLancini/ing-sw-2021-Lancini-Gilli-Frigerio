@@ -13,4 +13,6 @@ public class ServerMessageMarketReturn extends ServerMessage {
         this.resources = resources;
     }
 
+    public Collection<Resource> getResources(){return this.resources;}
+
 }

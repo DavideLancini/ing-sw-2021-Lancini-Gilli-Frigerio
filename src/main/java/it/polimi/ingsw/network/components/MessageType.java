@@ -4,5 +4,5 @@ package it.polimi.ingsw.network.components;
  * @author Lancini Davide
  */
 public enum MessageType {
-    PING, CONFIRM, LeaderActivation, TakeResources, BuyDevCard, Produce, SetResource, TryDepotConfiguration, SellLeader;
+    PING, CONFIRM, LeaderActivation, TakeResources, BuyDevCard, Produce, SetResource, TryDepotConfiguration, SellLeader, EndTurn;
 }

@@ -1,12 +1,20 @@
 package it.polimi.ingsw.view.cli;
 
+
 import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.view.Manager;
 
 
 import java.util.Collection;
 
-public class CLIActionManager {
+public class CLIActionManager extends Manager {
+
+    private ClientController ClientController;
+
+    public CLIActionManager(ClientController clicont){
+        this.ClientController = clicont;
+    }
 
     private static int parseToInt(String s) throws Exception{
         try{
@@ -14,6 +22,12 @@ public class CLIActionManager {
         }
         catch(Exception e) {throw new Exception("");}
     }
+
+    public void DisplayError(String error){
+        System.out.println("Server reports an error: "+error);
+        return;
+    }
+
 
     public void ArrangeDepot(Collection<Resource> resources){
         System.out.println("These are the resources to be arranged in your depot: ");
@@ -28,8 +42,9 @@ public class CLIActionManager {
 
 
 
-    public void Turn(){
+    public void Turn(boolean mainActionDone){
         boolean over = false;
+
         while (!over){
 
             System.out.println( "1. Take resources from market" );
@@ -38,6 +53,7 @@ public class CLIActionManager {
             System.out.println( "4. Activate Leader card");
             System.out.println( "5. Sell Leader card");
             System.out.println( "6. Set optional resources");
+            System.out.println( "7. End Turn");
 
             try {
                 int choice = parseToInt(Reader.in.nextLine());
@@ -45,6 +61,11 @@ public class CLIActionManager {
                 switch (choice) {
 
                     case 1:
+                        if(mainActionDone){
+                            System.out.println("Already done an action this turn!");
+                            break;
+                        }
+
                         System.out.println("0 for row, 1 for column");
                         boolean isRow = parseToInt(Reader.in.nextLine()) == 1 ? false : true;
                         System.out.println("Enter number of "+(isRow ? "row" : "column")+":");
@@ -56,6 +77,12 @@ public class CLIActionManager {
                         break;
 
                     case 2:
+
+                        if(mainActionDone){
+                            System.out.println("Already done an action this turn!");
+                            break;
+                        }
+
                         System.out.println("Level:");
                         Level level = Level.values()[parseToInt(Reader.in.nextLine())-1];
 
@@ -73,6 +100,12 @@ public class CLIActionManager {
                         break;
 
                     case 3:
+
+                        if(mainActionDone){
+                            System.out.println("Already done an action this turn!");
+                            break;
+                        }
+
                         boolean[] activated = new boolean[6];
                         String[] text = {
                                 "1 to produce with default production, 0 to skip it",
@@ -123,13 +156,20 @@ public class CLIActionManager {
                         over = true;
 
                         break;
+                    case 7:
+                        ClientController.endTurn();
+                        over = true;
+                        break;
                     default:
                         break;
                 }
 
 
             }
-            catch(Exception e){continue;}
+            catch(Exception e){
+                System.out.println("There's been an error: "+e);
+                continue;
+            }
         }
 
         return;

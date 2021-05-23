@@ -12,8 +12,9 @@ public class MessageSellLeader extends Message {
         this.type = MessageType.SellLeader;
     }
 
-    public void resolve(Controller controller) {
+    public boolean resolve(Controller controller) {
         controller.sellLeader(this.position);
+        return false;
     }
 
 }

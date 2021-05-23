@@ -12,8 +12,8 @@ public class MessageProduce extends Message {
         this.type = MessageType.Produce;
     }
 
-    public void resolve(Controller controller) {
-        controller.produce(this.activated);
+    public boolean resolve(Controller controller) {
+        return controller.produce(this.activated);
     }
 
 }

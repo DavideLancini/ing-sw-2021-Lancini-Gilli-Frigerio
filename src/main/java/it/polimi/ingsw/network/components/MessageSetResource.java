@@ -17,7 +17,8 @@ public class MessageSetResource extends Message {
         this.type = MessageType.SetResource;
     }
 
-    public void resolve(Controller controller) {
+    public boolean resolve(Controller controller) {
         controller.setResource(position, resource);
+        return false;
     }
 }

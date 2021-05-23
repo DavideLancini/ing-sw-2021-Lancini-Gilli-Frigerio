@@ -13,7 +13,8 @@ public class MessageTryDepotConfiguration extends Message {
         this.type = MessageType.TryDepotConfiguration;
     }
 
-    public void resolve(Controller controller) {
+    public boolean resolve(Controller controller) {
         controller.tryDepotConfiguration(this.input);
+        return false;
     }
 }

@@ -31,13 +31,12 @@ public class Controller {
 
             ServerMessageOK message = new ServerMessageOK();
             //TODO: send success
-            return;
         }
         else {
             ServerMessageError message = new ServerMessageError("Cannot sell Active Leaders");
             //TODO: send failure
-            return;
         }
+        return;
     }
 
 
@@ -146,7 +145,7 @@ public class Controller {
         return true;
     }
 
-    public void buyDevCard(Level level, CardColor color, int column){
+    public boolean buyDevCard(Level level, CardColor color, int column){
         DevCard newCard;
         Resource[] stdCost = board.getCard(color, level).getCost();
 
@@ -169,15 +168,18 @@ public class Controller {
         catch (Exception e ){
             ServerMessageError message = new ServerMessageError("Insufficient resources");
             /*TODO: send error message back to user, insufficient resources*/
+            return false;
         }
+        return true;
     }
 
     /**
      * @param activated array of booleans corrisponding to which productions are to be activated this action, 0 being the default,
      *                 1 to 3 the corresponding cards, and 4 to 5 the leader cards
+     * @return
      */
 
-    public void produce(boolean[] activated){
+    public boolean produce(boolean[] activated){
         ArrayList<Resource> totalinput = new ArrayList<>();
         ArrayList<Resource> totaloutput = new ArrayList<>();
         int totalfaith = 0;
@@ -191,6 +193,7 @@ public class Controller {
             else {
                 ServerMessageError message = new ServerMessageError("Invalid Production");
                 /*TODO: send error message back to user*/
+                return false;
             }
         }
 
@@ -216,7 +219,9 @@ public class Controller {
         catch (Exception e){
             ServerMessageError message = new ServerMessageError("Insufficient resources");
             /*TODO: send error message back to user, insufficient resources*/
+            return false;
         }
+        return true;
     }
 
 
@@ -279,14 +284,18 @@ public class Controller {
         return resources;
     }
 
-    public void takeResources(boolean isRow, int position){
+    public boolean takeResources(boolean isRow, int position){
         Marble[] marbles = null;
 
         if((isRow && position <= 3) || (!isRow && position <= 4) && position > 0) {
             try {marbles = this.market.takeResources(isRow, position);}
             catch (Exception e) {} //send back failure message
         }
-        else {ServerMessageError message = new ServerMessageError("Unable to acquire Market Resources.");} //TODO: send back failure message
+        else {
+            //TODO: send back failure message
+            ServerMessageError message = new ServerMessageError("Unable to acquire Market Resources.");
+            return false;
+        }
 
         Collection<Resource> resources;
 
@@ -294,6 +303,7 @@ public class Controller {
 
         //TODO: send back to client message with resources serialized
         ServerMessageMarketReturn message = new ServerMessageMarketReturn(resources);
+        return true;
     }
 
     private Collection<Resource> convert (Marble[] marbles){
