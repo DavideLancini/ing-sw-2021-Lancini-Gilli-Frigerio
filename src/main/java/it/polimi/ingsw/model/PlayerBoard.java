@@ -29,6 +29,12 @@ public class PlayerBoard {
         this.defaultProduction = new DefaultProduction();
     }
 
+    public PlayerBoard(LeaderCard[] leaders){
+        this();
+        System.arraycopy(leaders, 0, this.leaderCards, 0, 2);
+
+    }
+
     /**
      * addFaith
      * @param newFaith Faith to add
@@ -65,6 +71,10 @@ public class PlayerBoard {
         return this.leaderCards[position];
     }
 
+    /**
+     * Sell card for 1 faith
+     * @param position 0 or 1
+     */
     public void sellLeader (int position) {
         this.leaderCards[position] = null;
         addFaith(1);
@@ -95,6 +105,11 @@ public class PlayerBoard {
      */
     public DevCard getDevCard(int column, int level){return this.devCards[column][level];}
 
+    /**
+     * Default to highest level card present
+     * @param column selected slot 0 to 2 (3 available)
+     * @return devCard
+     */
     public DevCard getDevCard(int column){
         return this.devCards[column][2] != null ? this.devCards[column][2] : this.devCards[column][1] != null ? this.devCards[column][1] : this.devCards[column][0];
     }

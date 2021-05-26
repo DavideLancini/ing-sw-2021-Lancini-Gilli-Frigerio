@@ -46,6 +46,7 @@ public class Controller {
 
         if(!checkRequirements(leader)) {
             ServerMessageError message = new ServerMessageError("Leader requirements not met");
+
             return; /*TODO: send message back with failure notice*/
         }
 
@@ -102,12 +103,17 @@ public class Controller {
             ArrayList<DevCard> devCards = new ArrayList<>();
             for (int i = 0; i<3; i++){
                 for (int j = 0; j<3; j++){
-                       devCards.add(pb.getDevCard(i,j));
+                       if(pb.getDevCard(i,j) != null) devCards.add(pb.getDevCard(i,j));
                 }
             }
 
             for(CardColor each : requirements){
-                if(!devCards.remove(each))return false;
+                for(int i=0; i<devCards.size(); i++) {
+                    DevCard every = devCards.get(i);
+                    if (every.getColor().equals(each)){
+                        if(!devCards.remove(every)) return false;
+                    }
+                }
             }
             return true;
 
@@ -183,12 +189,12 @@ public class Controller {
         ArrayList<Resource> totalinput = new ArrayList<>();
         ArrayList<Resource> totaloutput = new ArrayList<>();
         int totalfaith = 0;
+        Production[] productions = new Production[6];
+        productions[0] = pb.getDefaultProduction();
 
-        Production[] leaderproductions = new Production[]{null, null};
-        LeaderCard[] leaders = {pb.getLeaderCard(0), pb.getLeaderCard(1)};
-        for(int i = 0; i<2 && activated[4+i]; i++){
-            LeaderCard each = pb.getLeaderCard(i);
-            if(each.getIsActive() && each instanceof LeaderProduction) leaderproductions[i] = ((LeaderProduction) each).getProduction();
+        for(int i = 0; i<2 && activated[1+i]; i++){
+            DevCard each = pb.getDevCard(i);
+            if(each != null) productions[i+1] = each.getProduction();
 
             else {
                 ServerMessageError message = new ServerMessageError("Invalid Production");
@@ -197,8 +203,16 @@ public class Controller {
             }
         }
 
-        Production[] productions = new Production[]{pb.getDefaultProduction(), pb.getDevCard(0).getProduction(), pb.getDevCard(1).getProduction(),
-                pb.getDevCard(2).getProduction(), leaderproductions[0], leaderproductions[1]};
+        for(int i = 0; i<2 && activated[4+i]; i++){
+            LeaderCard each = pb.getLeaderCard(i);
+            if(each.getIsActive() && each instanceof LeaderProduction) productions[i+4] = ((LeaderProduction) each).getProduction();
+
+            else {
+                ServerMessageError message = new ServerMessageError("Invalid Production");
+                /*TODO: send error message back to user*/
+                return false;
+            }
+        }
 
 
         try {

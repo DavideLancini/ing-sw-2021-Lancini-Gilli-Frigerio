@@ -14,6 +14,16 @@ public class Market {
     private static Marble sideMarble;
     private static Marble[][] marketBoard = new Marble[3][4] ;
 
+
+    /**
+     * Default market constructor
+     */
+    public Market() {
+        new Market(new Marble[]{Marble.BLUE, Marble.BLUE, Marble.WHITE, Marble.WHITE, Marble.WHITE,
+                Marble.WHITE, Marble.GRAY, Marble.GRAY, Marble.YELLOW, Marble.YELLOW, Marble.PURPLE, Marble.PURPLE, Marble.RED});
+    }
+
+
     /**
      * Market constructor
      * @param marbles 13 marbles(4 white,2 blue,2 gray,2 yellow,2 purple,1 red)
