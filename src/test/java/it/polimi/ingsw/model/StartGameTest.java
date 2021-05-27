@@ -11,5 +11,11 @@ public class StartGameTest {
 @Test
     public void testStarGame() throws FileNotFoundException {
     new StartGame(/*players*/);
+    DevCardBoard.topView(DevCardBoard.getTop(DevCardBoard.getBoard()));
+    for (LeaderCard leaderCard : LeaderCardDeck.deck){
+        leaderCard.leaderCardView();
     }
+    Market.marketView();
+    }
+
 }

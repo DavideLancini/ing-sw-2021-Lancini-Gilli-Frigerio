@@ -13,7 +13,7 @@
        "SHIELD"
       ],
       "output":[
-       "FAITH"
+      
       ],
       "faithOutput":1
      }
@@ -61,7 +61,7 @@
        "STONE", "SHIELD"
       ],
       "output":[
-       "SERVANT", "SERVANT", "FAITH"
+       "SERVANT", "SERVANT"
       ],
       "faithOutput":1
      }
@@ -80,7 +80,6 @@
       "SERVANT"
      ],
      "output":[
-      "FAITH", "FAITH"
      ],
      "faithOutput":2
     }
@@ -112,7 +111,7 @@
       "SERVANT"
      ],
      "output":[
-      "STONE", "STONE", "FAITH"
+      "STONE", "STONE"
      ],
      "faithOutput":1
     }
@@ -128,7 +127,7 @@
       "SERVANT", "SERVANT"
      ],
      "output":[
-      "SHIELD", "SHIELD", "FAITH", "FAITH"
+      "SHIELD", "SHIELD"
      ],
      "faithOutput":2
     }
@@ -147,8 +146,7 @@
       "STONE"
      ],
      "output":[
-      "SHIELD", "FAITH", "FAITH", "FAITH"
-     ],
+      "SHIELD"],
      "faithOutput":3
     }
    }, {
@@ -163,7 +161,7 @@
       "COIN", "SHIELD"
      ],
      "output":[
-      "SERVANT", "SERVANT", "STONE", "STONE", "FAITH"
+      "SERVANT", "SERVANT", "STONE", "STONE"
      ],
      "faithOutput":1
     }
@@ -179,7 +177,7 @@
       "SERVANT", "SERVANT"
      ],
      "output":[
-      "SHIELD", "SHIELD", "SHIELD", "FAITH", "FAITH"
+      "SHIELD", "SHIELD", "SHIELD"
      ],
      "faithOutput":2
     }
@@ -233,7 +231,7 @@
       "COIN","SERVANT"
      ],
      "output":[
-      "SHIELD", "SHIELD", "FAITH"
+      "SHIELD", "SHIELD"
      ],
      "faithOutput":1
     }
@@ -267,7 +265,7 @@
       "SERVANT"
      ],
      "output":[
-      "FAITH"
+     
      ],
      "faithOutput":1
     }
@@ -286,7 +284,6 @@
       "SHIELD"
      ],
      "output":[
-      "FAITH", "FAITH"
      ],
      "faithOutput":2
     }
@@ -303,7 +300,7 @@
       "SHIELD","SHIELD"
      ],
      "output":[
-      "SERVANT","SERVANT", "FAITH", "FAITH"
+      "SERVANT","SERVANT"
      ],
      "faithOutput":2
     }
@@ -337,7 +334,7 @@
       "SHIELD"
      ],
      "output":[
-      "COIN", "COIN", "FAITH"
+      "COIN", "COIN"
      ],
      "faithOutput":1
     }
@@ -356,7 +353,7 @@
       "SHIELD"
      ],
      "output":[
-     "SERVANT" , "FAITH", "FAITH","FAITH"
+     "SERVANT"
      ],
      "faithOutput":3
     }
@@ -373,7 +370,7 @@
       "SHIELD","SHIELD"
      ],
      "output":[
-      "SERVANT","SERVANT","SERVANT", "FAITH", "FAITH"
+      "SERVANT","SERVANT","SERVANT"
      ],
      "faithOutput":2
     }
@@ -390,7 +387,7 @@
       "STONE", "SERVANT"
      ],
      "output":[
-      "COIN","COIN","SHIELD", "SHIELD", "FAITH"
+      "COIN","COIN","SHIELD", "SHIELD"
      ],
      "faithOutput":1
     }
@@ -428,7 +425,7 @@
       "COIN"
      ],
      "output":[
-       "FAITH"
+     
      ],
      "faithOutput":1
     }
@@ -462,7 +459,7 @@
       "STONE", "SERVANT"
      ],
      "output":[
-      "COIN","COIN", "FAITH"
+      "COIN","COIN"
      ],
      "faithOutput":1
     }
@@ -498,7 +495,7 @@
       "COIN"
      ],
      "output":[
-      "SHIELD", "SHIELD", "FAITH"
+      "SHIELD", "SHIELD"
      ],
      "faithOutput":1
     }
@@ -515,7 +512,7 @@
       "COIN","COIN"
      ],
      "output":[
-      "STONE", "STONE", "FAITH", "FAITH"
+      "STONE", "STONE"
      ],
      "faithOutput":2
     }
@@ -549,7 +546,6 @@
       "STONE"
      ],
      "output":[
-       "FAITH", "FAITH"
      ],
      "faithOutput":2
     }
@@ -568,7 +564,7 @@
       "SERVANT","SERVANT"
      ],
      "output":[
-      "STONE","STONE","STONE", "FAITH", "FAITH"
+      "STONE","STONE","STONE"
      ],
      "faithOutput":2
     }
@@ -585,7 +581,7 @@
       "SERVANT"
      ],
      "output":[
-      "COIN", "FAITH", "FAITH","FAITH"
+      "COIN"
      ],
      "faithOutput":3
     }
@@ -619,7 +615,7 @@
       "COIN","SERVANT"
      ],
      "output":[
-      "SHIELD","SHIELD","STONE", "STONE", "FAITH"
+      "SHIELD","SHIELD","STONE", "STONE"
      ],
      "faithOutput":1
     }
@@ -640,7 +636,7 @@
       "COIN","SHIELD"
      ],
      "output":[
-      "STONE", "STONE", "FAITH"
+      "STONE", "STONE"
      ],
      "faithOutput":0
     }
@@ -674,7 +670,7 @@
       "STONE"
      ],
      "output":[
-       "FAITH"
+     
      ],
      "faithOutput":1
     }
@@ -710,7 +706,7 @@
       "STONE"
      ],
      "output":[
-      "SERVANT","SERVANT", "FAITH"
+      "SERVANT","SERVANT"
      ],
      "faithOutput":1
     }
@@ -727,7 +723,7 @@
       "STONE", "STONE"
      ],
      "output":[
-      "COIN","COIN", "FAITH", "FAITH"
+      "COIN","COIN"
      ],
      "faithOutput":2
     }
@@ -744,7 +740,6 @@
       "COIN"
      ],
      "output":[
-       "FAITH", "FAITH"
      ],
      "faithOutput":2
     }
@@ -780,7 +775,7 @@
       "STONE", "STONE"
      ],
      "output":[
-      "COIN","COIN","COIN", "FAITH", "FAITH"
+      "COIN","COIN","COIN"
      ],
      "faithOutput":2
     }
@@ -797,7 +792,7 @@
       "STONE", "SHIELD"
      ],
      "output":[
-      "COIN","COIN", "SERVANT","SERVANT", "FAITH"
+      "COIN","COIN", "SERVANT","SERVANT"
      ],
      "faithOutput":1
     }
@@ -814,7 +809,7 @@
       "COIN"
      ],
      "output":[
-      "STONE","FAITH", "FAITH", "FAITH"
+      "STONE"
      ],
      "faithOutput":3
     }
@@ -831,7 +826,7 @@
       "COIN"
      ],
      "output":[
-      "STONE", "STONE","STONE", "FAITH"
+      "STONE", "STONE","STONE"
      ],
      "faithOutput":1
     }

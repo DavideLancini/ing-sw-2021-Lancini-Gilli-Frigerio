@@ -50,17 +50,17 @@ public class TestController {
     @Test
     public void TestBuyDevCard(){
         DevCard card = dcb.getCard(CardColor.GREEN, Level.ONE);
-        pb.getStrongbox().deposit(new ArrayList<Resource>(Arrays.asList(
+        pb.getStrongbox().deposit(new ArrayList<>(Arrays.asList(
                 Resource.SHIELD, Resource.SHIELD, Resource.SHIELD, Resource.SHIELD, Resource.SHIELD,
-                Resource.STONE, Resource.STONE, Resource.STONE, Resource.STONE , Resource.STONE,
+                Resource.STONE, Resource.STONE, Resource.STONE, Resource.STONE, Resource.STONE,
                 Resource.COIN, Resource.COIN, Resource.COIN, Resource.COIN, Resource.COIN,
-                Resource.SERVANT, Resource.SERVANT, Resource.SERVANT, Resource.SERVANT,Resource.SERVANT
-                )));
+                Resource.SERVANT, Resource.SERVANT, Resource.SERVANT, Resource.SERVANT, Resource.SERVANT
+        )));
         controller.buyDevCard(Level.ONE, CardColor.GREEN, 1);
         assertSame(card, pb.getDevCard(1));
 
-        //card.devCardView();
-        //pb.getStrongbox().StrongboxView();
+        /*card.devCardView();
+        pb.playerBoardView();*/
     }
 
     @Test
@@ -71,16 +71,15 @@ public class TestController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        pb.getStrongbox().deposit(new ArrayList<Resource>(Arrays.asList(
+        pb.getStrongbox().deposit(new ArrayList<>(Arrays.asList(
                 Resource.SHIELD, Resource.SHIELD, Resource.SHIELD, Resource.SHIELD, Resource.SHIELD,
-                Resource.STONE, Resource.STONE, Resource.STONE, Resource.STONE , Resource.STONE,
+                Resource.STONE, Resource.STONE, Resource.STONE, Resource.STONE, Resource.STONE,
                 Resource.COIN, Resource.COIN, Resource.COIN, Resource.COIN, Resource.COIN,
-                Resource.SERVANT, Resource.SERVANT, Resource.SERVANT, Resource.SERVANT,Resource.SERVANT
+                Resource.SERVANT, Resource.SERVANT, Resource.SERVANT, Resource.SERVANT, Resource.SERVANT
         )));
 
         controller.produce(new boolean[]{false, true, false, false, false, false});
 
-        pb.getDevCard(0).devCardView();
-        pb.getStrongbox().StrongboxView();
+       pb.playerBoardView();
     }
 }
