@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.logging.Level;
 
-public class serverNetInterface {
+public class ServerNetInterface {
     private static int port;
     private static int maxSlots;
     private static boolean isON = false;

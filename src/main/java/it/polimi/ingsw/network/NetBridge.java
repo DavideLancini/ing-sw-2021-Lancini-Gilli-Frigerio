@@ -2,7 +2,7 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.network.Message;
 
-public class netBridge {
+public class NetBridge {
     Message message;
     public boolean connect(String serverAddress, int serverPort, int localPort){
         return true;

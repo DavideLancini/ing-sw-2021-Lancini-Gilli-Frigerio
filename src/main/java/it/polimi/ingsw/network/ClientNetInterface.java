@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.logging.Level;
 
-public class clientNetInterface {
-    private final String serverAddress;
-    private final int serverPort;
-    private final int localPort;
+public class ClientNetInterface {
+    private String serverAddress;
+    private int serverPort;
+    private int localPort;
 
     private boolean isConnected = false;
     private final boolean isLogged = false;
@@ -21,7 +21,7 @@ public class clientNetInterface {
     private Listener listener;
     private ServerSocket father;
 
-    public clientNetInterface(String serverAddress, int serverPort, int localPort){
+    public void setParameters(String serverAddress, int serverPort, int localPort){
         this.serverAddress=serverAddress;
         this.serverPort=serverPort;
         this.localPort=localPort;

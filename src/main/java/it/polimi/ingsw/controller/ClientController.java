@@ -9,10 +9,10 @@ import it.polimi.ingsw.view.cli.CLIActionManager;
 import it.polimi.ingsw.view.gui.GUIActionManager;
 
 public class ClientController {
-    private netBridge net;
+    private NetBridge net;
     private Manager manager;
 
-    public void setup (netBridge net){
+    public void setup (NetBridge net){
         this.net = net;
     }
 
