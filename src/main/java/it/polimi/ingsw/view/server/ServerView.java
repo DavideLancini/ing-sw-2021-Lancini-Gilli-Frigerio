@@ -93,9 +93,9 @@ public class ServerView {
      */
     public static void toggleServer() {
         if (checkServerActivity()) {
-            serverMain.startMain();
-        } else {
             serverMain.stopMain();
+        } else {
+            serverMain.startMain();
         }
     }
 
