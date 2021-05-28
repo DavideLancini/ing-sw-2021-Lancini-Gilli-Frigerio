@@ -5,7 +5,7 @@ import it.polimi.ingsw.network.ServerNetInterface;
 import org.junit.Test;
 
 public class ServerTestMatch{
-    @Test
+    //@Test
     public void main(){
         System.out.println("This is a modified version of the server, the Logger is locked to the Finest Level, " +
                 "every commodity features are disabled and the server runs only one match for exactly 4 clients");

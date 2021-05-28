@@ -4,7 +4,7 @@ import it.polimi.ingsw.network.ClientNetInterface;
 import org.junit.Test;
 
 public class ClientTestMatch {
-    @Test
+    //@Test
     public void main(){
         ClientNetInterface net = new ClientNetInterface();
 
