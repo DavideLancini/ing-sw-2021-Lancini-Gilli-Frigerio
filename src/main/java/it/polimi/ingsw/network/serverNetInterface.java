@@ -18,13 +18,8 @@ public class serverNetInterface {
 
     private static ServerSocket serverSocket;
 
-    public serverNetInterface(int localPort){
-
-    }
-
     /**
      * Setter for the Server Port.
-     *
      *
      * @author Lancini Davide
      */
@@ -85,12 +80,13 @@ public class serverNetInterface {
      *
      * @author Lancini Davide
      */
-    public static void startMain(){
+    public static void startServer(){
         if(isON){
             Server.logger.log(Level.WARNING,"serverMain>startMain> The server is already ON");
         }else{
             try {
                 serverSocket = new ServerSocket(port);
+                isON = true;
             } catch (IOException e) {
                 Server.logger.log(Level.WARNING,"serverMain>startMain> Opening failed");
                 isON = false;
@@ -105,7 +101,6 @@ public class serverNetInterface {
             Thread t = new Thread(connection);
             t.start();
         }
-
     }
 
     /**
@@ -114,7 +109,7 @@ public class serverNetInterface {
      *
      * @author Lancini Davide
      */
-    public static void stopMain(){
+    public static void stopServer(){
         try {
             serverSocket.close();
         } catch (IOException e) {
