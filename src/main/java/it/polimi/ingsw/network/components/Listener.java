@@ -20,7 +20,6 @@ public class Listener extends Thread {
     private Socket listenerSocket = null;
     private DataInputStream inputStream = null;
 
-
     public Listener(ServerSocket socket){
         fatherSocket = socket;
     }

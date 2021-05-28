@@ -18,7 +18,7 @@ import static java.lang.Integer.parseInt;
  *
  * @author Lancini Davide
  */
-public class ServerView {
+public class ServerMainMenu {
 
     /**
      * Load preferred port number and max slot for match
