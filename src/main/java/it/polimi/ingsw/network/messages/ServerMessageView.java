@@ -1,7 +1,6 @@
-package it.polimi.ingsw.network.components;
+package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.network.ServerMessage;
-import it.polimi.ingsw.network.components.ServerMessageType;
 
 public class ServerMessageView extends ServerMessage {
     public String view;

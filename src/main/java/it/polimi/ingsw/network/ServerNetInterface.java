@@ -1,8 +1,8 @@
 package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.Server;
+import it.polimi.ingsw.network.components.Listener;
 import it.polimi.ingsw.network.components.ListenerOccupiedExeption;
-import it.polimi.ingsw.network.components.serverListenerSocket;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -93,13 +93,9 @@ public class ServerNetInterface {
             }
         }
 
-        serverListenerSocket connection = new serverListenerSocket(serverSocket);
-
-        //TODO Start a small percentage of threads to use less resources (open th. when open one is successfully connected)
         int i;
         for(i=0;i<maxSlots;i++){
-            Thread t = new Thread(connection);
-            t.start();
+            //TODO: create an empty controller and pass serverSocket
         }
     }
 

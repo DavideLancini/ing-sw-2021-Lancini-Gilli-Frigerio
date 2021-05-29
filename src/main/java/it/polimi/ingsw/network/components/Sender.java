@@ -6,7 +6,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class Sender{
+public class Sender implements Runnable{
     private String destinationAddress;
     private int destinationPort;
     private Socket socket;
@@ -18,8 +18,30 @@ public class Sender{
         //TODO: throw info
     }
 
-    public boolean connect(){
-        // opening sender
+    @Override
+    public void run() {
+        boolean isON = true;
+        isON = connect();
+        isON = activateStream();
+        while(isON){
+            //TODO: keep sending ping and update isON
+        }
+        isON = close();
+    }
+
+    public boolean send(Message message){
+        String x = Serializer.serialize(message);
+        try {
+            outStream.writeUTF(x);
+        } catch (IOException e) {
+            //TODO: Manage this error
+            return false;
+        }
+        //TODO: check for the confirmation of message and return it
+        return true;
+    }
+
+    protected boolean connect(){
         try {
             this.socket = new Socket(this.destinationAddress, this.destinationPort);
             //TODO: throw info
@@ -30,8 +52,7 @@ public class Sender{
         }
     }
 
-    public boolean activateStream(){
-        // activate output stream
+    protected boolean activateStream(){
         try {
             this.outStream = new DataOutputStream(socket.getOutputStream());
             //TODO: throw info
@@ -42,25 +63,13 @@ public class Sender{
         }
     }
 
-    public boolean send(Message message){
-        String x = Serializer.serialize(message);
-
-        try {
-            outStream.writeUTF(x);
-        } catch (IOException e) {
-            //TODO: Manage this error
-            return false;
-        }
-        //TODO: check for the confirmation of message and return boolean
-        return true;
-    }
-    public boolean close(){
+    protected boolean close(){
         try {
             this.socket.close();
-            return true;
+            return false;
         } catch (IOException ioException) {
             //TODO: Manage this error
-            return false;
+            return true;
         }
     }
 }

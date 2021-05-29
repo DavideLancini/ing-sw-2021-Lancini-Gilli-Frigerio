@@ -1,7 +1,7 @@
 package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.network.components.MessageType;
+import it.polimi.ingsw.network.messages.MessageType;
 
 public abstract class Message {
 

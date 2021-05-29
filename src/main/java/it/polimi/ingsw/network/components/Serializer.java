@@ -3,6 +3,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.network.Message;
 import it.polimi.ingsw.network.ServerMessage;
+import it.polimi.ingsw.network.messages.MessageJsonDeserializer;
+import it.polimi.ingsw.network.messages.ServerMessageJsonDeserializer;
 
 public class Serializer {
     public static String serialize(Object o){

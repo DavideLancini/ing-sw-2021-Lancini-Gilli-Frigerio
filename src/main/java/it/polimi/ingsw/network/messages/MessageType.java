@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network.components;
+package it.polimi.ingsw.network.messages;
 /**
  * Types of Messages the Network is able to send
  * @author Lancini Davide

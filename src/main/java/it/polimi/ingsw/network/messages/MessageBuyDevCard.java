@@ -1,10 +1,9 @@
-package it.polimi.ingsw.network.components;
+package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.CardColor;
 import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.network.Message;
-import it.polimi.ingsw.network.components.MessageType;
 
 public class MessageBuyDevCard extends Message {
     private Level level;

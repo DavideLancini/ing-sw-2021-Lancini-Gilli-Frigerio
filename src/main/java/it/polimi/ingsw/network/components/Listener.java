@@ -15,7 +15,7 @@ import java.util.logging.Level;
  *
  * @author Lancini Davide
  */
-public class Listener extends Thread {
+public class Listener implements Runnable {
     private ServerSocket fatherSocket = null;
     private Socket listenerSocket = null;
     private DataInputStream inputStream = null;
@@ -39,7 +39,9 @@ public class Listener extends Thread {
         }
 
         while(true){
-            //TODO Timeout connection
+            //Receive
+            Message x = receive();
+
         }
     }
 

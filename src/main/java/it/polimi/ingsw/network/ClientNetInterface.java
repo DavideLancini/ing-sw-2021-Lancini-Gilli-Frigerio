@@ -27,24 +27,16 @@ public class ClientNetInterface {
         this.localPort=localPort;
     }
 
-    public boolean connect(){
+    public void connect(){
         if(!isConnected & !isLogged){
             //create sender
             this.sender = new Sender(this.serverAddress, this.serverPort);
             Client.logger.log(Level.INFO,"class>method> Sender created on:" + this.serverAddress + this.serverPort);
-            //connect sender
-            if(this.sender.connect()){
-                //activate output stream
-                this.isConnected = this.sender.activateStream();
-                //TODO: throw info
-            }else{
-                //TODO: throw warning (not connected)
-                return false;
-            }
+            //activate sender
+            sender.run();
         }else{
             //TODO throw warning (sender already connected)
         }
-        return isConnected;
     }
 
     public boolean login(){
@@ -57,13 +49,13 @@ public class ClientNetInterface {
                 return false;
             }
             //create listener
-            listener = new Listener(father);
+            this.listener = new Listener(father);
             //start listener
-            listener.start();
+            this.listener.run();
             //TODO: create an actual login message
                 Message x = null;
             //send login request
-            sender.send(x);
+            this.sender.send(x);
             //wait for response
             Message y = listener.receive();
             //TODO: from Response extract token

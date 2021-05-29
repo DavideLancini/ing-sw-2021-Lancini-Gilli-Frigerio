@@ -1,8 +1,7 @@
-package it.polimi.ingsw.network.components;
+package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.network.Message;
-import it.polimi.ingsw.network.components.MessageType;
 
 public class MessageLeaderActivation extends Message {
     public int position;

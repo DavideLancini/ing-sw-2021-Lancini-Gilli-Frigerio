@@ -2,9 +2,9 @@ package it.polimi.ingsw.controller;
 
 
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.network.components.ServerMessageError;
-import it.polimi.ingsw.network.components.ServerMessageMarketReturn;
-import it.polimi.ingsw.network.components.ServerMessageOK;
+import it.polimi.ingsw.network.messages.ServerMessageError;
+import it.polimi.ingsw.network.messages.ServerMessageMarketReturn;
+import it.polimi.ingsw.network.messages.ServerMessageOK;
 
 import java.util.ArrayList;
 import java.util.Arrays;

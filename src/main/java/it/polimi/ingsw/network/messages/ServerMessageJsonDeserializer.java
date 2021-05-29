@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network.components;
+package it.polimi.ingsw.network.messages;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

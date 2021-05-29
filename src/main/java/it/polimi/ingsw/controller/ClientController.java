@@ -3,16 +3,16 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.CardColor;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.*;
-import it.polimi.ingsw.network.components.*;
+import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.view.Manager;
 import it.polimi.ingsw.view.cli.CLIActionManager;
 import it.polimi.ingsw.view.gui.GUIActionManager;
 
 public class ClientController {
-    private NetBridge net;
+    private ConnectionInterface net;
     private Manager manager;
 
-    public void setup (NetBridge net){
+    public void setup (ConnectionInterface net){
         this.net = net;
     }
 

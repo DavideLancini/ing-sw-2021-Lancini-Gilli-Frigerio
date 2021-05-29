@@ -2,8 +2,8 @@ package it.polimi.ingsw.view.server;
 
 import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.Reader;
+import it.polimi.ingsw.network.ServerNetInterface;
 import it.polimi.ingsw.network.components.ListenerOccupiedExeption;
-import it.polimi.ingsw.network.components.serverMain;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -52,14 +52,14 @@ public class ServerMainMenu {
         }
 
         try {
-            serverMain.setMaxSlots(maxSlots);
+            ServerNetInterface.setMaxSlots(maxSlots);
         }
         catch (InstantiationException InstantiationException) {
             Server.logger.log(Level.WARNING,"ServerView>LoadParameters> Active Slots exceed Requested Max Slots");
         }
 
         try {
-            serverMain.setPort(port);
+            ServerNetInterface.setPort(port);
         }
         catch (ListenerOccupiedExeption listenerOccupiedExeption) {
             Server.logger.log(Level.WARNING,"ServerView>LoadParameters> The Listener is ON, the port cannot be changed");
@@ -93,9 +93,9 @@ public class ServerMainMenu {
      */
     public static void toggleServer() {
         if (checkServerActivity()) {
-            serverMain.stopMain();
+            ServerNetInterface.stopServer();
         } else {
-            serverMain.startMain();
+            ServerNetInterface.startServer();
         }
     }
 
@@ -135,6 +135,6 @@ public class ServerMainMenu {
      * @author Lancini Davide
      */
     private static boolean checkServerActivity() {
-        return serverMain.getStatus();
+        return ServerNetInterface.getStatus();
     }
 }
