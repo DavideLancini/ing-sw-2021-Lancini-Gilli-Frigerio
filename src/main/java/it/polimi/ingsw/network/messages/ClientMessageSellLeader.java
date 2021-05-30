@@ -1,12 +1,12 @@
 package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.network.Message;
+import it.polimi.ingsw.network.ClientMessage;
 
-public class MessageSellLeader extends Message {
+public class ClientMessageSellLeader extends ClientMessage {
     private int position;
 
-    public MessageSellLeader(int position) {
+    public ClientMessageSellLeader(int position) {
         this.position = position;
         this.type = MessageType.SellLeader;
     }

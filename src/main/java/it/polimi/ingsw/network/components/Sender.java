@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.components;
 
-import it.polimi.ingsw.network.Message;
+import it.polimi.ingsw.network.ClientMessage;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class Sender implements Runnable{
         isON = close();
     }
 
-    public boolean send(Message message){
+    public boolean send(ClientMessage message){
         String x = Serializer.serialize(message);
         try {
             outStream.writeUTF(x);

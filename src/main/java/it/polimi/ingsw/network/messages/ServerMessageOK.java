@@ -5,7 +5,7 @@ import it.polimi.ingsw.network.ServerMessage;
 public class ServerMessageOK extends ServerMessage {
 
     public ServerMessageOK() {
-        this.type = ServerMessageType.OK;
+        this.type = MessageType.OK;
     }
 
 }

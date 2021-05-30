@@ -1,7 +1,7 @@
 package it.polimi.ingsw.network.components;
 
 import it.polimi.ingsw.Server;
-import it.polimi.ingsw.network.Message;
+import it.polimi.ingsw.network.ClientMessage;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -40,12 +40,12 @@ public class Listener implements Runnable {
 
         while(true){
             //Receive
-            Message x = receive();
+            ClientMessage x = receive();
 
         }
     }
 
-    public Message receive(){
+    public ClientMessage receive(){
         String rawMessage = "";
         try {
             rawMessage = inputStream.readUTF();

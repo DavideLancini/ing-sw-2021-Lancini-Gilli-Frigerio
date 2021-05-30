@@ -1,7 +1,7 @@
 package it.polimi.ingsw.network;
 
-import it.polimi.ingsw.network.messages.MessageLeaderActivation;
-import it.polimi.ingsw.network.messages.MessageTakeResources;
+import it.polimi.ingsw.network.messages.ClientMessageLeaderActivation;
+import it.polimi.ingsw.network.messages.ClientMessageTakeResources;
 import it.polimi.ingsw.network.components.Serializer;
 import it.polimi.ingsw.network.messages.ServerMessageError;
 import org.junit.Test;
@@ -12,18 +12,18 @@ public class SerializerTest {
     @Test
     public void testSerialize(){
         Serializer serializer = new Serializer();
-        MessageLeaderActivation message = new MessageLeaderActivation(1);
+        ClientMessageLeaderActivation message = new ClientMessageLeaderActivation(1);
 
         String serialized = Serializer.serialize(message);
-        Message deserialized = (Message) Serializer.deserializeMessage(serialized);
+        ClientMessage deserialized = (ClientMessage) Serializer.deserializeMessage(serialized);
 
-        assertSame(message.position, ((MessageLeaderActivation)deserialized).position);
+        assertSame(message.position, ((ClientMessageLeaderActivation)deserialized).position);
 
-        MessageTakeResources message2 = new MessageTakeResources(false, 2);
+        ClientMessageTakeResources message2 = new ClientMessageTakeResources(false, 2);
         serialized = Serializer.serialize(message2);
-        deserialized = (Message) Serializer.deserializeMessage(serialized);
+        deserialized = (ClientMessage) Serializer.deserializeMessage(serialized);
 
-        assertSame(message2.position, ((MessageTakeResources)deserialized).position);
+        assertSame(message2.position, ((ClientMessageTakeResources)deserialized).position);
 
         ServerMessageError message3 = new ServerMessageError("Test123");
         serialized = Serializer.serialize(message3);

@@ -1,13 +1,13 @@
 package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.network.Message;
+import it.polimi.ingsw.network.ClientMessage;
 
-public class MessageTakeResources extends Message {
+public class ClientMessageTakeResources extends ClientMessage {
     private boolean isRow;
     public int position;
 
-    public MessageTakeResources(boolean isRow, int position) {
+    public ClientMessageTakeResources(boolean isRow, int position) {
         this.position = position;
         this.isRow = isRow;
         this.type = MessageType.TakeResources;

@@ -1,12 +1,12 @@
 package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.network.Message;
+import it.polimi.ingsw.network.ClientMessage;
 
-public class MessageProduce extends Message {
+public class ClientMessageProduce extends ClientMessage {
     private boolean[] activated = new boolean[6];
 
-    public MessageProduce(boolean[] activated) {
+    public ClientMessageProduce(boolean[] activated) {
         System.arraycopy(activated, 0, this.activated, 0, activated.length);
         this.type = MessageType.Produce;
     }

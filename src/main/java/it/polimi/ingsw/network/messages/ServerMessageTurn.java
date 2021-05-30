@@ -7,7 +7,7 @@ public class ServerMessageTurn extends ServerMessage {
     private boolean mainAction;
 
     public ServerMessageTurn(boolean mainAction) {
-        this.type = ServerMessageType.Turn;
+        this.type = MessageType.Turn;
         this.mainAction = mainAction;
     }
 
