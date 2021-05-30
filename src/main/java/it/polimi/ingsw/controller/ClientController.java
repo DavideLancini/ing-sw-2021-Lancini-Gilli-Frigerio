@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.*;
 import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.view.Manager;
-import it.polimi.ingsw.view.cli.CLIActionManager;
+import it.polimi.ingsw.view.CLIActionManager;
 import it.polimi.ingsw.view.gui.GUIActionManager;
 
 public class ClientController {

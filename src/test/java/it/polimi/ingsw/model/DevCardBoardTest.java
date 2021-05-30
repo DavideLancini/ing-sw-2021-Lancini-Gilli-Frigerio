@@ -2,8 +2,6 @@ package it.polimi.ingsw.model;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class DevCardBoardTest {
 
     Resource[] r1= {Resource.SHIELD,Resource.SERVANT,Resource.SHIELD,Resource.SHIELD};
@@ -21,7 +19,7 @@ public class DevCardBoardTest {
 
     DevCard[][] top={{d1,d2,d3},{d2,d3,d1},{d2,d1,d3},{d3,d2,d1}};
     @Test
-    public void DevCardBordViewTest(){
-    DevCardBoard.topView(top);
-}
+    public void DevCardBordViewTest() {
+        DevCardBoard.topView(top);
+    }
 }

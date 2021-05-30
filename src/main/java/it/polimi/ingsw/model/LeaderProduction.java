@@ -35,6 +35,10 @@ public class LeaderProduction extends LeaderCard {
         this.choice = choice;
     }
 
+    public Resource getChoice() {
+        return choice;
+    }
+
     public void leaderCardView() {
         System.out.println("══════════════╗");
         System.out.println("   [" + requirements.toString()+"+"+Level.TWO+ "]");

@@ -142,11 +142,11 @@ public class Controller {
     }
 
     private boolean valid(Resource[] subset){
-        Resource type = null;
+        Resource type = Resource.EMPTY;
         for(Resource elem : subset){
-            if(elem == null)continue;
-            if(type == null){type = elem; continue;}
-            if(type != null && !type.equals(elem))return false;
+            if(elem == Resource.EMPTY)continue;
+            if(type == Resource.EMPTY){type = elem; continue;}
+            if(type != Resource.EMPTY && !type.equals(elem))return false;
         }
         return true;
     }
@@ -189,6 +189,7 @@ public class Controller {
         ArrayList<Resource> totalinput = new ArrayList<>();
         ArrayList<Resource> totaloutput = new ArrayList<>();
         int totalfaith = 0;
+        Resource[] choice=new Resource[2];
         Production[] productions = new Production[6];
         productions[0] = pb.getDefaultProduction();
 
@@ -205,7 +206,11 @@ public class Controller {
 
         for(int i = 0; i<2 && activated[4+i]; i++){
             LeaderCard each = pb.getLeaderCard(i);
-            if(each.getIsActive() && each instanceof LeaderProduction) productions[i+4] = ((LeaderProduction) each).getProduction();
+            if(each.getIsActive() && each instanceof LeaderProduction){
+                //TODO: messagge setChoice()
+                productions[i+4] = ((LeaderProduction) each).getProduction();
+                choice[i]=((LeaderProduction) each).getChoice();
+            }
 
             else {
                 ServerMessageError message = new ServerMessageError("Invalid Production");
@@ -220,6 +225,9 @@ public class Controller {
                 if(activated[i]){
                     totalinput.addAll(Arrays.asList(productions[i].getInput()));
                     totaloutput.addAll(Arrays.asList(productions[i].getOutput()));
+                    if (i>=4){
+                        totaloutput.add(choice[i-4]);
+                    }
                     totalfaith += productions[i].getFaith();
                 }
             }

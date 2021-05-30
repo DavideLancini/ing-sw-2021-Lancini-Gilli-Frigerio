@@ -1,9 +1,9 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.view.CLIActionManager;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import static it.polimi.ingsw.view.cli.MainMenu.*;
 
 /**
  * Client App
@@ -11,16 +11,18 @@ import static it.polimi.ingsw.view.cli.MainMenu.*;
  * @author Lancini Davide
  */
 public class Client {
+
     public static Logger logger = Logger.getLogger("ClientApp");
     public static void main( String[] args ) {
         logger.setLevel(Level.FINE);
         boolean isON = true;
 
         while(isON){
-            switch (showMainMenu()){
+            switch (CLIActionManager.showMainMenu()){
                 case "1":
+                    CLIActionManager.createMatch();
                     //enter create match
-                    break;
+                    return;
                 case "2":
                     //enter join match
                     break;

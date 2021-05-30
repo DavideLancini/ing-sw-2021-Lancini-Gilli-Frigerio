@@ -1,12 +1,14 @@
-package it.polimi.ingsw.view.cli;
+package it.polimi.ingsw.view;
 
 
 import it.polimi.ingsw.controller.ClientController;
+import it.polimi.ingsw.controller.Game;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.view.Manager;
 
 
 import java.util.Collection;
+import java.util.Scanner;
 
 public class CLIActionManager extends Manager {
 
@@ -174,8 +176,83 @@ public class CLIActionManager extends Manager {
 
         return;
 
-
-
     }
+    private PlayerBoard[] pbs;
+    /**
+     * Shows all table
+     * @param game game id
+     */
+    public void ShowAll(Game game){
+
+        pbs=game.getPbs();
+        DevCard[][] TopDev=DevCardBoard.getTop(DevCardBoard.getBoard());
+        for(int i=0;i<pbs.length;i++){
+            pbs[i].playerBoardView();
+        }
+        Market.marketView();
+        DevCardBoard.topView(TopDev);
+    }
+
+    /**
+     * shows only one player
+     * @param pos selected player
+     */
+    public void ShowPlayerBoard(int pos){
+        this.pbs[pos].playerBoardView();
+    }
+
+    /**
+     * shows only market
+     */
+    public void ShowMarket(){
+        Market.marketView();
+    }
+
+    /**
+     * shows buyable only devCards
+     */
+    public void ShowDevTop(){
+        DevCard[][] TopDev=DevCardBoard.getTop(DevCardBoard.getBoard());
+        DevCardBoard.topView(TopDev);
+    }
+
+    /**
+     * MainMenu
+     * @return selected action of player/client
+     */
+    public static String showMainMenu(){
+        System.out.println( "1. Create Match" );
+        System.out.println( "2. Join Match" );
+        System.out.println( "3. View Public Match" );
+        System.out.println( "4. Create Custom Rule Set" );
+        System.out.println( "5. Settings" );
+        System.out.println( "6. Credits" );
+
+        String action;
+        action = Reader.in.nextLine();
+
+        return action;
+    }
+
+    public static boolean createMatch(){
+        int numOfPlayers=0;
+        boolean correctInput=false;
+        while (!correctInput) {
+            System.out.println("Number of players?");
+            numOfPlayers = Reader.in.nextInt();
+            if (numOfPlayers>4||numOfPlayers<1)
+                System.out.println("selected number from 1 to 4");
+            else
+                correctInput=true;
+        }
+        switch (numOfPlayers){
+            case 1:return true;
+            case 2:return true;
+            case 3:return true;
+            case 4:return true;
+        }
+        return false;
+    }
+    public static void joinMatch(){}
 
 }
