@@ -2,7 +2,6 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.view.CLIActionManager;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

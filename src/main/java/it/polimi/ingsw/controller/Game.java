@@ -21,10 +21,11 @@ public class Game {
         //singlePlayer
     }
     private void TwoPlayers(PlayerBoard[] playerBoards){
-        while (true) {//start turn player1
+        while (true) {
+            //start turn player1
             //wait endturn
             //check endgame
-            //start turn player1
+            //start turn player2
             //wait endturn
             //check endgame
         }
