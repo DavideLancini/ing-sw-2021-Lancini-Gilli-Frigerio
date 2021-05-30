@@ -7,8 +7,11 @@ import it.polimi.ingsw.network.components.Sender;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientNetInterface {
+    private Logger logger = Logger.getLogger("CNILogger");
+
     private String serverAddress;
     private int serverPort;
     private int localPort;

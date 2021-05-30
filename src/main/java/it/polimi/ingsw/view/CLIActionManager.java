@@ -4,6 +4,7 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.controller.Game;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.view.Manager;
 
 
@@ -25,6 +26,35 @@ public class CLIActionManager extends Manager {
         catch(Exception e) {throw new Exception("");}
     }
 
+    public static ClientNetInterface Connect() {
+        ClientNetInterface net = new ClientNetInterface();
+        String serverAddress;
+        int serverPort;
+        int localPort;
+
+        System.out.println( "serverAddress: " );
+        serverAddress=Reader.in.nextLine();
+
+        System.out.println( "serverPort: " );
+        try {
+            serverPort= parseToInt(Reader.in.nextLine());
+        } catch (Exception e) {
+            return null;
+        }
+
+        System.out.println( "localPort: " );
+        try {
+            localPort= parseToInt(Reader.in.nextLine());
+        } catch (Exception e) {
+            return null;
+        }
+
+        net.setParameters(serverAddress, serverPort, localPort);
+        net.connect();
+
+        return net;
+    }
+
     public void DisplayError(String error){
         System.out.println("Server reports an error: "+error);
         return;
@@ -42,7 +72,19 @@ public class CLIActionManager extends Manager {
         ClientController.tryDepot(newresources);
     }
 
+    public static boolean Online(){
+        while(true){
+            System.out.println( "Play Online (y/n, default n):" );
+            switch(Reader.in.nextLine()){
+                case "y":
+                    return true;
+                default:
+                    return false;
+            }
 
+        }
+
+    }
 
     public void Turn(boolean mainActionDone){
         boolean over = false;
@@ -234,7 +276,7 @@ public class CLIActionManager extends Manager {
         return action;
     }
 
-    public static boolean createMatch(){
+    public static boolean createMatch(ClientNetInterface net){
         int numOfPlayers=0;
         boolean correctInput=false;
         while (!correctInput) {
@@ -252,6 +294,12 @@ public class CLIActionManager extends Manager {
             case 4:return true;
         }
         return false;
+
+
+        //TODO: create MessageCreateGame
+        //net.send (message)
+        //TODO: entra nella funzione InGame che da ora pilota il client
+
     }
     public static void joinMatch(){}
 

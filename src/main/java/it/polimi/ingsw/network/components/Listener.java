@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Listener Component
@@ -29,7 +30,7 @@ public class Listener implements Runnable {
             listenerSocket = fatherSocket.accept();
         } catch (IOException e) {
             Server.logger.log(Level.WARNING,"serverListenerSocket>run> This Thread cannot accept connections");
-            // TODO restart thread HERE
+            // TODO: super failed connection
         }
 
         try {
