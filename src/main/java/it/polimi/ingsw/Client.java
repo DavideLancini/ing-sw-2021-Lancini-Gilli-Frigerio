@@ -18,9 +18,8 @@ public class Client {
         logger.setLevel(Level.FINE);
         boolean isON = true;
         if(CLIActionManager.Online()){
+            ClientNetInterface net = CLIActionManager.Connect();
             while(isON){
-                ClientNetInterface net = CLIActionManager.Connect();
-
                 switch (CLIActionManager.showMainMenu()){
                     case "1":
                         CLIActionManager.createMatch(net);
