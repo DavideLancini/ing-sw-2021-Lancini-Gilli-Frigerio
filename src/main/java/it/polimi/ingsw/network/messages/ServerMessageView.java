@@ -6,7 +6,7 @@ public class ServerMessageView extends ServerMessage {
     public String view;
 
     public ServerMessageView(String view) {
-        this.type = ServerMessageType.View;
+        this.type = MessageType.View;
         this.view = view;
     }
 

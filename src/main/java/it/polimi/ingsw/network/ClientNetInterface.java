@@ -53,21 +53,21 @@ public class ClientNetInterface {
             //start listener
             this.listener.run();
             //TODO: create an actual login message
-                Message x = null;
+                ClientMessage x = null;
             //send login request
             this.sender.send(x);
             //wait for response
-            Message y = listener.receive();
+            ClientMessage y = listener.receive();
             //TODO: from Response extract token
         }
         return isLogged;
     }
 
-    public void send(Message message){
+    public void send(ClientMessage message){
         sender.send(message);
     }
 
-    public Message receive(){
+    public ClientMessage receive(){
         return listener.receive();
     }
 }

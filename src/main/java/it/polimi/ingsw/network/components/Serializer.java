@@ -1,10 +1,8 @@
 package it.polimi.ingsw.network.components;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import it.polimi.ingsw.network.Message;
+import it.polimi.ingsw.network.ClientMessage;
 import it.polimi.ingsw.network.ServerMessage;
-import it.polimi.ingsw.network.messages.MessageJsonDeserializer;
-import it.polimi.ingsw.network.messages.ServerMessageJsonDeserializer;
 
 public class Serializer {
     public static String serialize(Object o){
@@ -12,9 +10,9 @@ public class Serializer {
         return gson.toJson(o);
     }
 
-    public static Message deserializeMessage(String s){
-        Gson gson = new GsonBuilder().registerTypeAdapter(Message.class, new MessageJsonDeserializer()).create();
-        return gson.fromJson(s, Message.class);
+    public static ClientMessage deserializeMessage(String s){
+        Gson gson = new GsonBuilder().registerTypeAdapter(ClientMessage.class, new ClientMessageJsonDeserializer()).create();
+        return gson.fromJson(s, ClientMessage.class);
     }
 
     public static ServerMessage deserializeServerMessage(String s){

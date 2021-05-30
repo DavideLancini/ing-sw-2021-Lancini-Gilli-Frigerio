@@ -28,7 +28,7 @@ public class ClientController {
             Message message = net.receive();
             //TODO: check if there is actually a message, otherwise wait
 
-            switch(((ServerMessage)message).getType()){
+            switch(message.getType()){
                 case Turn:
                     manager.Turn(((ServerMessageTurn)message).getAction());
                     break;
@@ -59,35 +59,35 @@ public class ClientController {
 
 
     public void endTurn(){
-        net.send(new MessageEndTurn());
+        net.send(new ClientMessageEndTurn());
     }
 
     public void takeResources(boolean isRow, int position){
-        net.send(new MessageTakeResources(isRow, position));
+        net.send(new ClientMessageTakeResources(isRow, position));
 
     }
     public void buyDevCard(Level level, CardColor color, int column){
-        net.send(new MessageBuyDevCard(level, color, column));
+        net.send(new ClientMessageBuyDevCard(level, color, column));
 
     }
     public void produce(boolean[] activated){
-        net.send(new MessageProduce(activated));
+        net.send(new ClientMessageProduce(activated));
 
     }
     public void activateLeader(int position){
-        net.send(new MessageLeaderActivation(position));
+        net.send(new ClientMessageLeaderActivation(position));
 
     }
     public void sellLeader(int position){
-        net.send(new MessageSellLeader(position));
+        net.send(new ClientMessageSellLeader(position));
 
     }
     public void setResource(Resource resource, int position){
-        net.send(new MessageSetResource(resource, position));
+        net.send(new ClientMessageSetResource(resource, position));
 
     }
     public void tryDepot(Resource[] resource){
-        net.send(new MessageTryDepotConfiguration(resource));
+        net.send(new ClientMessageTryDepotConfiguration(resource));
 
     }
 

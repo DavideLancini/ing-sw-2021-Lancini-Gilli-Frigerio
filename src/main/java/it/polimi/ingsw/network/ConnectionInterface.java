@@ -15,13 +15,13 @@ public class ConnectionInterface{
         this.listener = new Listener(fatherSocket);
     }
 
-    public boolean send(Message message){
+    public boolean send(ClientMessage message){
         sender.send(message);
         //TODO: return actual confirmation
         return true;
     }
 
-    public Message receive(){
+    public ClientMessage receive(){
         return listener.receive();
     }
 }

@@ -2,15 +2,15 @@ package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.network.Message;
+import it.polimi.ingsw.network.ClientMessage;
 
-public class MessageSetResource extends Message {
+public class ClientMessageSetResource extends ClientMessage {
     private Resource resource;
     private int position;
 
     //0 to 1 for defaultProduciton input, 2 for output, 3 to 4 for LeaderProduction choice
 
-    public MessageSetResource(Resource resource, int position) {
+    public ClientMessageSetResource(Resource resource, int position) {
         this.resource = resource;
         this.position = position;
         this.type = MessageType.SetResource;
