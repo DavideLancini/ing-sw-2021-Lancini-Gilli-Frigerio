@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Listener Component
@@ -37,12 +36,6 @@ public class Listener implements Runnable {
             inputStream = new DataInputStream(new BufferedInputStream(listenerSocket.getInputStream()));
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        while(true){
-            //Receive
-            ClientMessage x = receive();
-
         }
     }
 

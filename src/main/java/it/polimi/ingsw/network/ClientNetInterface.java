@@ -34,9 +34,16 @@ public class ClientNetInterface {
         if(!isConnected & !isLogged){
             //create sender
             this.sender = new Sender(this.serverAddress, this.serverPort);
-            Client.logger.log(Level.INFO,"class>method> Sender created on:" + this.serverAddress + this.serverPort);
+            Client.logger.log(Level.INFO,"class>method> Sender created on:" + this.serverAddress + " and port: "+ this.serverPort);
             //activate sender
             sender.run();
+            try {
+                father = new ServerSocket(localPort);
+            } catch (IOException e) {
+                //TODO: throw error
+            }
+            listener = new Listener(father);
+
         }else{
             //TODO throw warning (sender already connected)
         }

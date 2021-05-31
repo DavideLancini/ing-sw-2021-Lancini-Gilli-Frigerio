@@ -2,14 +2,13 @@ package it.polimi.ingsw.view;
 
 
 import it.polimi.ingsw.controller.ClientController;
-import it.polimi.ingsw.controller.Game;
-import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.CardColor;
+import it.polimi.ingsw.model.Level;
+import it.polimi.ingsw.model.Reader;
+import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.ClientNetInterface;
-import it.polimi.ingsw.view.Manager;
-
 
 import java.util.Collection;
-import java.util.Scanner;
 
 public class CLIActionManager extends Manager {
 
