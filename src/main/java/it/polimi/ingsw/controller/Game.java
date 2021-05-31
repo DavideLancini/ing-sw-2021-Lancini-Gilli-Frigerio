@@ -7,75 +7,118 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class Game {
-    public PlayerBoard[] pbs;
+    public Player[] players;
     public DevCardBoard devCardBoard;
     public LeaderCardDeck leaderCardDeck;
     public Market market;
-    public int i=0;
+    private boolean endGame=false;
     /**
      * Game constructor
-     * @param playerBoards all the players playing
+     * @param players
      */
-    public Game(PlayerBoard[] playerBoards) throws FileNotFoundException, IllegalStateException {
-        StartGame();
-        setPbs(playerBoards);
-        switch (playerBoards.length ) {
-            case 1: SinglePlayer(playerBoards);
-            case 2: TwoPlayers(playerBoards);
-            case 3: ThreePlayers(playerBoards);
-            case 4: FourPlayers(playerBoards);
+    public Game(Player[] players) throws Exception {
+        startGame();
+        setPlayers(players);
+        switch (players.length) {
+            case 1:
+                System.out.println("Starting SinglePlayer...");
+                singlePlayer(players);
+                break;
+            case 2:
+                System.out.println("Starting TwoPlayers...");
+                twoPlayers(players);
+                break;
+            case 3:
+                System.out.println("Starting ThreePlayers...");
+                threePlayers(players);
+                break;
+            case 4:
+                System.out.println("Starting FourPlayers...");
+                fourPlayers(players);
+                break;
+            default:
+                System.out.println("not in range");
+                break;
         }
     }
-    private void SinglePlayer(PlayerBoard[] playerBoards){
-        i++;
-        //singlePlayer
-    }
-    private void TwoPlayers(PlayerBoard[] playerBoards) throws FileNotFoundException {
-        //start turn player1
-        //wait endturn
-        //check endgame
-        //start turn player2
-        //wait endturn
-        //check endgame
-    }
-    private void ThreePlayers(PlayerBoard[] playerBoards){
-        //start turn player1
-        //wait endturn
-        //check endgame
-        //start turn player2
-        //wait endturn
-        //check endgame
-        //start turn player3
-        //wait endturn
-        //check endgame
+
+    /**
+     * starts single player Match
+     * @param players id of player
+     */
+    private void singlePlayer(Player[] players){
+        while (!endGame) {
+            endGame = players[0].turn();
+        }
     }
 
-    private void FourPlayers(PlayerBoard[] playerBoards){
-        //start turn player1
-        //wait endturn
-        //check endgame
-        //start turn player2
-        //wait endturn
-        //check endgame
-        //start turn player3
-        //wait endturn
-        //check endgame
-        //start turn player4
-        //wait endturn
-        //check endgame
+    /**
+     * starts a two player game
+     * @param players id of players
+     * @throws Exception deposit errors
+     */
+    private void twoPlayers(Player[] players) throws Exception {
+        players[1].secondPlayer();
+        int j=0;
+        while (!endGame){
+        endGame=players[j].turn();
+        //start turn player
+        // wait endTurn
+        //check endGame
+        if(j==1)
+            j=0;
+        else
+            j++;
+        }
+
+    }
+    /**
+     * starts a three player game
+     * @param players id of players
+     * @throws Exception deposit errors
+     */
+    private void threePlayers(Player[] players) throws Exception {
+        players[1].secondPlayer();
+        players[2].thirdPlayer();
+        int j=0;
+        while (!endGame){
+        endGame=players[j].turn();
+        if(j==2)
+            j=0;
+        else
+            j++;
+        }
+    }
+    /**
+     * starts a four player game
+     * @param players id of players
+     * @throws Exception deposit errors
+     */
+    private void fourPlayers(Player[] players) throws Exception {
+        players[1].secondPlayer();
+        players[2].thirdPlayer();
+        players[3].fourthPlayer();
+        int j = 0;
+        while (!endGame){
+        endGame=players[j].turn();
+        if (j== 3)
+            j = 0;
+        else
+            j++;
+        }
     }
 
-    public PlayerBoard[] getPbs() {
-        return pbs;
+    public Player[] getPlayers() {
+        return players;
     }
 
-    public void setPbs(PlayerBoard[] pbs) {
-        this.pbs = pbs;
+    public void setPlayers(Player[] players) {
+        this.players= players;
     }
     /**
      * StartGame constructor
      */
-    private void StartGame(/*players*/) throws FileNotFoundException {
+    private void startGame(/*players*/) throws FileNotFoundException {
         createDevCardBoard();
         createLeaderDeck();
         createMarket();

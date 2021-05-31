@@ -14,7 +14,6 @@ public class ShowAll {
      */
     public  ShowAll(Game game){
 
-        pbs=game.getPbs();
         DevCard[][] TopDev= DevCardBoard.getTop(DevCardBoard.getBoard());
         for(int i=0;i<pbs.length;i++){
             pbs[i].playerBoardView();

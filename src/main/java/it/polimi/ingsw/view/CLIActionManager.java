@@ -74,9 +74,9 @@ public class CLIActionManager extends Manager {
 
     public static boolean Online(){
         while(true){
-            System.out.println( "Play Online (y/n, default n):" );
+            System.out.println( "1.[online]\n2.[local]");
             switch(Reader.in.nextLine()){
-                case "y":
+                case "1":
                     return true;
                 default:
                     return false;

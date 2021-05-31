@@ -22,7 +22,7 @@ public class Client {
                 switch (CLIActionManager.showMainMenu()){
                     case "1":
                         CLIActionManager.createMatch(net);
-                        return;
+                        break;
                     case "2":
                         //enter join match
                         break;
