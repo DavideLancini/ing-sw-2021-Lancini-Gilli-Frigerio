@@ -9,7 +9,7 @@ import static it.polimi.ingsw.model.Market.*;
 import static org.junit.Assert.*;
 
 public class TestMarket {
-
+    Market market = new Market();
     Marble[][] testMarketBoard = {
             {Marble.WHITE, Marble.BLUE, Marble.GRAY, Marble.YELLOW},
             {Marble.PURPLE, Marble.RED, Marble.WHITE, Marble.BLUE},
@@ -21,8 +21,8 @@ public class TestMarket {
     @Test
     public void trySetSideMarbleWithCorrectValue() {
 
-        setSideMarble(testSideMarble);
-        Marble returnedSideMarble = Market.getSideMarble();
+        market.setSideMarble(testSideMarble);
+        Marble returnedSideMarble = market.getSideMarble();
 
         assertSame(testSideMarble, returnedSideMarble);
     }
@@ -30,8 +30,8 @@ public class TestMarket {
     @Before
     @Test
     public void trySetMarketBoardWithCorrectValues() {
-        setMarketBoard(testMarketBoard);
-        Marble[][] returnedMarketBoard = Market.getMarketBoard();
+        market.setMarketBoard(testMarketBoard);
+        Marble[][] returnedMarketBoard = market.getMarketBoard();
 
         assertSame(testMarketBoard, returnedMarketBoard);
     }
@@ -43,15 +43,15 @@ public class TestMarket {
         Marble[] expectedRow = new Marble[]{Marble.WHITE, Marble.BLUE, Marble.GRAY, Marble.YELLOW};
         Marble[] returnedCol;
         Marble[] expectedCol = new Marble[]{Marble.YELLOW, Marble.WHITE, Marble.PURPLE};
-        marketView();
-        returnedRow = Market.takeResources(true, 1);
+        market.marketView();
+        returnedRow = market.takeResources(true, 1);
         assertArrayEquals(expectedRow, returnedRow);
-        assertSame(Marble.WHITE, Market.getSideMarble());
-        marketView();
-        returnedCol = Market.takeResources(false, 3);
+        assertSame(Marble.WHITE, market.getSideMarble());
+        market.marketView();
+        returnedCol = market.takeResources(false, 3);
         assertArrayEquals(expectedCol, returnedCol);
-        marketView();
-        assertSame(Marble.YELLOW, Market.getSideMarble());
+        market.marketView();
+        assertSame(Marble.YELLOW, market.getSideMarble());
 
     }
 

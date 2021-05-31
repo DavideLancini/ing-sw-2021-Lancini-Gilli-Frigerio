@@ -6,6 +6,8 @@ import it.polimi.ingsw.model.CardColor;
 import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Reader;
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.network.ClientMessage;
+import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.network.ClientNetInterface;
 
 import java.util.Collection;
@@ -85,10 +87,9 @@ public class CLIActionManager extends Manager {
 
     }
 
-    public void Turn(boolean mainActionDone){
-        boolean over = false;
+    public ClientMessage Turn(boolean mainActionDone){
 
-        while (!over){
+        while (true){
 
             System.out.println( "1. Take resources from market" );
             System.out.println( "2. Buy Development card");
@@ -113,11 +114,7 @@ public class CLIActionManager extends Manager {
                         boolean isRow = parseToInt(Reader.in.nextLine()) == 1 ? false : true;
                         System.out.println("Enter number of "+(isRow ? "row" : "column")+":");
                         int position = parseToInt(Reader.in.nextLine());
-                        ClientController.takeResources(isRow, position);
-
-                        over = true;
-
-                        break;
+                        return new ClientMessageTakeResources(isRow, position);
 
                     case 2:
 
@@ -136,11 +133,8 @@ public class CLIActionManager extends Manager {
                         System.out.println("Column in which to put it: ");
                         int column = parseToInt(Reader.in.nextLine());
 
-                        ClientController.buyDevCard(level, color, column);
+                        return new ClientMessageBuyDevCard(level, color, column);
 
-                        over = true;
-
-                        break;
 
                     case 3:
 
@@ -164,28 +158,19 @@ public class CLIActionManager extends Manager {
                             activated[i] = parseToInt(Reader.in.nextLine()) == 1 ? true : false;
                         }
 
-                        ClientController.produce(activated);
+                        return new ClientMessageProduce(activated);
 
-                        over = true;
-
-                        break;
 
                     case 4:
                         System.out.println("Enter number of Leader Card to be activated");
                         int pos = parseToInt(Reader.in.nextLine());
-                        ClientController.activateLeader(pos);
+                        return new ClientMessageLeaderActivation(pos);
 
-                        over = true;
-
-                        break;
                     case 5:
                         System.out.println("Enter number of Leader Card to be sold");
                         int number = parseToInt(Reader.in.nextLine());
-                        ClientController.sellLeader(number);
+                        return new ClientMessageSellLeader(number);
 
-                        over = true;
-
-                        break;
                     case 6:
                         System.out.println("Enter number of resource to be set. 0 to 1 for defaultProduciton input, 2 for output, 3 to 4 for LeaderProduction choice");
                         int res = parseToInt(Reader.in.nextLine());
@@ -194,15 +179,11 @@ public class CLIActionManager extends Manager {
                         for (int i = 0; i < Resource.values().length -2; i++){System.out.println(""+i+". "+Resource.values()[i].toString());};
                         Resource resource = Resource.values()[parseToInt(Reader.in.nextLine())];
 
-                        ClientController.setResource(resource, res);
+                        return new ClientMessageSetResource(resource, res);
 
-                        over = true;
-
-                        break;
                     case 7:
-                        ClientController.endTurn();
-                        over = true;
-                        break;
+                        return new ClientMessageEndTurn();
+
                     default:
                         break;
                 }
@@ -214,8 +195,6 @@ public class CLIActionManager extends Manager {
                 continue;
             }
         }
-
-        return;
 
     }
 

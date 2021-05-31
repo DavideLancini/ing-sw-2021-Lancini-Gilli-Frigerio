@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.network.messages.EndTurnException;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -17,96 +18,39 @@ public class Game {
      * @param players
      */
     public Game(Player[] players) throws Exception {
-        startGame();
+        setupGame();
         setPlayers(players);
-        switch (players.length) {
-            case 1:
-                System.out.println("Starting SinglePlayer...");
-                singlePlayer(players);
-                break;
-            case 2:
-                System.out.println("Starting TwoPlayers...");
-                twoPlayers(players);
-                break;
-            case 3:
-                System.out.println("Starting ThreePlayers...");
-                threePlayers(players);
-                break;
-            case 4:
-                System.out.println("Starting FourPlayers...");
-                fourPlayers(players);
-                break;
-            default:
-                System.out.println("not in range");
-                break;
-        }
+        if(players.length>=2)players[1].secondPlayer();
+        if(players.length>=3)players[2].thirdPlayer();
+        if(players.length>=4)players[3].fourthPlayer();
+        if(players.length>=5)throw new Exception("Number of players out of range");
+        System.out.println("Starting Game with "+players.length+" players...");
+        startGame(players);
     }
 
-    /**
-     * starts single player Match
-     * @param players id of player
-     */
-    private void singlePlayer(Player[] players){
-        while (!endGame) {
-            endGame = players[0].turn();
-        }
-    }
 
-    /**
-     * starts a two player game
-     * @param players id of players
-     * @throws Exception deposit errors
-     */
-    private void twoPlayers(Player[] players) throws Exception {
-        players[1].secondPlayer();
-        int j=0;
-        while (!endGame){
-        endGame=players[j].turn();
-        //start turn player
-        // wait endTurn
-        //check endGame
-        if(j==1)
-            j=0;
-        else
-            j++;
-        }
-
-    }
-    /**
-     * starts a three player game
-     * @param players id of players
-     * @throws Exception deposit errors
-     */
-    private void threePlayers(Player[] players) throws Exception {
-        players[1].secondPlayer();
-        players[2].thirdPlayer();
-        int j=0;
-        while (!endGame){
-        endGame=players[j].turn();
-        if(j==2)
-            j=0;
-        else
-            j++;
-        }
-    }
     /**
      * starts a four player game
      * @param players id of players
-     * @throws Exception deposit errors
      */
-    private void fourPlayers(Player[] players) throws Exception {
-        players[1].secondPlayer();
-        players[2].thirdPlayer();
-        players[3].fourthPlayer();
-        int j = 0;
-        while (!endGame){
-        endGame=players[j].turn();
-        if (j== 3)
-            j = 0;
-        else
-            j++;
+    private void startGame(Player[] players) {
+
+        do {
+            for(Player each : players) {
+                boolean done = false;
+                boolean action = false;
+                while(!done){
+                    try {
+                        action = each.turn(false);
+                    }
+                    catch(EndTurnException e){done = true;}
+                }
+            }
         }
+        while (!checkEndGame());
     }
+
+
 
     public Player[] getPlayers() {
         return players;
@@ -115,10 +59,17 @@ public class Game {
     public void setPlayers(Player[] players) {
         this.players= players;
     }
+
+    private boolean checkEndGame(){
+        //TODO
+        return false;
+    }
+
+
     /**
      * StartGame constructor
      */
-    private void startGame(/*players*/) throws FileNotFoundException {
+    private void setupGame(/*players*/) throws FileNotFoundException {
         createDevCardBoard();
         createLeaderDeck();
         createMarket();
@@ -129,7 +80,7 @@ public class Game {
      */
     private void createDevCardBoard() throws FileNotFoundException {
         DevCardDeck[][] board= new Gson().fromJson(new FileReader("src/main/resources/DevCardBOARD.json"),DevCardDeck[][].class);
-        devCardBoard = new DevCardBoard(board);
+        this.devCardBoard = new DevCardBoard(board);
         //DevCardBoard.topView(DevCardBoard.getTop(DevCardBoard.getBoard()));
     }
 
@@ -147,13 +98,13 @@ public class Game {
         System.arraycopy(leaderProductionDeck,0,deck,4,leaderProductionDeck.length);
         System.arraycopy(leaderSaleDeck,0,deck,8,leaderSaleDeck.length);
         System.arraycopy(leaderDepotDeck,0,deck,12,leaderDepotDeck.length);
-        leaderCardDeck = new LeaderCardDeck(deck);
+        this.leaderCardDeck = new LeaderCardDeck(deck);
         // for (LeaderCard leaderCard : deck){leaderCard.leaderCardView();}
     }
 
     private void createMarket() throws FileNotFoundException {
         Marble[] marbles= new Gson().fromJson(new FileReader("src/main/resources/Marbles.json"),Marble[].class);
-        market = new Market(marbles);
+        this.market = new Market(marbles);
         //Market.marketView();
     }
 

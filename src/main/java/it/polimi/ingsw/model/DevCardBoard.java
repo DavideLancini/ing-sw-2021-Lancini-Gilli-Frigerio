@@ -25,21 +25,21 @@ public class DevCardBoard {
         int i=0;
 
         for(DevCardDeck[] row : board){
-            System.arraycopy(row, 0, DevCardBoard.board[i], 0, row.length);
+            System.arraycopy(row, 0, this.board[i], 0, row.length);
             i++;
         }
 
     }
 
-    public static DevCardDeck[][] getBoard() {
-        return board;
+    public DevCardDeck[][] getBoard() {
+        return this.board;
     }
 
     /**
      * getTop
      * @return view of 12 DevCards you could buy
      */
-    public static DevCard[][] getTop(DevCardDeck[][] board){
+    public DevCard[][] getTop(){
         DevCard[][] top = {
                 {null, null, null},
                 {null, null, null},
@@ -49,14 +49,15 @@ public class DevCardBoard {
 
         for(int i=0;i<4;i++){
             for(int j=0;j<3;j++){
-                top[i][j] = board[i][j].peek();
+                top[i][j] = this.board[i][j].peek();
             }
         }
 
         return top;
     }
 
-    public static void topView(DevCard[][] top) {
+    public void topView() {
+        DevCard[][] top = this.getTop();
         System.out.println("══════════════╗");
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 3; j++) {

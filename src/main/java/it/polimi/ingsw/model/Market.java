@@ -11,8 +11,8 @@ import java.util.Collections;
  */
 public class Market {
 
-    private static Marble sideMarble;
-    private static Marble[][] marketBoard = new Marble[3][4] ;
+    private Marble sideMarble;
+    private Marble[][] marketBoard = new Marble[3][4] ;
 
 
     /**
@@ -33,35 +33,35 @@ public class Market {
        int k=0;
            for(int i=0;i<3;i++){
             for (int j=0;j<4;j++){
-                marketBoard[i][j]=marbles[k];
+                this.marketBoard[i][j]=marbles[k];
                 k++;
             }
         }
-       sideMarble=marbles[12];
+       this.sideMarble=marbles[12];
     }
 
     /**
      * getSideMarble
       * @return Marble outside the current marketBoard
      */
-    public static Marble getSideMarble() {
-        return sideMarble;
+    public Marble getSideMarble() {
+        return this.sideMarble;
     }
 
     /**
      * setSideMarble
      * @param  sideMarble selected marble type
      */
-    public static void setSideMarble(Marble sideMarble) {
-       Market.sideMarble = sideMarble;
+    public void setSideMarble(Marble sideMarble) {
+       this.sideMarble = sideMarble;
     }
 
     /**
      * getMarketBoard
      * @return the current market board
      */
-    public static Marble[][] getMarketBoard() {
-        return marketBoard;
+    public Marble[][] getMarketBoard() {
+        return this.marketBoard;
     }
 
     /**
@@ -69,8 +69,8 @@ public class Market {
      * set the starting market, use only on game start
      * @param inputMarketBoard initial marketBoard
      */
-    public static void setMarketBoard(Marble[][] inputMarketBoard) {
-        marketBoard = inputMarketBoard;
+    public void setMarketBoard(Marble[][] inputMarketBoard) {
+        this.marketBoard = inputMarketBoard;
     }
 
     /**
@@ -81,7 +81,7 @@ public class Market {
      * @return 3(column)/4(row) marbles selected
      * @throws Exception if position is out of marketBroad (position<0 or >2 for row or >3 for column)
      */
-    public static Marble[] takeResources(boolean isRow, int position) throws Exception{
+    public Marble[] takeResources(boolean isRow, int position) throws Exception{
         Marble[] takenRow=new Marble[4];
         Marble[] takenCol=new Marble[3];
         Marble oldSideMarble= sideMarble;
@@ -117,16 +117,14 @@ public class Market {
      * marketView
      * CLI output
      */
-    public static void marketView(){
+    public void marketView(){
         System.out.println(Marble.RESET+"market:");
-        System.out.println("["+sideMarble+Marble.RESET+"]");
+        System.out.println("["+this.sideMarble+Marble.RESET+"]");
         for(int i=0;i<3;i++){
             for(int j=0;j<4;j++){
-                if (j<3)
-                System.out.print(marketBoard[i][j]);
-                else
-                System.out.println(marketBoard[i][j]);
+                System.out.print(this.marketBoard[i][j]);
             }
+            System.out.println("");
         }
     }
 }

@@ -7,41 +7,39 @@ import it.polimi.ingsw.model.Market;
 import it.polimi.ingsw.model.PlayerBoard;
 
 public class ShowAll {
-    private PlayerBoard[] pbs;
+
     /**
      * Shows all table
      * @param game game id
      */
-    public  ShowAll(Game game){
+    public static void ShowAll(Game game){
 
-        DevCard[][] TopDev= DevCardBoard.getTop(DevCardBoard.getBoard());
-        for(int i=0;i<pbs.length;i++){
-            pbs[i].playerBoardView();
+        for(int i=0;i<game.players.length;i++){
+            ShowPlayerBoard(i, game);
         }
-        Market.marketView();
-        DevCardBoard.topView(TopDev);
+        ShowMarket(game);
+        ShowDevTop(game);
     }
 
     /**
      * shows only one player
      * @param pos selected player
      */
-    public void ShowPlayerBoard(int pos){
-        this.pbs[pos].playerBoardView();
+    public static void ShowPlayerBoard(int pos, Game game){
+        game.players[pos].playerBoard.playerBoardView();
     }
 
     /**
      * shows only market
      */
-    public void ShowMarket(){
-        Market.marketView();
+    public static void ShowMarket(Game game){
+        game.market.marketView();
     }
 
     /**
      * shows buyable only devCards
      */
-    public void ShowDevTop(){
-        DevCard[][] TopDev=DevCardBoard.getTop(DevCardBoard.getBoard());
-        DevCardBoard.topView(TopDev);
+    public static void ShowDevTop(Game game){
+        game.devCardBoard.topView();
     }
 }

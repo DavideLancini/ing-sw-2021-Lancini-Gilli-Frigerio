@@ -12,6 +12,13 @@ public class DevCardDeck {
 
     private Stack<DevCard> deck;
 
+    public DevCardDeck (DevCard[] cards){
+        this.deck = new Stack<DevCard>();
+        for(DevCard each : cards){
+            this.deck.push(each);
+        }
+    }
+
     public Stack<DevCard> getDeck() {
         return deck;
     }

@@ -17,9 +17,15 @@ public class DevCardBoardTest {
     DevCard d2= new DevCard(Level.ONE,CardColor.GREEN,9,r3,p2);
     DevCard d3= new DevCard(Level.THREE,CardColor.YELLOW,9,r4,p3);
 
-    DevCard[][] top={{d1,d2,d3},{d2,d3,d1},{d2,d1,d3},{d3,d2,d1}};
+    DevCardDeck[][] board={
+            {new DevCardDeck(new DevCard[]{d1,d2,d3}), new DevCardDeck(new DevCard[]{d2,d3,d1}), new DevCardDeck(new DevCard[]{d3,d2,d1})},
+            {new DevCardDeck(new DevCard[]{d1,d2,d3}), new DevCardDeck(new DevCard[]{d2,d3,d1}), new DevCardDeck(new DevCard[]{d2,d1,d3})},
+            {new DevCardDeck(new DevCard[]{d2,d3,d1}), new DevCardDeck(new DevCard[]{d2,d1,d3}), new DevCardDeck(new DevCard[]{d3,d2,d1})},
+            {new DevCardDeck(new DevCard[]{d1,d2,d3}), new DevCardDeck(new DevCard[]{d2,d1,d3}), new DevCardDeck(new DevCard[]{d3,d2,d1})}
+    };
+    DevCardBoard dcb = new DevCardBoard(board);
     @Test
     public void DevCardBordViewTest() {
-        DevCardBoard.topView(top);
+        dcb.topView();
     }
 }

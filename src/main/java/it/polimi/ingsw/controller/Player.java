@@ -2,23 +2,31 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.PlayerBoard;
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.network.messages.EndTurnException;
 
 public class Player {
     public PlayerBoard playerBoard;
     public String playerId;
+    private Controller controller;
 
     public void addResource(int numOfResource) throws Exception {
-        //ask resource to add
+        //TODO: ask resource to add
         int i=0;
         Resource[] resources = new Resource[numOfResource];
-        for(Resource resource : resources)
-        playerBoard.getDepot().deposit(resource,i);
-        i++;
+        for(Resource resource : resources) {
+            playerBoard.getDepot().deposit(resource, i);
+            i++;
+        }
     }
 
-    public boolean turn() {
+    public boolean turn(boolean mainAction) throws EndTurnException {
+        boolean action = false;
 
-        return false;
+        //net.send(new ServerMessageTurn(mainAction));
+        //wait for response
+        //action = message.resolve(controller)
+
+        return action;
     }
 
     public void secondPlayer() throws Exception {

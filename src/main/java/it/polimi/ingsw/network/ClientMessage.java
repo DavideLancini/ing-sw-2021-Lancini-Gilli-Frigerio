@@ -11,6 +11,6 @@ public abstract class ClientMessage extends Message{
      * @param controller
      * @return true if an action has been correctly performed
      */
-    public boolean resolve(Controller controller){return false;}
+    public boolean resolve(Controller controller) throws Exception {return false;}
 }
 

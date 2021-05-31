@@ -1,12 +1,15 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.network.ClientMessage;
 
 import java.util.Collection;
 
 public abstract class Manager {
 
-    public void Turn(boolean action){}
+    public ClientMessage Turn(boolean action){
+        return null;
+    }
 
     public void View(String view){}
 
