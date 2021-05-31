@@ -26,7 +26,9 @@ public class Player {
         //wait for response
         //action = message.resolve(controller)
 
-        return action;
+        //temp
+        throw new EndTurnException();
+        //return /*action*/ true;
     }
 
     public void secondPlayer() throws Exception {

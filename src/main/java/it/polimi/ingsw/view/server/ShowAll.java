@@ -14,7 +14,7 @@ public class ShowAll {
      */
     public static void ShowAll(Game game){
 
-        for(int i=0;i<game.players.length;i++){
+        for(int i=0;i<game.getPlayers().length;i++){
             ShowPlayerBoard(i, game);
         }
         ShowMarket(game);
@@ -26,7 +26,7 @@ public class ShowAll {
      * @param pos selected player
      */
     public static void ShowPlayerBoard(int pos, Game game){
-        game.players[pos].playerBoard.playerBoardView();
+        game.getPlayers()[pos].playerBoard.playerBoardView();
     }
 
     /**

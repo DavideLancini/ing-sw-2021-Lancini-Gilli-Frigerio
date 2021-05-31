@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class Game {
-    public Player[] players;
+    private Player[] players;
     public DevCardBoard devCardBoard;
     public LeaderCardDeck leaderCardDeck;
     public Market market;
@@ -53,7 +53,7 @@ public class Game {
 
 
     public Player[] getPlayers() {
-        return players;
+        return this.players;
     }
 
     public void setPlayers(Player[] players) {
@@ -62,7 +62,7 @@ public class Game {
 
     private boolean checkEndGame(){
         //TODO
-        return false;
+        return true;
     }
 
 
