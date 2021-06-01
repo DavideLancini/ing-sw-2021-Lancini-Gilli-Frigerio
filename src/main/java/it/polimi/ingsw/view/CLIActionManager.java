@@ -29,12 +29,12 @@ public class CLIActionManager extends Manager {
     }
 
     public static ClientNetInterface Connect() {
-        ClientNetInterface net = null;
+        ClientNetInterface net = new ClientNetInterface();
         String serverAddress;
         int serverPort;
         int localPort;
 
-        while(net == null){
+        while(true){
             System.out.println( "serverAddress: " );
             serverAddress=Reader.in.nextLine();
 
@@ -55,11 +55,11 @@ public class CLIActionManager extends Manager {
             net.setParameters(serverAddress, serverPort, localPort);
             try {
                 net.connect();
+                return net;
             } catch (DisconnectedException e) {
-                e.printStackTrace();
+                //Do nothing, just restart the loop
             }
         }
-        return net;
     }
 
     public void DisplayError(String error){

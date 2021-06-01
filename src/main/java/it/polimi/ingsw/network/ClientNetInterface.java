@@ -30,47 +30,22 @@ public class ClientNetInterface {
         this.localPort=localPort;
     }
 
-    public boolean connect() throws DisconnectedException{
+    public void connect() throws DisconnectedException{
         if(!isConnected & !isLogged){
             //create sender
             try {
                 this.sender = new Sender(this.serverAddress, this.serverPort);
             } catch (DisconnectedException e) {
-                return false;
+                throw new DisconnectedException("failed to create a sender");
             }
             Client.logger.log(Level.INFO,"class>method> Sender created on:" + this.serverAddress + " and port: "+ this.serverPort);
             try {
                 father = new ServerSocket(localPort);
             } catch (IOException e) {
-                return false;
+                throw new DisconnectedException("failed to connect");
             }
             listener = new Listener(father);
-        }else{
-            return false;
         }
-        return true;
-    }
-
-    public boolean login() throws DisconnectedException{
-        if(isConnected & !isLogged){
-            // open father socket
-            try {
-                father = new ServerSocket(localPort);
-            } catch (IOException e) {
-                //TODO: throw warning (listener not opened)
-                return false;
-            }
-            //create listener
-            this.listener = new Listener(father);
-            //TODO: create an actual login message
-                ClientMessage x = null;
-            //send login request
-            this.sender.send(x);
-            //wait for response
-            ClientMessage y = listener.receive();
-            //TODO: from Response extract token
-        }
-        return isLogged;
     }
 
     public boolean send(ClientMessage message) throws DisconnectedException {
