@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.server;
 
-import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.Reader;
 import it.polimi.ingsw.network.ServerNetInterface;
 import it.polimi.ingsw.network.components.ListenerOccupiedException;
@@ -10,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static java.lang.Integer.parseInt;
 
@@ -19,6 +19,7 @@ import static java.lang.Integer.parseInt;
  * @author Lancini Davide
  */
 public class ServerMainMenu {
+    private static Logger serverViewLogger = Logger.getLogger("ServerApp");
 
     /**
      * Load preferred port number and max slot for match
@@ -41,12 +42,12 @@ public class ServerMainMenu {
             file.close();
         }
         catch (FileNotFoundException FileNotFoundException) {
-            Server.logger.log(Level.WARNING,"ServerView>LoadParameters> Server.properties not found, loaded standard parameters");
+            serverViewLogger.log(Level.WARNING,"ServerView>LoadParameters> Server.properties not found, loaded standard parameters");
             maxSlots = 1000;
             port = 4;
         }
         catch (IOException IOException){
-            Server.logger.log(Level.WARNING,"ServerView>LoadParameters> IO Error, loaded standard parameters");
+            serverViewLogger.log(Level.WARNING,"ServerView>LoadParameters> IO Error, loaded standard parameters");
             maxSlots = 1000;
             port = 4;
         }
@@ -55,14 +56,14 @@ public class ServerMainMenu {
             ServerNetInterface.setMaxSlots(maxSlots);
         }
         catch (InstantiationException InstantiationException) {
-            Server.logger.log(Level.WARNING,"ServerView>LoadParameters> Active Slots exceed Requested Max Slots");
+            serverViewLogger.log(Level.WARNING,"ServerView>LoadParameters> Active Slots exceed Requested Max Slots");
         }
 
         try {
             ServerNetInterface.setPort(port);
         }
         catch (ListenerOccupiedException listenerOccupiedException) {
-            Server.logger.log(Level.WARNING,"ServerView>LoadParameters> The Listener is ON, the port cannot be changed");
+            serverViewLogger.log(Level.WARNING,"ServerView>LoadParameters> The Listener is ON, the port cannot be changed");
         }
     }
 
@@ -124,7 +125,7 @@ public class ServerMainMenu {
             }
         }
         catch (IOException | InterruptedException e1) {
-            Server.logger.log(Level.WARNING,"ServerView>clearConsole> IOException, console not cleaned");
+            serverViewLogger.log(Level.WARNING,"ServerView>clearConsole> IOException, console not cleaned");
         }
     }
 

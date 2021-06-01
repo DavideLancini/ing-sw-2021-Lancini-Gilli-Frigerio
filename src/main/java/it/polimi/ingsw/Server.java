@@ -11,9 +11,9 @@ import java.util.logging.Logger;
  * @author Lancini Davide
  */
 public class Server {
-    public static Logger logger = Logger.getLogger("ServerApp");
+    private static Logger serverLogger = Logger.getLogger("ServerApp");
     public static void main( String[] args ){
-        logger.setLevel(Level.ALL);
+        serverLogger.setLevel(Level.ALL);
         boolean isON = true;
 
         ServerMainMenu.loadParameters();

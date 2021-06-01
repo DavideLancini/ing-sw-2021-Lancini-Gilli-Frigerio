@@ -2,6 +2,8 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.network.components.Listener;
 import it.polimi.ingsw.network.components.Sender;
+import it.polimi.ingsw.network.components.Serializer;
+import it.polimi.ingsw.network.messages.MessageLocalPort;
 
 import java.net.ServerSocket;
 
@@ -9,13 +11,23 @@ public class ConnectionInterface{
     private Sender sender;
     private Listener listener;
 
-    public ConnectionInterface(String clientAddress, int clientPort,  ServerSocket fatherSocket) throws DisconnectedException {
+    public ConnectionInterface(ServerSocket fatherSocket) throws DisconnectedException {
+        //Create a new Listener
+        this.listener = new Listener(fatherSocket);
+        //Receive the port to witch connect from the first message
+        int clientPort;
+        ClientMessage message = Serializer.deserializeMessage(listener.receive());
+        if(message instanceof MessageLocalPort) {
+            clientPort = ((MessageLocalPort)message).getPort();
+        }else{
+            throw new DisconnectedException("Port not usable");
+        }
+        //Create a Sender
         try {
-            this.sender = new Sender(clientAddress, clientPort);
+            this.sender = new Sender(listener.getTargetAddress(), clientPort);
         } catch (DisconnectedException e) {
             throw new DisconnectedException("Failed to connect");
         }
-        this.listener = new Listener(fatherSocket);
     }
 
     public void send(ClientMessage message) throws DisconnectedException {
@@ -32,6 +44,6 @@ public class ConnectionInterface{
     }
 
     public ClientMessage receive() throws DisconnectedException{
-        return listener.receive();
+        return Serializer.deserializeMessage(listener.receive());
     }
 }

@@ -1,13 +1,15 @@
 package it.polimi.ingsw.network;
 
-import it.polimi.ingsw.Server;
+import it.polimi.ingsw.controller.Player;
 import it.polimi.ingsw.network.components.ListenerOccupiedException;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServerNetInterface {
+    private static Logger netLogger = Logger.getLogger("ServerApp");
     private static int port;
     private static int maxSlots;
     private static boolean isON = false;
@@ -81,21 +83,28 @@ public class ServerNetInterface {
      */
     public static void startServer(){
         if(isON){
-            Server.logger.log(Level.WARNING,"serverMain>startMain> The server is already ON");
+            netLogger.log(Level.WARNING,"serverMain>startMain> The server is already ON");
         }else{
             try {
                 serverSocket = new ServerSocket(port);
                 isON = true;
             } catch (IOException e) {
-                Server.logger.log(Level.WARNING,"serverMain>startMain> Opening failed");
+                netLogger.log(Level.WARNING,"serverMain>startMain> Opening failed");
                 isON = false;
             }
         }
 
-        int i;
-        for(i=0;i<maxSlots;i++){
-            //TODO: create an empty controller and pass serverSocket
-        }
+        //In a thread:
+        Runnable connection = new Runnable() {
+            @Override
+            public void run() {
+
+                for (int i = 0; i < maxSlots; i++) {
+                    Player x = new Player(serverSocket);
+                }
+                //TODO: create an empty player and pass serverSocket
+            }
+        };
     }
 
     /**
@@ -107,8 +116,9 @@ public class ServerNetInterface {
     public static void stopServer(){
         try {
             serverSocket.close();
+            isON = false;
         } catch (IOException e) {
-            Server.logger.log(Level.WARNING,"serverMain>stopMain> Closing failed");
+            netLogger.log(Level.WARNING,"serverMain>stopMain> Closing failed");
         }
     }
 }

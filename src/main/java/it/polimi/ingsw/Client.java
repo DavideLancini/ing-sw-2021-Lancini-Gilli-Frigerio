@@ -13,9 +13,9 @@ import java.util.logging.Logger;
  */
 public class Client {
 
-    public static Logger logger = Logger.getLogger("ClientApp");
+    private static Logger logger = Logger.getLogger("ClientApp");
     public static void main( String[] args ) {
-        logger.setLevel(Level.FINE);
+        logger.setLevel(Level.ALL);
         boolean isON = true;
         if(CLIActionManager.Online()){
             ClientNetInterface net = CLIActionManager.Connect();

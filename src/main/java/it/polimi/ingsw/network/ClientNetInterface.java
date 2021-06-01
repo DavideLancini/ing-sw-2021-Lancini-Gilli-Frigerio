@@ -1,24 +1,20 @@
 package it.polimi.ingsw.network;
 
-import it.polimi.ingsw.Client;
 import it.polimi.ingsw.network.components.Listener;
 import it.polimi.ingsw.network.components.Sender;
+import it.polimi.ingsw.network.components.Serializer;
+import it.polimi.ingsw.network.messages.MessageLocalPort;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ClientNetInterface {
-    private Logger logger = Logger.getLogger("CNILogger");
-
     private String serverAddress;
     private int serverPort;
     private int localPort;
 
     private boolean isConnected = false;
     private final boolean isLogged = false;
-    private String token;
 
     private Sender sender;
     private Listener listener;
@@ -38,17 +34,30 @@ public class ClientNetInterface {
             } catch (DisconnectedException e) {
                 throw new DisconnectedException("failed to create a sender");
             }
-            Client.logger.log(Level.INFO,"class>method> Sender created on:" + this.serverAddress + " and port: "+ this.serverPort);
             try {
                 father = new ServerSocket(localPort);
             } catch (IOException e) {
-                throw new DisconnectedException("failed to connect");
+                throw new DisconnectedException("failed to create fatherSocket");
             }
-            listener = new Listener(father);
+            //Open a listener on a runnable
+            Runnable temp = new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        listener = new Listener(father);
+                    } catch (DisconnectedException e) {
+                        //TODO: probably this error is impossible
+                    }
+                }
+            };
+            //Create a message to declare to the server what port should be used to receive messages
+            MessageLocalPort message;
+            message = new MessageLocalPort(localPort);
+            sender.send(message);
         }
     }
 
-    public boolean send(ClientMessage message) throws DisconnectedException {
+    public boolean send(Message message) throws DisconnectedException {
         int tries = 5;
         while(tries>0){
             try{
@@ -62,6 +71,6 @@ public class ClientNetInterface {
     }
 
     public ClientMessage receive() throws DisconnectedException{
-        return listener.receive();
+        return Serializer.deserializeMessage(listener.receive());
     }
 }
