@@ -53,3 +53,14 @@ public class Client {
 
     }
 }
+
+//Logger Levels
+//Level.OFF     -> Nothing is logged
+//Level.SEVERE  -> Fatal Error
+//Level.WARNING -> Big Error
+//Level.INFO    -> Important Messages that should always be in the console
+//Level.CONFIG  -> Important Messages for debug
+//Level.FINE    -> Recoverable Failure
+//Level.FINER   -> Logging calls for entering, returning, or throwing an exception
+//Level.FINEST  -> Highly detailed tracking
+//Level.ALL     -> Everything is logged

@@ -30,26 +30,28 @@ public class ClientNetInterface {
         this.localPort=localPort;
     }
 
-    public void connect(){
+    public boolean connect() throws DisconnectedException{
         if(!isConnected & !isLogged){
             //create sender
-            this.sender = new Sender(this.serverAddress, this.serverPort);
+            try {
+                this.sender = new Sender(this.serverAddress, this.serverPort);
+            } catch (DisconnectedException e) {
+                return false;
+            }
             Client.logger.log(Level.INFO,"class>method> Sender created on:" + this.serverAddress + " and port: "+ this.serverPort);
-            //activate sender
-            sender.run();
             try {
                 father = new ServerSocket(localPort);
             } catch (IOException e) {
-                //TODO: throw error
+                return false;
             }
             listener = new Listener(father);
-
         }else{
-            //TODO throw warning (sender already connected)
+            return false;
         }
+        return true;
     }
 
-    public boolean login(){
+    public boolean login() throws DisconnectedException{
         if(isConnected & !isLogged){
             // open father socket
             try {
@@ -60,8 +62,6 @@ public class ClientNetInterface {
             }
             //create listener
             this.listener = new Listener(father);
-            //start listener
-            this.listener.run();
             //TODO: create an actual login message
                 ClientMessage x = null;
             //send login request
@@ -73,11 +73,20 @@ public class ClientNetInterface {
         return isLogged;
     }
 
-    public void send(ClientMessage message){
-        sender.send(message);
+    public boolean send(ClientMessage message) throws DisconnectedException {
+        int tries = 5;
+        while(tries>0){
+            try{
+                sender.send(message);
+                return true;
+            }catch (DisconnectedException e){
+                tries--;
+            }
+        }
+        return false;
     }
 
-    public ClientMessage receive(){
+    public ClientMessage receive() throws DisconnectedException{
         return listener.receive();
     }
 }

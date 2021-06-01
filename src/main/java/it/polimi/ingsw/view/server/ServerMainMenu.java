@@ -3,7 +3,7 @@ package it.polimi.ingsw.view.server;
 import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.Reader;
 import it.polimi.ingsw.network.ServerNetInterface;
-import it.polimi.ingsw.network.components.ListenerOccupiedExeption;
+import it.polimi.ingsw.network.components.ListenerOccupiedException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -61,7 +61,7 @@ public class ServerMainMenu {
         try {
             ServerNetInterface.setPort(port);
         }
-        catch (ListenerOccupiedExeption listenerOccupiedExeption) {
+        catch (ListenerOccupiedException listenerOccupiedException) {
             Server.logger.log(Level.WARNING,"ServerView>LoadParameters> The Listener is ON, the port cannot be changed");
         }
     }

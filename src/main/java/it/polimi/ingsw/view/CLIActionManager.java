@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Reader;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.ClientMessage;
+import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.network.ClientNetInterface;
 
@@ -28,48 +29,51 @@ public class CLIActionManager extends Manager {
     }
 
     public static ClientNetInterface Connect() {
-        ClientNetInterface net = new ClientNetInterface();
+        ClientNetInterface net = null;
         String serverAddress;
         int serverPort;
         int localPort;
 
-        System.out.println( "serverAddress: " );
-        serverAddress=Reader.in.nextLine();
+        while(net == null){
+            System.out.println( "serverAddress: " );
+            serverAddress=Reader.in.nextLine();
 
-        System.out.println( "serverPort: " );
-        try {
-            serverPort= parseToInt(Reader.in.nextLine());
-        } catch (Exception e) {
-            return null;
+            System.out.println( "serverPort: " );
+            try {
+                serverPort= parseToInt(Reader.in.nextLine());
+            } catch (Exception e) {
+                return null;
+            }
+
+            System.out.println( "localPort: " );
+            try {
+                localPort= parseToInt(Reader.in.nextLine());
+            } catch (Exception e) {
+                return null;
+            }
+
+            net.setParameters(serverAddress, serverPort, localPort);
+            try {
+                net.connect();
+            } catch (DisconnectedException e) {
+                e.printStackTrace();
+            }
         }
-
-        System.out.println( "localPort: " );
-        try {
-            localPort= parseToInt(Reader.in.nextLine());
-        } catch (Exception e) {
-            return null;
-        }
-
-        net.setParameters(serverAddress, serverPort, localPort);
-        net.connect();
-
         return net;
     }
 
     public void DisplayError(String error){
-        System.out.println("Server reports an error: "+error);
-        return;
+        System.out.println("Server reports an error: "+ error);
     }
 
 
-    public void ArrangeDepot(Collection<Resource> resources){
+    public void ArrangeDepot(Collection<Resource> resources) throws DisconnectedException {
         System.out.println("These are the resources to be arranged in your depot: ");
         int i = 0;
         for(Resource each : resources){System.out.println(""+(i++)+". "+each.toString());}
 
         //TODO: collect new arrangement
         Resource[] newresources = null;
-
         ClientController.tryDepot(newresources);
     }
 
@@ -82,9 +86,7 @@ public class CLIActionManager extends Manager {
                 default:
                     return false;
             }
-
         }
-
     }
 
     public ClientMessage Turn(boolean mainActionDone){

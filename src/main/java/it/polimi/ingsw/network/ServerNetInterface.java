@@ -1,8 +1,7 @@
 package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.Server;
-import it.polimi.ingsw.network.components.Listener;
-import it.polimi.ingsw.network.components.ListenerOccupiedExeption;
+import it.polimi.ingsw.network.components.ListenerOccupiedException;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -23,9 +22,9 @@ public class ServerNetInterface {
      *
      * @author Lancini Davide
      */
-    public static void setPort(int listenerPort) throws ListenerOccupiedExeption {
+    public static void setPort(int listenerPort) throws ListenerOccupiedException {
         if(isON){
-            throw new ListenerOccupiedExeption("ERROR: Listener occupied, the port cannot be modified");
+            throw new ListenerOccupiedException("ERROR: Listener occupied, the port cannot be modified");
         }else{
             port = listenerPort;
         }

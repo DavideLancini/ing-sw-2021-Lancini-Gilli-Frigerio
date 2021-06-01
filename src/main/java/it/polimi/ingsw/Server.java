@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class Server {
     public static Logger logger = Logger.getLogger("ServerApp");
     public static void main( String[] args ){
-        logger.setLevel(Level.FINE);
+        logger.setLevel(Level.ALL);
         boolean isON = true;
 
         ServerMainMenu.loadParameters();
@@ -35,12 +35,13 @@ public class Server {
     }
 }
 
-
-//Server.logger.log(Level.SEVERE,"class>method> error"); Fatal Error
-//Server.logger.log(Level.WARNING,"class>method> error, solution"); Solvable Error
-//Server.logger.log(Level.INFO,"class>method> communication"); Info
-
-//Server.logger.log(Level.CONFIG,"class>method> error, solution");
-//Server.logger.log(Level.FINE,"class>method> error, solution");
-//Server.logger.log(Level.FINER,"class>method> error, solution");
-//Server.logger.log(Level.FINEST,"class>method> error, solution");
+//Logger Levels
+//Level.OFF     -> Nothing is logged
+//Level.SEVERE  -> Fatal Error
+//Level.WARNING -> Big Error
+//Level.INFO    -> Important Messages that should always be in the console
+//Level.CONFIG  -> Important Messages for debug
+//Level.FINE    -> Recoverable Failure
+//Level.FINER   -> Logging calls for entering, returning, or throwing an exception
+//Level.FINEST  -> Highly detailed tracking
+//Level.ALL     -> Everything is logged

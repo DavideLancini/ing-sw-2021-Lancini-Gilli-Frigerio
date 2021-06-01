@@ -9,19 +9,29 @@ public class ConnectionInterface{
     private Sender sender;
     private Listener listener;
 
-    public ConnectionInterface(String clientAddress, int clientPort,  ServerSocket fatherSocket){
-        this.sender = new Sender(clientAddress, clientPort);
-        sender.run();
+    public ConnectionInterface(String clientAddress, int clientPort,  ServerSocket fatherSocket) throws DisconnectedException {
+        try {
+            this.sender = new Sender(clientAddress, clientPort);
+        } catch (DisconnectedException e) {
+            throw new DisconnectedException("Failed to connect");
+        }
         this.listener = new Listener(fatherSocket);
     }
 
-    public boolean send(ClientMessage message){
-        sender.send(message);
-        //TODO: return actual confirmation
-        return true;
+    public void send(ClientMessage message) throws DisconnectedException {
+        int tries = 5;
+        while(tries>0){
+            try{
+                sender.send(message);
+                return;
+            }catch (DisconnectedException e){
+                tries--;
+            }
+        }
+        throw new DisconnectedException("Failed to send");
     }
 
-    public ClientMessage receive(){
+    public ClientMessage receive() throws DisconnectedException{
         return listener.receive();
     }
 }

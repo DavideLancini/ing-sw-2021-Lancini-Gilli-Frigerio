@@ -1,8 +1,9 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.network.ClientNetInterface;
+import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.ServerNetInterface;
-import it.polimi.ingsw.network.components.ListenerOccupiedExeption;
+import it.polimi.ingsw.network.components.ListenerOccupiedException;
 import org.junit.Test;
 
 public class CompleteMatchTest {
@@ -21,7 +22,7 @@ public class CompleteMatchTest {
                 }
                 try {
                     ServerNetInterface.setPort(1000);
-                } catch (ListenerOccupiedExeption listenerOccupiedExeption) {
+                } catch (ListenerOccupiedException listenerOccupiedExeption) {
                     System.out.println("ERROR: Unreachable Error in this Test");
                 }
                 ServerNetInterface.startServer();
@@ -37,7 +38,11 @@ public class CompleteMatchTest {
             public void run(){
                 ClientNetInterface net = new ClientNetInterface();
                 net.setParameters("localhost", 1000, 1001);
-                net.connect();
+                try {
+                    net.connect();
+                } catch (DisconnectedException e) {
+                    e.printStackTrace();
+                }
                 //TODO: when the login method is working insert HERE
                 //TODO: create match
                 //TODO: start game
@@ -48,7 +53,11 @@ public class CompleteMatchTest {
             public void run(){
                 ClientNetInterface net = new ClientNetInterface();
                 net.setParameters("localhost", 1000, 1002);
-                net.connect();
+                try {
+                    net.connect();
+                } catch (DisconnectedException e) {
+                    e.printStackTrace();
+                }
                 //TODO: when the login method is working insert HERE
                 //TODO: start game
             }
@@ -58,7 +67,11 @@ public class CompleteMatchTest {
             public void run(){
                 ClientNetInterface net = new ClientNetInterface();
                 net.setParameters("localhost", 1000, 1003);
-                net.connect();
+                try {
+                    net.connect();
+                } catch (DisconnectedException e) {
+                    e.printStackTrace();
+                }
                 //TODO: when the login method is working insert HERE
                 //TODO: start game
             }
@@ -68,7 +81,11 @@ public class CompleteMatchTest {
             public void run(){
                 ClientNetInterface net = new ClientNetInterface();
                 net.setParameters("localhost", 1000, 1004);
-                net.connect();
+                try {
+                    net.connect();
+                } catch (DisconnectedException e) {
+                    e.printStackTrace();
+                }
                 //TODO: when the login method is working insert HERE
                 //TODO: start game
             }
