@@ -18,7 +18,14 @@ public class Client {
         clientLogger.setLevel(Level.ALL);
         boolean isON = true;
         if(CLIActionManager.Online()){
-            ClientNetInterface net = CLIActionManager.Connect();
+
+            //TODO: THIS IS ONLY FOR TESTING
+            ClientNetInterface net = new ClientNetInterface();
+            net.setParameters("localhost", 5555, 1001);
+            //TODO: THIS IS ONLY FOR TESTING
+
+            //ClientNetInterface net = CLIActionManager.Connect();
+
             while(isON){
                 switch (CLIActionManager.showMainMenu()){
                     case "1":

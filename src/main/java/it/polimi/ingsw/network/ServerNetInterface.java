@@ -90,6 +90,7 @@ public class ServerNetInterface {
         }else{
             try {
                 serverSocket = new ServerSocket(port);
+                logger.log(Level.INFO, "Father Socket Created on: "+port);
                 isON = true;
             } catch (IOException e) {
                 logger.log(Level.WARNING,"Opening failed");
