@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.server;
+package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.Reader;
 import it.polimi.ingsw.network.ServerNetInterface;
@@ -14,16 +14,27 @@ import java.util.logging.Logger;
 import static java.lang.Integer.parseInt;
 
 /**
- * Interface for the Server Application
+ * View for the Server Application
  *
  * @author Lancini Davide
  */
-public class ServerMainMenu {
-    private static Logger serverViewLogger = Logger.getLogger("ServerApp");
+public class ServerView {
+    private static Logger logger;
 
     /**
-     * Load preferred port number and max slot for match
-     *
+     * Import Logger from the ServerApp and pass it to the Network Interface
+     * @author Lancini Davide
+     */
+    public static void setLogger(Logger logger) {
+        ServerView.logger = logger;
+        ServerNetInterface.setLogger(logger);
+    }
+
+    /**
+     * Load all server Parameters from server.properties, in case of failure standard parameters will be loaded.
+     * Standard Parameters:
+     * - Local Port: 5555
+     * - Max Slots: 8
      * @warning InstantiationException: Do Nothing
      * @warning ListenerOccupiedException: Do Nothing
      * @warning FileNotFoundException: Load standard parameters
@@ -40,43 +51,47 @@ public class ServerMainMenu {
             maxSlots = parseInt(serverProperties.getProperty("maxSlots"));
             port = parseInt(serverProperties.getProperty("port"));
             file.close();
+            logger.log(Level.CONFIG,"Server.properties successfully loaded from file");
         }
         catch (FileNotFoundException FileNotFoundException) {
-            serverViewLogger.log(Level.WARNING,"ServerView>LoadParameters> Server.properties not found, loaded standard parameters");
-            maxSlots = 1000;
-            port = 4;
+            maxSlots = 8;
+            port = 5555;
+            logger.log(Level.WARNING,"Server.properties not found, loaded standard parameters");
         }
         catch (IOException IOException){
-            serverViewLogger.log(Level.WARNING,"ServerView>LoadParameters> IO Error, loaded standard parameters");
-            maxSlots = 1000;
-            port = 4;
+            maxSlots = 8;
+            port = 5555;
+            logger.log(Level.WARNING,"IO Error, loaded standard parameters");
         }
-
+        logger.log(Level.INFO,"Parameters Loaded: (Port: "+port+") (Max Slots: "+maxSlots+")");
         try {
             ServerNetInterface.setMaxSlots(maxSlots);
+            logger.log(Level.CONFIG,"Max Slots successfully applied");
         }
         catch (InstantiationException InstantiationException) {
-            serverViewLogger.log(Level.WARNING,"ServerView>LoadParameters> Active Slots exceed Requested Max Slots");
+            logger.log(Level.WARNING,"Active Slots exceed Requested Max Slots");
         }
 
         try {
             ServerNetInterface.setPort(port);
+            logger.log(Level.CONFIG,"Port successfully applied");
         }
         catch (ListenerOccupiedException listenerOccupiedException) {
-            serverViewLogger.log(Level.WARNING,"ServerView>LoadParameters> The Listener is ON, the port cannot be changed");
+            logger.log(Level.WARNING,"The Listener is ON, the port cannot be changed");
         }
     }
 
     /**
      * Print server status and the available commands
-     *
      * @author Lancini Davide
      */
     public static String serverMenu() {
         clearConsole();
-        if (checkServerActivity()) {
-            System.out.println("The server is ON");
-            // TODO print server parameters (hostname, port, max slots, open slots)
+        if (ServerNetInterface.getStatus()) {
+            System.out.println("The server is ON ");
+            System.out.println("- Port: "+ ServerNetInterface.getPort());
+            System.out.println("- Max Slots: "+ ServerNetInterface.getMaxSlots());
+            System.out.println("- Active Games: "+ ServerNetInterface.getActiveGames());
             System.out.println("1. Stop Server");
         } else {
             System.out.println("The server is OFF");
@@ -89,14 +104,15 @@ public class ServerMainMenu {
 
     /**
      * Toggle Server ON/OFF
-     *
      * @author Lancini Davide
      */
     public static void toggleServer() {
-        if (checkServerActivity()) {
+        if (ServerNetInterface.getStatus()) {
             ServerNetInterface.stopServer();
+            logger.log(Level.INFO, "Server Stopped");
         } else {
             ServerNetInterface.startServer();
+            logger.log(Level.INFO, "Server Started");
         }
     }
 
@@ -104,7 +120,6 @@ public class ServerMainMenu {
      * Edit the standard parameters for the server.
      * Most parameters can be modified with the Server Online.
      * Parameters that need a reboot to be activated will still be saved in the properties file (with no effect)
-     *
      * @author Lancini Davide
      */
     public static void editParameters() {
@@ -113,29 +128,21 @@ public class ServerMainMenu {
 
     /**
      * Simple feature to keep the console clean, tested on windows, mac os and some linux distros.
-     *
+     * Only works if the Logger is OFF
      * @author Lancini Davide
      */
-    private static void clearConsole() {
-        try {
-            if (System.getProperty("os.name").contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                System.out.print("\033\143");
+    private static void clearConsole(){
+        if(logger.getLevel() == Level.OFF){
+            try {
+                if (System.getProperty("os.name").contains("Windows")) {
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                } else {
+                    System.out.print("\033\143");
+                }
+            }
+            catch (IOException | InterruptedException e1) {
+                logger.log(Level.WARNING,"IOException, console not cleaned");
             }
         }
-        catch (IOException | InterruptedException e1) {
-            serverViewLogger.log(Level.WARNING,"ServerView>clearConsole> IOException, console not cleaned");
-        }
-    }
-
-    /**
-     * Check if the sockets are online
-     *
-     * @return true if both sockets are online
-     * @author Lancini Davide
-     */
-    private static boolean checkServerActivity() {
-        return ServerNetInterface.getStatus();
     }
 }

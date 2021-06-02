@@ -9,33 +9,53 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ServerNetInterface {
-    private static Logger netLogger = Logger.getLogger("ServerNetInterfaceLogger");
+    private static Logger logger;
     private static int port;
     private static int maxSlots;
     private static boolean isON = false;
 
     private static int activeSlots = 0;
-    private static int activeMatches = 0;
+    private static int activeGames = 0;
 
     private static ServerSocket serverSocket;
 
     /**
+     * Setter for the Logger
+     * @author Lancini Davide
+     */
+    public static void setLogger(Logger logger) {
+        ServerNetInterface.logger = logger;
+    }
+
+    /**
      * Setter for the Server Port.
-     *
      * @author Lancini Davide
      */
     public static void setPort(int listenerPort) throws ListenerOccupiedException {
         if(isON){
-            throw new ListenerOccupiedException("ERROR: Listener occupied, the port cannot be modified");
+            logger.log(Level.WARNING,"Listener occupied, the port cannot be modified", new ListenerOccupiedException("ERROR"));
         }else{
             port = listenerPort;
+            logger.log(Level.FINE,"Port received and applied: "+port);
+        }
+    }
+
+    /**
+     * Setter for the Server Max Slot.
+     * @author Lancini Davide
+     */
+    public static void setMaxSlots(int listenerMaxSlot) throws InstantiationException {
+        if(isON & activeSlots > listenerMaxSlot){
+            logger.log(Level.WARNING, "Slots requests exceed Max Slots",new InstantiationException());
+        }else{
+            maxSlots = listenerMaxSlot;
+            logger.log(Level.FINE, "Max Slots received and applied: "+maxSlots);
+            //TODO start new empty players if needed
         }
     }
 
     /**
      * Getter for the Server Port.
-     *
-     *
      * @author Lancini Davide
      */
     public static int getPort(){
@@ -43,24 +63,7 @@ public class ServerNetInterface {
     }
 
     /**
-     * Setter for the Server Max Slot.
-     *
-     *
-     * @author Lancini Davide
-     */
-    public static void setMaxSlots(int listenerMaxSlot) throws InstantiationException {
-        if(isON & activeSlots > listenerMaxSlot){
-            throw new InstantiationException();
-        }else{
-            maxSlots = listenerMaxSlot;
-            //TODO start missing threads
-        }
-    }
-
-    /**
      * Getter for the Server Max Slot.
-     *
-     *
      * @author Lancini Davide
      */
     public static int getMaxSlots() {
@@ -69,27 +72,27 @@ public class ServerNetInterface {
 
     /**
      * Getter for the Status
-     *
-     *
      * @author Lancini Davide
      */
     public static boolean getStatus(){ return isON;}
 
+    public static int getActiveGames() {
+        return activeGames;
+    }
+
     /**
      * Main Server Method
-     *
-     *
      * @author Lancini Davide
      */
     public static void startServer(){
         if(isON){
-            netLogger.log(Level.WARNING,"serverMain>startMain> The server is already ON");
+            logger.log(Level.WARNING,"The server is already ON");
         }else{
             try {
                 serverSocket = new ServerSocket(port);
                 isON = true;
             } catch (IOException e) {
-                netLogger.log(Level.WARNING,"serverMain>startMain> Opening failed");
+                logger.log(Level.WARNING,"Opening failed");
                 isON = false;
             }
         }
@@ -118,7 +121,7 @@ public class ServerNetInterface {
             serverSocket.close();
             isON = false;
         } catch (IOException e) {
-            netLogger.log(Level.WARNING,"serverMain>stopMain> Closing failed");
+            logger.log(Level.WARNING,"serverMain>stopMain> Closing failed");
         }
     }
 }
