@@ -7,15 +7,22 @@ import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Reader;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.ClientMessage;
+import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.*;
-import it.polimi.ingsw.network.ClientNetInterface;
 
 import java.util.Collection;
+import java.util.logging.Logger;
 
 public class CLIActionManager extends Manager {
 
+    private static Logger logger;
     private ClientController ClientController;
+
+    public static void setLogger(Logger logger){
+        CLIActionManager.logger=logger;
+    }
+
 
     public CLIActionManager(ClientController clicont){
         this.ClientController = clicont;

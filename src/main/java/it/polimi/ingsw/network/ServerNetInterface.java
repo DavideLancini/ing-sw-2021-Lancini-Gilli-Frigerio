@@ -113,8 +113,6 @@ public class ServerNetInterface {
 
     /**
      * Stop Listener without save (for now).
-     *
-     *
      * @author Lancini Davide
      */
     public static void stopServer(){
@@ -122,7 +120,7 @@ public class ServerNetInterface {
             serverSocket.close();
             isON = false;
         } catch (IOException e) {
-            logger.log(Level.WARNING,"serverMain>stopMain> Closing failed");
+            logger.log(Level.WARNING,"Closing failed");
         }
     }
 }

@@ -13,16 +13,23 @@ import java.util.logging.Logger;
  * @author Lancini Davide
  */
 public class Client {
-
-    private static Logger clientLogger = Logger.getLogger("ClientApp");
     public static void main( String[] args ) {
-        clientLogger.setLevel(Level.ALL);
+        //Logger Creation
+        Logger logger = Logger.getLogger("ClientApp");
+        logger.setLevel(Level.ALL);
+        CLIActionManager.setLogger(logger);
+
         boolean isON = true;
         if(CLIActionManager.Online()){
 
             //TODO: THIS IS ONLY FOR TESTING
             ClientNetInterface net = new ClientNetInterface();
             net.setParameters("localhost", 5555, 1001);
+            try {
+                net.connect();
+            } catch (DisconnectedException e) {
+                //FAILED TO CONNECT
+            }
             //TODO: THIS IS ONLY FOR TESTING
 
             //ClientNetInterface net = CLIActionManager.Connect();
