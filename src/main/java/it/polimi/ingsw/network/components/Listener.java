@@ -16,29 +16,30 @@ import java.util.logging.Logger;
  * @author Lancini Davide
  */
 public class Listener{
-    private static Logger listenerLogger = Logger.getLogger("ListenerLogger");
+    private static Logger logger;
 
     private Socket listenerSocket;
     private DataInputStream inputStream;
     private String listenerName;
 
-    public Listener(ServerSocket fatherSocket) throws DisconnectedException{
-        listenerLogger.setLevel(Level.ALL);
+    public Listener(ServerSocket fatherSocket, Logger logger) throws DisconnectedException{
+        Listener.logger = logger;
+        logger.setLevel(Level.ALL);
         //Accept connection
         try {
             this.listenerSocket = fatherSocket.accept();
             this.listenerName = "Listener" + getTargetAddress();
-            listenerLogger.log(Level.INFO,this.listenerName+" has accepted a connection");
+            logger.log(Level.INFO,this.listenerName+" has accepted a connection");
         } catch (IOException error) {
-            listenerLogger.log(Level.WARNING,"Cannot accept a connection");
+            logger.log(Level.WARNING,"Cannot accept a connection");
             throw new DisconnectedException("Listener cannot accept connection");
         }
         //Open input stream
         try {
             this.inputStream = new DataInputStream(new BufferedInputStream(this.listenerSocket.getInputStream()));
-            listenerLogger.log(Level.INFO,this.listenerName+"has created a stream ");
+            logger.log(Level.INFO,this.listenerName+"has created a stream ");
         } catch (IOException error) {
-            listenerLogger.log(Level.WARNING,this.listenerName+"Listener failed to open a stream");
+            logger.log(Level.WARNING,this.listenerName+"Listener failed to open a stream");
             throw new DisconnectedException("Failed to open a stream");
         }
     }

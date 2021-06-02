@@ -89,9 +89,9 @@ public class ServerView {
         clearConsole();
         if (ServerNetInterface.getStatus()) {
             System.out.println("The server is ON ");
-            System.out.println("- Port: "+ ServerNetInterface.getPort());
-            System.out.println("- Max Slots: "+ ServerNetInterface.getMaxSlots());
-            System.out.println("- Active Games: "+ ServerNetInterface.getActiveGames());
+            System.out.println(" - Port: "+ ServerNetInterface.getPort());
+            System.out.println(" - Max Slots: "+ ServerNetInterface.getMaxSlots());
+            System.out.println(" - Active Games: "+ ServerNetInterface.getActiveGames());
             System.out.println("1. Stop Server");
         } else {
             System.out.println("The server is OFF");

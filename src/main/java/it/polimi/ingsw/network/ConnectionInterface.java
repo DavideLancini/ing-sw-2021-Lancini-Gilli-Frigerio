@@ -6,14 +6,17 @@ import it.polimi.ingsw.network.components.Serializer;
 import it.polimi.ingsw.network.messages.MessageLocalPort;
 
 import java.net.ServerSocket;
+import java.util.logging.Logger;
 
 public class ConnectionInterface{
+    private static Logger logger;
     private Sender sender;
     private Listener listener;
 
-    public ConnectionInterface(ServerSocket fatherSocket) throws DisconnectedException {
+    public ConnectionInterface(ServerSocket fatherSocket, Logger logger) throws DisconnectedException {
+        ConnectionInterface.logger = logger;
         //Create a new Listener
-        this.listener = new Listener(fatherSocket);
+        this.listener = new Listener(fatherSocket, logger);
         //Receive the port to witch connect from the first message
         int clientPort;
         ClientMessage message = Serializer.deserializeMessage(listener.receive());

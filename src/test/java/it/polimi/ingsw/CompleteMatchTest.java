@@ -6,7 +6,12 @@ import it.polimi.ingsw.network.ServerNetInterface;
 import it.polimi.ingsw.network.components.ListenerOccupiedException;
 import org.junit.Test;
 
+import java.util.logging.Logger;
+
 public class CompleteMatchTest {
+
+    private static Logger logger = Logger.getLogger("Test Logger");
+
     @Test
     public void main(){
         Runnable server = new Runnable(){
@@ -37,7 +42,7 @@ public class CompleteMatchTest {
             @Override
             public void run(){
                 ClientNetInterface net = new ClientNetInterface();
-                net.setParameters("localhost", 1000, 1001);
+                net.setParameters("localhost", 1000, 1001, logger);
                 try {
                     net.connect();
                 } catch (DisconnectedException e) {
@@ -52,7 +57,7 @@ public class CompleteMatchTest {
             @Override
             public void run(){
                 ClientNetInterface net = new ClientNetInterface();
-                net.setParameters("localhost", 1000, 1002);
+                net.setParameters("localhost", 1000, 1002, logger);
                 try {
                     net.connect();
                 } catch (DisconnectedException e) {
@@ -66,7 +71,7 @@ public class CompleteMatchTest {
             @Override
             public void run(){
                 ClientNetInterface net = new ClientNetInterface();
-                net.setParameters("localhost", 1000, 1003);
+                net.setParameters("localhost", 1000, 1003, logger);
                 try {
                     net.connect();
                 } catch (DisconnectedException e) {
@@ -80,7 +85,7 @@ public class CompleteMatchTest {
             @Override
             public void run(){
                 ClientNetInterface net = new ClientNetInterface();
-                net.setParameters("localhost", 1000, 1004);
+                net.setParameters("localhost", 1000, 1004, logger);
                 try {
                     net.connect();
                 } catch (DisconnectedException e) {

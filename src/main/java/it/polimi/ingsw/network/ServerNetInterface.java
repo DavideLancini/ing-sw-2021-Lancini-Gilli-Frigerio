@@ -55,6 +55,14 @@ public class ServerNetInterface {
     }
 
     /**
+     * Getter for the Logger.
+     * @author Lancini Davide
+     */
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    /**
      * Getter for the Server Port.
      * @author Lancini Davide
      */
@@ -98,17 +106,22 @@ public class ServerNetInterface {
             }
         }
 
+        System.out.println("IM HERE 1");
+
         //In a thread:
         Runnable connection = new Runnable() {
             @Override
             public void run() {
 
                 for (int i = 0; i < maxSlots; i++) {
-                    Player x = new Player(serverSocket);
+                    System.out.println("IM HERE 2");
+                    Player x = new Player(serverSocket, logger);
+                    System.out.println("IM HERE 3");
                 }
                 //TODO: create an empty player and pass serverSocket
             }
         };
+        connection.run();
     }
 
     /**

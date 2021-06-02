@@ -59,7 +59,7 @@ public class CLIActionManager extends Manager {
                 return null;
             }
 
-            net.setParameters(serverAddress, serverPort, localPort);
+            net.setParameters(serverAddress, serverPort, localPort, logger);
             try {
                 net.connect();
                 return net;

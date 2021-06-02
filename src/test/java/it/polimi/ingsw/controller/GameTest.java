@@ -1,10 +1,14 @@
 package it.polimi.ingsw.controller;
+
 import org.junit.Test;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.logging.Logger;
 
 public class GameTest{
+
+    private static Logger logger = Logger.getLogger("Test Logger");
 
     ServerSocket fatherSocket;
     {
@@ -15,7 +19,7 @@ public class GameTest{
         }
     }
 
-    Player[] pbs= new Player[]{new Player(fatherSocket)};
+    Player[] pbs= new Player[]{new Player(fatherSocket, logger)};
 
     @Test
     public void Game() throws Exception {

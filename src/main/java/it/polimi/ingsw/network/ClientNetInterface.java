@@ -7,11 +7,13 @@ import it.polimi.ingsw.network.messages.MessageLocalPort;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.logging.Logger;
 
 public class ClientNetInterface {
     private String serverAddress;
     private int serverPort;
     private int localPort;
+    private static Logger logger;
 
     private boolean isConnected = false;
     private final boolean isLogged = false;
@@ -20,10 +22,11 @@ public class ClientNetInterface {
     private Listener listener;
     private ServerSocket father;
 
-    public void setParameters(String serverAddress, int serverPort, int localPort){
+    public void setParameters(String serverAddress, int serverPort, int localPort, Logger logger){
         this.serverAddress=serverAddress;
         this.serverPort=serverPort;
         this.localPort=localPort;
+        ClientNetInterface.logger=logger;
     }
 
     public void connect() throws DisconnectedException{
@@ -44,7 +47,7 @@ public class ClientNetInterface {
                 @Override
                 public void run() {
                     try {
-                        listener = new Listener(father);
+                        listener = new Listener(father, logger);
                     } catch (DisconnectedException e) {
                         //TODO: probably this error is impossible
                     }
@@ -54,6 +57,7 @@ public class ClientNetInterface {
             MessageLocalPort message;
             message = new MessageLocalPort(localPort);
             sender.send(message);
+            temp.run();
         }
     }
 

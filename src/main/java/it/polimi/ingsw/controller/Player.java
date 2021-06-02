@@ -7,19 +7,21 @@ import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.EndTurnException;
 
 import java.net.ServerSocket;
+import java.util.logging.Logger;
 
 public class Player {
+    private static Logger logger;
+    private ConnectionInterface net;
     public PlayerBoard playerBoard;
     public String playerId;
     private Controller controller;
 
-    public Player(ServerSocket fatherSocket) {
-        while(true){
-            try {
-                ConnectionInterface net = new ConnectionInterface(fatherSocket);
-            } catch (DisconnectedException e) {
-                //do nothing, try again
-            }
+    public Player(ServerSocket father, Logger logger){
+        Player.logger = logger;
+        try {
+            net = new ConnectionInterface(father, logger);
+        } catch (DisconnectedException e) {
+            //TODO: manage error
         }
     }
 
