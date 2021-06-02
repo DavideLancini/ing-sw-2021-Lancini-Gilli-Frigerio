@@ -22,11 +22,12 @@ public class ServerView {
     private static Logger logger;
 
     /**
-     * Import Logger from the ServerApp
+     * Import Logger from the ServerApp and pass it to the Network Interface
      * @author Lancini Davide
      */
     public static void setLogger(Logger logger) {
         ServerView.logger = logger;
+        ServerNetInterface.setLogger(logger);
     }
 
     /**
@@ -34,7 +35,6 @@ public class ServerView {
      * Standard Parameters:
      * - Local Port: 5555
      * - Max Slots: 8
-     *
      * @warning InstantiationException: Do Nothing
      * @warning ListenerOccupiedException: Do Nothing
      * @warning FileNotFoundException: Load standard parameters
@@ -83,7 +83,6 @@ public class ServerView {
 
     /**
      * Print server status and the available commands
-     *
      * @author Lancini Davide
      */
     public static String serverMenu() {
@@ -105,7 +104,6 @@ public class ServerView {
 
     /**
      * Toggle Server ON/OFF
-     *
      * @author Lancini Davide
      */
     public static void toggleServer() {
@@ -122,7 +120,6 @@ public class ServerView {
      * Edit the standard parameters for the server.
      * Most parameters can be modified with the Server Online.
      * Parameters that need a reboot to be activated will still be saved in the properties file (with no effect)
-     *
      * @author Lancini Davide
      */
     public static void editParameters() {
@@ -132,7 +129,6 @@ public class ServerView {
     /**
      * Simple feature to keep the console clean, tested on windows, mac os and some linux distros.
      * Only works if the Logger is OFF
-     *
      * @author Lancini Davide
      */
     private static void clearConsole(){

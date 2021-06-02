@@ -20,6 +20,10 @@ public class Server {
         ServerView.loadParameters();
         //Main Cycle of the Server Interface
         boolean isON = true;
+
+        //TURN SERVER ON RIGHT AWAY
+        ServerView.toggleServer();
+
         while(isON){
             //Asking for a command
             switch (ServerView.serverMenu()) {
@@ -28,7 +32,7 @@ public class Server {
                     ServerView.toggleServer();
                     break;
                 case "2":
-                    //Edit server settings, if the server is running some parameters will be locked
+                    //Edit server parameters, some parameters require a reboot (localport)
                     ServerView.editParameters();
                     break;
                 case "3":
