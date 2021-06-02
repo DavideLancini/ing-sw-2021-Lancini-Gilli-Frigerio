@@ -3,7 +3,7 @@ package it.polimi.ingsw.network;
 import it.polimi.ingsw.network.components.Listener;
 import it.polimi.ingsw.network.components.Sender;
 import it.polimi.ingsw.network.components.Serializer;
-import it.polimi.ingsw.network.messages.MessageLocalPort;
+import it.polimi.ingsw.network.messages.ClientMessageLocalPort;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -54,8 +54,8 @@ public class ClientNetInterface {
                 }
             };
             //Create a message to declare to the server what port should be used to receive messages
-            MessageLocalPort message;
-            message = new MessageLocalPort(localPort);
+            ClientMessageLocalPort message;
+            message = new ClientMessageLocalPort(localPort);
             sender.send(message);
             temp.run();
         }

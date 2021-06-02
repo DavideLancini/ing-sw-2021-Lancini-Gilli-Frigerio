@@ -9,7 +9,7 @@ import it.polimi.ingsw.network.messages.EndTurnException;
 import java.net.ServerSocket;
 import java.util.logging.Logger;
 
-public class Player {
+public class Player extends Thread{
     private static Logger logger;
     private ConnectionInterface net;
     public PlayerBoard playerBoard;
@@ -57,5 +57,13 @@ public class Player {
     public void fourthPlayer() throws Exception {
         addResource(2);
         playerBoard.addFaith(1);
+    }
+
+    @Override
+    public void run() {
+        boolean isON = true;
+        while(isON){
+            //TODO
+        }
     }
 }

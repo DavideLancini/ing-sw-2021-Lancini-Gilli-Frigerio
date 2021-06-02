@@ -48,6 +48,7 @@ public class Listener{
         String rawMessage = "";
         try {
             rawMessage = this.inputStream.readUTF();
+            logger.log(Level.INFO, this.listenerName + "has received: "+rawMessage);
             return rawMessage;
         } catch (IOException e) {
             throw new DisconnectedException("Failed to receive");
@@ -55,6 +56,8 @@ public class Listener{
     }
 
     public String getTargetAddress(){
-        return this.listenerSocket.getRemoteSocketAddress().toString();
+        String temp = this.listenerSocket.getRemoteSocketAddress().toString();
+        temp = temp.substring(1,temp.indexOf(":"));
+        return temp;
     }
 }

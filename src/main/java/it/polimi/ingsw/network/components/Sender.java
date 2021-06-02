@@ -26,7 +26,6 @@ public class Sender{
 
         senderLogger.setLevel(Level.ALL);
         this.logName = "SenderTo(" + destinationAddress + ":" + destinationPort + ")" ;
-        System.out.println("i'm here");
         //Connect Socket
         try {
             this.socket = new Socket(destinationAddress, destinationPort);
