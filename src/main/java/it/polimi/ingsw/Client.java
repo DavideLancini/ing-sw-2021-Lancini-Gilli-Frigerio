@@ -35,7 +35,8 @@ public class Client {
             //ClientNetInterface net = CLIActionManager.Connect();
 
             while(isON){
-                switch (CLIActionManager.showMainMenu()){
+                String selection = CLIActionManager.showMainMenu();
+                switch (selection){
                     case "1":
                         try {
                             CLIActionManager.createMatch(net);

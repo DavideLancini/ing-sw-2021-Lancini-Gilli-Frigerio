@@ -241,14 +241,10 @@ public class CLIActionManager extends Manager {
             else
                 correctInput=true;
         }
-        /*switch (numOfPlayers){
-            case 1:return true;
-            case 2:return true;
-            case 3:return true;
-            case 4:return true;
-        }*/
-        ServerMessageView messageView= new ServerMessageView("Hello");
-        net.send(messageView);
+        ClientMessageCreateGame createMessage= new ClientMessageCreateGame(numOfPlayers);
+        net.send(createMessage);
+        ServerMessageOK ok=new ServerMessageOK();
+        net.send(ok);
 
 
 
