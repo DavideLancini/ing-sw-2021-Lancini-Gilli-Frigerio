@@ -2,8 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.PlayerBoard;
 import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.network.ConnectionInterface;
-import it.polimi.ingsw.network.DisconnectedException;
+import it.polimi.ingsw.network.*;
 import it.polimi.ingsw.network.messages.EndTurnException;
 
 import java.net.ServerSocket;
@@ -23,6 +22,7 @@ public class Player extends Thread{
         } catch (DisconnectedException e) {
             //TODO: manage error
         }
+        ServerNetInterface.addPlayer();
     }
 
     public void addResource(int numOfResource) throws Exception {
@@ -61,9 +61,16 @@ public class Player extends Thread{
 
     @Override
     public void run() {
-        boolean isON = true;
-        while(isON){
-            //TODO
+        while(ServerNetInterface.isON){
+            try {
+                Message temp = net.receive();
+                System.out.println(temp.toString());
+                net.send(temp);
+                //TODO: SONO IO 1
+            } catch (DisconnectedException e) {
+                ServerNetInterface.removePlayer();
+                interrupt();
+            }
         }
     }
 }

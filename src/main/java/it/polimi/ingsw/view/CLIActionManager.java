@@ -246,6 +246,8 @@ public class CLIActionManager extends Manager {
         ServerMessageOK ok=new ServerMessageOK();
         net.send(ok);
 
+        System.out.println(net.receive().toString());
+
 
 
         //TODO: create MessageCreateGame

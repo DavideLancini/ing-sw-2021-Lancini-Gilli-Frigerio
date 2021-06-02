@@ -21,7 +21,7 @@ public class ConnectionInterface{
         this.listener = new Listener(fatherSocket, logger);
         //Receive the port to witch connect from the first message
         int clientPort;
-        ClientMessage message = Serializer.deserializeMessage(listener.receive());
+        Message message = Serializer.deserializeMessage(listener.receive());
         if(message instanceof ClientMessageLocalPort) {
             clientPort = ((ClientMessageLocalPort)message).getPort();
         }else{
@@ -40,7 +40,7 @@ public class ConnectionInterface{
         }
     }
 
-    public void send(ClientMessage message) throws DisconnectedException {
+    public void send(Message message) throws DisconnectedException {
         int tries = 5;
         while(tries>0){
             try{

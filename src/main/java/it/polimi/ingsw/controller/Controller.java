@@ -261,17 +261,6 @@ public class Controller {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     private ArrayList<Resource> extractCost(Resource[] cost) throws Exception{
         ArrayList<Resource> resources= new ArrayList<>();
         Resource[] depotCopy = {null, null, null, null, null, null, null, null, null, null};

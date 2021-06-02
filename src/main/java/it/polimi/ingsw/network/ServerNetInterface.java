@@ -5,19 +5,33 @@ import it.polimi.ingsw.network.components.ListenerOccupiedException;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static java.lang.Thread.sleep;
 
 public class ServerNetInterface {
     private static Logger logger;
     private static int port;
     private static int maxSlots;
-    private static boolean isON = false;
+    public static boolean isON = false;
 
     private static int activeSlots = 0;
     private static int activeGames = 0;
 
     private static ServerSocket serverSocket;
+
+    private static final Thread connection = new Thread() {
+        @Override
+        public void run() {
+            for (int i = 0; i < maxSlots && isON && !isInterrupted(); i++) {
+                Player emptyPlayer = new Player(serverSocket, logger);
+                emptyPlayer.start();
+            }
+            //TODO: create an empty player and pass serverSocket
+        }
+    };
 
     /**
      * Setter for the Logger
@@ -105,20 +119,11 @@ public class ServerNetInterface {
                 isON = false;
             }
         }
-
-        //In a thread:
-        Thread connection = new Thread() {
-            @Override
-            public void run() {
-                for (int i = 0; i < maxSlots; i++) {
-                    Player x = new Player(serverSocket, logger);
-                    x.start();
-                }
-                //TODO: create an empty player and pass serverSocket
-            }
-        };
-
-        connection.start();
+        if(connection.isInterrupted()){
+            connection.checkAccess();
+        }else{
+            connection.start();
+        }
     }
 
     /**
@@ -127,10 +132,29 @@ public class ServerNetInterface {
      */
     public static void stopServer(){
         try {
-            serverSocket.close();
-            isON = false;
+            isON = false; //mark the Network OFF
+            //TODO: close the player that is still waiting for a connection
+            Socket emptyPlayerResolver = new Socket("localhost", port);
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                //TODO
+            }
+            serverSocket.close(); //close the Main Socket
+            connection.interrupt(); //Interrupt the connection creator
+
         } catch (IOException e) {
             logger.log(Level.WARNING,"Closing failed");
         }
     }
+
+    public static void addPlayer(){
+        activeSlots++;
+    }
+
+    public static void removePlayer(){
+        activeSlots--;
+    }
+
+
 }

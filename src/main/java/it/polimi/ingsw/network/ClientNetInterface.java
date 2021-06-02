@@ -74,7 +74,7 @@ public class ClientNetInterface {
         return false;
     }
 
-    public ClientMessage receive() throws DisconnectedException{
+    public Message receive() throws DisconnectedException{
         return Serializer.deserializeMessage(listener.receive());
     }
 }

@@ -21,6 +21,7 @@ public class Client {
 
         boolean isON = true;
         if(CLIActionManager.Online()){
+
             //TODO: THIS IS ONLY FOR TESTING
             ClientNetInterface net = new ClientNetInterface();
             net.setParameters("localhost", 5555, 1001, logger);
