@@ -10,4 +10,3 @@ public abstract class ClientMessage extends Message{
      */
     public boolean resolve(Controller controller) throws Exception {return false;}
 }
-

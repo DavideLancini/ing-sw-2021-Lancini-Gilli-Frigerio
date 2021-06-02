@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ServerNetInterface {
-    private static Logger netLogger = Logger.getLogger("ServerApp");
+    private static Logger netLogger = Logger.getLogger("ServerNetInterfaceLogger");
     private static int port;
     private static int maxSlots;
     private static boolean isON = false;

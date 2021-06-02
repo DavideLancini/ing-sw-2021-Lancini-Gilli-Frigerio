@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author Lancini Davide
  */
 public class Sender{
-    private static final Logger senderLogger = Logger.getLogger("SenderLogger");
+    private static Logger senderLogger = Logger.getLogger("SenderLogger");
 
     private String logName;
     private Socket socket;
@@ -25,15 +25,14 @@ public class Sender{
     public Sender(String destinationAddress, int destinationPort) throws DisconnectedException {
 
         senderLogger.setLevel(Level.ALL);
-        this.logName = "Sender(" + destinationAddress + ":" + destinationPort + ")" ;
+        this.logName = "SenderTo(" + destinationAddress + ":" + destinationPort + ")" ;
         System.out.println("i'm here");
         //Connect Socket
         try {
             this.socket = new Socket(destinationAddress, destinationPort);
             senderLogger.log(Level.INFO,logName + " is connected");
         } catch (IOException errorMessage) {
-            senderLogger.log(Level.WARNING,logName + " has failed connection");
-            throw new DisconnectedException("Connection Failed");
+            senderLogger.log(Level.WARNING,logName + " has failed connection", new DisconnectedException("Connection Failed"));
         }
         //Activate Output stream
         try {
@@ -46,12 +45,11 @@ public class Sender{
     }
 
     public void send(Message message) throws DisconnectedException {
-        senderLogger.log(Level.FINE,logName + " has to send: " + message.toString());
+        senderLogger.log(Level.INFO,logName + " has to send: " + message.toString());
         String x = Serializer.serialize(message);
         try {
             outStream.writeUTF(x);
-            senderLogger.log(Level.INFO,logName + " has sent a message");
-            senderLogger.log(Level.FINEST,logName + "message: " + x);
+            senderLogger.log(Level.INFO,logName + " has sent a message: "+ x);
         } catch (IOException errorMessage) {
             senderLogger.log(Level.WARNING,logName + " has failed to send a message");
             throw new DisconnectedException("Sending Failed");

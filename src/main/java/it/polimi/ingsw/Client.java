@@ -13,9 +13,9 @@ import java.util.logging.Logger;
  */
 public class Client {
 
-    private static Logger logger = Logger.getLogger("ClientApp");
+    private static Logger clientLogger = Logger.getLogger("ClientApp");
     public static void main( String[] args ) {
-        logger.setLevel(Level.ALL);
+        clientLogger.setLevel(Level.ALL);
         boolean isON = true;
         if(CLIActionManager.Online()){
             ClientNetInterface net = CLIActionManager.Connect();
@@ -50,7 +50,6 @@ public class Client {
         }else{
             //TODO: versione offline del menu
         }
-
     }
 }
 
