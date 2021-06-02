@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.network.ClientNetInterface;
+import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.view.CLIActionManager;
 
 import java.util.logging.Level;
@@ -22,7 +23,11 @@ public class Client {
             while(isON){
                 switch (CLIActionManager.showMainMenu()){
                     case "1":
-                        CLIActionManager.createMatch(net);
+                        try {
+                            CLIActionManager.createMatch(net);
+                        } catch (DisconnectedException e) {
+                            e.printStackTrace();
+                        }
                         break;
                     case "2":
                         //enter join match
