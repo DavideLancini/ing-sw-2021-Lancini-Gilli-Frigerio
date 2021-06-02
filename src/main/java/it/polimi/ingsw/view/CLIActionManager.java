@@ -223,7 +223,7 @@ public class CLIActionManager extends Manager {
      * @param net connection
      * @return number of player
      */
-    public static boolean createMatch(ClientNetInterface net){
+    public static void createMatch(ClientNetInterface net) throws DisconnectedException {
         int numOfPlayers=0;
         boolean correctInput=false;
         while (!correctInput) {
@@ -234,13 +234,15 @@ public class CLIActionManager extends Manager {
             else
                 correctInput=true;
         }
-        switch (numOfPlayers){
+        /*switch (numOfPlayers){
             case 1:return true;
             case 2:return true;
             case 3:return true;
             case 4:return true;
-        }
-        return false;
+        }*/
+        ServerMessageView messageView= new ServerMessageView("Hello");
+        net.send(messageView);
+
 
 
         //TODO: create MessageCreateGame
