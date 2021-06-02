@@ -15,7 +15,7 @@ public class ServerNetInterface {
     private static boolean isON = false;
 
     private static int activeSlots = 0;
-    private static int activeMatches = 0;
+    private static int activeGames = 0;
 
     private static ServerSocket serverSocket;
 
@@ -69,11 +69,13 @@ public class ServerNetInterface {
 
     /**
      * Getter for the Status
-     *
-     *
      * @author Lancini Davide
      */
     public static boolean getStatus(){ return isON;}
+
+    public static int getActiveGames() {
+        return activeGames;
+    }
 
     /**
      * Main Server Method

@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.view.server.ServerMainMenu;
+import it.polimi.ingsw.view.ServerView;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,31 +11,39 @@ import java.util.logging.Logger;
  * @author Lancini Davide
  */
 public class Server {
-    private static Logger serverLogger = Logger.getLogger("ServerApp");
     public static void main( String[] args ){
-        serverLogger.setLevel(Level.ALL);
+        //Logger Creation
+        Logger logger = Logger.getLogger("ServerApp");
+        logger.setLevel(Level.ALL);
+        ServerView.setLogger(logger);
+        //Loading parameters from the properties file or standard par. if FNF
+        ServerView.loadParameters();
+        //Main Cycle of the Server Interface
         boolean isON = true;
-
-        ServerMainMenu.loadParameters();
         while(isON){
-            switch (ServerMainMenu.serverMenu()) {
+            //Asking for a command
+            switch (ServerView.serverMenu()) {
                 case "1":
-                    ServerMainMenu.toggleServer();
+                    //Switch server ON/OFF
+                    ServerView.toggleServer();
                     break;
                 case "2":
-                    ServerMainMenu.editParameters();
+                    //Edit server settings, if the server is running some parameters will be locked
+                    ServerView.editParameters();
                     break;
                 case "3":
+                    //Shutdown WITHOUT save, turn OFF the server first to save all the matches
                     isON = false;
                     break;
                 default:
+                    //Invalid Command: just re-prompt the Menu
                     break;
             }
         }
     }
 }
 
-//Logger Levels
+//Logger Levels, suggested OFF for normal use
 //Level.OFF     -> Nothing is logged
 //Level.SEVERE  -> Fatal Error
 //Level.WARNING -> Big Error
