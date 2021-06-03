@@ -3,6 +3,7 @@ package it.polimi.ingsw.network;
 import it.polimi.ingsw.network.components.Listener;
 import it.polimi.ingsw.network.components.Sender;
 import it.polimi.ingsw.network.components.Serializer;
+import it.polimi.ingsw.network.messages.ClientMessage;
 import it.polimi.ingsw.network.messages.ClientMessageLocalPort;
 
 import java.net.ServerSocket;

@@ -2,7 +2,6 @@ package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.network.ClientMessage;
 
 public class ClientMessageSetResource extends ClientMessage {
     private Resource resource;

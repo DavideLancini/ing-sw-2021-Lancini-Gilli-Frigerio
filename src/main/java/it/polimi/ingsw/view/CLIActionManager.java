@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.CardColor;
 import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Reader;
 import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.network.ClientMessage;
+import it.polimi.ingsw.network.messages.ClientMessage;
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.*;

@@ -3,7 +3,6 @@ package it.polimi.ingsw.network.messages;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.CardColor;
 import it.polimi.ingsw.model.Level;
-import it.polimi.ingsw.network.ClientMessage;
 
 public class ClientMessageBuyDevCard extends ClientMessage {
     private Level level;

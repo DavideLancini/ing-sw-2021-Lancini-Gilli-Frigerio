@@ -1,8 +1,9 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.network.Message;
 
-public abstract class ClientMessage extends Message{
+public abstract class ClientMessage extends Message {
     /**
      *
      * @param controller

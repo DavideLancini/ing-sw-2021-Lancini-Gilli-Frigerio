@@ -1,7 +1,5 @@
 package it.polimi.ingsw.network.messages;
 
-import it.polimi.ingsw.network.ServerMessage;
-
 public class ServerMessageError extends ServerMessage {
     private String error;
 

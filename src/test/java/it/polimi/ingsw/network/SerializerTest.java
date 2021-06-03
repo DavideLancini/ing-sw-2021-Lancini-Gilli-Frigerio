@@ -1,9 +1,7 @@
 package it.polimi.ingsw.network;
 
-import it.polimi.ingsw.network.messages.ClientMessageLeaderActivation;
-import it.polimi.ingsw.network.messages.ClientMessageTakeResources;
+import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.network.components.Serializer;
-import it.polimi.ingsw.network.messages.ServerMessageError;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.network.ClientMessage;
 
 public class ClientMessageProduce extends ClientMessage {
     private boolean[] activated = new boolean[6];

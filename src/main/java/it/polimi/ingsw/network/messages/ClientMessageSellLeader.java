@@ -1,7 +1,6 @@
 package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.network.ClientMessage;
 
 public class ClientMessageSellLeader extends ClientMessage {
     private int position;

@@ -1,7 +1,5 @@
 package it.polimi.ingsw.network.messages;
 
-import it.polimi.ingsw.network.ClientMessage;
-
 public class ClientMessageLocalPort extends ClientMessage {
     private int localPort;
 

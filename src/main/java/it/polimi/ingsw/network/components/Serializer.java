@@ -1,8 +1,8 @@
 package it.polimi.ingsw.network.components;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import it.polimi.ingsw.network.ClientMessage;
-import it.polimi.ingsw.network.ServerMessage;
+import it.polimi.ingsw.network.messages.ClientMessage;
+import it.polimi.ingsw.network.messages.ServerMessage;
 
 public class Serializer {
     public static String serialize(Object o){

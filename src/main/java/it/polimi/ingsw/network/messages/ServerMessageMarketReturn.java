@@ -1,7 +1,6 @@
 package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.network.ServerMessage;
 
 import java.util.Collection;
 

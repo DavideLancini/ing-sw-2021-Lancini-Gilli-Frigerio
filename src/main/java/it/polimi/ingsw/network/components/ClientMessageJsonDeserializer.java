@@ -3,7 +3,7 @@ package it.polimi.ingsw.network.components;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
-import it.polimi.ingsw.network.ClientMessage;
+import it.polimi.ingsw.network.messages.ClientMessage;
 
 import java.lang.reflect.Type;
 
