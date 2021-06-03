@@ -169,4 +169,8 @@ public class PlayerBoard {
     private void ShowFaithTrack() {
         System.out.println(faithTrack+""+Resource.FAITH);
     }
+
+    public void setLeaders(LeaderCard[] leaderCards) {
+        this.leaderCards = leaderCards;
+    }
 }

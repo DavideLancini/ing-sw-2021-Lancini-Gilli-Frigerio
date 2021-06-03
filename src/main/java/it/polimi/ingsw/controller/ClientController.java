@@ -43,6 +43,9 @@ public class ClientController {
                 case Error:
                     manager.DisplayError(((ServerMessageError)message).getError());
                     break;
+
+                case ChooseLeaders:
+                    net.send(manager.ChooseLeaders(((ServerMessageChooseLeaders)message).getLeaders()));
             }
         }
     }

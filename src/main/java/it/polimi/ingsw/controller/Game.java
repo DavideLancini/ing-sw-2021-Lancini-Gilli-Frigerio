@@ -25,18 +25,26 @@ public class Game {
         if(players.length>=4)players[3].fourthPlayer();
         if(players.length>=5)throw new Exception("Number of players out of range");
         System.out.println("Starting Game with "+players.length+" players...");
-        startGame(players);
+
+        for(Player each: players) {
+            each.drawLeaderCards(leaderCardDeck.draw4());
+            each.playerBoard = new PlayerBoard();
+            each.setController(new Controller(each.playerBoard, this.devCardBoard, this.market));
+        }
+
+
+        startGame();
     }
 
 
     /**
      * starts a four player game
-     * @param players id of players
+     *
      */
-    private void startGame(Player[] players) {
+    private void startGame() {
 
         do {
-            for(Player each : players) {
+            for(Player each : this.players) {
                 boolean done = false;
                 boolean action = false;
                 while(!done){

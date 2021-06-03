@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Stack;
 
 /**
  * Class LeaderCardDeck
@@ -9,31 +10,38 @@ import java.util.Collections;
  */
 public class LeaderCardDeck {
 
-public  static  LeaderCard[] deck = new LeaderCard[16];
-private static LeaderCard[] given = new LeaderCard[4];
-private static int k=0;
+private Stack<LeaderCard> deck;
     /**
      * LeaderCardDeck constructor
      * @param leaderCards initialized leaderCards for the deck
      */
     public LeaderCardDeck(LeaderCard[] leaderCards) {
         Collections.shuffle(Arrays.asList(leaderCards));
-        deck = leaderCards;
+        deck.addAll(Arrays.asList(leaderCards));
     }
+
+    public LeaderCard[] draw4(){
+        return new LeaderCard[]{deck.pop(), deck.pop(), deck.pop(), deck.pop()};
+    }
+
+
+
+
+
+
 
     /**
      * getDeck
      * @return all LeaderCardDeck
      */
-    public LeaderCard[] getDeck(){
-        return deck;
-    }
+   // public LeaderCard[] getDeck(){return deck;}
 
     /**
      * setGiven
      * 4 leaderCard from deck
      */
-    private static void setGiven() {
+    /*
+    private void setGiven() {
        int i=0;
         while ( i<4) {
             given[i] = deck[k];
@@ -42,19 +50,20 @@ private static int k=0;
         }
 
     }
+    */
 
     /**
      * getGiven
      * @return 4 leaderCards
      */
-    private LeaderCard[] getGiven() {
-        return given;
-    }
+    //private LeaderCard[] getGiven() {return given;}
+
 
     /**
      * DrawTwo
      * select two cards to place in playerBoard
      */
+    /*
     public static LeaderCard[] DrawTwo(){
         LeaderCard[] chosen = new LeaderCard[2];
         int i=1;
@@ -76,4 +85,6 @@ private static int k=0;
         //set playerBoard.leaderCards
         return chosen;
     }
+    */
+
 }

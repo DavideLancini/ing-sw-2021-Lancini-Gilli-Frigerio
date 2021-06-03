@@ -250,6 +250,32 @@ public class CLIActionManager extends Manager {
 
     }
 
+    public ClientMessage ChooseLeaders(LeaderCard[] leaders){
+        System.out.println("Choose two of the following four Leaders:");
+        int i = 0, j = 0;
+        for (LeaderCard each : leaders) {
+            i++;
+            System.out.println(i+": ");
+            each.leaderCardView();
+        }
+        do {
+            try {
+                System.out.println("Enter the number of the first chosen Leader:");
+                i = parseToInt(Reader.in.nextLine());
+                System.out.println("Enter the number of the second chosen Leader:");
+                j = parseToInt(Reader.in.nextLine());
+            }
+            catch (NumberFormatException e) {
+                System.out.println("There's been an error, please retry.");
+                continue;}
+        }
+        while (i!=j && i <= 4 && j <= 4 && i >= 1 && j >= 1);
+        return new ClientMessageChosenLeaders(i,j);
+    }
+
+
+
+
     /**
      * MainMenu
      * @return selected action of player/client

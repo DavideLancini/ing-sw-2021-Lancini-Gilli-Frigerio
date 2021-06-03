@@ -1,9 +1,12 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.PlayerBoard;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.*;
 import it.polimi.ingsw.network.messages.EndTurnException;
+import it.polimi.ingsw.network.messages.ServerMessage;
+import it.polimi.ingsw.network.messages.ServerMessageChooseLeaders;
 
 import java.net.ServerSocket;
 import java.util.logging.Logger;
@@ -14,6 +17,7 @@ public class Player extends Thread{
     public PlayerBoard playerBoard;
     public String playerId;
     private Controller controller;
+    private LeaderCard[] templeaders;
 
     public Player(ServerSocket father, Logger logger){
         Player.logger = logger;
@@ -25,7 +29,7 @@ public class Player extends Thread{
         ServerNetInterface.addPlayer();
     }
 
-    public void addResource(int numOfResource) throws Exception {
+    private void addResource(int numOfResource) throws Exception {
         //TODO: ask resource to add
         int i=0;
         Resource[] resources = new Resource[numOfResource];
@@ -58,6 +62,21 @@ public class Player extends Thread{
         addResource(2);
         playerBoard.addFaith(1);
     }
+
+    public void drawLeaderCards(LeaderCard[] leaders) throws DisconnectedException {
+        this.templeaders = leaders;
+        net.send(new ServerMessageChooseLeaders(leaders));
+    }
+
+    /**
+     * called when receiving ClientMessageChosenLeaders before a game
+     * @param positions received in message
+     */
+    private void setLeaders(int[] positions){
+        this.playerBoard.setLeaders(new LeaderCard[]{this.templeaders[positions[0]], this.templeaders[positions[1]]});
+    }
+
+    public void setController(Controller controller){this.controller = controller;}
 
     @Override
     public void run() {
