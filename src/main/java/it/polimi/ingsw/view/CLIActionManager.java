@@ -2,10 +2,7 @@ package it.polimi.ingsw.view;
 
 
 import it.polimi.ingsw.controller.ClientController;
-import it.polimi.ingsw.model.CardColor;
-import it.polimi.ingsw.model.Level;
-import it.polimi.ingsw.model.Reader;
-import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.messages.ClientMessage;
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
@@ -28,11 +25,11 @@ public class CLIActionManager extends Manager {
         this.ClientController = clicont;
     }
 
-    private static int parseToInt(String s) throws Exception{
+    private static int parseToInt(String s) throws NumberFormatException{
         try{
             return Integer.parseInt(s);
         }
-        catch(Exception e) {throw new Exception("");}
+        catch(NumberFormatException e) {throw new NumberFormatException("");}
     }
 
     public static ClientNetInterface Connect() {
@@ -48,14 +45,14 @@ public class CLIActionManager extends Manager {
             System.out.println( "serverPort: " );
             try {
                 serverPort= parseToInt(Reader.in.nextLine());
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 return null;
             }
 
             System.out.println( "localPort: " );
             try {
                 localPort= parseToInt(Reader.in.nextLine());
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 return null;
             }
 
@@ -74,15 +71,56 @@ public class CLIActionManager extends Manager {
     }
 
 
-    public void ArrangeDepot(Collection<Resource> resources) throws DisconnectedException {
+    public ClientMessage ArrangeDepot(Collection<Resource> resources) {
         System.out.println("These are the resources to be arranged in your depot: ");
-        int i = 0;
-        for(Resource each : resources){System.out.println(""+(i++)+". "+each.toString());}
 
-        //TODO: collect new arrangement
-        Resource[] newresources = null;
-        ClientController.tryDepot(newresources);
+        int servant = 0;int shield = 0;int coin = 0;int stone = 0;
+        for (Resource resource : resources) {
+            switch(resource){
+                case COIN: coin++; break;
+                case SERVANT: servant++; break;
+                case SHIELD: shield++; break;
+                case STONE: stone++; break;
+            }
+        }
+        if (servant > 0) System.out.print(servant+""+Resource.SERVANT);
+        if (coin > 0) System.out.print(coin+""+Resource.COIN);
+        if (shield > 0) System.out.print(shield+""+Resource.SHIELD);
+        if (stone> 0) System.out.print(stone+""+Resource.STONE);
+        System.out.println("");
+
+        Resource[] newresources = new Resource[]{Resource.EMPTY, Resource.EMPTY, Resource.EMPTY, Resource.EMPTY, Resource.EMPTY, Resource.EMPTY};
+        Resource choice[] = new Resource[3];
+
+        for (int i = 0; i<3; i++){
+            System.out.println("Choose which resource to put in row n° "+i+": ");
+            System.out.println("1: "+Resource.SERVANT+"\t "+"2: "+Resource.COIN+"\t "+"3: "+Resource.SHIELD+"\t "+"4: "+Resource.STONE+"\t ");
+            try {
+                switch (parseToInt(Reader.in.nextLine())) {
+                    case 1: choice[i] = Resource.SERVANT;
+                    case 2: choice[i] = Resource.COIN;
+                    case 3: choice[i] = Resource.SHIELD;
+                    case 4: choice[i] = Resource.STONE;
+                    default: throw new NumberFormatException("");
+                }
+            }
+            catch(NumberFormatException e){
+                System.out.println("Number invalid, please retry.");
+                i--; continue;
+            }
+        }
+
+        if(resources.remove(choice[0]))newresources[0] = choice[0];
+        if(resources.remove(choice[1]))newresources[1] = choice[1];
+        if(resources.remove(choice[1]))newresources[2] = choice[1];
+        if(resources.remove(choice[2]))newresources[3] = choice[2];
+        if(resources.remove(choice[2]))newresources[4] = choice[2];
+        if(resources.remove(choice[2]))newresources[5] = choice[2];
+
+        return new ClientMessageTryDepotConfiguration(newresources, resources.size());
     }
+
+
 
     public static boolean Online(){
         while(true){
@@ -96,6 +134,11 @@ public class CLIActionManager extends Manager {
         }
     }
 
+    /**
+     * CLI Interface for in-game actions
+     * @param mainActionDone true if already took resources, bought a card or produced in this game turn
+     * @return message to be sent back to server
+     */
     public ClientMessage Turn(boolean mainActionDone){
 
         while (true){

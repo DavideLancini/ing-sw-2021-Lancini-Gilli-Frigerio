@@ -123,16 +123,15 @@ public class Controller {
 
 
 
-    public void tryDepotConfiguration(Resource[] input){
-        //input length is built to be 10, padded with nulls if necessary
+    public void tryDepotConfiguration(Resource[] input, int discardAmount){
+        //input length is built to be 6
         if(valid(Arrays.copyOfRange(input, 1, 2))
         && valid(Arrays.copyOfRange(input, 3, 5))
-        && valid(Arrays.copyOfRange(input, 6, 7))
-        && valid(Arrays.copyOfRange(input, 8, 9))
+        && different(input[0], input[1], input[3])
         ){
             ServerMessageOK message = new ServerMessageOK();
             //TODO: return depotisLegal
-            //TODO: add faith to other players
+            //TODO: add faith to other players (discardAmount)
 
         }
         else{
@@ -150,6 +149,15 @@ public class Controller {
         }
         return true;
     }
+
+    private boolean different(Resource a, Resource b, Resource c){
+        if(a == b && a != Resource.EMPTY) return false;
+        else if(a == c && a != Resource.EMPTY) return false;
+        else if(c == b && b != Resource.EMPTY) return false;
+        else return true;
+    }
+
+
 
     public boolean buyDevCard(Level level, CardColor color, int column){
         DevCard newCard;
@@ -300,7 +308,11 @@ public class Controller {
 
         if((isRow && position <= 3) || (!isRow && position <= 4) && position > 0) {
             try {marbles = this.market.takeResources(isRow, position);}
-            catch (Exception e) {} //send back failure message
+            catch (Exception e) {
+                //TODO: send back failure message
+                ServerMessageError message = new ServerMessageError(e.getMessage());
+                return false;
+            }
         }
         else {
             //TODO: send back failure message
@@ -311,6 +323,37 @@ public class Controller {
         Collection<Resource> resources;
 
         resources = this.convert(marbles);
+
+        //Empties depot to be reorganized
+        try {
+            for (int i = 0; i < 6; i++) {
+                Resource resource = pb.getDepot().extract(i);
+                if (resource != Resource.EMPTY) resources.add(resource);
+            }
+        }
+        catch(Exception e){
+            //TODO: critical error, resources will get lost in process
+        }
+
+        //Automatically deposits resources in leader depot slots
+        try {
+            for (int i = 0; i<resources.size(); i++) {
+                Resource each = ((ArrayList<Resource>)resources).get(i);
+                if (pb.getDepot().getLeaderType(0) == each) {
+                    if (pb.getDepot().getResource(6) == Resource.EMPTY) {pb.getDepot().deposit(each, 6); each = Resource.EMPTY; continue;}
+                    if (pb.getDepot().getResource(7) == Resource.EMPTY) {pb.getDepot().deposit(each, 7); each = Resource.EMPTY; continue;}
+                }
+                if (pb.getDepot().getLeaderType(1) == each) {
+                    if (pb.getDepot().getResource(8) == Resource.EMPTY) {pb.getDepot().deposit(each, 8); each = Resource.EMPTY; continue;}
+                    if (pb.getDepot().getResource(9) == Resource.EMPTY) {pb.getDepot().deposit(each, 9); each = Resource.EMPTY; continue;}
+                }
+            }
+        }
+        catch(Exception e){
+            //TODO: send back failure message
+            ServerMessageError message = new ServerMessageError("Error during Leader Depot resource placement.");
+            return false;
+        }
 
         //TODO: send back to client message with resources serialized
         ServerMessageMarketReturn message = new ServerMessageMarketReturn(resources);

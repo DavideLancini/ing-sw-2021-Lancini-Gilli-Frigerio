@@ -33,7 +33,7 @@ public class ClientController {
                     break;
 
                 case MarketReturn:
-                    manager.ArrangeDepot(((ServerMessageMarketReturn)message).getResources());
+                    net.send(manager.ArrangeDepot(((ServerMessageMarketReturn)message).getResources()));
                     break;
 
                 case View:
@@ -47,10 +47,5 @@ public class ClientController {
         }
     }
 
-
-    public void tryDepot(Resource[] resource) throws DisconnectedException{
-        net.send(new ClientMessageTryDepotConfiguration(resource));
-
-    }
 
 }

@@ -16,6 +16,8 @@ public abstract class Manager {
 
     public void DisplayError(String error){}
 
-    public void ArrangeDepot(Collection<Resource> resources) throws DisconnectedException {}
+    public ClientMessage ArrangeDepot(Collection<Resource> resources) throws DisconnectedException {
+        return null;
+    }
 
 }

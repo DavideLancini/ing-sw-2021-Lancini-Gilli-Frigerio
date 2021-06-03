@@ -25,6 +25,8 @@ public class Depot {
      * @return resources in LeaderDepot
      */
     public Resource[] getLeaderType(){return this.leaderType;}
+    public Resource getLeaderType(int position){return this.leaderType[position];}
+
 
     /**
      * Class constructor
@@ -55,7 +57,7 @@ public class Depot {
      */
     //TODO: Exception handling
     public void deposit(Resource resource, int position) throws Exception{
-        if(position<0 || position>9 || resource == Resource.EMPTY) throw new Exception("invalid position or null resource");
+        if(position<0 || position>9 || resource == Resource.EMPTY || resource == null) throw new Exception("invalid position or null resource");
         if(this.contents[position] != Resource.EMPTY){throw new Exception("slot already occupied");}
         else if( ( (position == 6 || position == 7) && !resource.equals(this.leaderType[0])) || ( (position == 8 || position == 9) && !resource.equals(this.leaderType[1]))) throw new Exception("invalid resource type");
         this.contents[position] = resource;

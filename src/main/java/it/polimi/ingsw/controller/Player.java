@@ -37,7 +37,7 @@ public class Player extends Thread{
 
     public boolean turn(boolean mainAction) throws EndTurnException {
         boolean action = false;
-
+        //TODO:
         //net.send(new ServerMessageTurn(mainAction));
         //wait for response
         //action = message.resolve(controller)
