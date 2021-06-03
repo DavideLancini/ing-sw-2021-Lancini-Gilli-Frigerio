@@ -61,16 +61,25 @@ public class Player extends Thread{
 
     @Override
     public void run() {
+        //TODO: Get a PlayerID
+        this.playerId = "xXx_Angelino_Alfano_xXx"; //TEMP
+
+        //TODO: Wait for a Join/Create Game
+
+        //TODO: Create controller
+
+        //Read Messages
         while(ServerNetInterface.isON){
+            logger.info("(Player)"+this.playerId+": is waiting for a message from the client");
             try {
                 Message temp = net.receive();
-                System.out.println(temp.toString());
-                net.send(temp);
-                //TODO: SONO IO 1
+
+                //TODO: temp.resolve(* manca il controller *)
             } catch (DisconnectedException e) {
                 ServerNetInterface.removePlayer();
                 interrupt();
             }
         }
     }
+
 }
