@@ -44,7 +44,8 @@ public class ConnectionInterface{
         int tries = 5;
         while(tries>0){
             try{
-                sender.send(message);
+                String rawMessage = Serializer.serialize(message);
+                sender.send(rawMessage);
                 return;
             }catch (DisconnectedException e){
                 tries--;
@@ -54,6 +55,6 @@ public class ConnectionInterface{
     }
 
     public ClientMessage receive() throws DisconnectedException{
-        return (ClientMessage) Serializer.deserializeMessage(listener.receive());
+        return Serializer.deserializeMessage(listener.receive());
     }
 }

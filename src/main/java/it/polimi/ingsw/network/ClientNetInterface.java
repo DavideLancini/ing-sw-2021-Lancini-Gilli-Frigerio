@@ -56,16 +56,20 @@ public class ClientNetInterface {
             //Create a message to declare to the server what port should be used to receive messages
             ClientMessageLocalPort message;
             message = new ClientMessageLocalPort(localPort);
-            sender.send(message);
+            String rawMessage = Serializer.serialize(message);
+            sender.send(rawMessage);
             temp.run();
         }
     }
 
     public boolean send(Message message) throws DisconnectedException {
+        String rawMessage = Serializer.serialize(message);
+
+
         int tries = 5;
         while(tries>0){
             try{
-                sender.send(message);
+                sender.send(rawMessage);
                 return true;
             }catch (DisconnectedException e){
                 tries--;
@@ -74,7 +78,7 @@ public class ClientNetInterface {
         return false;
     }
 
-    public Message receive() throws DisconnectedException{
-        return Serializer.deserializeMessage(listener.receive());
+    public ServerMessage receive() throws DisconnectedException{
+        return Serializer.deserializeServerMessage(listener.receive());
     }
 }

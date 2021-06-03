@@ -1,7 +1,6 @@
 package it.polimi.ingsw.network.components;
 
 import it.polimi.ingsw.network.DisconnectedException;
-import it.polimi.ingsw.network.Message;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -43,12 +42,10 @@ public class Sender{
         }
     }
 
-    public void send(Message message) throws DisconnectedException {
-        senderLogger.log(Level.INFO,logName + " has to send: " + message.toString());
-        String x = Serializer.serialize(message);
+    public void send(String rawMessage) throws DisconnectedException {
         try {
-            outStream.writeUTF(x);
-            senderLogger.log(Level.INFO,logName + " has sent a message: "+ x);
+            outStream.writeUTF(rawMessage);
+            senderLogger.log(Level.INFO,logName + " has sent a message: "+ rawMessage);
         } catch (IOException errorMessage) {
             senderLogger.log(Level.WARNING,logName + " has failed to send a message");
             throw new DisconnectedException("Sending Failed");
