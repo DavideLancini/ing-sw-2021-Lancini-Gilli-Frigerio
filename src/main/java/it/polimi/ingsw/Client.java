@@ -7,6 +7,8 @@ import it.polimi.ingsw.view.CLIActionManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Client App
  *
@@ -34,17 +36,22 @@ public class Client {
 
             //ClientNetInterface net = CLIActionManager.Connect();
 
-            while(isON){
-                String selection = CLIActionManager.showMainMenu();
-                switch (selection){
+
+                String[] selection = CLIActionManager.showMainMenu();
+                switch (selection[0]){
                     case "1":
                         try {
-                            CLIActionManager.createMatch(net);
+                            CLIActionManager.createMatch(net,selection[1]);
                         } catch (DisconnectedException e) {
                             e.printStackTrace();
                         }
                         break;
                     case "2":
+                        try {
+                            CLIActionManager.joinMatch(net,selection[1]);
+                        } catch (DisconnectedException e) {
+                            e.printStackTrace();
+                        }
                         //enter join match
                         break;
                     case "3":
@@ -66,6 +73,13 @@ public class Client {
                         // don't do anything and show again the main menu
                         break;
                 }
+            while(isON){
+                try {
+                sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+                System.out.println("im on");
             }
         }else{
             //TODO: versione offline del menu

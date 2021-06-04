@@ -4,9 +4,7 @@ import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.PlayerBoard;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.*;
-import it.polimi.ingsw.network.messages.EndTurnException;
-import it.polimi.ingsw.network.messages.ServerMessage;
-import it.polimi.ingsw.network.messages.ServerMessageChooseLeaders;
+import it.polimi.ingsw.network.messages.*;
 
 import java.net.ServerSocket;
 import java.util.logging.Logger;
@@ -80,8 +78,21 @@ public class Player extends Thread{
 
     @Override
     public void run() {
-        //TODO: Get a PlayerID
-        this.playerId = "xXx_Angelino_Alfano_xXx"; //TEMP
+        try {
+            Message temp1=net.receive();
+            if(temp1.getType()== MessageType.CreateGame) {
+                ClientMessageCreateGame createGame = (ClientMessageCreateGame) temp1;
+                this.playerId= createGame.CreateGame();
+            }
+            else {
+                ClientMessageJoinGame joinGame = (ClientMessageJoinGame) temp1;
+                this.playerId= joinGame.joinGame();
+            }
+        } catch (DisconnectedException e) {
+            e.printStackTrace();
+        }
+        //TODO: Get a PlayerID this.playerId = "xXx_Angelino_Alfano_xXx"; //TEMP
+
 
         //TODO: Wait for a Join/Create Game
 
