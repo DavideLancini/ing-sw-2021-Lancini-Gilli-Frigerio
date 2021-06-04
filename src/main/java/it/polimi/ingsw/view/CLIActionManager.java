@@ -255,22 +255,22 @@ public class CLIActionManager extends Manager {
         int i = 0, j = 0;
         for (String each : leaders) {
             i++;
-            System.out.println(i+": "+each);
+            System.out.println(i+":\n"+each);
 
         }
         i=0;
         do {
             try {
                 System.out.println("Enter the number of the first chosen Leader:");
-                i = parseToInt(Reader.in.nextLine());
+                i = Reader.in.nextInt();
                 System.out.println("Enter the number of the second chosen Leader:");
-                j = parseToInt(Reader.in.nextLine());
+                j = Reader.in.nextInt();
             }
             catch (NumberFormatException e) {
                 System.out.println("There's been an error, please retry.");
                 continue;}
         }
-        while (i!=j && i <= 4 && j <= 4 && i >= 1 && j >= 1);
+        while (!(i!=j && i <= 4 && j <= 4 && i >= 1 && j >= 1));
         return new ClientMessageChosenLeaders(i,j);
     }
 

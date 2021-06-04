@@ -48,7 +48,7 @@ public class LeaderSale extends LeaderCard {
     }
 
     public String view(){
-        String string = new String();
+        String string = "";
         string = string.concat("══════════════╗\n");
         string = string.concat("   [");
         for (CardColor each : requirements) {
