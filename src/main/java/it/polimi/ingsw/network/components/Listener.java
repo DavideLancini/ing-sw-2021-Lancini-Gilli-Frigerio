@@ -61,13 +61,15 @@ public class Listener {
      */
     public String receive() throws DisconnectedException {
         String rawMessage = "";
-        try {
-            rawMessage = this.inputStream.readUTF();
-            logger.info(this.listenerName + "has received: " + rawMessage);
-            return rawMessage;
-        } catch (IOException e) {
-            throw new DisconnectedException("Failed to receive");
+        while(rawMessage.equals("")){
+            try {
+                rawMessage = this.inputStream.readUTF();
+                logger.info(this.listenerName + "has received: " + rawMessage);
+            } catch (IOException e) {
+                throw new DisconnectedException("Failed to receive");
+            }
         }
+        return rawMessage;
     }
 
     /**
