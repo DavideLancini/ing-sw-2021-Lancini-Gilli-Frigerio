@@ -1,6 +1,7 @@
 package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.network.DisconnectedException;
 
 public class ClientMessageLeaderActivation extends ClientMessage {
     public int position;
@@ -10,7 +11,7 @@ public class ClientMessageLeaderActivation extends ClientMessage {
         this.type = MessageType.LeaderActivation;
     }
 
-    public boolean resolve(Controller controller) {
+    public boolean resolve(Controller controller) throws DisconnectedException {
         controller.activateLeader(this.position);
         return false;
     }

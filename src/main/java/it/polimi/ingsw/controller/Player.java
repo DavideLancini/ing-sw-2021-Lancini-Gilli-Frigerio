@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.PlayerBoard;
 import it.polimi.ingsw.model.Resource;
@@ -38,17 +39,21 @@ public class Player extends Thread{
         }
     }
 
-    public boolean turn(boolean mainAction) throws EndTurnException {
+    public boolean turn(boolean mainAction) throws EndTurnException, DisconnectedException {
         boolean action = false;
-        //TODO:
-        //net.send(new ServerMessageTurn(mainAction));
-        //wait for response
-        //action = message.resolve(controller)
 
-        //temp
-        throw new EndTurnException();
-        //return /*action*/ true;
+        net.send(new ServerMessageTurn(mainAction));
+        ClientMessage message = net.receive();
+
+        return action = message.resolve(controller);
     }
+
+    public void receiveLeaders() throws DisconnectedException {
+        ClientMessageChosenLeaders message = (ClientMessageChosenLeaders) net.receive();
+        setLeaders(message.getPositions());
+        logger.info("Leaders received and set");
+    }
+
 
     public void secondPlayer() throws Exception {
         addResource(1);

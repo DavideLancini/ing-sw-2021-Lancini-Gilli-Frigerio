@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 
+import it.polimi.ingsw.Client;
 import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.messages.ClientMessage;
@@ -13,7 +14,9 @@ import java.util.logging.Logger;
 
 public class CLIActionManager extends Manager {
 
-    private static Logger logger;
+
+    private static Logger logger = Client.logger;
+    private static ClientNetInterface net;
     private ClientController ClientController;
 
     public static void setLogger(Logger logger){
@@ -25,18 +28,20 @@ public class CLIActionManager extends Manager {
         this.ClientController = clicont;
     }
 
-    private static int parseToInt(String s) throws NumberFormatException{
+    private static int readInt(){
+        String in = Reader.in.nextLine();
         try{
-            return Integer.parseInt(s);
+            return Integer.parseInt(in);
         }
-        catch(NumberFormatException e) {throw new NumberFormatException("");}
+        catch (NumberFormatException e){
+            return Reader.in.nextInt();
+        }
+
     }
 
-    public static ClientNetInterface Connect() {
-        ClientNetInterface net = new ClientNetInterface();
+    public static ClientNetInterface Connect() throws DisconnectedException{
         String serverAddress;
         int serverPort;
-        int localPort;
 
         while(true){
             System.out.println( "serverAddress: " );
@@ -44,26 +49,21 @@ public class CLIActionManager extends Manager {
 
             System.out.println( "serverPort: " );
             try {
-                serverPort= parseToInt(Reader.in.nextLine());
+                serverPort= readInt();
             } catch (NumberFormatException e) {
                 return null;
             }
 
-            System.out.println( "localPort: " );
             try {
-                localPort= parseToInt(Reader.in.nextLine());
-            } catch (NumberFormatException e) {
-                return null;
-            }
-
-            net.setParameters(serverAddress, serverPort, localPort, logger);
-            try {
-                net.connect();
-                return net;
+                net = new ClientNetInterface(serverAddress,serverPort, Client.logger);
             } catch (DisconnectedException e) {
-                //Do nothing, just restart the loop
+                //warning
             }
         }
+    }
+
+    public static void autoConnect() throws DisconnectedException{
+        net = new ClientNetInterface("localhost",5555, Client.logger);
     }
 
     public void DisplayError(String error){
@@ -96,7 +96,7 @@ public class CLIActionManager extends Manager {
             System.out.println("Choose which resource to put in row n° "+i+": ");
             System.out.println("1: "+Resource.SERVANT+"\t "+"2: "+Resource.COIN+"\t "+"3: "+Resource.SHIELD+"\t "+"4: "+Resource.STONE+"\t ");
             try {
-                switch (parseToInt(Reader.in.nextLine())) {
+                switch (readInt()) {
                     case 1: choice[i] = Resource.SERVANT;
                     case 2: choice[i] = Resource.COIN;
                     case 3: choice[i] = Resource.SHIELD;
@@ -152,7 +152,7 @@ public class CLIActionManager extends Manager {
             System.out.println( "7. End Turn");
 
             try {
-                int choice = parseToInt(Reader.in.nextLine());
+                int choice = readInt();
 
                 switch (choice) {
 
@@ -163,9 +163,9 @@ public class CLIActionManager extends Manager {
                         }
 
                         System.out.println("0 for row, 1 for column");
-                        boolean isRow = parseToInt(Reader.in.nextLine()) == 1 ? false : true;
+                        boolean isRow = readInt() == 1 ? false : true;
                         System.out.println("Enter number of "+(isRow ? "row" : "column")+":");
-                        int position = parseToInt(Reader.in.nextLine());
+                        int position = readInt();
                         return new ClientMessageTakeResources(isRow, position);
 
                     case 2:
@@ -176,14 +176,14 @@ public class CLIActionManager extends Manager {
                         }
 
                         System.out.println("Level:");
-                        Level level = Level.values()[parseToInt(Reader.in.nextLine())-1];
+                        Level level = Level.values()[readInt()-1];
 
                         System.out.println("Color: ");
                         for (int i = 0; i<CardColor.values().length; i++){System.out.println(""+i+". "+CardColor.values()[i].toString());};
-                        CardColor color = CardColor.values()[parseToInt(Reader.in.nextLine())];
+                        CardColor color = CardColor.values()[readInt()];
 
                         System.out.println("Column in which to put it: ");
-                        int column = parseToInt(Reader.in.nextLine());
+                        int column = readInt();
 
                         return new ClientMessageBuyDevCard(level, color, column);
 
@@ -207,7 +207,7 @@ public class CLIActionManager extends Manager {
 
                         for(int i = 0; i<6; i++){
                             System.out.println(text[i]);
-                            activated[i] = parseToInt(Reader.in.nextLine()) == 1 ? true : false;
+                            activated[i] = readInt() == 1 ? true : false;
                         }
 
                         return new ClientMessageProduce(activated);
@@ -215,21 +215,21 @@ public class CLIActionManager extends Manager {
 
                     case 4:
                         System.out.println("Enter number of Leader Card to be activated");
-                        int pos = parseToInt(Reader.in.nextLine());
+                        int pos = readInt();
                         return new ClientMessageLeaderActivation(pos);
 
                     case 5:
                         System.out.println("Enter number of Leader Card to be sold");
-                        int number = parseToInt(Reader.in.nextLine());
+                        int number = readInt();
                         return new ClientMessageSellLeader(number);
 
                     case 6:
                         System.out.println("Enter number of resource to be set. 0 to 1 for defaultProduciton input, 2 for output, 3 to 4 for LeaderProduction choice");
-                        int res = parseToInt(Reader.in.nextLine());
+                        int res = readInt();
 
                         System.out.println("Resource: ");
                         for (int i = 0; i < Resource.values().length -2; i++){System.out.println(""+i+". "+Resource.values()[i].toString());};
-                        Resource resource = Resource.values()[parseToInt(Reader.in.nextLine())];
+                        Resource resource = Resource.values()[readInt()];
 
                         return new ClientMessageSetResource(resource, res);
 
@@ -255,7 +255,7 @@ public class CLIActionManager extends Manager {
         int i = 0, j = 0;
         for (String each : leaders) {
             i++;
-            System.out.println(i+": "+each);
+            System.out.println(i+":\n"+each);
 
         }
         i=0;
@@ -264,13 +264,13 @@ public class CLIActionManager extends Manager {
                 System.out.println("Enter the number of the first chosen Leader:");
                 i = parseToInt(Reader.in.nextLine());
                 System.out.println("Enter the number of the second chosen Leader:");
-                j = parseToInt(Reader.in.nextLine());
+                j = Reader.in.nextInt();
             }
             catch (NumberFormatException e) {
                 System.out.println("There's been an error, please retry.");
                 continue;}
         }
-        while (i!=j && i <= 4 && j <= 4 && i >= 1 && j >= 1);
+        while (!(i!=j && i <= 4 && j <= 4 && i >= 1 && j >= 1));
         return new ClientMessageChosenLeaders(i,j);
     }
 
@@ -286,9 +286,10 @@ public class CLIActionManager extends Manager {
         String playerID;
         System.out.println("playerID:");
         playerID = Reader.in.nextLine();
-        System.out.println("1. Create Match");
-        System.out.println("2. Join Match");
-        System.out.println("3. View Public Match");
+
+        System.out.println("1. Join Game");
+        System.out.println("2. Create Custom Game");
+        System.out.println("3. Join Custom Game");
         System.out.println("4. Create Custom Rule Set");
         System.out.println("5. Settings");
         System.out.println("6. Credits");
@@ -300,11 +301,10 @@ public class CLIActionManager extends Manager {
 
     /**
      * Create match ask number of players for starting game
-     * @param net connection
      * @param s
      * @return number of player
      */
-    public static void createMatch(ClientNetInterface net, String s) throws DisconnectedException {
+    public static void createCustomMatch(String s) throws DisconnectedException {
         int numOfPlayers=0;
         boolean correctInput=false;
         while (!correctInput) {
@@ -327,11 +327,15 @@ public class CLIActionManager extends Manager {
         //TODO: entra nella funzione InGame che da ora pilota il client
 
     }
-    public static void joinMatch(ClientNetInterface net, String playerId) throws DisconnectedException {
+
+    public static void joinMatch(String playerId) throws DisconnectedException {
         System.out.println("How many player? ");
         int gameMode = Reader.in.nextInt();
-        ClientMessageJoinGame messageJoin = new ClientMessageJoinGame(playerId,gameMode);
+        ClientMessageJoinGame messageJoin = new ClientMessageJoinGame(playerId, gameMode);
         net.send(messageJoin);
-    }
 
+        ClientController controller = new ClientController(true);
+        controller.setup(net);
+        controller.main();
+    }
 }

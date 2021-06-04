@@ -3,6 +3,7 @@ package it.polimi.ingsw.network.messages;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.CardColor;
 import it.polimi.ingsw.model.Level;
+import it.polimi.ingsw.network.DisconnectedException;
 
 public class ClientMessageBuyDevCard extends ClientMessage {
     private Level level;
@@ -16,7 +17,7 @@ public class ClientMessageBuyDevCard extends ClientMessage {
         this.column = column;
     }
 
-    public boolean resolve(Controller controller) {
+    public boolean resolve(Controller controller) throws DisconnectedException {
         return controller.buyDevCard(this.level, this.color, this.column);
     }
 }

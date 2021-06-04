@@ -1,6 +1,7 @@
 package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.network.DisconnectedException;
 
 public class ClientMessageTakeResources extends ClientMessage {
     private boolean isRow;
@@ -12,7 +13,7 @@ public class ClientMessageTakeResources extends ClientMessage {
         this.type = MessageType.TakeResources;
     }
 
-    public boolean resolve(Controller controller) {
+    public boolean resolve(Controller controller) throws DisconnectedException {
         return controller.takeResources(this.isRow, this.position);
     }
 }

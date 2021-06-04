@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import com.google.gson.Gson;
 import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.EndTurnException;
 import it.polimi.ingsw.network.messages.ServerMessageOK;
 
@@ -44,8 +45,14 @@ public class Game {
         for(Player each: players) {
             each.drawLeaderCards(leaderCardDeck.draw4());
             each.playerBoard = new PlayerBoard();
-            each.setController(new Controller(each.playerBoard, this.devCardBoard, this.market));
+            each.setController(new Controller(each.net, each.playerBoard, this.devCardBoard, this.market));
         }
+        Server.logger.info("OK6");
+
+        for(Player each: players){
+            each.receiveLeaders();
+        }
+        Server.logger.info("OK7");
 
         startGame();
     }
@@ -55,8 +62,8 @@ public class Game {
      * starts a four player game
      *
      */
-    private void startGame() {
-
+    private void startGame(){
+        Server.logger.info("Game actually started");
         do {
             for(Player each : this.players) {
                 boolean done = false;
@@ -65,7 +72,7 @@ public class Game {
                     try {
                         action = each.turn(false);
                     }
-                    catch(EndTurnException e){done = true;}
+                    catch(EndTurnException | DisconnectedException e){done = true;}
                 }
             }
         }

@@ -1,87 +1,60 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.controller.ClientController;
-import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
-import it.polimi.ingsw.network.Message;
 import it.polimi.ingsw.view.CLIActionManager;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static java.lang.Thread.sleep;
-
 /**
- * Client App
- *
- * @author Lancini Davide
+ * Client App (COPY) because the IDE cannot run this 2 times
  */
 public class Client2 {
     public static Logger logger = Logger.getLogger("ClientApp");
-    public static void main( String[] args ) {
+
+    public static void main(String[] args) {
         //Logger Creation
         logger.setLevel(Level.ALL);
-        CLIActionManager.setLogger(logger);
-
+        //Ask Online-Offline
         boolean isON = CLIActionManager.Online();
-        if(isON){
-            //TODO: THIS IS ONLY FOR TESTING
-            ClientNetInterface net = new ClientNetInterface();
-            net.setParameters("localhost", 5555, 1002, logger);
+        if (isON) {
             try {
-                net.connect();
+
+                CLIActionManager.autoConnect(); //Only for Testing
+                //CLIActionManager.Connect();
+
+                String[] selection = CLIActionManager.showMainMenu();
+                switch (selection[0]) {
+                    case "1":
+                        CLIActionManager.joinMatch(selection[1]);
+                        break;
+                    case "2":
+                        CLIActionManager.createCustomMatch(selection[1]);
+                        break;
+                    case "3":
+                        //TODO: Join Custom Match
+                        break;
+                    case "4":
+                        //TODO: Create custom rule set
+                        break;
+                    case "5":
+                        //TODO: Settings
+                        break;
+                    case "6":
+                        //TODO: Credits
+                        break;
+                    case "7":
+                        isON = false;
+                        break;
+                    default:
+                        //Don't do anything and show again the main menu
+                        break;
+                }
             } catch (DisconnectedException e) {
-                //FAILED TO CONNECT
+                isON = false;
             }
-            //TODO: THIS IS ONLY FOR TESTING
-
-            //ClientNetInterface net = CLIActionManager.Connect();
-
-            String[] selection = CLIActionManager.showMainMenu();
-            switch (selection[0]){
-                case "1":
-                    try {
-                        CLIActionManager.createMatch(net,selection[1]);
-                    } catch (DisconnectedException e) {
-                        isON = false;
-                    }
-                    break;
-                case "2":
-                    try {
-                        CLIActionManager.joinMatch(net,selection[1]);
-                    } catch (DisconnectedException e) {
-                        isON = false;
-                    }
-                    ClientController controller = new ClientController(true);
-                    controller.setup(net);
-                    try {
-                        controller.main();
-                    } catch (DisconnectedException e) {
-                        isON = false;
-                    }
-                    //enter join match
-                    break;
-                case "3":
-                    //enter view open match
-                    break;
-                case "4":
-                    //enter create custom rule set
-                    break;
-                case "5":
-                    //enter settings
-                    break;
-                case "6":
-                    //enter credits
-                    break;
-                case "7":
-                    isON = false;
-                    break;
-                default:
-                    // don't do anything and show again the main menu
-                    break;
-            }
-        }else{
-            //TODO: versione offline del menu
+        } else {
+            //TODO: Offline menu
         }
     }
 }
