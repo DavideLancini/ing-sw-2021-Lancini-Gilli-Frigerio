@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Stack;
@@ -16,8 +17,10 @@ private Stack<LeaderCard> deck;
      * @param leaderCards initialized leaderCards for the deck
      */
     public LeaderCardDeck(LeaderCard[] leaderCards) {
-        Collections.shuffle(Arrays.asList(leaderCards));
-        deck.addAll(Arrays.asList(leaderCards));
+        ArrayList<LeaderCard> leaders = new ArrayList<>(Arrays.asList(leaderCards));
+        Collections.shuffle(leaders);
+        this.deck = new Stack<LeaderCard>();
+        this.deck.addAll(leaders);
     }
 
     public LeaderCard[] draw4(){

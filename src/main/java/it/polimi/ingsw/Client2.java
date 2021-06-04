@@ -1,7 +1,9 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
+import it.polimi.ingsw.network.Message;
 import it.polimi.ingsw.view.CLIActionManager;
 
 import java.util.logging.Level;
@@ -15,14 +17,14 @@ import static java.lang.Thread.sleep;
  * @author Lancini Davide
  */
 public class Client2 {
+    public static Logger logger = Logger.getLogger("ClientApp");
     public static void main( String[] args ) {
         //Logger Creation
-        Logger logger = Logger.getLogger("ClientApp");
         logger.setLevel(Level.ALL);
         CLIActionManager.setLogger(logger);
 
-        boolean isON = true;
-        if(CLIActionManager.Online()){
+        boolean isON = CLIActionManager.Online();
+        if(isON){
             //TODO: THIS IS ONLY FOR TESTING
             ClientNetInterface net = new ClientNetInterface();
             net.setParameters("localhost", 5555, 1002, logger);
@@ -41,14 +43,20 @@ public class Client2 {
                     try {
                         CLIActionManager.createMatch(net,selection[1]);
                     } catch (DisconnectedException e) {
-                        e.printStackTrace();
+                        isON = false;
                     }
                     break;
                 case "2":
                     try {
                         CLIActionManager.joinMatch(net,selection[1]);
                     } catch (DisconnectedException e) {
-                        e.printStackTrace();
+                        isON = false;
+                    }
+                    ClientController controller = new ClientController(true);
+                    try {
+                        controller.main();
+                    } catch (DisconnectedException e) {
+                        isON = false;
                     }
                     //enter join match
                     break;
@@ -70,14 +78,6 @@ public class Client2 {
                 default:
                     // don't do anything and show again the main menu
                     break;
-            }
-            while(isON){
-                try {
-                    sleep(10000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("im on");
             }
         }else{
             //TODO: versione offline del menu

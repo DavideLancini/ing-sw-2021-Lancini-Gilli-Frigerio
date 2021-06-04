@@ -11,9 +11,9 @@ import java.util.logging.Logger;
  * @author Lancini Davide
  */
 public class Server {
+    public static Logger logger = Logger.getLogger("ServerApp");
     public static void main( String[] args ){
         //Logger Creation
-        Logger logger = Logger.getLogger("ServerApp");
         logger.setLevel(Level.ALL);
         ServerView.setLogger(logger);
         //Loading parameters from the properties file or standard par. if FNF
