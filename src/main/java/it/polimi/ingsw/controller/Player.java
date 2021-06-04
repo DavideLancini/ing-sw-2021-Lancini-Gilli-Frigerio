@@ -79,6 +79,7 @@ public class Player extends Thread{
 
     @Override
     public void run() {
+        //Get IdPlayer
         try {
             Message temp1=net.receive();
             if(temp1.getType()== MessageType.CreateGame) {
@@ -92,7 +93,6 @@ public class Player extends Thread{
         } catch (DisconnectedException e) {
             e.printStackTrace();
         }
-        //TODO: Get a PlayerID this.playerId = "xXx_Angelino_Alfano_xXx"; //TEMP
 
         //TODO: Wait for a Join/Create Game
 

@@ -38,6 +38,7 @@ public class Server {
                 case "3":
                     //Shutdown WITHOUT save, turn OFF the server first to save all the matches
                     isON = false;
+                    System.exit(0);
                     break;
                 default:
                     //Invalid Command: just re-prompt the Menu
