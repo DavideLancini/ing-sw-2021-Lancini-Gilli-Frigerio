@@ -26,7 +26,7 @@ public class Client {
             try {
 
                 CLIActionManager.autoConnect(); //Only for Testing
-                //ClientNetInterface net = CLIActionManager.Connect();
+                //CLIActionManager.Connect();
 
                 String[] selection = CLIActionManager.showMainMenu();
                 switch (selection[0]){

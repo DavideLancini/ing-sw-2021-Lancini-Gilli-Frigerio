@@ -20,57 +20,46 @@ public class Client2 {
     public static void main( String[] args ) {
         //Logger Creation
         logger.setLevel(Level.ALL);
-        CLIActionManager.setLogger(logger);
-
+        //Ask Online-Offline
         boolean isON = CLIActionManager.Online();
         if(isON){
             try {
-                CLIActionManager.autoConnect();
+
+                CLIActionManager.autoConnect(); //Only for Testing
+                //CLIActionManager.Connect();
+
+                String[] selection = CLIActionManager.showMainMenu();
+                switch (selection[0]){
+                    case "1":
+                        CLIActionManager.joinMatch(selection[1]);
+                        break;
+                    case "2":
+                        CLIActionManager.createCustomMatch(selection[1]);
+                        break;
+                    case "3":
+                        //TODO: Join Custom Match
+                        break;
+                    case "4":
+                        //TODO: Create custom rule set
+                        break;
+                    case "5":
+                        //TODO: Settings
+                        break;
+                    case "6":
+                        //TODO: Credits
+                        break;
+                    case "7":
+                        isON = false;
+                        break;
+                    default:
+                        //Don't do anything and show again the main menu
+                        break;
+                }
             } catch (DisconnectedException e) {
                 isON=false;
             }
-            //ClientNetInterface net = CLIActionManager.Connect();
-
-            String[] selection = CLIActionManager.showMainMenu();
-
-            switch (selection[0]){
-                //Join Match
-                case "1":
-                    try {
-                        CLIActionManager.joinMatch(selection[1]);
-                    } catch (DisconnectedException e) {
-                        isON = false;
-                    }
-                    break;
-                //Create Custom Match
-                case "2":
-                    try {
-                        CLIActionManager.createCustomMatch(selection[1]);
-                    } catch (DisconnectedException e) {
-                        isON = false;
-                    }
-                    break;
-                //Join Custom Match
-                case "3":
-                    break;
-                case "4":
-                    //enter create custom rule set
-                    break;
-                case "5":
-                    //enter settings
-                    break;
-                case "6":
-                    //enter credits
-                    break;
-                case "7":
-                    isON = false;
-                    break;
-                default:
-                    // don't do anything and show again the main menu
-                    break;
-            }
         }else{
-            //TODO: offline menu
+            //TODO: Offline menu
         }
     }
 }
