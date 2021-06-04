@@ -262,16 +262,16 @@ public class CLIActionManager extends Manager {
         do {
             try {
                 System.out.println("Enter the number of the first chosen Leader:");
-                i = readInt()-1;
+                i = readInt();
                 System.out.println("Enter the number of the second chosen Leader:");
-                j = readInt()-1;
+                j = readInt();
             }
             catch (NumberFormatException e) {
                 System.out.println("There's been an error, please retry.");
                 continue;}
         }
         while (!(i!=j && i <= 4 && j <= 4 && i >= 1 && j >= 1));
-        return new ClientMessageChosenLeaders(i,j);
+        return new ClientMessageChosenLeaders(i-1,j-1);
     }
 
 
