@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 
+import it.polimi.ingsw.Client;
 import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.messages.ClientMessage;
@@ -13,7 +14,9 @@ import java.util.logging.Logger;
 
 public class CLIActionManager extends Manager {
 
-    private static Logger logger;
+
+    private static Logger logger = Client.logger;
+    private static ClientNetInterface net;
     private ClientController ClientController;
 
     public static void setLogger(Logger logger){
@@ -32,11 +35,9 @@ public class CLIActionManager extends Manager {
         catch(NumberFormatException e) {throw new NumberFormatException("");}
     }
 
-    public static ClientNetInterface Connect() {
-        ClientNetInterface net = new ClientNetInterface();
+    public static ClientNetInterface Connect() throws DisconnectedException{
         String serverAddress;
         int serverPort;
-        int localPort;
 
         while(true){
             System.out.println( "serverAddress: " );
@@ -49,21 +50,16 @@ public class CLIActionManager extends Manager {
                 return null;
             }
 
-            System.out.println( "localPort: " );
             try {
-                localPort= parseToInt(Reader.in.nextLine());
-            } catch (NumberFormatException e) {
-                return null;
-            }
-
-            net.setParameters(serverAddress, serverPort, localPort, logger);
-            try {
-                net.connect();
-                return net;
+                net = new ClientNetInterface(serverAddress,serverPort, Client.logger);
             } catch (DisconnectedException e) {
-                //Do nothing, just restart the loop
+                //warning
             }
         }
+    }
+
+    public static void autoConnect() throws DisconnectedException{
+        net = new ClientNetInterface("localhost",5555, Client.logger);
     }
 
     public void DisplayError(String error){
@@ -285,9 +281,10 @@ public class CLIActionManager extends Manager {
         String playerID;
         System.out.println("playerID:");
         playerID = Reader.in.nextLine();
-        System.out.println("1. Create Match");
-        System.out.println("2. Join Match");
-        System.out.println("3. View Public Match");
+
+        System.out.println("1. Join Game");
+        System.out.println("2. Create Custom Game");
+        System.out.println("3. Join Custom Game");
         System.out.println("4. Create Custom Rule Set");
         System.out.println("5. Settings");
         System.out.println("6. Credits");
@@ -299,11 +296,10 @@ public class CLIActionManager extends Manager {
 
     /**
      * Create match ask number of players for starting game
-     * @param net connection
      * @param s
      * @return number of player
      */
-    public static void createMatch(ClientNetInterface net, String s) throws DisconnectedException {
+    public static void createCustomMatch(String s) throws DisconnectedException {
         int numOfPlayers=0;
         boolean correctInput=false;
         while (!correctInput) {
@@ -326,11 +322,15 @@ public class CLIActionManager extends Manager {
         //TODO: entra nella funzione InGame che da ora pilota il client
 
     }
-    public static void joinMatch(ClientNetInterface net, String playerId) throws DisconnectedException {
+
+    public static void joinMatch(String playerId) throws DisconnectedException {
         System.out.println("How many player? ");
         int gameMode = Reader.in.nextInt();
-        ClientMessageJoinGame messageJoin = new ClientMessageJoinGame(playerId,gameMode);
+        ClientMessageJoinGame messageJoin = new ClientMessageJoinGame(playerId, gameMode);
         net.send(messageJoin);
-    }
 
+        ClientController controller = new ClientController(true);
+        controller.setup(net);
+        controller.main();
+    }
 }
