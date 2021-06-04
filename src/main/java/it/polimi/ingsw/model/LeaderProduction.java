@@ -40,7 +40,7 @@ public class LeaderProduction extends LeaderCard {
     }
 
     public String view(){
-        String string = "";
+        String string = new String();
         string.concat("══════════════╗\n");
         string.concat("   [" + requirements.toString()+"+"+Level.TWO+ "]\n");
         string.concat("   +["+Resource.EMPTY+"]\n");

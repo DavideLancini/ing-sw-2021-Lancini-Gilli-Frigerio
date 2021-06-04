@@ -28,7 +28,7 @@ public class LeaderDepot extends LeaderCard {
     public Resource getRequirements(){return  this.requirements;}
 
     public String view(){
-        String string = "";
+        String string = new String();
         string.concat("══════════════╗\n");
         string.concat("   [5" + this.requirements + "]\n");
         string.concat("   "+getType() + " " + getType()+"\n");

@@ -36,7 +36,7 @@ public class LeaderTransform extends LeaderCard {
     }
 */
     public String view(){
-        String string = "";
+        String string = new String();
         string.concat("══════════════╗\n");
         string.concat("   [");
         for(CardColor each : requirements) {
