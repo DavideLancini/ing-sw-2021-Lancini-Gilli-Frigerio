@@ -41,11 +41,11 @@ public class LeaderProduction extends LeaderCard {
 
     public String view(){
         String string = new String();
-        string.concat("══════════════╗\n");
-        string.concat("   [" + requirements.toString()+"+"+Level.TWO+ "]\n");
-        string.concat("   +["+Resource.EMPTY+"]\n");
-        string.concat("  \u001b[38:5:221m {"+this.getVP()+"}\u001b[m\n");
-        string.concat("══════════════╝\n");
+        string = string.concat("══════════════╗\n");
+        string = string.concat("   [" + requirements.toString()+"+"+Level.TWO+ "]\n");
+        string = string.concat("   +["+Resource.EMPTY+"]\n");
+        string = string.concat("  \u001b[38:5:221m {"+this.getVP()+"}\u001b[m\n");
+        string = string.concat("══════════════╝\n");
         return string;
     }
 

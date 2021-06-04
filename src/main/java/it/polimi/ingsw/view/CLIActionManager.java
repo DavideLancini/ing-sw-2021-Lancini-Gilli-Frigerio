@@ -258,6 +258,7 @@ public class CLIActionManager extends Manager {
             System.out.println(i+": "+each);
 
         }
+        i=0;
         do {
             try {
                 System.out.println("Enter the number of the first chosen Leader:");
