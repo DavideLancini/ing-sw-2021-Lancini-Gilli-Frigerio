@@ -22,5 +22,5 @@ public abstract class Manager {
         return null;
     }
 
-    public ClientMessage ChooseLeaders(LeaderCard[] leaders) {return null;};
+    public ClientMessage ChooseLeaders(String[] leaders) {return null;};
 }

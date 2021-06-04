@@ -64,7 +64,10 @@ public class Player extends Thread{
 
     public void drawLeaderCards(LeaderCard[] leaders) throws DisconnectedException {
         this.templeaders = leaders;
-        net.send(new ServerMessageChooseLeaders(leaders));
+        String[] stringleaders = new String[4];
+        for(int i = 0;i< leaders.length; i++) stringleaders[i] = leaders[i].view();
+
+        net.send(new ServerMessageChooseLeaders(stringleaders));
     }
 
     /**

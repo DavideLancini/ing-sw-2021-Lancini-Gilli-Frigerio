@@ -39,6 +39,16 @@ public class LeaderProduction extends LeaderCard {
         return choice;
     }
 
+    public String view(){
+        String string = "";
+        string.concat("══════════════╗\n");
+        string.concat("   [" + requirements.toString()+"+"+Level.TWO+ "]\n");
+        string.concat("   +["+Resource.EMPTY+"]\n");
+        string.concat("  \u001b[38:5:221m {"+this.getVP()+"}\u001b[m\n");
+        string.concat("══════════════╝\n");
+        return string;
+    }
+
     public void leaderCardView() {
         System.out.println("══════════════╗");
         System.out.println("   [" + requirements.toString()+"+"+Level.TWO+ "]");
