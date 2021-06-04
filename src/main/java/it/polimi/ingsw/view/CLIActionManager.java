@@ -39,6 +39,10 @@ public class CLIActionManager extends Manager {
 
     }
 
+    public void View(String s){System.out.println(s);}
+
+
+
     public static ClientNetInterface Connect() throws DisconnectedException{
         String serverAddress;
         int serverPort;
@@ -94,13 +98,14 @@ public class CLIActionManager extends Manager {
 
         for (int i = 0; i<3; i++){
             System.out.println("Choose which resource to put in row n° "+i+": ");
-            System.out.println("1: "+Resource.SERVANT+"\t "+"2: "+Resource.COIN+"\t "+"3: "+Resource.SHIELD+"\t "+"4: "+Resource.STONE+"\t ");
+            System.out.println("1: "+Resource.SERVANT+"\t "+"2: "+Resource.COIN+"\t "+"3: "+Resource.SHIELD+"\t "+"4: "+Resource.STONE+"\t "+"5: "+Resource.EMPTY);
             try {
                 switch (readInt()) {
                     case 1: choice[i] = Resource.SERVANT; break;
                     case 2: choice[i] = Resource.COIN; break;
                     case 3: choice[i] = Resource.SHIELD; break;
                     case 4: choice[i] = Resource.STONE; break;
+                    case 5: choice[i] = Resource.EMPTY; break;
                     default: throw new NumberFormatException("");
                 }
             }

@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.EndTurnException;
 import it.polimi.ingsw.network.messages.ServerMessageOK;
+import it.polimi.ingsw.network.messages.ServerMessageView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -70,7 +71,9 @@ public class Game {
                 boolean action = false;
                 while(!done){
                     try {
-                        action = each.turn(false);
+                        each.net.send(new ServerMessageView(market.view()));
+                        action = each.turn(action);
+                        Server.logger.info("Setting action to "+action);
                     }
                     catch(EndTurnException | DisconnectedException e){done = true;}
                 }

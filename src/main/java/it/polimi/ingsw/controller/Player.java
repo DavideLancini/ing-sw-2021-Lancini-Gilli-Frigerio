@@ -40,12 +40,10 @@ public class Player extends Thread{
     }
 
     public boolean turn(boolean mainAction) throws EndTurnException, DisconnectedException {
-        boolean action = false;
-
         net.send(new ServerMessageTurn(mainAction));
         ClientMessage message = net.receive();
 
-        return action = message.resolve(controller);
+        return message.resolve(controller);
     }
 
     public void receiveLeaders() throws DisconnectedException {
