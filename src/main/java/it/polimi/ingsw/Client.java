@@ -2,6 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
+import it.polimi.ingsw.network.Message;
 import it.polimi.ingsw.view.CLIActionManager;
 
 import java.util.logging.Level;
@@ -77,7 +78,12 @@ public class Client {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("im on");
+                try {
+                    Message message = net.receive();
+                    System.out.println(message.toString());
+                } catch (DisconnectedException e) {
+                    //TODO
+                }
             }
         }else{
             //TODO: versione offline del menu

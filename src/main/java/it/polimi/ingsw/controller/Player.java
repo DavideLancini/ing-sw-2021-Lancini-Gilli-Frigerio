@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class Player extends Thread{
     private static Logger logger;
-    private ConnectionInterface net;
+    public ConnectionInterface net;
     public PlayerBoard playerBoard;
     public String playerId;
     private Controller controller;
@@ -88,28 +88,15 @@ public class Player extends Thread{
             }
             else {
                 ClientMessageJoinGame joinGame = (ClientMessageJoinGame) temp1;
-                this.playerId= joinGame.joinGame();
+                this.playerId= joinGame.getPlayerId();
+                //Enter queue
+                Queue.enterQueue(joinGame.getGameMode(), this);
             }
         } catch (DisconnectedException e) {
-            e.printStackTrace();
+            //TODO: manage error
         }
+        //This player is in a game
 
-        //TODO: Wait for a Join/Create Game
-
-        //TODO: Create controller
-
-        //Read Messages
-        while(ServerNetInterface.isON){
-            logger.info("(Player)"+this.playerId+": is waiting for a message from the client");
-            try {
-                Message temp = net.receive();
-
-                //TODO: temp.resolve(* manca il controller *)
-            } catch (DisconnectedException e) {
-                ServerNetInterface.removePlayer();
-                interrupt();
-            }
-        }
     }
 
 }

@@ -280,18 +280,19 @@ public class CLIActionManager extends Manager {
      * MainMenu
      * @return selected action of player/client
      */
-    public static String[] showMainMenu(){
+    public static String[] showMainMenu() {
         String action;
         String playerID;
         System.out.println("playerID:");
         playerID = Reader.in.nextLine();
-        System.out.println( "1. Create Match" );
-        System.out.println( "2. Join Match" );
-        System.out.println( "3. View Public Match" );
-        System.out.println( "4. Create Custom Rule Set" );
-        System.out.println( "5. Settings" );
-        System.out.println( "6. Credits" );
+        System.out.println("1. Create Match");
+        System.out.println("2. Join Match");
+        System.out.println("3. View Public Match");
+        System.out.println("4. Create Custom Rule Set");
+        System.out.println("5. Settings");
+        System.out.println("6. Credits");
         action = Reader.in.nextLine();
+
 
         return new String[]{action, playerID};
     }
@@ -325,8 +326,10 @@ public class CLIActionManager extends Manager {
         //TODO: entra nella funzione InGame che da ora pilota il client
 
     }
-    public static void joinMatch(ClientNetInterface net, String s) throws DisconnectedException {
-        ClientMessageJoinGame messageJoin =new ClientMessageJoinGame(s);
+    public static void joinMatch(ClientNetInterface net, String playerId) throws DisconnectedException {
+        System.out.println("How many player? ");
+        int gameMode = Reader.in.nextInt();
+        ClientMessageJoinGame messageJoin = new ClientMessageJoinGame(playerId,gameMode);
         net.send(messageJoin);
     }
 

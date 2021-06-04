@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import com.google.gson.Gson;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.messages.EndTurnException;
+import it.polimi.ingsw.network.messages.ServerMessageOK;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -18,6 +19,15 @@ public class Game {
      * @param players
      */
     public Game(Player[] players) throws Exception {
+        System.out.println("Gioco Creato");
+
+
+
+        for(Player each: players) {
+            each.net.send(new ServerMessageOK());
+        }
+
+
         setupGame();
         setPlayers(players);
         if(players.length>=2)players[1].secondPlayer();
@@ -31,8 +41,6 @@ public class Game {
             each.playerBoard = new PlayerBoard();
             each.setController(new Controller(each.playerBoard, this.devCardBoard, this.market));
         }
-
-
         startGame();
     }
 
