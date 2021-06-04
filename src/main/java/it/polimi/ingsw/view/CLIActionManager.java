@@ -262,9 +262,9 @@ public class CLIActionManager extends Manager {
         do {
             try {
                 System.out.println("Enter the number of the first chosen Leader:");
-                i = parseToInt(Reader.in.nextLine());
+                i = readInt();
                 System.out.println("Enter the number of the second chosen Leader:");
-                j = Reader.in.nextInt();
+                j = readInt();
             }
             catch (NumberFormatException e) {
                 System.out.println("There's been an error, please retry.");
