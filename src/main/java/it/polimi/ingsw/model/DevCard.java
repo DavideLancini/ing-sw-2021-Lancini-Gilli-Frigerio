@@ -72,7 +72,7 @@ public class DevCard {
      */
     public String devCardView(){
         System.out.print("Price[");
-        new ResourceCounter(this.cost);
+        new ResourceCounter(this.cost).count();
         System.out.println("]");
         this.production.productionView();
         System.out.println("  "+this.level+" "+this.color+"\u001b[38:5:221m {"+this.VP+"}\u001b[m");
