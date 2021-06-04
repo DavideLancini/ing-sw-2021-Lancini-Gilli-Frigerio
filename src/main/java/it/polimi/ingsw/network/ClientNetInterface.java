@@ -23,23 +23,17 @@ public class ClientNetInterface {
     private Listener listener;
     private ServerSocket father;
 
-    public void setParameters(String serverAddress, int serverPort, int localPort, Logger logger){
-        this.serverAddress=serverAddress;
-        this.serverPort=serverPort;
-        this.localPort=localPort;
-        ClientNetInterface.logger=logger;
-    }
+    public ClientNetInterface(String serverAddress, int serverPort, Logger logger) throws DisconnectedException {
 
-    public void connect() throws DisconnectedException{
-        if(!isConnected & !isLogged){
+        if (!isConnected & !isLogged) {
             //create sender
             try {
-                this.sender = new Sender(this.serverAddress, this.serverPort);
+                this.sender = new Sender(serverAddress, serverPort);
             } catch (DisconnectedException e) {
                 throw new DisconnectedException("failed to create a sender");
             }
             try {
-                father = new ServerSocket(localPort);
+                father = new ServerSocket(0);
             } catch (IOException e) {
                 throw new DisconnectedException("failed to create fatherSocket");
             }
@@ -56,12 +50,12 @@ public class ClientNetInterface {
             };
             //Create a message to declare to the server what port should be used to receive messages
             ClientMessageLocalPort message;
-            message = new ClientMessageLocalPort(localPort);
+            message = new ClientMessageLocalPort(father.getLocalPort());
             String rawMessage = Serializer.serialize(message);
             sender.send(rawMessage);
             temp.start();
-        }else{
-            logger.info("ClientNetInterface is already connected");
+        } else {
+            //TODO: warning
         }
     }
 

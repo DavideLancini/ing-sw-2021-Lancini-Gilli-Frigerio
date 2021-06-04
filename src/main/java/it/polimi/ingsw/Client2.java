@@ -3,7 +3,6 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
-import it.polimi.ingsw.network.Message;
 import it.polimi.ingsw.view.CLIActionManager;
 
 import java.util.logging.Level;
@@ -25,44 +24,34 @@ public class Client2 {
 
         boolean isON = CLIActionManager.Online();
         if(isON){
-            //TODO: THIS IS ONLY FOR TESTING
-            ClientNetInterface net = new ClientNetInterface();
-            net.setParameters("localhost", 5555, 1002, logger);
             try {
-                net.connect();
+                CLIActionManager.autoConnect();
             } catch (DisconnectedException e) {
-                //FAILED TO CONNECT
+                isON=false;
             }
-            //TODO: THIS IS ONLY FOR TESTING
-
             //ClientNetInterface net = CLIActionManager.Connect();
 
             String[] selection = CLIActionManager.showMainMenu();
+
             switch (selection[0]){
+                //Join Match
                 case "1":
                     try {
-                        CLIActionManager.createMatch(net,selection[1]);
+                        CLIActionManager.joinMatch(selection[1]);
                     } catch (DisconnectedException e) {
                         isON = false;
                     }
                     break;
+                //Create Custom Match
                 case "2":
                     try {
-                        CLIActionManager.joinMatch(net,selection[1]);
+                        CLIActionManager.createCustomMatch(selection[1]);
                     } catch (DisconnectedException e) {
                         isON = false;
                     }
-                    ClientController controller = new ClientController(true);
-                    controller.setup(net);
-                    try {
-                        controller.main();
-                    } catch (DisconnectedException e) {
-                        isON = false;
-                    }
-                    //enter join match
                     break;
+                //Join Custom Match
                 case "3":
-                    //enter view open match
                     break;
                 case "4":
                     //enter create custom rule set
@@ -81,7 +70,7 @@ public class Client2 {
                     break;
             }
         }else{
-            //TODO: versione offline del menu
+            //TODO: offline menu
         }
     }
 }

@@ -1,3 +1,4 @@
+/*
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.network.ClientNetInterface;
@@ -41,10 +42,9 @@ public class CompleteMatchTest {
         Runnable client1 = new Runnable(){
             @Override
             public void run(){
-                ClientNetInterface net = new ClientNetInterface();
-                net.setParameters("localhost", 1000, 1001, logger);
+                ClientNetInterface net = null;
                 try {
-                    net.connect();
+                    net = new ClientNetInterface("localhost",1000);
                 } catch (DisconnectedException e) {
                     e.printStackTrace();
                 }
@@ -98,3 +98,4 @@ public class CompleteMatchTest {
     }
 
 }
+*/
