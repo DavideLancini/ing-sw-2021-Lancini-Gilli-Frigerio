@@ -43,7 +43,8 @@ public class LeaderProduction extends LeaderCard {
         String string = "";
         string = string.concat("══════════════╗\n");
         string = string.concat("   [" + requirements.toString()+"+"+Level.TWO+ "]\n");
-        string = string.concat("   +["+Resource.EMPTY+"]\n");
+        string = string.concat(this.production.view());
+        string = string.concat("+["+Resource.EMPTY+"]\n");
         string = string.concat("  \u001b[38:5:221m {"+this.getVP()+"}\u001b[m\n");
         string = string.concat("══════════════╝\n");
         return string;
@@ -52,8 +53,8 @@ public class LeaderProduction extends LeaderCard {
     public void leaderCardView() {
         System.out.println("══════════════╗");
         System.out.println("   [" + requirements.toString()+"+"+Level.TWO+ "]");
-        this.getProduction().productionView();
-        System.out.println("   +["+Resource.EMPTY+"]");
+        this.production.productionView();
+        System.out.println(" +["+Resource.EMPTY+"]");
         System.out.println("  \u001b[38:5:221m {"+this.getVP()+"}\u001b[m");
         System.out.println("══════════════╝");
     }
