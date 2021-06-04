@@ -1,35 +1,30 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.controller.ClientController;
-import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.view.CLIActionManager;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static java.lang.Thread.sleep;
-
 /**
- * Client App
- *
- * @author Lancini Davide
+ * Client App (COPY) because the IDE cannot run this 2 times
  */
 public class Client2 {
     public static Logger logger = Logger.getLogger("ClientApp");
-    public static void main( String[] args ) {
+
+    public static void main(String[] args) {
         //Logger Creation
         logger.setLevel(Level.ALL);
         //Ask Online-Offline
         boolean isON = CLIActionManager.Online();
-        if(isON){
+        if (isON) {
             try {
 
                 CLIActionManager.autoConnect(); //Only for Testing
                 //CLIActionManager.Connect();
 
                 String[] selection = CLIActionManager.showMainMenu();
-                switch (selection[0]){
+                switch (selection[0]) {
                     case "1":
                         CLIActionManager.joinMatch(selection[1]);
                         break;
@@ -56,9 +51,9 @@ public class Client2 {
                         break;
                 }
             } catch (DisconnectedException e) {
-                isON=false;
+                isON = false;
             }
-        }else{
+        } else {
             //TODO: Offline menu
         }
     }
