@@ -9,7 +9,7 @@ public class ClientMessageEndTurn extends ClientMessage {
     }
 
     @Override
-    public boolean resolve(Controller controller) throws Exception {
-        throw new Exception(new EndTurnException());
+    public boolean resolve(Controller controller) throws EndTurnException {
+        throw new EndTurnException();
     }
 }

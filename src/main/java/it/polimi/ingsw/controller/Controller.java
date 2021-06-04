@@ -2,6 +2,8 @@ package it.polimi.ingsw.controller;
 
 
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.network.ConnectionInterface;
+import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.ServerMessageError;
 import it.polimi.ingsw.network.messages.ServerMessageMarketReturn;
 import it.polimi.ingsw.network.messages.ServerMessageOK;
@@ -17,37 +19,43 @@ public class Controller {
     private PlayerBoard pb;
     private DevCardBoard board;
     private Market market;
+    private ConnectionInterface net;
 
-    public Controller(PlayerBoard pb, DevCardBoard board, Market market){
+    public Controller(ConnectionInterface net, PlayerBoard pb, DevCardBoard board, Market market){
         this.pb = pb;
         this.board = board;
+        this.market = market;
+        this.net = net;
+    }
+
+    public Controller(PlayerBoard pb, DevCardBoard dcb, Market market) {
+        this.pb = pb;
+        this.board = dcb;
         this.market = market;
     }
 
 
-    public void sellLeader (int position) {
+    public void sellLeader (int position) throws DisconnectedException {
         if (!pb.getLeaderCard(position).getIsActive()) {
             pb.sellLeader(position);
 
-            ServerMessageOK message = new ServerMessageOK();
-            //TODO: send success
+            net.send(new ServerMessageOK());
         }
         else {
-            ServerMessageError message = new ServerMessageError("Cannot sell Active Leaders");
-            //TODO: send failure
+            net.send(new ServerMessageError("Cannot sell Active Leaders"));
         }
         return;
     }
 
 
-    public void activateLeader (int position) {
+    public void activateLeader (int position) throws DisconnectedException {
 
         LeaderCard leader = this.pb.getLeaderCard(position);
 
         if(!checkRequirements(leader)) {
-            ServerMessageError message = new ServerMessageError("Leader requirements not met");
+            net.send(new ServerMessageError("Leader requirements not met"));
 
-            return; /*TODO: send message back with failure notice*/
+            return;
         }
 
         if(!leader.getIsActive()) {
@@ -55,11 +63,11 @@ public class Controller {
             if (leader instanceof LeaderDepot)((LeaderDepot)leader).toggleActive(pb.getDepot());
             else leader.toggleActive();
 
-            ServerMessageOK message = new ServerMessageOK();
-        } //TODO: then send message of success
+            net.send(new ServerMessageOK());
+        }
 
         else {
-            ServerMessageError message = new ServerMessageError("Leader already active"); //TODO: send message back with failure notice
+            net.send(new ServerMessageError("Leader already active"));
 
         }
 
@@ -123,20 +131,19 @@ public class Controller {
 
 
 
-    public void tryDepotConfiguration(Resource[] input, int discardAmount){
+    public void tryDepotConfiguration(Resource[] input, int discardAmount) throws DisconnectedException {
         //input length is built to be 6
         if(valid(Arrays.copyOfRange(input, 1, 2))
         && valid(Arrays.copyOfRange(input, 3, 5))
         && different(input[0], input[1], input[3])
         ){
-            ServerMessageOK message = new ServerMessageOK();
+            net.send(new ServerMessageOK());
             //TODO: return depotisLegal
             //TODO: add faith to other players (discardAmount)
 
         }
         else{
-            ServerMessageError message = new ServerMessageError("Invalid Depot Configuration");
-            //TODO: return depotisIllegal
+            net.send(new ServerMessageError("Invalid Depot Configuration"));
         }
     }
 
@@ -159,7 +166,7 @@ public class Controller {
 
 
 
-    public boolean buyDevCard(Level level, CardColor color, int column){
+    public boolean buyDevCard(Level level, CardColor color, int column) throws DisconnectedException {
         DevCard newCard;
         Resource[] stdCost = board.getCard(color, level).getCost();
 
@@ -180,8 +187,8 @@ public class Controller {
         }
 
         catch (Exception e ){
-            ServerMessageError message = new ServerMessageError("Insufficient resources");
-            /*TODO: send error message back to user, insufficient resources*/
+            net.send(new ServerMessageError("Insufficient resources"));
+
             return false;
         }
         return true;
@@ -193,7 +200,7 @@ public class Controller {
      * @return
      */
 
-    public boolean produce(boolean[] activated){
+    public boolean produce(boolean[] activated) throws DisconnectedException {
         ArrayList<Resource> totalinput = new ArrayList<>();
         ArrayList<Resource> totaloutput = new ArrayList<>();
         int totalfaith = 0;
@@ -206,8 +213,8 @@ public class Controller {
             if(each != null) productions[i+1] = each.getProduction();
 
             else {
-                ServerMessageError message = new ServerMessageError("Invalid Production");
-                /*TODO: send error message back to user*/
+                net.send(new ServerMessageError("Invalid Production"));
+
                 return false;
             }
         }
@@ -221,8 +228,8 @@ public class Controller {
             }
 
             else {
-                ServerMessageError message = new ServerMessageError("Invalid Production");
-                /*TODO: send error message back to user*/
+                net.send(new ServerMessageError("Invalid Production"));
+
                 return false;
             }
         }
@@ -247,8 +254,8 @@ public class Controller {
 
         }
         catch (Exception e){
-            ServerMessageError message = new ServerMessageError("Insufficient resources");
-            /*TODO: send error message back to user, insufficient resources*/
+            net.send(new ServerMessageError("Insufficient resources"));
+
             return false;
         }
         return true;
@@ -303,20 +310,19 @@ public class Controller {
         return resources;
     }
 
-    public boolean takeResources(boolean isRow, int position){
+    public boolean takeResources(boolean isRow, int position) throws DisconnectedException {
         Marble[] marbles = null;
 
         if((isRow && position <= 3) || (!isRow && position <= 4) && position > 0) {
             try {marbles = this.market.takeResources(isRow, position);}
             catch (Exception e) {
-                //TODO: send back failure message
-                ServerMessageError message = new ServerMessageError(e.getMessage());
+                net.send(new ServerMessageError(e.getMessage()));
                 return false;
             }
         }
         else {
-            //TODO: send back failure message
-            ServerMessageError message = new ServerMessageError("Unable to acquire Market Resources.");
+
+            net.send(new ServerMessageError("Unable to acquire Market Resources."));
             return false;
         }
 
@@ -350,13 +356,13 @@ public class Controller {
             }
         }
         catch(Exception e){
-            //TODO: send back failure message
-            ServerMessageError message = new ServerMessageError("Error during Leader Depot resource placement.");
+
+            net.send(new ServerMessageError("Error during Leader Depot resource placement."));
             return false;
         }
 
-        //TODO: send back to client message with resources serialized
-        ServerMessageMarketReturn message = new ServerMessageMarketReturn(resources);
+
+        net.send(new ServerMessageMarketReturn(resources));
         return true;
     }
 

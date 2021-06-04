@@ -1,6 +1,7 @@
 package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.network.DisconnectedException;
 
 public class ClientMessageProduce extends ClientMessage {
     private boolean[] activated = new boolean[6];
@@ -10,7 +11,7 @@ public class ClientMessageProduce extends ClientMessage {
         this.type = MessageType.Produce;
     }
 
-    public boolean resolve(Controller controller) {
+    public boolean resolve(Controller controller) throws DisconnectedException {
         return controller.produce(this.activated);
     }
 

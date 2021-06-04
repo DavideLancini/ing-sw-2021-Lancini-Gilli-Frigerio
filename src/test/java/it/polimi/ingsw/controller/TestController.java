@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.network.DisconnectedException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.io.FileNotFoundException;
@@ -30,14 +31,14 @@ public class TestController {
     Controller controller = new Controller(pb, dcb, market);
 
     @Test
-    public void TestSellLeader(){
+    public void TestSellLeader() throws DisconnectedException {
         controller.sellLeader(0);
         assertSame(null, pb.getLeaderCard(0));
         assertSame(1, pb.getFaith());
     }
 
     @Test
-    public void TestActivateLeader(){
+    public void TestActivateLeader() throws DisconnectedException {
         try {
             pb.addDevCard(new DevCard(Level.ONE, CardColor.PURPLE, 1, new Resource[]{Resource.COIN}, new Production(new Resource[]{Resource.SHIELD}, new Resource[]{Resource.COIN})), 0);
         } catch (Exception e) {
@@ -48,7 +49,7 @@ public class TestController {
     }
 
     @Test
-    public void TestBuyDevCard(){
+    public void TestBuyDevCard() throws DisconnectedException {
         DevCard card = dcb.getCard(CardColor.GREEN, Level.ONE);
         pb.getStrongbox().deposit(new ArrayList<>(Arrays.asList(
                 Resource.SHIELD, Resource.SHIELD, Resource.SHIELD, Resource.SHIELD, Resource.SHIELD,
@@ -64,7 +65,7 @@ public class TestController {
     }
 
     @Test
-    public void TestProduce(){
+    public void TestProduce() throws DisconnectedException {
         DevCard card = dcb.getCard(CardColor.GREEN, Level.ONE);
         try {
             pb.addDevCard(card, 0);

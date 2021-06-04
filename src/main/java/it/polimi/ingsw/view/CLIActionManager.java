@@ -28,11 +28,15 @@ public class CLIActionManager extends Manager {
         this.ClientController = clicont;
     }
 
-    private static int parseToInt(String s) throws NumberFormatException{
+    private static int readInt(){
+        String in = Reader.in.nextLine();
         try{
-            return Integer.parseInt(s);
+            return Integer.parseInt(in);
         }
-        catch(NumberFormatException e) {throw new NumberFormatException("");}
+        catch (NumberFormatException e){
+            return Reader.in.nextInt();
+        }
+
     }
 
     public static ClientNetInterface Connect() throws DisconnectedException{
@@ -45,7 +49,7 @@ public class CLIActionManager extends Manager {
 
             System.out.println( "serverPort: " );
             try {
-                serverPort= parseToInt(Reader.in.nextLine());
+                serverPort= readInt();
             } catch (NumberFormatException e) {
                 return null;
             }
@@ -92,7 +96,7 @@ public class CLIActionManager extends Manager {
             System.out.println("Choose which resource to put in row n° "+i+": ");
             System.out.println("1: "+Resource.SERVANT+"\t "+"2: "+Resource.COIN+"\t "+"3: "+Resource.SHIELD+"\t "+"4: "+Resource.STONE+"\t ");
             try {
-                switch (parseToInt(Reader.in.nextLine())) {
+                switch (readInt()) {
                     case 1: choice[i] = Resource.SERVANT;
                     case 2: choice[i] = Resource.COIN;
                     case 3: choice[i] = Resource.SHIELD;
@@ -148,7 +152,7 @@ public class CLIActionManager extends Manager {
             System.out.println( "7. End Turn");
 
             try {
-                int choice = parseToInt(Reader.in.nextLine());
+                int choice = readInt();
 
                 switch (choice) {
 
@@ -159,9 +163,9 @@ public class CLIActionManager extends Manager {
                         }
 
                         System.out.println("0 for row, 1 for column");
-                        boolean isRow = parseToInt(Reader.in.nextLine()) == 1 ? false : true;
+                        boolean isRow = readInt() == 1 ? false : true;
                         System.out.println("Enter number of "+(isRow ? "row" : "column")+":");
-                        int position = parseToInt(Reader.in.nextLine());
+                        int position = readInt();
                         return new ClientMessageTakeResources(isRow, position);
 
                     case 2:
@@ -172,14 +176,14 @@ public class CLIActionManager extends Manager {
                         }
 
                         System.out.println("Level:");
-                        Level level = Level.values()[parseToInt(Reader.in.nextLine())-1];
+                        Level level = Level.values()[readInt()-1];
 
                         System.out.println("Color: ");
                         for (int i = 0; i<CardColor.values().length; i++){System.out.println(""+i+". "+CardColor.values()[i].toString());};
-                        CardColor color = CardColor.values()[parseToInt(Reader.in.nextLine())];
+                        CardColor color = CardColor.values()[readInt()];
 
                         System.out.println("Column in which to put it: ");
-                        int column = parseToInt(Reader.in.nextLine());
+                        int column = readInt();
 
                         return new ClientMessageBuyDevCard(level, color, column);
 
@@ -203,7 +207,7 @@ public class CLIActionManager extends Manager {
 
                         for(int i = 0; i<6; i++){
                             System.out.println(text[i]);
-                            activated[i] = parseToInt(Reader.in.nextLine()) == 1 ? true : false;
+                            activated[i] = readInt() == 1 ? true : false;
                         }
 
                         return new ClientMessageProduce(activated);
@@ -211,21 +215,21 @@ public class CLIActionManager extends Manager {
 
                     case 4:
                         System.out.println("Enter number of Leader Card to be activated");
-                        int pos = parseToInt(Reader.in.nextLine());
+                        int pos = readInt();
                         return new ClientMessageLeaderActivation(pos);
 
                     case 5:
                         System.out.println("Enter number of Leader Card to be sold");
-                        int number = parseToInt(Reader.in.nextLine());
+                        int number = readInt();
                         return new ClientMessageSellLeader(number);
 
                     case 6:
                         System.out.println("Enter number of resource to be set. 0 to 1 for defaultProduciton input, 2 for output, 3 to 4 for LeaderProduction choice");
-                        int res = parseToInt(Reader.in.nextLine());
+                        int res = readInt();
 
                         System.out.println("Resource: ");
                         for (int i = 0; i < Resource.values().length -2; i++){System.out.println(""+i+". "+Resource.values()[i].toString());};
-                        Resource resource = Resource.values()[parseToInt(Reader.in.nextLine())];
+                        Resource resource = Resource.values()[readInt()];
 
                         return new ClientMessageSetResource(resource, res);
 
