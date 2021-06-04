@@ -1,9 +1,11 @@
 package it.polimi.ingsw.controller;
 
 
+import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.ConnectionInterface;
 import it.polimi.ingsw.network.DisconnectedException;
+import it.polimi.ingsw.network.messages.ClientMessageTryDepotConfiguration;
 import it.polimi.ingsw.network.messages.ServerMessageError;
 import it.polimi.ingsw.network.messages.ServerMessageMarketReturn;
 import it.polimi.ingsw.network.messages.ServerMessageOK;
@@ -131,7 +133,7 @@ public class Controller {
 
 
 
-    public void tryDepotConfiguration(Resource[] input, int discardAmount) throws DisconnectedException {
+    public boolean tryDepotConfiguration(Resource[] input, int discardAmount) throws DisconnectedException {
         //input length is built to be 6
         if(valid(Arrays.copyOfRange(input, 1, 2))
         && valid(Arrays.copyOfRange(input, 3, 5))
@@ -140,10 +142,11 @@ public class Controller {
             net.send(new ServerMessageOK());
             //TODO: return depotisLegal
             //TODO: add faith to other players (discardAmount)
-
+            return true;
         }
         else{
             net.send(new ServerMessageError("Invalid Depot Configuration"));
+            return false;
         }
     }
 
@@ -339,6 +342,7 @@ public class Controller {
         }
         catch(Exception e){
             //TODO: critical error, resources will get lost in process
+            Server.logger.info("Critical error");
         }
 
         //Automatically deposits resources in leader depot slots
@@ -363,6 +367,12 @@ public class Controller {
 
 
         net.send(new ServerMessageMarketReturn(resources));
+        Server.logger.info("About to try depot configuration");
+        try{
+            ((ClientMessageTryDepotConfiguration)(net.receive())).resolve(this);
+        }
+        catch (Exception e){}//TODO: temp
+        Server.logger.info("Correctly tried depot configuration");
         return true;
     }
 

@@ -15,7 +15,6 @@ public class ClientMessageTryDepotConfiguration extends ClientMessage {
     }
 
     public boolean resolve(Controller controller) throws DisconnectedException {
-        controller.tryDepotConfiguration(this.input, discardAmount);
-        return false;
+        return controller.tryDepotConfiguration(this.input, discardAmount);
     }
 }
