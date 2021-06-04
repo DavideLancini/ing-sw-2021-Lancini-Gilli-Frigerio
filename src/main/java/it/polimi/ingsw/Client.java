@@ -23,7 +23,6 @@ public class Client {
 
         boolean isON = true;
         if(CLIActionManager.Online()){
-
             //TODO: THIS IS ONLY FOR TESTING
             ClientNetInterface net = new ClientNetInterface();
             net.setParameters("localhost", 5555, 1001, logger);
@@ -36,49 +35,48 @@ public class Client {
 
             //ClientNetInterface net = CLIActionManager.Connect();
 
-
-                String[] selection = CLIActionManager.showMainMenu();
-                switch (selection[0]){
-                    case "1":
-                        try {
-                            CLIActionManager.createMatch(net,selection[1]);
-                        } catch (DisconnectedException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case "2":
-                        try {
-                            CLIActionManager.joinMatch(net,selection[1]);
-                        } catch (DisconnectedException e) {
-                            e.printStackTrace();
-                        }
-                        //enter join match
-                        break;
-                    case "3":
-                        //enter view open match
-                        break;
-                    case "4":
-                        //enter create custom rule set
-                        break;
-                    case "5":
-                        //enter settings
-                        break;
-                    case "6":
-                        //enter credits
-                        break;
-                    case "7":
-                        isON = false;
-                        break;
-                    default:
-                        // don't do anything and show again the main menu
-                        break;
-                }
+            String[] selection = CLIActionManager.showMainMenu();
+            switch (selection[0]){
+                case "1":
+                    try {
+                        CLIActionManager.createMatch(net,selection[1]);
+                    } catch (DisconnectedException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "2":
+                    try {
+                        CLIActionManager.joinMatch(net,selection[1]);
+                    } catch (DisconnectedException e) {
+                        e.printStackTrace();
+                    }
+                    //enter join match
+                    break;
+                case "3":
+                    //enter view open match
+                    break;
+                case "4":
+                    //enter create custom rule set
+                    break;
+                case "5":
+                    //enter settings
+                    break;
+                case "6":
+                    //enter credits
+                    break;
+                case "7":
+                    isON = false;
+                    break;
+                default:
+                    // don't do anything and show again the main menu
+                    break;
+            }
             while(isON){
                 try {
-                sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+                    sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("im on");
             }
         }else{

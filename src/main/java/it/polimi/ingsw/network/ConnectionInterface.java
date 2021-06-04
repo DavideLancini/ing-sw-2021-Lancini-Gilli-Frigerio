@@ -20,14 +20,17 @@ public class ConnectionInterface{
         ConnectionInterface.logger = logger;
         //Create a new Listener
         this.listener = new Listener(fatherSocket, logger);
+        logger.info("Listener created");
         //Receive the port to witch connect from the first message
         int clientPort;
         Message message = Serializer.deserializeMessage(listener.receive());
+        logger.info("ConnectionInterface is collecting the target port for the sender");
         if(message instanceof ClientMessageLocalPort) {
             clientPort = ((ClientMessageLocalPort)message).getPort();
         }else{
             throw new DisconnectedException("Port not usable");
         }
+        logger.info("ConnectionInterface received target port: " + clientPort);
         //Create a Sender
         try {
             try {

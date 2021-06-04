@@ -20,9 +20,9 @@ import java.util.logging.Logger;
 public class Listener {
     private static Logger logger;
 
-    private final Socket listenerSocket;
-    private final DataInputStream inputStream;
-    private final String listenerName;
+    private Socket listenerSocket;
+    private DataInputStream inputStream;
+    private String listenerName;
 
     /**
      * Constructor for the Listener the listener will be stuck on accept until a connection is made.

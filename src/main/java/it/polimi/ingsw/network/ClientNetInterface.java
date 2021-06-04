@@ -17,7 +17,7 @@ public class ClientNetInterface {
     private static Logger logger;
 
     private boolean isConnected = false;
-    private final boolean isLogged = false;
+    private boolean isLogged = false;
 
     private Sender sender;
     private Listener listener;
@@ -44,7 +44,7 @@ public class ClientNetInterface {
                 throw new DisconnectedException("failed to create fatherSocket");
             }
             //Open a listener on a runnable
-            Runnable temp = new Runnable() {
+            Thread temp = new Thread() {
                 @Override
                 public void run() {
                     try {
@@ -59,7 +59,9 @@ public class ClientNetInterface {
             message = new ClientMessageLocalPort(localPort);
             String rawMessage = Serializer.serialize(message);
             sender.send(rawMessage);
-            temp.run();
+            temp.start();
+        }else{
+            logger.info("ClientNetInterface is already connected");
         }
     }
 

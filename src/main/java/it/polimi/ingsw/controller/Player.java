@@ -20,9 +20,10 @@ public class Player extends Thread{
     public Player(ServerSocket father, Logger logger){
         Player.logger = logger;
         try {
-            net = new ConnectionInterface(father, logger);
+            this.net = new ConnectionInterface(father, logger);
+            logger.info("player created");
         } catch (DisconnectedException e) {
-            //TODO: manage error
+            logger.info("Player cannot create a connection");
         }
         ServerNetInterface.addPlayer();
     }
@@ -92,7 +93,6 @@ public class Player extends Thread{
             e.printStackTrace();
         }
         //TODO: Get a PlayerID this.playerId = "xXx_Angelino_Alfano_xXx"; //TEMP
-
 
         //TODO: Wait for a Join/Create Game
 
