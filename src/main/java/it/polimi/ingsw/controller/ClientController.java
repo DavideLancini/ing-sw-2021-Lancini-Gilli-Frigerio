@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.ConnectionInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.Message;
@@ -10,10 +11,10 @@ import it.polimi.ingsw.view.Manager;
 import it.polimi.ingsw.view.gui.GUIActionManager;
 
 public class ClientController {
-    private ConnectionInterface net;
+    private ClientNetInterface net;
     private Manager manager;
 
-    public void setup (ConnectionInterface net){
+    public void setup (ClientNetInterface net){
         this.net = net;
     }
 

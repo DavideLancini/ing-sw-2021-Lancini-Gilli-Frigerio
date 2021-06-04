@@ -53,6 +53,7 @@ public class Client {
                         isON = false;
                     }
                     ClientController controller = new ClientController(true);
+                    controller.setup(net);
                     try {
                         controller.main();
                     } catch (DisconnectedException e) {
