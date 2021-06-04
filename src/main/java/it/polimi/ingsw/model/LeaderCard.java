@@ -53,6 +53,8 @@ public abstract class LeaderCard {
      * overridden in each subclass
      */
     public void leaderCardView() {}
+
+    public String view(){return null;}
 }
 
 

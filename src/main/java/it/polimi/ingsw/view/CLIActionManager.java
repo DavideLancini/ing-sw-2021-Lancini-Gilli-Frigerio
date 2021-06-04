@@ -246,14 +246,15 @@ public class CLIActionManager extends Manager {
 
     }
 
-    public ClientMessage ChooseLeaders(LeaderCard[] leaders){
+    public ClientMessage ChooseLeaders(String[] leaders){
         System.out.println("Choose two of the following four Leaders:");
         int i = 0, j = 0;
-        for (LeaderCard each : leaders) {
+        for (String each : leaders) {
             i++;
-            System.out.println(i+": ");
-            each.leaderCardView();
+            System.out.println(i+": "+each);
+
         }
+        i=0;
         do {
             try {
                 System.out.println("Enter the number of the first chosen Leader:");
