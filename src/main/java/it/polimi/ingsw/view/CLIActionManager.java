@@ -97,10 +97,10 @@ public class CLIActionManager extends Manager {
             System.out.println("1: "+Resource.SERVANT+"\t "+"2: "+Resource.COIN+"\t "+"3: "+Resource.SHIELD+"\t "+"4: "+Resource.STONE+"\t ");
             try {
                 switch (readInt()) {
-                    case 1: choice[i] = Resource.SERVANT;
-                    case 2: choice[i] = Resource.COIN;
-                    case 3: choice[i] = Resource.SHIELD;
-                    case 4: choice[i] = Resource.STONE;
+                    case 1: choice[i] = Resource.SERVANT; break;
+                    case 2: choice[i] = Resource.COIN; break;
+                    case 3: choice[i] = Resource.SHIELD; break;
+                    case 4: choice[i] = Resource.STONE; break;
                     default: throw new NumberFormatException("");
                 }
             }
@@ -262,9 +262,9 @@ public class CLIActionManager extends Manager {
         do {
             try {
                 System.out.println("Enter the number of the first chosen Leader:");
-                i = readInt();
+                i = readInt()-1;
                 System.out.println("Enter the number of the second chosen Leader:");
-                j = readInt();
+                j = readInt()-1;
             }
             catch (NumberFormatException e) {
                 System.out.println("There's been an error, please retry.");
