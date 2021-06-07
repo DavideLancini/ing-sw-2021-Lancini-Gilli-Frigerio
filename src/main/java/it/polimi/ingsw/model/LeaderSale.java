@@ -46,6 +46,10 @@ public class LeaderSale extends LeaderCard {
         }
         return reducedcost;
     }
+    /**
+     * LeaderCard view
+     * @return string to show
+     */
 
     public String view(){
         String string = "";
@@ -63,19 +67,5 @@ public class LeaderSale extends LeaderCard {
     }
 
 
-    /**
-     * LeaderCard view
-     */
-    public void leaderCardView() {
-        System.out.println("══════════════╗");
-        System.out.print("   [");
-        for (CardColor each : requirements) {
-            System.out.print(each + ";");
-        }
-        System.out.println("\b]");
 
-        System.out.println("   -" + this.getType());
-        System.out.println("  \u001b[38:5:221m {" + this.getVP() + "}\u001b[m");
-        System.out.println("══════════════╝");
-    }
 }

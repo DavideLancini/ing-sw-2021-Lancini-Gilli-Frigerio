@@ -11,7 +11,7 @@ public class TestStrongbox {
         Strongbox strongbox = new Strongbox();
         ArrayList<Resource> input = new ArrayList(Arrays.asList(Resource.COIN, Resource.STONE, Resource.COIN, Resource.STONE, Resource.SHIELD));
         strongbox.deposit(input);
-        strongbox.StrongboxView();
+        System.out.println(strongbox.StrongboxView());
         ArrayList<Resource> check = new ArrayList(Arrays.asList(Resource.COIN, Resource.STONE, Resource.STONE));
 
 
@@ -22,9 +22,8 @@ public class TestStrongbox {
 
         ArrayList<Resource> input2 = new ArrayList(Arrays.asList(Resource.COIN, Resource.STONE, Resource.COIN, Resource.SHIELD,Resource.SERVANT));
         strongbox2.deposit(input2);
-        strongbox2.StrongboxView();
+        System.out.println(strongbox2.StrongboxView());
         ArrayList<Resource> check2 = new ArrayList(Arrays.asList(Resource.COIN, Resource.STONE, Resource.STONE));
-
 
         boolean returnedbool2 = strongbox2.contains(check2);
         assertSame(false, returnedbool2);

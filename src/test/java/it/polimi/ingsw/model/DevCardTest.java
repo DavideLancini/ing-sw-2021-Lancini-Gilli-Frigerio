@@ -16,7 +16,7 @@ public class DevCardTest {
     }
 
     @Test
-    public void devCardView() {;
-        assertEquals(d1.toString(),d1.devCardView());
+    public void devCardView() {
+        System.out.println(d1.devCardView());
     }
 }

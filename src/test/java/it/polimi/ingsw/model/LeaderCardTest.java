@@ -12,9 +12,9 @@ public class LeaderCardTest {
     LeaderCard lead4=new LeaderDepot(12,Resource.COIN, Resource.STONE);
     @Test
     public void leaderCardView() {
-        lead1.leaderCardView();
-        lead2.leaderCardView();
-        lead3.leaderCardView();
-        lead4.leaderCardView();
+        System.out.println(lead1.view());
+        System.out.println(lead2.view());
+        System.out.println(lead3.view());
+        System.out.println(lead4.view());
     }
 }

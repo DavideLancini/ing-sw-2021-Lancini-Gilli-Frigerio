@@ -9,7 +9,7 @@ import java.util.*;
 public class DevCardBoard {
 
     //First index x for color, second index y for level
-    public static DevCardDeck[][] board;
+    public  DevCardDeck[][] board;
 
 
     /**
@@ -18,7 +18,7 @@ public class DevCardBoard {
      */
     public DevCardBoard(DevCardDeck[][] board){
         shuffleDecks(board);
-        DevCardBoard.board = new DevCardDeck[][]{{null,null,null},
+        this.board = new DevCardDeck[][]{{null,null,null},
                                                  {null,null,null},
                                                  {null,null,null},
                                                  {null,null,null}};
@@ -56,19 +56,21 @@ public class DevCardBoard {
         return top;
     }
 
-    public void topView() {
+    public String topView() {
+        String string="";
         DevCard[][] top = this.getTop();
-        System.out.println("══════════════╗");
+        string=string.concat("══════════════╗\n");
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 3; j++) {
-                top[i][j].toString();
-                if(j!=2)System.out.println("--------------");
+                string=string.concat(top[i][j].devCardView());
+                if(j!=2)string=string.concat("--------------\n");
             }
             if(i!=3)
-            System.out.println("══════════════╣");
+                string=string.concat("══════════════╣\n");
             else
-                System.out.println("══════════════╝");
+                string=string.concat("══════════════╝\n");
         }
+        return string;
     }
 
     /**

@@ -50,12 +50,4 @@ public class LeaderProduction extends LeaderCard {
         return string;
     }
 
-    public void leaderCardView() {
-        System.out.println("══════════════╗");
-        System.out.println("   [" + requirements.toString()+"+"+Level.TWO+ "]");
-        this.production.productionView();
-        System.out.println(" +["+Resource.EMPTY+"]");
-        System.out.println("  \u001b[38:5:221m {"+this.getVP()+"}\u001b[m");
-        System.out.println("══════════════╝");
-    }
 }

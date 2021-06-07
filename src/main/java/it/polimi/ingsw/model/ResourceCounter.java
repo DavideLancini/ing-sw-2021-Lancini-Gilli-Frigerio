@@ -1,18 +1,12 @@
 package it.polimi.ingsw.model;
 
 import java.util.Collection;
-import java.util.Collections;
+
 
 public class ResourceCounter {
-    private Resource[] resources;
 
-
-
-    private String string;
-
-    public ResourceCounter(Resource[] resources){
-        this.resources=resources;
-        string="";
+    public  static String count(Resource[] resources){
+        String string="";
         int servant = 0;int shield = 0;int coin = 0;int stone = 0;
         for (Resource resource : resources) {
             if (resource == Resource.STONE)
@@ -36,10 +30,11 @@ public class ResourceCounter {
         if (stone> 0) {
             string = string.concat(stone + "" + Resource.STONE);
         }
-
+       return string;
     }
-    public ResourceCounter(Collection<Resource> resources){
-        string="";
+
+    public static String count1(Collection<Resource> resources){
+        String string1="";
         int servant = 0;int shield = 0;int coin = 0;int stone = 0;
         for (Resource resource : resources) {
             if (resource == Resource.STONE)
@@ -52,56 +47,18 @@ public class ResourceCounter {
                 shield++;
         }
         if (servant > 0) {
-            System.out.print(servant + "" + Resource.SERVANT);
-            string = string.concat(servant + "" + Resource.SERVANT);
+            string1 = string1.concat(servant + "" + Resource.SERVANT);
         }
         if (coin > 0) {
-            System.out.print(coin + "" + Resource.COIN);
-            string = string.concat(coin + "" + Resource.COIN);
+            string1 = string1.concat(coin + "" + Resource.COIN);
         }
         if (shield > 0) {
-            System.out.print(shield + "" + Resource.SHIELD);
-            string = string.concat(shield + "" + Resource.SHIELD);
+            string1 = string1.concat(shield + "" + Resource.SHIELD);
         }
         if (stone> 0) {
-            System.out.print(stone + "" + Resource.STONE);
-            string = string.concat(stone + "" + Resource.STONE);
+            string1 = string1.concat(stone + "" + Resource.STONE);
         }
+        return string1;
 
-    }
-    public void count() {
-        int servant = 0;
-        int shield = 0;
-        int coin = 0;
-        int stone = 0;
-        for (Resource resource : this.resources) {
-            if (resource == Resource.STONE)
-                stone++;
-            else if (resource == Resource.SERVANT)
-                servant++;
-            else if (resource == Resource.COIN)
-                coin++;
-            else if (resource == Resource.SHIELD)
-                shield++;
-        }
-        if (servant > 0) {
-            System.out.print(servant + "" + Resource.SERVANT);
-            string = string.concat(servant + "" + Resource.SERVANT);
-        }
-        if (coin > 0) {
-            System.out.print(coin + "" + Resource.COIN);
-            string = string.concat(coin + "" + Resource.COIN);
-        }
-        if (shield > 0) {
-            System.out.print(shield + "" + Resource.SHIELD);
-            string = string.concat(shield + "" + Resource.SHIELD);
-        }
-        if (stone > 0) {
-            System.out.print(stone + "" + Resource.STONE);
-            string = string.concat(stone + "" + Resource.STONE);
-        }
-    }
-    public String getString() {
-        return string;
     }
 }

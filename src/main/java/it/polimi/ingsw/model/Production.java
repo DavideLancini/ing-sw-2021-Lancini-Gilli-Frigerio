@@ -71,25 +71,14 @@ public class Production {
 
     /**
      * productionView
+     * @return string to show
      */
-    public void productionView(){
-        System.out.print("[");
-        new ResourceCounter(this.input).count();
-        System.out.print("]→[");
-        new ResourceCounter(this.output).count();
-        if(this.faithOutput!=0)
-        System.out.print(this.faithOutput +""+Resource.FAITH);
-        System.out.println("]");
-    }
-
     public String view() {
         String string="";
         string=string.concat("[");
-        ResourceCounter input=new ResourceCounter(this.input);
-        string=string.concat(input.getString());
+        string=string.concat(ResourceCounter.count(this.input));
         string=string.concat("]→[");
-        ResourceCounter output=new ResourceCounter(this.output);
-        string=string.concat(output.getString());
+        string=string.concat(ResourceCounter.count(this.output));
         if(this.faithOutput!=0)
            string=string.concat(this.faithOutput +""+Resource.FAITH);
         string=string.concat("]");

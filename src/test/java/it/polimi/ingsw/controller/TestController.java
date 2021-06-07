@@ -81,6 +81,6 @@ public class TestController {
 
         controller.produce(new boolean[]{false, true, false, false, false, false});
 
-       pb.playerBoardView();
+       pb.playerBoardView("testPlayer");
     }
 }

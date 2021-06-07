@@ -43,14 +43,14 @@ public class TestMarket {
         Marble[] expectedRow = new Marble[]{Marble.WHITE, Marble.BLUE, Marble.GRAY, Marble.YELLOW};
         Marble[] returnedCol;
         Marble[] expectedCol = new Marble[]{Marble.YELLOW, Marble.WHITE, Marble.PURPLE};
-        market.marketView();
+        System.out.println(market.view());
         returnedRow = market.takeResources(true, 1);
         assertArrayEquals(expectedRow, returnedRow);
         assertSame(Marble.WHITE, market.getSideMarble());
-        market.marketView();
+        System.out.println(market.view());
         returnedCol = market.takeResources(false, 3);
         assertArrayEquals(expectedCol, returnedCol);
-        market.marketView();
+        System.out.println(market.view());
         assertSame(Marble.YELLOW, market.getSideMarble());
 
     }

@@ -44,6 +44,6 @@ public class TestDepot {
     public void testDepotView(){
         Resource[] contents= {Resource.COIN, Resource.STONE, Resource.SHIELD, Resource.SHIELD, Resource.EMPTY, Resource.SERVANT, Resource.EMPTY, Resource.EMPTY, Resource.EMPTY, Resource.EMPTY};
         depot.setContents(contents);
-        depot.depotView();
+        System.out.println(depot.depotView());
     }
 }

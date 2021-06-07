@@ -10,17 +10,19 @@ import java.util.Collection;
 
 public abstract class Manager {
 
-    public ClientMessage Turn(boolean action){
+    public ClientMessage turn(boolean action){
         return null;
     }
 
-    public void View(String view){}
+    public void view(String view){}
 
-    public void DisplayError(String error){}
+    public void displayError(String error){}
 
-    public ClientMessage ArrangeDepot(Collection<Resource> resources) throws DisconnectedException {
+    public ClientMessage arrangeDepot(Collection<Resource> resources){
         return null;
     }
 
-    public ClientMessage ChooseLeaders(String[] leaders) {return null;};
+    public ClientMessage chooseLeaders(String[] leaders) {return null;}
+
+    public ClientMessage addResource() {return null;}
 }

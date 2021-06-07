@@ -113,6 +113,11 @@ public class Market {
         }
     }
 
+    /**
+     * marketView
+     *  CLI output
+     * @return String to show
+     */
     public String view(){
         String string = "";
         string = string.concat(Marble.RESET+"market:\n");
@@ -127,19 +132,5 @@ public class Market {
         return string;
     }
 
-    /**
-     * marketView
-     * CLI output
-     */
-    public void marketView() {
-        System.out.println(Marble.RESET+"market:");
-        System.out.println("["+this.sideMarble+Marble.RESET+"]");
-        for(int i=0;i<3;i++){
-            for(int j=0;j<4;j++){
-                System.out.print(this.marketBoard[i][j]);
-            }
-            System.out.println("");
-        }
-    }
 }
 

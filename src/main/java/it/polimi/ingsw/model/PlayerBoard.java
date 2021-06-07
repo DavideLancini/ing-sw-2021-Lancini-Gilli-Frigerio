@@ -141,33 +141,42 @@ public class PlayerBoard {
 
     }
 
-    public void playerBoardView(){
-        System.out.println("player");
-        ShowFaithTrack();
-        this.depot.depotView();
-        this.strongbox.StrongboxView();
-        devCardsView();
+    public String playerBoardView(String player){
+        String string="";
+        string=string.concat(player+"\n");
+        string=string.concat(ShowFaithTrack());
+        string=string.concat(this.depot.depotView());
+        string=string.concat(this.strongbox.StrongboxView());
+        string=string.concat(devCardsView());
+        return string;
 
     }
 
-    private void devCardsView() {
-        boolean first=false;
+    private String devCardsView() {
+        String string="";
+        boolean first=false;// first card printed?
         for(int i=0;i<3;i++){
             for(int j=2;j>-1;j--){
-                if (first)
-                devCards[i][j].coveredView();
+                if (first) {
+
+                    string = string.concat(devCards[i][j].coveredView() + "");
+                }
                 else if (devCards[i][j]!=null) {
-                    devCards[i][j].toString();
+                    string = string.concat("^^^^^^^^^^^^^^\n");
+                    string=string.concat(devCards[i][j].devCardView()+"");
                     first=true;
                     }
             }
             first=false;
             }
+        return string;
     }
 
 
-    private void ShowFaithTrack() {
-        System.out.println(faithTrack+""+Resource.FAITH);
+    private String ShowFaithTrack() {
+        String string="";
+        string=string.concat(faithTrack+""+Resource.FAITH+"\n");
+        return string;
     }
 
     public void setLeaders(LeaderCard[] leaderCards) {

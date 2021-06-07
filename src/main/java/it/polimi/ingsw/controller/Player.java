@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.PlayerBoard;
+import it.polimi.ingsw.model.Reader;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.*;
 import it.polimi.ingsw.network.messages.*;
@@ -30,12 +31,13 @@ public class Player extends Thread{
     }
 
     private void addResource(int numOfResource) throws Exception {
-        //TODO: ask resource to add
-        int i=0;
-        Resource[] resources = new Resource[numOfResource];
-        for(Resource resource : resources) {
-            playerBoard.getDepot().deposit(resource, i);
-            i++;
+        int i;
+        for(i=0;i<numOfResource;i++) {
+            net.send(new ServerMessageAddResource());
+            logger.info("waiting Player selected Resource");
+            ClientMessagePlaceResource message = (ClientMessagePlaceResource) net.receive();
+            logger.info("Player selected Resource");
+            playerBoard.getDepot().deposit(message.getResource(),i);
         }
     }
 
@@ -53,7 +55,7 @@ public class Player extends Thread{
     }
 
 
-    public void secondPlayer() throws Exception {
+    public void secondPlayer() throws Exception, EndTurnException {
         addResource(1);
     }
     public void thirdPlayer() throws Exception {

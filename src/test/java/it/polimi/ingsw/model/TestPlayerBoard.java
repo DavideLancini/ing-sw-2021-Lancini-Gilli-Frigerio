@@ -37,6 +37,11 @@ public class TestPlayerBoard {
     @Test
     public void testPlayerView(){
         try {
+            pb.addDevCard(newCard, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
             pb.addDevCard(newCard, 0);
         }
         catch (Exception e){}
@@ -45,6 +50,6 @@ public class TestPlayerBoard {
         }
         catch (Exception e){}
         pb.addFaith(23);
-        pb.playerBoardView();
+        System.out.println( pb.playerBoardView("testPlayer"));
     }
 }

@@ -71,20 +71,19 @@ public class DevCard {
      * devCardView
      */
     public String devCardView(){
-        System.out.print("Price[");
-        new ResourceCounter(this.cost).count();
-        System.out.println("]");
-        this.production.productionView();
-        System.out.println("  "+this.level+" "+this.color+"\u001b[38:5:221m {"+this.VP+"}\u001b[m");
-        return "";
-    }
-    @Override
-    public String toString(){
-        return devCardView();
+        String string="";
+        string=string.concat("Price[");
+        string=string.concat(ResourceCounter.count(this.cost));
+        string=string.concat("]\n");
+        string=string.concat(this.production.view());
+        string=string.concat("\n  "+this.level+" "+this.color+"\u001b[38:5:221m {"+this.VP+"}\u001b[m\n");
+        return string;
     }
 
-    public void coveredView(){
-        System.out.println("━━━━━━━━━━━━━━");
-        System.out.println("  "+this.level+" "+this.color+"\u001b[38:5:221m {"+this.VP+"}\u001b[m");// covered card possible view
+    public String coveredView(){
+        String string="";
+        string=string.concat("━━━━━━━━━━━━━━\n");
+        string=string.concat("  "+this.level+" "+this.color+"\u001b[38:5:221m {"+this.VP+"}\u001b[m\n");// covered card possible view
+        return string;
     }
 }

@@ -16,7 +16,7 @@ public class Client {
         //Logger Creation
         logger.setLevel(Level.ALL);
         //Ask Online-Offline
-        boolean isON = CLIActionManager.Online();
+        boolean isON = CLIActionManager.online();
         if (isON) {
             try {
 

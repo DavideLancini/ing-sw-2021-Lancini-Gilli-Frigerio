@@ -26,6 +26,6 @@ public class DevCardBoardTest {
     DevCardBoard dcb = new DevCardBoard(board);
     @Test
     public void DevCardBordViewTest() {
-        dcb.topView();
+        System.out.println(dcb.topView());
     }
 }

@@ -1,8 +1,6 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.ClientNetInterface;
-import it.polimi.ingsw.network.ConnectionInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.Message;
 import it.polimi.ingsw.network.messages.*;
@@ -30,23 +28,27 @@ public class ClientController {
 
             switch(message.getType()){
                 case Turn:
-                    net.send(manager.Turn(((ServerMessageTurn)message).getAction()));
+                    net.send(manager.turn(((ServerMessageTurn)message).getAction()));
                     break;
 
                 case MarketReturn:
-                    net.send(manager.ArrangeDepot(((ServerMessageMarketReturn)message).getResources()));
+                    net.send(manager.arrangeDepot(((ServerMessageMarketReturn)message).getResources()));
                     break;
 
                 case View:
-                    manager.View(((ServerMessageView)message).view);
+                    manager.view(((ServerMessageView)message).view);
                     break;
 
                 case Error:
-                    manager.DisplayError(((ServerMessageError)message).getError());
+                    manager.displayError(((ServerMessageError)message).getError());
                     break;
 
                 case ChooseLeaders:
-                    net.send(manager.ChooseLeaders(((ServerMessageChooseLeaders)message).getLeaders()));
+                    net.send(manager.chooseLeaders(((ServerMessageChooseLeaders)message).getLeaders()));
+                    break;
+                case AddResource:
+                    net.send(manager.addResource());
+                    break;
             }
         }
     }

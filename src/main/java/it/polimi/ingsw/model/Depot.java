@@ -85,11 +85,12 @@ public class Depot {
         return resource;
     }
 
-    public void depotView(){
-        System.out.println("   /╲");
-        System.out.println("  /"+contents[0]+" ╲");
-        System.out.println(" /"+contents[1]+" "+contents[2]+" ╲");
-        System.out.println("/"+contents[3]+" "+contents[4]+" "+contents[5]+" ╲");
-
+    public String depotView(){
+        String string="";
+        string=string.concat("   /╲\n");
+        string=string.concat("  /"+contents[0]+" ╲\n");
+        string=string.concat(" /"+contents[1]+" "+contents[2]+" ╲\n");
+        string=string.concat("/"+contents[3]+" "+contents[4]+" "+contents[5]+" ╲\n");
+        return string;
     }
 }

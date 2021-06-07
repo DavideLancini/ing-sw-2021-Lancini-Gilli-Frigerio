@@ -20,7 +20,7 @@ public class Game {
     private boolean endGame=false;
     /**
      * Game constructor
-     * @param players
+     * @param players Players playing the game
      */
     public Game(Player[] players) throws Exception {
         Server.logger.info("Gioco Creato");
@@ -32,14 +32,7 @@ public class Game {
         setupGame();
         Server.logger.finest("Setup OK");
         setPlayers(players);
-        /*Server.logger.info("OK1 ");
-        if(players.length>=2)players[1].secondPlayer();
-        Server.logger.info("OK2");
-        if(players.length>=3)players[2].thirdPlayer();
-        Server.logger.info("OK3");
-        if(players.length>=4)players[3].fourthPlayer();
-        Server.logger.info("OK4");*/
-        if(players.length>=5)throw new Exception("Number of players out of range");
+
         System.out.println("Starting Game with "+players.length+" players...");
 
         Server.logger.info("OK5");
@@ -54,6 +47,19 @@ public class Game {
             each.receiveLeaders();
         }
         Server.logger.info("OK7");
+
+        try {
+            if(players.length>=2)players[1].secondPlayer();
+            if(players.length>=3)players[2].thirdPlayer();
+            if(players.length>=4)players[3].fourthPlayer();
+            if(players.length>=5)throw new Exception("Number of players out of range");
+        }
+        catch (EndTurnException e) {
+            e.printStackTrace();
+        }
+
+
+
 
         startGame();
     }
@@ -71,7 +77,7 @@ public class Game {
                 boolean action = false;
                 while(!done){
                     try {
-                        each.net.send(new ServerMessageView(market.view()));
+                        showAllGame(each);
                         action = each.turn(action);
                         Server.logger.info("Setting action to "+action);
                     }
@@ -82,11 +88,19 @@ public class Game {
         while (!checkEndGame());
     }
 
-
-
-    public Player[] getPlayers() {
-        return this.players;
+    private boolean showAllGame(Player each) {
+        try {
+            each.net.send(new ServerMessageView(market.view()));
+            each.net.send(new ServerMessageView(devCardBoard.topView()));
+            for (Player player : players) {
+                each.net.send(new ServerMessageView(player.playerBoard.playerBoardView(player.playerId)));
+            }
+        } catch (DisconnectedException e) {
+           return true;
+        }
+        return false;
     }
+
 
     public void setPlayers(Player[] players) {
         this.players= players;
@@ -101,7 +115,7 @@ public class Game {
     /**
      * StartGame constructor
      */
-    private void setupGame(/*players*/) throws FileNotFoundException {
+    private void setupGame() throws FileNotFoundException {
         createDevCardBoard();
         Server.logger.info("OK1 ");
         createLeaderDeck();

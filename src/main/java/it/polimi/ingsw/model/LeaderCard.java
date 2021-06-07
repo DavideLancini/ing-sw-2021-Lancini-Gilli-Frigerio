@@ -51,9 +51,8 @@ public abstract class LeaderCard {
     /**
      * LeaderCard view
      * overridden in each subclass
+     * @return string to show
      */
-    public void leaderCardView() {}
-
     public String view(){return null;}
 }
 

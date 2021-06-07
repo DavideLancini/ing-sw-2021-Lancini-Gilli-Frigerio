@@ -71,9 +71,11 @@ public class Strongbox {
         return true;
     }
 
-    public void StrongboxView(){
-        System.out.print("╔════════════╗\n╚═════╚╝═════╝\n  ");
-        new ResourceCounter(this.resources);
-        System.out.println("\n╚════════════╝");
+    public String StrongboxView(){
+        String string="";
+        string=string.concat("╔════════════╗\n╚═════╚╝═════╝\n  ");
+        string=string.concat(ResourceCounter.count1(this.resources));
+        string=string.concat("\n╚════════════╝\n");
+        return string;
     }
 }

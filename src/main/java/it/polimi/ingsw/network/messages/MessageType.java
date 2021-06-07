@@ -4,5 +4,5 @@ package it.polimi.ingsw.network.messages;
  * @author Lancini Davide
  */
 public enum MessageType {
-    LeaderActivation, TakeResources, BuyDevCard, Produce, SetResource, TryDepotConfiguration, SellLeader, EndTurn, Error, OK, Turn, MarketReturn, View, LocalPort, CreateGame, JoinGame, ChooseLeaders, ChosenLeaders;
+    LeaderActivation, TakeResources, BuyDevCard, Produce, SetResource, TryDepotConfiguration, SellLeader, EndTurn, Error, OK, Turn, MarketReturn, View, LocalPort, CreateGame, JoinGame, ChooseLeaders, ChosenLeaders, AddResource, PlaceResource
 }
