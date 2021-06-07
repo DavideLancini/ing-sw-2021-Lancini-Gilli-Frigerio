@@ -17,33 +17,52 @@ public class CLIActionManager extends Manager {
 
     private static Logger logger = Client.logger;
     private static ClientNetInterface net;
-    private ClientController ClientController;
 
     public static void setLogger(Logger logger){
         CLIActionManager.logger=logger;
     }
 
-
-    public CLIActionManager(ClientController clicont){
-        this.ClientController = clicont;
-    }
-
+    /**
+     * Read a number from user input
+     * @return a valid number
+     */
     private static int readInt(){
-        String in = Reader.in.nextLine();
-        try{
-            return Integer.parseInt(in);
+        while(true) {
+            String in = Reader.in.nextLine();
+            try {
+                return Integer.parseInt(in);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number, please retry.");
+            }
         }
-        catch (NumberFormatException e){
-            return Reader.in.nextInt();
-        }
-
     }
+
+    /**
+     * Read a valid number from user input contained in range
+     * @param min minimum number accepted
+     * @param max maximum number accepted
+     * @return a valid number
+     */
+    private static int readInt(int min, int max){
+        while(true) {
+            String in = Reader.in.nextLine();
+            try {
+                int read = Integer.parseInt(in);
+                if(read >= min && read >= max) return read;
+                else System.out.println("Number out of range, please retry.");
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number, please retry.");
+            }
+        }
+    }
+
 
     public void view(String s){System.out.println(s);}
 
 
 
-    public static ClientNetInterface connect() throws DisconnectedException{
+ /*   CREDO CI SIA QUALCOSA DI SBAGLIATO CON QUESTO METODO, FINCHE' NON E' UTILIZZATO TANTO VALE TENERLO COMMENTATO
+ public static ClientNetInterface connect() throws DisconnectedException{
         String serverAddress;
         int serverPort;
 
@@ -64,7 +83,7 @@ public class CLIActionManager extends Manager {
                 //warning
             }
         }
-    }
+    }*/
 
     public static void autoConnect() throws DisconnectedException{
         net = new ClientNetInterface("localhost",5555, Client.logger);
@@ -97,22 +116,11 @@ public class CLIActionManager extends Manager {
         Resource[] choice = new Resource[3];
 
         for (int i = 0; i<3; i++){
-            System.out.println("Choose which resource to put in row n° "+i+": ");
-            System.out.println("1: "+Resource.SERVANT+"\t "+"2: "+Resource.COIN+"\t "+"3: "+Resource.SHIELD+"\t "+"4: "+Resource.STONE+"\t "+"5: "+Resource.EMPTY);
-            try {
-                switch (readInt()) {
-                    case 1: choice[i] = Resource.SERVANT; break;
-                    case 2: choice[i] = Resource.COIN; break;
-                    case 3: choice[i] = Resource.SHIELD; break;
-                    case 4: choice[i] = Resource.STONE; break;
-                    case 5: choice[i] = Resource.EMPTY; break;
-                    default: throw new NumberFormatException("");
-                }
-            }
-            catch(NumberFormatException e){
-                System.out.println("Number invalid, please retry.");
-                i--;
-            }
+            System.out.print("Choose which resource to put in row n° "+i+": ");
+            for (int j = 1; j <= Resource.values().length -1; j++){System.out.print(""+j+". "+Resource.values()[j-1].toString()+" ");}
+            System.out.println();
+            choice[i] = Resource.values()[readInt(1,5)-1];
+
         }
 
         if(resources.remove(choice[0]))newresources[0] = choice[0];
@@ -128,15 +136,8 @@ public class CLIActionManager extends Manager {
 
 
     public static boolean online(){
-        while(true){
-            System.out.println( "1.[online]\n2.[local]");
-            switch(Reader.in.nextLine()){
-                case "1":
-                    return true;
-                default:
-                    return false;
-            }
-        }
+        System.out.println( "1.[online]\n2.[local]");
+        return "1".equals(Reader.in.nextLine());
     }
 
     /**
@@ -157,23 +158,23 @@ public class CLIActionManager extends Manager {
             System.out.println( "7. End Turn");
 
             try {
-                int choice = readInt();
+                int choice = readInt(1,7);
 
                 switch (choice) {
 
-                    case 1:
+                    case 1: //TAKE RESOURCES FROM MARKET
                         if(mainActionDone){
                             System.out.println("Already done an action this turn!");
                             break;
                         }
 
-                        System.out.println("ROW: [0], COLUMN: [1]");
-                        boolean isRow = readInt() != 1;
+                        System.out.println("ROW: [1], COLUMN: [2]");
+                        boolean isRow = readInt(1,2) == 1;
                         System.out.println("Enter number of "+(isRow ? "row" : "column")+":");
-                        int position = readInt();
+                        int position = isRow? readInt(1,3) : readInt(1,4);
                         return new ClientMessageTakeResources(isRow, position);
 
-                    case 2:
+                    case 2: // BUY DEVCARD
 
                         if(mainActionDone){
                             System.out.println("Already done an action this turn!");
@@ -181,19 +182,22 @@ public class CLIActionManager extends Manager {
                         }
 
                         System.out.println("Level:");
-                        Level level = Level.values()[readInt()-1];
+                        Level level = Level.values()[readInt(1,Level.values().length) - 1];
 
                         System.out.println("Color: ");
-                        for (int i = 0; i<CardColor.values().length; i++){System.out.println(""+i+". "+CardColor.values()[i].toString());}
-                        CardColor color = CardColor.values()[readInt()];
+                        for (int i = 1; i <= CardColor.values().length; i++) {
+                            System.out.print("" + i + ". " + CardColor.values()[i-1].toString()+" ");
+                        }
+                        System.out.println();
+                        CardColor color = CardColor.values()[readInt(1,CardColor.values().length)-1];
 
                         System.out.println("Column in which to put it: ");
-                        int column = readInt();
-
+                        int column = readInt(1,3)-1;
                         return new ClientMessageBuyDevCard(level, color, column);
 
 
-                    case 3:
+
+                    case 3: //PRODUCE
 
                         if(mainActionDone){
                             System.out.println("Already done an action this turn!");
@@ -212,33 +216,35 @@ public class CLIActionManager extends Manager {
 
                         for(int i = 0; i<6; i++){
                             System.out.println(text[i]);
-                            activated[i] = readInt() == 1;
+                            activated[i] = readInt(0,1) == 1;
                         }
 
                         return new ClientMessageProduce(activated);
 
 
-                    case 4:
-                        System.out.println("Enter number of Leader Card to be activated");
-                        int pos = readInt();
-                        return new ClientMessageLeaderActivation(pos);
+                    case 4: //ACTIVATE LEADER
+                        System.out.println("Enter number of Leader Card to be activated (1 or 2):");
+                        int pos = readInt(1,2);
+                        return new ClientMessageLeaderActivation(pos-1);
 
-                    case 5:
-                        System.out.println("Enter number of Leader Card to be sold");
-                        int number = readInt();
-                        return new ClientMessageSellLeader(number);
+                    case 5: //SELL LEADER
+                        System.out.println("Enter number of Leader Card to be sold: (1 or 2)");
+                        int number = readInt(1,2);
+                        return new ClientMessageSellLeader(number-1);
 
-                    case 6:
-                        System.out.println("Enter number of resource to be set. 0 to 1 for defaultProduciton input, 2 for output, 3 to 4 for LeaderProduction choice");
-                        int res = readInt();
+                    case 6: //SET RESOURCE
+                        System.out.println("Enter number of resource to be set. 1 to 2 for defaultProduciton input, 3 for output, 4 to 5 for LeaderProduction choice");
+                        int res = readInt(1,5);
 
-                        System.out.println("Resource: ");
-                        for (int i = 0; i < Resource.values().length -2; i++){System.out.println(""+i+". "+Resource.values()[i].toString());}
-                        Resource resource = Resource.values()[readInt()];
+                        System.out.print("Resource: ");
+                        for (int i = 1; i <= Resource.values().length -2; i++){System.out.print(""+i+". "+Resource.values()[i-1].toString()+" ");}
+                        System.out.println();
+                        Resource resource = Resource.values()[readInt()-1];
 
-                        return new ClientMessageSetResource(resource, res);
 
-                    case 7:
+                        return new ClientMessageSetResource(resource, res-1);
+
+                    case 7: //ENDTURN
                         return new ClientMessageEndTurn();
 
                     default:
@@ -304,20 +310,10 @@ public class CLIActionManager extends Manager {
     }
 
     public ClientMessage addResource(){
-       Resource resource;
-        System.out.println("[Selected 1 resource]\n1:"+Resource.COIN+"2:"+Resource.STONE+"3:"+Resource.SERVANT+"4:"+Resource.SHIELD);
-        switch (Reader.in.nextInt()){
-            case 1:resource=Resource.COIN;
-                break;
-            case 2:resource=Resource.STONE;
-                break;
-            case 3:resource=Resource.SERVANT;
-                break;
-            case 4:resource=Resource.SHIELD;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + Reader.in.nextInt());
-        }
+        System.out.print("[Select your starting resource]: ");
+        for (int i = 1; i <= Resource.values().length -2; i++){System.out.print(""+i+". "+Resource.values()[i-1].toString()+" ");}
+        System.out.println();
+        Resource resource = Resource.values()[readInt(1,4)-1];
       return new ClientMessagePlaceResource(resource);
     }
 
@@ -350,8 +346,8 @@ public class CLIActionManager extends Manager {
     }
 
     public static void joinMatch(String playerId) throws DisconnectedException {
-        System.out.println("How many player? ");
-        int gameMode = Reader.in.nextInt();
+        System.out.println("How many players?");
+        int gameMode = readInt(1,4);
         ClientMessageJoinGame messageJoin = new ClientMessageJoinGame(playerId, gameMode);
         net.send(messageJoin);
 

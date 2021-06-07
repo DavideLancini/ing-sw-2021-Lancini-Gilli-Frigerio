@@ -1,16 +1,15 @@
 package it.polimi.ingsw.model;
 
-import java.util.Arrays;
 /**
  * Class DevCard
  * @author Gruppo 12
  */
 public class DevCard {
-    private Resource[] cost;
-    private Level level;
-    private CardColor color;
-    private int VP;
-    private Production production;
+    private final Resource[] cost;
+    private final Level level;
+    private final CardColor color;
+    private final int VP;
+    private final Production production;
 
     /**
      * getCost

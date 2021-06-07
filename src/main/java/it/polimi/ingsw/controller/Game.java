@@ -10,14 +10,13 @@ import it.polimi.ingsw.network.messages.ServerMessageView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.logging.Logger;
 
 public class Game {
     private Player[] players;
     public DevCardBoard devCardBoard;
     public LeaderCardDeck leaderCardDeck;
     public Market market;
-    private boolean endGame=false;
+
     /**
      * Game constructor
      * @param players Players playing the game
@@ -48,18 +47,11 @@ public class Game {
         }
         Server.logger.info("OK7");
 
-        try {
-            if(players.length>=2)players[1].secondPlayer();
-            if(players.length>=3)players[2].thirdPlayer();
-            if(players.length>=4)players[3].fourthPlayer();
-            if(players.length>=5)throw new Exception("Number of players out of range");
-        }
-        catch (EndTurnException e) {
-            e.printStackTrace();
-        }
 
-
-
+        if(players.length>=2)players[1].secondPlayer();
+        if(players.length>=3)players[2].thirdPlayer();
+        if(players.length>=4)players[3].fourthPlayer();
+        if(players.length>=5)throw new Exception("Number of players out of range");
 
         startGame();
     }
@@ -88,17 +80,12 @@ public class Game {
         while (!checkEndGame());
     }
 
-    private boolean showAllGame(Player each) {
-        try {
-            each.net.send(new ServerMessageView(market.view()));
-            each.net.send(new ServerMessageView(devCardBoard.topView()));
-            for (Player player : players) {
-                each.net.send(new ServerMessageView(player.playerBoard.playerBoardView(player.playerId)));
-            }
-        } catch (DisconnectedException e) {
-           return true;
+    private void showAllGame(Player each) throws DisconnectedException {
+        each.net.send(new ServerMessageView(market.view()));
+        each.net.send(new ServerMessageView(devCardBoard.topView()));
+        for (Player player : players) {
+            each.net.send(new ServerMessageView(player.playerBoard.playerBoardView(player.playerId)));
         }
-        return false;
     }
 
 
@@ -107,13 +94,17 @@ public class Game {
     }
 
     private boolean checkEndGame(){
-        //TODO
-        return true;
+        for(Player each : this.players) {
+            if(each.playerBoard.getFaith() >= 20 || each.playerBoard.getDevCardsNumber() >= 7) return true;
+        }
+        //TODO: Testing
+        return false;
     }
 
 
     /**
-     * StartGame constructor
+     * Setup of the varius elements of the game
+     * @throws FileNotFoundException if file json is not found
      */
     private void setupGame() throws FileNotFoundException {
         createDevCardBoard();

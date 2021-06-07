@@ -1,5 +1,9 @@
 package it.polimi.ingsw.model;
 
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 /**
  * Class PlayerBoard
  * @author Gruppo 12
@@ -7,12 +11,12 @@ package it.polimi.ingsw.model;
 public class PlayerBoard {
 
     private int faithTrack;
-    private Strongbox strongbox = new Strongbox();
+    private final Strongbox strongbox = new Strongbox();
     private LeaderCard[] leaderCards;
-    private Depot depot= new Depot();
+    private final Depot depot= new Depot();
     //DevCard[colonna][livello]
     private DevCard[][] devCards;
-    private DefaultProduction defaultProduction;
+    private final DefaultProduction defaultProduction;
 
     /**
      * class constructor
@@ -154,22 +158,23 @@ public class PlayerBoard {
 
     private String devCardsView() {
         String string="";
+
         boolean first=false;// first card printed?
         for(int i=0;i<3;i++){
             for(int j=2;j>-1;j--){
                 if (first) {
-
                     string = string.concat(devCards[i][j].coveredView() + "");
                 }
                 else if (devCards[i][j]!=null) {
                     string = string.concat("^^^^^^^^^^^^^^\n");
                     string=string.concat(devCards[i][j].devCardView()+"");
                     first=true;
-                    }
+                }
             }
             first=false;
-            }
+        }
         return string;
+
     }
 
 
@@ -181,5 +186,9 @@ public class PlayerBoard {
 
     public void setLeaders(LeaderCard[] leaderCards) {
         this.leaderCards = leaderCards;
+    }
+
+    public int getDevCardsNumber() {
+        return Math.toIntExact(Arrays.stream(this.devCards).filter(Objects::nonNull).count());
     }
 }

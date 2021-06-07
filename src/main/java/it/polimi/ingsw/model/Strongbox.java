@@ -62,7 +62,7 @@ public class Strongbox {
      * @return true if subset is contained in the strongBox else false
      */
     public boolean contains(Collection<Resource> subset){
-        ArrayList<Resource> main = new ArrayList(this.resources);
+        ArrayList<Resource> main = new ArrayList<>(this.resources);
 
         try{
             for(Resource elem : subset){if(!main.remove(elem))throw new Exception("");}

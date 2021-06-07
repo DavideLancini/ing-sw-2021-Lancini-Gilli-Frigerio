@@ -10,17 +10,17 @@ import it.polimi.ingsw.view.gui.GUIActionManager;
 
 public class ClientController {
     private ClientNetInterface net;
-    private Manager manager;
+    private final Manager manager;
 
     public void setup (ClientNetInterface net){
         this.net = net;
     }
 
     public ClientController(boolean cli) {
-        this.manager = cli? new CLIActionManager(this) : new GUIActionManager(this);
+        this.manager = cli? new CLIActionManager() : new GUIActionManager();
     }
 
-    //implements thread?
+
     public void main() throws DisconnectedException {
         while (true){
             Message message = net.receive();

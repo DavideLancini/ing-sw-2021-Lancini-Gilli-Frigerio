@@ -53,13 +53,13 @@ public class Depot {
      * Deposit Resource taken form Market
      * @param resource resource to deposit
      * @param position selected slot to place resource into Depot. 0<=position<6 standard depot, 6<=position<10 leadercards depot.
-     * @throws Exception if resource is null, if position is out of depot size or if slot alreadyin use
+     * @throws Exception if resource is null, if position is out of depot size or if slot already in use
      */
     //TODO: Exception handling
     public void deposit(Resource resource, int position) throws Exception{
         if(position<0 || position>9 || resource == Resource.EMPTY || resource == null) throw new Exception("invalid position or null resource");
         if(this.contents[position] != Resource.EMPTY){throw new Exception("slot already occupied");}
-        else if( ( (position == 6 || position == 7) && !resource.equals(this.leaderType[0])) || ( (position == 8 || position == 9) && !resource.equals(this.leaderType[1]))) throw new Exception("invalid resource type");
+        else if( ( (position == 6 || position == 7) && !resource.equals(this.leaderType[0])) || ( (position == 8 || position == 9) && !resource.equals(this.leaderType[1]))) throw new Exception("invalid resource type for leader depot");
         this.contents[position] = resource;
     }
 
@@ -67,7 +67,7 @@ public class Depot {
      */
     //Check for input length and valid resource types is perfomed by controller
     public void setContents(Resource[] input){
-        System.arraycopy(input, 0, this.contents, 0, 10);
+        System.arraycopy(input, 0, this.contents, 0, input.length);
     }
 
     /**

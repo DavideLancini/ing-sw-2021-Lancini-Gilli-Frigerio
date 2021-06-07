@@ -1,10 +1,8 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.Server;
+
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.PlayerBoard;
-import it.polimi.ingsw.model.Reader;
-import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.*;
 import it.polimi.ingsw.network.messages.*;
 
@@ -30,14 +28,22 @@ public class Player extends Thread{
         ServerNetInterface.addPlayer();
     }
 
-    private void addResource(int numOfResource) throws Exception {
-        int i;
-        for(i=0;i<numOfResource;i++) {
+    /**
+     * Add in the deposit the starting resources
+     * @param numOfResource 1 for second and third player, 2 for fourth.
+     * @throws DisconnectedException if unable to send or receive messages
+     */
+    private void addResource(int numOfResource) throws DisconnectedException {
+        for(int i=0;i<numOfResource;i++) {
             net.send(new ServerMessageAddResource());
             logger.info("waiting Player selected Resource");
             ClientMessagePlaceResource message = (ClientMessagePlaceResource) net.receive();
             logger.info("Player selected Resource");
-            playerBoard.getDepot().deposit(message.getResource(),i);
+            try {
+                playerBoard.getDepot().deposit(message.getResource(),i);
+            } catch (Exception e) {
+                logger.info("THIS SHOULD NOT BE POSSIBLE");
+            }
         }
     }
 
@@ -55,14 +61,14 @@ public class Player extends Thread{
     }
 
 
-    public void secondPlayer() throws Exception, EndTurnException {
+    public void secondPlayer() throws DisconnectedException {
         addResource(1);
     }
-    public void thirdPlayer() throws Exception {
+    public void thirdPlayer() throws DisconnectedException {
         addResource(1);
         playerBoard.addFaith(1);
     }
-    public void fourthPlayer() throws Exception {
+    public void fourthPlayer() throws DisconnectedException {
         addResource(2);
         playerBoard.addFaith(1);
     }
@@ -84,6 +90,8 @@ public class Player extends Thread{
     }
 
     public void setController(Controller controller){this.controller = controller;}
+
+
 
     @Override
     public void run() {

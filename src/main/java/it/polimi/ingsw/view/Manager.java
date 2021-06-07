@@ -1,10 +1,8 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.network.Message;
 import it.polimi.ingsw.network.messages.ClientMessage;
-import it.polimi.ingsw.network.DisconnectedException;
+
 
 import java.util.Collection;
 
