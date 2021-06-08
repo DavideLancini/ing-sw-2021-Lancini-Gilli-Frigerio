@@ -48,7 +48,7 @@ public class CLIActionManager extends Manager {
             String in = Reader.in.nextLine();
             try {
                 int read = Integer.parseInt(in);
-                if(read >= min && read >= max) return read;
+                if(read >= min && read <= max) return read;
                 else System.out.println("Number out of range, please retry.");
             } catch (NumberFormatException e) {
                 System.out.println("Invalid number, please retry.");
@@ -323,15 +323,10 @@ public class CLIActionManager extends Manager {
      */
     public static void createCustomMatch(String s) throws DisconnectedException {
         int numOfPlayers=0;
-        boolean correctInput=false;
-        while (!correctInput) {
-            System.out.println("Number of players?");
-            numOfPlayers = Reader.in.nextInt();
-            if (numOfPlayers>4||numOfPlayers<1)
-                System.out.println("selected number from 1 to 4");
-            else
-                correctInput=true;
-        }
+
+        System.out.println("Number of players?");
+        numOfPlayers = readInt(1,4);
+
         ClientMessageCreateGame createMessage= new ClientMessageCreateGame(numOfPlayers,s);
         net.send(createMessage);
         ServerMessageView serverMessage= (ServerMessageView) net.receive();

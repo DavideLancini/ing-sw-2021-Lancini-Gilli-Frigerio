@@ -22,7 +22,7 @@ public class Game {
      * @param players Players playing the game
      */
     public Game(Player[] players) throws Exception {
-        Server.logger.info("Gioco Creato");
+        Server.logger.info("Game Created");
 
         for(Player each: players) {
             each.net.send(new ServerMessageOK());
@@ -80,11 +80,29 @@ public class Game {
         while (!checkEndGame());
     }
 
-    private void showAllGame(Player each) throws DisconnectedException {
-        each.net.send(new ServerMessageView(market.view()));
-        each.net.send(new ServerMessageView(devCardBoard.topView()));
+    private void showAllGame(Player currentPlayer) throws DisconnectedException {
+        showPlayersBoards(currentPlayer);
+        currentPlayer.net.send(new ServerMessageView(devCardBoard.topView()));
+        currentPlayer.net.send(new ServerMessageView(currentPlayer.playerBoard.playerBoardView("YOU")));
+        currentPlayer.net.send(new ServerMessageView(showLeaderCards(currentPlayer)));
+        currentPlayer.net.send(new ServerMessageView(market.view()));
+    }
+
+    private String showLeaderCards(Player currentPlayer) {
+        String string="";
+        LeaderCard[] tempLeaders={currentPlayer.playerBoard.getLeaderCard(0),currentPlayer.playerBoard.getLeaderCard(1)};
+        string=string.concat(tempLeaders[0].view());
+        if(tempLeaders[0].getIsActive())
+            string=string.concat("is active");
+        string=string.concat(tempLeaders[1].view());
+        if(tempLeaders[0].getIsActive())
+            string=string.concat("is active");
+        return string;
+    }
+
+    private void showPlayersBoards(Player currentPlayer) throws DisconnectedException {
         for (Player player : players) {
-            each.net.send(new ServerMessageView(player.playerBoard.playerBoardView(player.playerId)));
+            if(player!=currentPlayer) currentPlayer.net.send(new ServerMessageView(player.playerBoard.playerBoardView(player.playerId)));
         }
     }
 
@@ -103,7 +121,7 @@ public class Game {
 
 
     /**
-     * Setup of the varius elements of the game
+     * Setup of game's elements
      * @throws FileNotFoundException if file json is not found
      */
     private void setupGame() throws FileNotFoundException {
@@ -121,7 +139,6 @@ public class Game {
     private void createDevCardBoard() throws FileNotFoundException {
         DevCardDeck[][] board= new Gson().fromJson(new FileReader("src/main/resources/DevCardBOARD.json"),DevCardDeck[][].class);
         this.devCardBoard = new DevCardBoard(board);
-        //DevCardBoard.topView(DevCardBoard.getTop(DevCardBoard.getBoard()));
     }
 
     /**
@@ -150,13 +167,13 @@ public class Game {
         Server.logger.info("OK12 ");
         this.leaderCardDeck = new LeaderCardDeck(deck);
         Server.logger.info("FINE");
-        // for (LeaderCard leaderCard : deck){leaderCard.leaderCardView();}
+
     }
 
     private void createMarket() throws FileNotFoundException {
         Marble[] marbles= new Gson().fromJson(new FileReader("src/main/resources/Marbles.json"),Marble[].class);
         this.market = new Market(marbles);
-        //Market.marketView();
+
     }
 
 }
