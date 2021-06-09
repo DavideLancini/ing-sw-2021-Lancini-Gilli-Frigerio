@@ -33,7 +33,7 @@ public class DevCardDeck {
      * @return DevCard on top of deck
      */
      public DevCard peek(){
-         return deck.get(deck.size()-1);
+         return deck.size() == 0 ? null : deck.peek();
      }
 
 }

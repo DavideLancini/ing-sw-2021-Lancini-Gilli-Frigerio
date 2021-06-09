@@ -11,14 +11,14 @@ import it.polimi.ingsw.network.messages.ServerMessageView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Collections;
+import java.util.Arrays;
+
 
 public class Game {
     private Player[] players;
     public DevCardBoard devCardBoard;
     public LeaderCardDeck leaderCardDeck;
     public Market market;
-    private ActionPile actionPile;
 
     /**
      * Game constructor for single player
@@ -37,11 +37,12 @@ public class Game {
 
         player.drawLeaderCards(leaderCardDeck.draw4());
         player.playerBoard = new PlayerBoard();
-        player.setController(new Controller(player.net, player.playerBoard, this.devCardBoard, this.market));
+        player.setController(new Controller(player.net, player.playerBoard, this.devCardBoard, this.market, this));
 
         Server.logger.info("OK6");
         player.receiveLeaders();
         Server.logger.info("OK7");
+
         startSoloGame();
     }
 
@@ -68,7 +69,7 @@ public class Game {
         for(Player each: players) {
             each.drawLeaderCards(leaderCardDeck.draw4());
             each.playerBoard = new PlayerBoard();
-            each.setController(new Controller(each.net, each.playerBoard, this.devCardBoard, this.market));
+            each.setController(new Controller(each.net, each.playerBoard, this.devCardBoard, this.market, this));
         }
         Server.logger.info("OK6");
 
@@ -86,37 +87,48 @@ public class Game {
         startGame();
     }
 
-    /**
-     * starts a singlePlayer
-     */
-    private void startSoloGame(){
-        boolean endGame=false;
-        PcPlayerBoard pcPlayerBoard=new PcPlayerBoard();
-        Server.logger.info("Game actually started");
-        do {
-            if(checkEndGame()) break;
+
+    private void startSoloGame() throws DisconnectedException {
+        PcPlayerBoard pc= new PcPlayerBoard(this.devCardBoard);
+        Server.logger.info("Solo game actually started");
+
+        do{
             boolean done = false;
             boolean action = false;
             while(!done){
                 try {
-                        showAllGame(players[0]);
-                        action = players[0].turn(action);
-                        Server.logger.info("Setting action to "+action);
+                    showAllGame(players[0]);
+                    action = players[0].turn(action);
+                    Server.logger.info("Setting action to "+action);
                 }
-                catch(EndTurnException | DisconnectedException e){done = true;}
+                catch(EndTurnException e){done = true;}
             }
-            endGame=pcPlayerBoard.turn(devCardBoard,players[0].net);
-            if(pcPlayerBoard.getDarkFaith()>=20)
-                endGame=true;
+            if(checkEndGame()) {
+                players[0].net.send(new ServerMessageView("The Game is now over! You have won."));
+            }
+            String turn;
+            try{turn = pc.turn();}
+            catch (EndGameException e){
+                players[0].net.send(new ServerMessageView(e.getMessage()));
+                players[0].net.send(new ServerMessageView("The Game is now over! You have lost."));
+                return;
+            }
+            players[0].net.send(new ServerMessageView(turn));
         }
-        while (!endGame);
+        while(true);
     }
+
+
+
+
+
 
     /**
      * starts a multiplayer game
      */
     private void startGame(){
         Server.logger.info("Game actually started");
+        boolean endGame = false;
         do {
             for(Player each : this.players) {
                 boolean done = false;
@@ -130,8 +142,10 @@ public class Game {
                     catch(EndTurnException | DisconnectedException e){done = true;}
                 }
             }
+            if(!endGame) endGame = checkEndGame();
         }
-        while (!checkEndGame());
+        while (endGame);
+        finalSummary();
     }
 
     private void showAllGame(Player currentPlayer) throws DisconnectedException {
@@ -145,12 +159,18 @@ public class Game {
     private String showLeaderCards(Player currentPlayer) {
         String string="";
         LeaderCard[] tempLeaders={currentPlayer.playerBoard.getLeaderCard(0),currentPlayer.playerBoard.getLeaderCard(1)};
-        string=string.concat(tempLeaders[0].view());
-        if(tempLeaders[0].getIsActive())
-            string=string.concat("is active");
-        string=string.concat(tempLeaders[1].view());
-        if(tempLeaders[0].getIsActive())
-            string=string.concat("is active");
+
+        for(int i = 0; i< tempLeaders.length; i++){
+            if(tempLeaders[i] == null)string = string.concat(
+                    "   \\ /    \n" +
+                    "    X       \n" +
+                    "   / \\    \n");
+            else{
+                string=string.concat(tempLeaders[i].view());
+                if(tempLeaders[i].getIsActive()) string=string.concat("is active");
+            }
+        }
+
         return string;
     }
 
@@ -167,9 +187,15 @@ public class Game {
 
     private boolean checkEndGame(){
         for(Player each : this.players) {
-            if(each.playerBoard.getFaith() >= 20 || each.playerBoard.getDevCardsNumber() >= 7) return true;
+            if(each.playerBoard.getFaith() >= 20 || each.playerBoard.getDevCardsNumber() >= 7) {
+                for(Player every : this.players){
+                    try{every.net.send(new ServerMessageView("The Game will be over at the end of this round!"));}
+                    catch (DisconnectedException ignored){}
+                }
+
+                return true;
+            }
         }
-        //TODO: Testing
         return false;
     }
 
@@ -214,8 +240,48 @@ public class Game {
     private void createMarket() throws FileNotFoundException {
         Marble[] marbles= new Gson().fromJson(new FileReader("src/main/resources/Marbles.json"),Marble[].class);
         this.market = new Market(marbles);
-
     }
 
+    private void finalSummary(){
+        int[] results = new int[this.players.length];
+
+        for (int i = 0; i< this.players.length; i++) {
+            results[i] = this.players[i].playerBoard.getTotalVP();
+        }
+        int[] sortedresults = new int[results.length];
+        System.arraycopy(sortedresults, 0, results, 0, results.length);
+        Arrays.sort(sortedresults);
+
+        Player winner = null;
+        String string = "Game is over!\nThese are the final rankings:\n\n";
+        for (int j = 1; j <= this.players.length; j++) {
+
+            for (int i = 0; i< this.players.length; i++) {
+                if(sortedresults[j-1] == results[i]) {
+                    string = string.concat(j+". "+this.players[i].playerId+": "+sortedresults[j-1]+"\n");
+                    results[i] = -1;
+                    if(j == 1) winner = this.players[i];
+                    break;
+                }
+            }
+
+
+        }
+
+        for(Player each : this.players){
+            try {
+                each.net.send(new ServerMessageView(string));
+                each.net.send(new ServerMessageView(each.equals(winner) ? "You Won!" : "You Lost!"));
+            }
+            catch (DisconnectedException ignored){}
+        }
+    }
+
+
+    public void discardsToFaith(PlayerBoard pb, int amount) {
+        for (Player player : this.players) {
+            if (player.playerBoard != pb) player.playerBoard.addFaith(amount);
+        }
+    }
 }
 

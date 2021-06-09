@@ -9,7 +9,7 @@ import java.util.*;
 public class DevCardBoard {
 
     //First index x for color, second index y for level
-    public  DevCardDeck[][] board;//X:0=BLUE 1=YELLOW 2=GREEN 3= PURPLE
+    private  DevCardDeck[][] board;//X:0=BLUE 1=YELLOW 2=GREEN 3= PURPLE
                                   //Y:0=ONE 1=TWO 2=THREE
 
     /**
@@ -62,7 +62,15 @@ public class DevCardBoard {
         string=string.concat("══════════════╗\n");
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 3; j++) {
-                string=string.concat(top[i][j].devCardView());
+
+                if(top[i][j] != null)string=string.concat(top[i][j].devCardView());
+                else string = string.concat(
+                        "   \\ /    \n" +
+                        "    X       \n" +
+                        "   / \\    \n"
+                );
+
+
                 if(j!=2)string=string.concat("--------------\n");
             }
             if(i!=3)
@@ -83,7 +91,7 @@ public class DevCardBoard {
         int x = color.ordinal();
         int y = level.ordinal();
 
-        return board[x][y].peek();
+        return this.board[x][y].peek();
     }
 
     /**
@@ -97,23 +105,18 @@ public class DevCardBoard {
     public DevCard buy(Level level, CardColor color, Collection<Resource> cost) throws Exception {
 
         DevCard card = this.getCard(color, level);
-        ArrayList<Resource> costcopy = new ArrayList(cost);
+
+        ArrayList<Resource> costcopy = new ArrayList<>(cost);
 
         for(Resource elem : card.getCost()){if(!costcopy.remove(elem))throw new Exception("cost requirements not matched");}
-        //if(!cost.containsAll(Arrays.asList(card.getCost()))) throw new Exception("cost requirements not matched");
 
-        return board[color.ordinal()][level.ordinal()].draw();
+        return this.board[color.ordinal()][level.ordinal()].draw();
     }
 
     private void shuffleDecks(DevCardDeck[][] board){
-        Resource[] resource=new Resource[]{};
         for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 3; j++) {
-                Collections.shuffle(board[i][j].getDeck());
-                board[i][j].getDeck().add(0,new DevCard(Level.EMPTY,CardColor.EMPTY,0,resource,new Production(resource,resource)));
-            }
+            for (int j = 0; j < 3; j++) Collections.shuffle(board[i][j].getDeck());
         }
-
     }
 
 }

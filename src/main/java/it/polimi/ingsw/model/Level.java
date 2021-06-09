@@ -6,12 +6,11 @@ package it.polimi.ingsw.model;
 public enum Level {
     ONE("."),
     TWO(":"),
-    THREE("⋮"),
-    EMPTY("");
+    THREE("⋮");
 
     Level(String escape) { this.escape = escape; }
 
-    private String escape;
+    private final String escape;
 
     @Override
     public String toString(){

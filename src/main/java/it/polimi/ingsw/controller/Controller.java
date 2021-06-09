@@ -22,14 +22,16 @@ public class Controller {
     private final DevCardBoard board;
     private final Market market;
     private ConnectionInterface net;
+    private Game game;
 
-    public Controller(ConnectionInterface net, PlayerBoard pb, DevCardBoard board, Market market){
+    public Controller(ConnectionInterface net, PlayerBoard pb, DevCardBoard board, Market market, Game game){
         this.pb = pb;
         this.board = board;
         this.market = market;
         this.net = net;
+        this.game = game;
     }
-
+//Used in tests only i think
     public Controller(PlayerBoard pb, DevCardBoard dcb, Market market) {
         this.pb = pb;
         this.board = dcb;
@@ -84,6 +86,7 @@ public class Controller {
     }
 
     private boolean checkRequirements(LeaderCard leader){
+
         if(leader instanceof LeaderProduction){
             for(int i=0; i<3; i++) {
                 DevCard card = this.pb.getDevCard(i, 1);
@@ -103,7 +106,7 @@ public class Controller {
             }
             if (check>=5) return true;
             else {
-                ArrayList<Resource> left = null;
+                ArrayList<Resource> left = new ArrayList<>();
                 for(int i = 0; i< 5-check; i++) left.add(requirements);
                 return this.pb.getStrongbox().contains(left);
             }
@@ -150,7 +153,8 @@ public class Controller {
             Server.logger.info(pb.getDepot().depotView());
             pb.getDepot().setContents(input);
             Server.logger.info(pb.getDepot().depotView());
-            //TODO: add faith to other players (discardAmount)
+            game.discardsToFaith(pb, discardAmount);
+
             return true;
         }
         else{
@@ -179,6 +183,12 @@ public class Controller {
 
     public boolean buyDevCard(Level level, CardColor color, int column) throws DisconnectedException {
         DevCard newCard;
+
+        if(board.getCard(color, level) == null){
+            net.send(new ServerMessageError("There are no more cards of this type."));
+            return false;
+        }
+
         Resource[] stdCost = board.getCard(color, level).getCost();
 
         //LeaderSale effect
@@ -202,6 +212,7 @@ public class Controller {
 
             return false;
         }
+        net.send(new ServerMessageOK());
         return true;
     }
 
@@ -232,7 +243,7 @@ public class Controller {
 
         for(int i = 0; i<2 && activated[4+i]; i++){
             LeaderCard each = pb.getLeaderCard(i);
-            if(each.getIsActive() && each instanceof LeaderProduction){
+            if(each != null && each.getIsActive() && each instanceof LeaderProduction){
                 productions[i+4] = ((LeaderProduction) each).getProduction();
                 choice[i]=((LeaderProduction) each).getChoice();
             }
@@ -399,7 +410,7 @@ public class Controller {
         ArrayList<LeaderCard> leaders = new ArrayList<>(Arrays.asList(pb.getLeaderCard(0), pb.getLeaderCard(1)));
 
         //filter leader cards for only actives and Transform type
-        List<LeaderCard> listleaders = leaders.stream().filter(x -> x.getIsActive() && x instanceof LeaderTransform).collect(Collectors.toList());
+        List<LeaderCard> listleaders = leaders.stream().filter(x -> x!=null && x.getIsActive() && x instanceof LeaderTransform).collect(Collectors.toList());
 
 
         for(Marble elem : marbles){

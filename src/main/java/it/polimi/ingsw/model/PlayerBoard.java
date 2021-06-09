@@ -191,4 +191,10 @@ public class PlayerBoard {
     public int getDevCardsNumber() {
         return Math.toIntExact(Arrays.stream(this.devCards).filter(Objects::nonNull).count());
     }
+
+    public int getTotalVP(){
+        //TODO
+        return 0;
+    }
+
 }

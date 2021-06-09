@@ -7,7 +7,7 @@ package it.polimi.ingsw.model;
  */
 public class LeaderDepot extends LeaderCard {
     //hardcoded to 5 of the same resource, possible to be changed
-    private Resource requirements;
+    private final Resource requirements;
 
     public LeaderDepot(int vp, Resource type, Resource requirements) {
         this.vp = vp;

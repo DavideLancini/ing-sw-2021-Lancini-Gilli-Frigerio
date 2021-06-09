@@ -16,10 +16,6 @@ public class Depot {
         return this.contents[position];
     }
 
-    public void setLeaderType(Resource[] leaderType) {
-        this.leaderType = leaderType;
-    }
-
     /**
      * getLeaderType
      * @return resources in LeaderDepot

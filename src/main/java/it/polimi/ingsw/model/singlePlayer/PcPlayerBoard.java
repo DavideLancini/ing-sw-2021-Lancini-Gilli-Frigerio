@@ -1,51 +1,78 @@
 package it.polimi.ingsw.model.singlePlayer;
 
 
+import it.polimi.ingsw.model.CardColor;
 import it.polimi.ingsw.model.DevCardBoard;
+import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.network.ConnectionInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.ServerMessageView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class PcPlayerBoard {
     public ActionPile actionPile;
     private int darkFaith;
+    private DevCardBoard board;
 
-    public PcPlayerBoard(){
-        darkFaith=0;
-        actionPile= new ActionPile();
+    public PcPlayerBoard(DevCardBoard board){
+        this.darkFaith=0;
+        this.actionPile= new ActionPile();
+        this.board = board;
     }
 
-    public boolean turn(DevCardBoard devCardBoard, ConnectionInterface net) {
-        boolean endGame=false;
+    public String turn() throws EndGameException{
         ActionToken pcTurn=this.actionPile.getFirst();
 
         switch (pcTurn.getType()){
             case AddFaith:
-                darkFaith=darkFaith+2;
+                this.darkFaith += 2;
+                if(this.darkFaith >= 20) throw new EndGameException(pcTurn.view()+darkFaithView());
                 break;
+
             case ShufflePile:
-                darkFaith=darkFaith+1;
-                this.actionPile.shufflePile();
+                this.darkFaith += 1;
+                if(this.darkFaith >= 20) throw new EndGameException(pcTurn.view()+darkFaithView());
+                this.actionPile.setupActionPile();
                 break;
+
             case RemoveDevCard:
-                endGame=pcTurn.resolve(devCardBoard);//card color to remove
+                int i = 2;
+                CardColor color = ((ActionRemove) pcTurn).getCardColor();
+
+                Level level = Level.ONE;
+                while(i>0){
+                    if(this.board.getCard(color, level) == null) {
+                        if(level == Level.ONE) level = Level.TWO;
+                        else if(level == Level.TWO) level = Level.THREE;
+                        else throw new EndGameException(pcTurn.view()+darkFaithView());
+                    }
+                    else{
+                        try {
+                            this.board.buy(level, color, new ArrayList<>(Arrays.asList(this.board.getCard(color, level).getCost())));
+                        }
+                        catch(Exception e){continue;}
+                        i--;
+                    }
+                }
+
                 break;
+
             default:
                 throw new IllegalStateException("Unexpected value: " + pcTurn.getType());
         }
-        try {
-            net.send(new ServerMessageView(pcTurn.view()+DarkFaithView()));
-        } catch (DisconnectedException e) {
-            e.printStackTrace();
-        }
-        return endGame;
+
+        return pcTurn.view()+darkFaithView();
+
     }
 
-    public String DarkFaithView(){
-        return "DARKFAITH: \uD83D\uDD47\u001b[0m" + darkFaith;
+
+    public String darkFaithView(){
+        return "DARK FAITH: \uD83D\uDD47\u001b[0m" + this.darkFaith;
     }
 
     public int getDarkFaith() {
-        return darkFaith;
+        return this.darkFaith;
     }
 }

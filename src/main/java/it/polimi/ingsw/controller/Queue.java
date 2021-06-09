@@ -1,5 +1,7 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.network.DisconnectedException;
+
 public class Queue{
     private static Player[] player2 = new Player[2];
     private static Player[] player3 = new Player[3];
@@ -10,7 +12,16 @@ public class Queue{
 
     public static void enterQueue(int gameMode, Player player){
         switch(gameMode){
-            case 2:{
+            case 1:
+                try {
+                    new Game(player);
+                } catch (Exception e) {
+                    //TODO
+                }
+                break;
+
+
+            case 2:
 
                 //Insert player in queue
                 player2[count2]=player;
@@ -27,8 +38,8 @@ public class Queue{
                     count2=0;
                 }
                 break;
-            }
-            case 3:{
+
+            case 3:
 
                 //Insert player in queue
                 player3[count3]=player;
@@ -45,8 +56,8 @@ public class Queue{
                     count3=0;
                 }
                 break;
-            }
-            case 4:{
+
+            case 4:
 
                 //Insert player in queue
                 player4[count4]=player;
@@ -63,7 +74,7 @@ public class Queue{
                     count4=0;
                 }
                 break;
-            }
+
         }
     }
 }

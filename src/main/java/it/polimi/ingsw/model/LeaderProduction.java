@@ -8,7 +8,7 @@ package it.polimi.ingsw.model;
 public class LeaderProduction extends LeaderCard {
     private Production production;
     private Resource choice;
-    private CardColor requirements;
+    private final CardColor requirements;
 
     public LeaderProduction(int vp, Resource type, CardColor requirements, Production production){
         this.vp = vp;
