@@ -9,8 +9,8 @@ import java.util.*;
 public class DevCardBoard {
 
     //First index x for color, second index y for level
-    public  DevCardDeck[][] board;
-
+    public  DevCardDeck[][] board;//X:0=BLUE 1=YELLOW 2=GREEN 3= PURPLE
+                                  //Y:0=ONE 1=TWO 2=THREE
 
     /**
      * class constructor
@@ -106,9 +106,11 @@ public class DevCardBoard {
     }
 
     private void shuffleDecks(DevCardDeck[][] board){
+        Resource[] resource=new Resource[]{};
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 3; j++) {
                 Collections.shuffle(board[i][j].getDeck());
+                board[i][j].getDeck().add(0,new DevCard(Level.EMPTY,CardColor.EMPTY,0,resource,new Production(resource,resource)));
             }
         }
 

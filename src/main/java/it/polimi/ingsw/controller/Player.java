@@ -106,10 +106,15 @@ public class Player extends Thread{
                 ClientMessageJoinGame joinGame = (ClientMessageJoinGame) temp1;
                 this.playerId= joinGame.getPlayerId();
                 //Enter queue
-                Queue.enterQueue(joinGame.getGameMode(), this);
+                int gameMode = joinGame.getGameMode();
+                if (gameMode==1)
+                    new Game(this);
+                else Queue.enterQueue(gameMode, this);
             }
         } catch (DisconnectedException e) {
             //TODO: manage error
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         //This player is in a game
 

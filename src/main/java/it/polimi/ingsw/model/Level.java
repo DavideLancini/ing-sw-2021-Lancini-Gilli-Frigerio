@@ -6,7 +6,8 @@ package it.polimi.ingsw.model;
 public enum Level {
     ONE("."),
     TWO(":"),
-    THREE("⋮");
+    THREE("⋮"),
+    EMPTY("");
 
     Level(String escape) { this.escape = escape; }
 

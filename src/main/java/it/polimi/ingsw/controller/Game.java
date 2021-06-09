@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import com.google.gson.Gson;
 import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.singlePlayer.*;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.EndTurnException;
 import it.polimi.ingsw.network.messages.ServerMessageOK;
@@ -10,12 +11,41 @@ import it.polimi.ingsw.network.messages.ServerMessageView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Collections;
 
 public class Game {
     private Player[] players;
     public DevCardBoard devCardBoard;
     public LeaderCardDeck leaderCardDeck;
     public Market market;
+    private ActionPile actionPile;
+
+    /**
+     * Game constructor for single player
+     * @param player single Player information
+     */
+    public Game(Player player) throws Exception {
+        Server.logger.info("Game Created");
+        player.net.send(new ServerMessageOK());
+        setupGame();
+        Server.logger.finest("Setup OK");
+        setPlayers(new Player[]{player});
+
+        System.out.println("Starting Solo Game");
+
+        Server.logger.info("OK5");
+
+        player.drawLeaderCards(leaderCardDeck.draw4());
+        player.playerBoard = new PlayerBoard();
+        player.setController(new Controller(player.net, player.playerBoard, this.devCardBoard, this.market));
+
+        Server.logger.info("OK6");
+        player.receiveLeaders();
+        Server.logger.info("OK7");
+        startSoloGame();
+    }
+
+
 
     /**
      * Game constructor
@@ -56,10 +86,34 @@ public class Game {
         startGame();
     }
 
+    /**
+     * starts a singlePlayer
+     */
+    private void startSoloGame(){
+        boolean endGame=false;
+        PcPlayerBoard pcPlayerBoard=new PcPlayerBoard();
+        Server.logger.info("Game actually started");
+        do {
+            if(checkEndGame()) break;
+            boolean done = false;
+            boolean action = false;
+            while(!done){
+                try {
+                        showAllGame(players[0]);
+                        action = players[0].turn(action);
+                        Server.logger.info("Setting action to "+action);
+                }
+                catch(EndTurnException | DisconnectedException e){done = true;}
+            }
+            endGame=pcPlayerBoard.turn(devCardBoard,players[0].net);
+            if(pcPlayerBoard.getDarkFaith()>=20)
+                endGame=true;
+        }
+        while (!endGame);
+    }
 
     /**
-     * starts a four player game
-     *
+     * starts a multiplayer game
      */
     private void startGame(){
         Server.logger.info("Game actually started");
@@ -119,7 +173,6 @@ public class Game {
         return false;
     }
 
-
     /**
      * Setup of game's elements
      * @throws FileNotFoundException if file json is not found
@@ -146,28 +199,16 @@ public class Game {
      * @throws FileNotFoundException if files.json is not found
      */
     private void createLeaderDeck() throws FileNotFoundException {
-        Server.logger.info("OK3 ");
         LeaderTransform[] leaderTransformDeck=new Gson().fromJson(new FileReader("src/main/resources/LeaderCards/TransformCard.json"),LeaderTransform[].class);
-        Server.logger.info("OK4 ");
         LeaderProduction[] leaderProductionDeck=new Gson().fromJson(new FileReader("src/main/resources/LeaderCards/ProductionCard.json"),LeaderProduction[].class);
-        Server.logger.info("OK5 ");
         LeaderSale[] leaderSaleDeck=new Gson().fromJson(new FileReader("src/main/resources/LeaderCards/SaleCard.json"), LeaderSale[].class);
-        Server.logger.info("OK6 ");
         LeaderDepot[] leaderDepotDeck=new Gson().fromJson(new FileReader("src/main/resources/LeaderCards/DepotCard.json"),LeaderDepot[].class);
-        Server.logger.info("OK7 ");
         LeaderCard[] deck= new LeaderCard[16];
-        Server.logger.info("OK8 ");
         System.arraycopy(leaderTransformDeck,0,deck,0,leaderTransformDeck.length);
-        Server.logger.info("OK9 ");
         System.arraycopy(leaderProductionDeck,0,deck,4,leaderProductionDeck.length);
-        Server.logger.info("OK10 ");
         System.arraycopy(leaderSaleDeck,0,deck,8,leaderSaleDeck.length);
-        Server.logger.info("OK11 ");
         System.arraycopy(leaderDepotDeck,0,deck,12,leaderDepotDeck.length);
-        Server.logger.info("OK12 ");
         this.leaderCardDeck = new LeaderCardDeck(deck);
-        Server.logger.info("FINE");
-
     }
 
     private void createMarket() throws FileNotFoundException {
