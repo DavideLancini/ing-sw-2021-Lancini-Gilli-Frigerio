@@ -7,7 +7,7 @@ package it.polimi.ingsw.model;
  */
 public class LeaderProduction extends LeaderCard {
     private Production production;
-    private Resource choice;
+    private Resource choice = Resource.EMPTY;
     private final CardColor requirements;
 
     public LeaderProduction(int vp, Resource type, CardColor requirements, Production production){
@@ -42,10 +42,9 @@ public class LeaderProduction extends LeaderCard {
     public String view(){
         String string = "";
         string = string.concat("══════════════╗\n");
-        string = string.concat("   [" + requirements.toString()+"+"+Level.TWO+ "]\n");
-        string = string.concat(this.production.view());
-        string = string.concat("+["+Resource.EMPTY+"]\n");
-        string = string.concat("  \u001b[38:5:221m {"+this.getVP()+"}\u001b[m\n");
+        string = string.concat("   [" + requirements.toString()+Level.TWO+ "]      \n");
+        string = string.concat("["+this.type+"]->["+this.choice+"]+ 1"+Resource.FAITH + "\n");
+        string = string.concat("  \u001b[38:5:221m {"+this.getVP()+"}\u001b[m        \n");
         string = string.concat("══════════════╝\n");
         return string;
     }

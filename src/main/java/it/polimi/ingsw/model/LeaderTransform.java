@@ -21,20 +21,6 @@ public class LeaderTransform extends LeaderCard {
     public CardColor[] getRequirements(){return this.requirements;}
 
 
- /* obsolete, controller should handle it
-    /**
-     * WhiteTo
-     *
-     * @param white white marble taken form market
-     * @return resource based on leader type
-     * @throws Exception if marble is not white
-     *//*
-    public Resource WhiteTo(Marble white) throws Exception {/*return right resource for marble type given*//*
-        if (white.equals(Marble.WHITE))
-            return getType();
-        else throw new Exception("not White");
-    }
-*/
     public String view(){
         String string = "";
         string = string.concat("══════════════╗\n");
@@ -43,8 +29,8 @@ public class LeaderTransform extends LeaderCard {
             string = string.concat(each+";");
         }
         string = string.concat("\b]\n");
-        string = string.concat("   "+Marble.WHITE+"="+this.getType()+"\n");
-        string = string.concat("  \u001b[38:5:221m {"+this.getVP()+"}\u001b[m\n");
+        string = string.concat("   "+Marble.WHITE+"="+this.getType()+"        \n");
+        string = string.concat("  \u001b[38:5:221m {"+this.getVP()+"}\u001b[m       \n");
         string = string.concat("══════════════╝\n");
         return string;
     }

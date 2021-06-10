@@ -17,4 +17,7 @@ public class DefaultProduction extends Production{
 
     public void setOutput(Resource c){ this.output = new Resource[]{c};}
 
+    public String view() {
+        return "Default Production:\n  ["+this.input[0]+"]\n\t\t\t-> ["+this.output[0]+"]\n  ["+this.input[1]+"]\n";
+    }
 }

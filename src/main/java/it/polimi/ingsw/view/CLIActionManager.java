@@ -117,7 +117,7 @@ public class CLIActionManager extends Manager {
 
         for (int i = 0; i<3; i++){
             System.out.print("Choose which resource to put in row n° "+i+": ");
-            for (int j = 1; j <= Resource.values().length -1; j++){System.out.print(""+j+". "+Resource.values()[j-1].toString()+" ");}
+            for (int j = 1; j <= Resource.values().length -1; j++){System.out.print(""+j+". "+Resource.values()[j-1].toString()+"   ");}
             System.out.println();
             choice[i] = Resource.values()[readInt(1,5)-1];
 
@@ -237,7 +237,7 @@ public class CLIActionManager extends Manager {
                         int res = readInt(1,5);
 
                         System.out.print("Resource: ");
-                        for (int i = 1; i <= Resource.values().length -2; i++){System.out.print(""+i+". "+Resource.values()[i-1].toString()+" ");}
+                        for (int i = 1; i <= Resource.values().length -2; i++){System.out.print(""+i+". "+Resource.values()[i-1].toString()+"   ");}
                         System.out.println();
                         Resource resource = Resource.values()[readInt()-1];
 
@@ -263,11 +263,13 @@ public class CLIActionManager extends Manager {
     public ClientMessage chooseLeaders(String[] leaders){
         System.out.println("Choose two of the following four Leaders:");
         int i = 0, j = 0;
+        String[] sleaders = new String[4];
         for (String each : leaders) {
             i++;
-            System.out.println(i+":\n"+each);
-
+            sleaders[i-1] = ""+i+":\t\t\t\n"+each;
         }
+        System.out.println(ViewHelper.displayS2S(sleaders));
+
         i=0;
         do {
             try {
@@ -311,21 +313,27 @@ public class CLIActionManager extends Manager {
 
     public ClientMessage addResource(){
         System.out.print("[Select your starting resource]: ");
-        for (int i = 1; i <= Resource.values().length -2; i++){System.out.print(""+i+". "+Resource.values()[i-1].toString()+" ");}
+        for (int i = 1; i <= Resource.values().length -2; i++){System.out.print(""+i+". "+Resource.values()[i-1].toString()+"   ");}
         System.out.println();
         Resource resource = Resource.values()[readInt(1,4)-1];
       return new ClientMessagePlaceResource(resource);
     }
+
+    public ClientMessage chooseResource(Resource[] choice){
+        System.out.println("Select which resource to convert a white marble to:\t[0]. "+choice[0]+"\t[1]. "+choice[1]);
+        boolean position = readInt(0,1) == 1;
+
+        return new ClientMessageChosenWhite(position);
+    }
+
 
     /**
      * Create match ask number of players for starting game
      * @param s Player Id
      */
     public static void createCustomMatch(String s) throws DisconnectedException {
-        int numOfPlayers=0;
-
         System.out.println("Number of players?");
-        numOfPlayers = readInt(1,4);
+        int numOfPlayers = readInt(1,4);
 
         ClientMessageCreateGame createMessage= new ClientMessageCreateGame(numOfPlayers,s);
         net.send(createMessage);

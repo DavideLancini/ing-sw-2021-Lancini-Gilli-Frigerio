@@ -24,7 +24,6 @@ public class ClientController {
     public void main() throws DisconnectedException {
         while (true){
             Message message = net.receive();
-            //TODO: check if there is actually a message, otherwise wait
 
             switch(message.getType()){
                 case Turn:
@@ -46,9 +45,17 @@ public class ClientController {
                 case ChooseLeaders:
                     net.send(manager.chooseLeaders(((ServerMessageChooseLeaders)message).getLeaders()));
                     break;
+
                 case AddResource:
                     net.send(manager.addResource());
                     break;
+
+                case TwoMarbleLeaders:
+                    net.send(manager.chooseResource(((ServerMessageTwoMarbleLeaders)message).getResources()));
+                    break;
+
+                case GameOver:
+                    return;
             }
         }
     }

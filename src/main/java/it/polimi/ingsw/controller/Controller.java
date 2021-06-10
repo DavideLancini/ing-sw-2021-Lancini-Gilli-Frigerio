@@ -5,10 +5,7 @@ import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.ConnectionInterface;
 import it.polimi.ingsw.network.DisconnectedException;
-import it.polimi.ingsw.network.messages.ClientMessageTryDepotConfiguration;
-import it.polimi.ingsw.network.messages.ServerMessageError;
-import it.polimi.ingsw.network.messages.ServerMessageMarketReturn;
-import it.polimi.ingsw.network.messages.ServerMessageOK;
+import it.polimi.ingsw.network.messages.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +51,7 @@ public class Controller {
 
 
     public void activateLeader (int position) throws DisconnectedException {
+        Server.logger.info("Activating leader");
         if(position != 0 && position!= 1){net.send(new ServerMessageError("Invalid Position.")); return;}
 
         LeaderCard leader = this.pb.getLeaderCard(position);
@@ -63,7 +61,7 @@ public class Controller {
 
             return;
         }
-
+        Server.logger.info("Checking requirements");
         if(!checkRequirements(leader)) {
             net.send(new ServerMessageError("Leader requirements not met"));
 
@@ -88,6 +86,7 @@ public class Controller {
     private boolean checkRequirements(LeaderCard leader){
 
         if(leader instanceof LeaderProduction){
+            Server.logger.info("Found LeaderProduction");
             for(int i=0; i<3; i++) {
                 DevCard card = this.pb.getDevCard(i, 1);
                 if(card != null && card.getColor() == ((LeaderProduction) leader).getRequirements())return true;
@@ -98,6 +97,7 @@ public class Controller {
 
 
         else if(leader instanceof LeaderDepot){
+            Server.logger.info("Found LeaderDepot");
             int check = 0;
             Resource requirements = ((LeaderDepot) leader).getRequirements();
 
@@ -126,14 +126,21 @@ public class Controller {
                        if(pb.getDevCard(i,j) != null) devCards.add(pb.getDevCard(i,j));
                 }
             }
+            Server.logger.info("Requirements: "+ Arrays.toString(requirements));
+            Server.logger.info("Devcards: "+devCards.toString());
 
             for(CardColor each : requirements){
+                boolean found = false;
+                Server.logger.info("Requirement: "+each.toString());
                 for(int i=0; i<devCards.size(); i++) {
                     DevCard every = devCards.get(i);
                     if (every.getColor().equals(each)){
                         if(!devCards.remove(every)) return false;
+                        else {found = true; break;}
                     }
+                    Server.logger.info("Devcards: "+devCards.toString());
                 }
+                if(!found) return false;
             }
             return true;
 
@@ -405,7 +412,7 @@ public class Controller {
         return true;
     }
 
-    private Collection<Resource> convert (Marble[] marbles){
+    private Collection<Resource> convert (Marble[] marbles) throws DisconnectedException {
         ArrayList<Resource> resources = new ArrayList<>();
         ArrayList<LeaderCard> leaders = new ArrayList<>(Arrays.asList(pb.getLeaderCard(0), pb.getLeaderCard(1)));
 
@@ -435,7 +442,11 @@ public class Controller {
                     if(listleaders.size() == 1){
                         resources.add(listleaders.get(0).getType());
                     }
-                    //TODO: in case of two leaders, prop choice for each white resource to user.
+                    else if (listleaders.size() == 2){
+                        net.send(new ServerMessageTwoMarbleLeaders(listleaders.get(0).getType(), listleaders.get(1).getType()));
+                        ClientMessageChosenWhite message = (ClientMessageChosenWhite) net.receive();
+                        resources.add(listleaders.get(message.getPosition() ? 1 : 0).getType());
+                    }
 
                     break;
             }

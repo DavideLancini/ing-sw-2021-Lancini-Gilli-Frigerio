@@ -1,6 +1,6 @@
 [
- {"production":{"input":["SERVANT"],"output":[],"faithOutput":1},"choice":null,"requirements":"BLUE","vp":4,"isActive":false,"type":"FAITH"},
-{"production":{"input":["SHIELD"],"output":[],"faithOutput":1},"choice":null,"requirements":"YELLOW","vp":4,"isActive":false,"type":"FAITH"},
-{"production":{"input":["COIN"],"output":[],"faithOutput":1},"choice":null,"requirements":"GREEN","vp":4,"isActive":false,"type":"FAITH"},
-{"production":{"input":["STONE"],"output":[],"faithOutput":1},"choice":null,"requirements":"PURPLE","vp":4,"isActive":false,"type":"FAITH"}
+ {"production":{"input":["SERVANT"],"output":[],"faithOutput":1},"choice":"EMPTY","requirements":"BLUE","vp":4,"isActive":false,"type":"SERVANT"},
+{"production":{"input":["SHIELD"],"output":[],"faithOutput":1},"choice":"EMPTY","requirements":"YELLOW","vp":4,"isActive":false,"type":"SHIELD"},
+{"production":{"input":["COIN"],"output":[],"faithOutput":1},"choice":"EMPTY","requirements":"GREEN","vp":4,"isActive":false,"type":"COIN"},
+{"production":{"input":["STONE"],"output":[],"faithOutput":1},"choice":"EMPTY","requirements":"PURPLE","vp":4,"isActive":false,"type":"STONE"}
 ]

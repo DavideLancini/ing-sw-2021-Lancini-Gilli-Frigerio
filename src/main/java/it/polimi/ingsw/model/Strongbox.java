@@ -72,10 +72,12 @@ public class Strongbox {
     }
 
     public String StrongboxView(){
-        String string="";
-        string=string.concat("╔════════════╗\n╚═════╚╝═════╝\n  ");
-        string=string.concat(ResourceCounter.count1(this.resources));
-        string=string.concat("\n╚════════════╝\n");
+        String string="╔════════════╗\n╚═════╚╝═════╝\n  ";
+        string=string.concat(ResourceCounter.count(this.resources));
+        for(int i = 0; i<4-ResourceCounter.countTypes(this.resources); i++){string = string.concat("  ");}
+
+
+        string=string.concat("\n╚════════════╝");
         return string;
     }
 }

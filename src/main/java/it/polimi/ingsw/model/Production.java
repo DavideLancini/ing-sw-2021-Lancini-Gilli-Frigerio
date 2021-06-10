@@ -74,14 +74,12 @@ public class Production {
      * @return string to show
      */
     public String view() {
-        String string="";
-        string=string.concat("[");
-        string=string.concat(ResourceCounter.count(this.input));
-        string=string.concat("]→[");
-        string=string.concat(ResourceCounter.count(this.output));
-        if(this.faithOutput!=0)
-           string=string.concat(this.faithOutput +""+Resource.FAITH);
-        string=string.concat("]");
+        String string = ("["+ResourceCounter.count(this.input)+"]->["+ResourceCounter.count(this.output)+
+                (this.faithOutput != 0 ? this.faithOutput+""+Resource.FAITH : "") + "]");
+
+        for(int i = 0; i<4-ResourceCounter.countTypes(this.input)-ResourceCounter.countTypes(this.output)-(faithOutput>0?1:0); i++){string = string.concat("   ");}
+
+        string = string.concat("\n");
         return string;
     }
 }

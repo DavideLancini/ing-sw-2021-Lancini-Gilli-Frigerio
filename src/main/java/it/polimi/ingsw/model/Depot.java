@@ -83,8 +83,8 @@ public class Depot {
 
     public String depotView(){
         String string="";
-        string=string.concat("   /╲\n");
-        string=string.concat("  /"+contents[0]+" ╲\n");
+        string=string.concat("   /╲\t\n");
+        string=string.concat("  /"+contents[0]+" ╲\t\n");
         string=string.concat(" /"+contents[1]+" "+contents[2]+" ╲\n");
         string=string.concat("/"+contents[3]+" "+contents[4]+" "+contents[5]+" ╲\n");
         return string;

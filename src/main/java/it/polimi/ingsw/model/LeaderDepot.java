@@ -30,9 +30,9 @@ public class LeaderDepot extends LeaderCard {
     public String view(){
         String string = "";
         string = string.concat("══════════════╗\n");
-        string = string.concat("   [5" + this.requirements + "]\n");
-        string = string.concat("   "+getType() + " " + getType()+"\n");
-        string = string.concat("   \u001b[38:5:221m{" + this.getVP() + "}\u001b[m\n");
+        string = string.concat("   [5" + this.requirements + "]      \n");
+        string = string.concat("   "+getType() + " " + getType()+"      \n");
+        string = string.concat("   \u001b[38:5:221m{" + this.getVP() + "}\u001b[m        \n");
         string = string.concat("══════════════╝\n");
 
         return string;

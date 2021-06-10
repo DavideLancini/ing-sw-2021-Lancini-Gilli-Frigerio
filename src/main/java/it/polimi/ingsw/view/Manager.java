@@ -23,4 +23,6 @@ public abstract class Manager {
     public ClientMessage chooseLeaders(String[] leaders) {return null;}
 
     public ClientMessage addResource() {return null;}
+
+    public ClientMessage chooseResource(Resource[] resources) {return null;}
 }

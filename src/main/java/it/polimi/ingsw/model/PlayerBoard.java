@@ -1,8 +1,9 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.view.ViewHelper;
+
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Class PlayerBoard
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
 public class PlayerBoard {
 
     private int faithTrack;
+    private int popeVP;
     private final Strongbox strongbox = new Strongbox();
     private LeaderCard[] leaderCards;
     private final Depot depot= new Depot();
@@ -42,11 +44,9 @@ public class PlayerBoard {
     /**
      * addFaith
      * @param newFaith Faith to add
-     * @return Return new faith for easy access
      */
-    public int addFaith(int newFaith){
+    public void addFaith(int newFaith){
         this.faithTrack += newFaith;
-        return this.faithTrack;
     }
 
     /**
@@ -149,31 +149,33 @@ public class PlayerBoard {
         String string="";
         string=string.concat(player+"\n");
         string=string.concat(ShowFaithTrack());
-        string=string.concat(this.depot.depotView());
-        string=string.concat(this.strongbox.StrongboxView());
+        string=string.concat(ViewHelper.displayS2S(this.depot.depotView()+"\n",this.strongbox.StrongboxView(),this.getDefaultProduction().view())+"\n");
         string=string.concat(devCardsView());
         return string;
 
     }
 
     private String devCardsView() {
-        String string="";
 
-        boolean first=false;// first card printed?
+        String[] columns = new String[3];
+
         for(int i=0;i<3;i++){
+            boolean first=false;// first card printed?
+            String string="";
             for(int j=2;j>-1;j--){
                 if (first) {
                     string = string.concat(devCards[i][j].coveredView() + "");
                 }
                 else if (devCards[i][j]!=null) {
-                    string = string.concat("^^^^^^^^^^^^^^\n");
+                    string = string.concat("^^^^^^^^^^^^^^^^^^\n");
                     string=string.concat(devCards[i][j].devCardView()+"");
                     first=true;
                 }
             }
-            first=false;
+            columns[i] = string;
+
         }
-        return string;
+        return ViewHelper.displayS2S(columns);
 
     }
 

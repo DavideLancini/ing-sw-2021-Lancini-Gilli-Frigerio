@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.view.ViewHelper;
+
 import java.util.*;
 
 /**
@@ -57,28 +59,27 @@ public class DevCardBoard {
     }
 
     public String topView() {
-        String string="";
+
+        String[] columns = new String[4];
         DevCard[][] top = this.getTop();
-        string=string.concat("══════════════╗\n");
         for (int i = 0; i < 4; i++) {
+            String string = "═════════════════╗\n";
             for (int j = 0; j < 3; j++) {
 
                 if(top[i][j] != null)string=string.concat(top[i][j].devCardView());
                 else string = string.concat(
-                        "   \\ /    \n" +
-                        "    X       \n" +
-                        "   / \\    \n"
+                        "   \\ /\t\t\t\n" +
+                        "    X\t\t\t\n" +
+                        "   / \\\t\t\t\n"
                 );
 
 
-                if(j!=2)string=string.concat("--------------\n");
+                if(j!=2)string=string.concat("----------------\n");
             }
-            if(i!=3)
-                string=string.concat("══════════════╣\n");
-            else
-                string=string.concat("══════════════╝\n");
+            string=string.concat("═════════════════╝\n");
+            columns[i] = string;
         }
-        return string;
+        return ViewHelper.displayS2S(columns);
     }
 
     /**

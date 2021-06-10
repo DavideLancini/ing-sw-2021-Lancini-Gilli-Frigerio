@@ -8,6 +8,7 @@ import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.EndTurnException;
 import it.polimi.ingsw.network.messages.ServerMessageOK;
 import it.polimi.ingsw.network.messages.ServerMessageView;
+import it.polimi.ingsw.view.ViewHelper;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -142,6 +143,7 @@ public class Game {
                     catch(EndTurnException | DisconnectedException e){done = true;}
                 }
             }
+            //TODO: Rapporti in Vaticano
             if(!endGame) endGame = checkEndGame();
         }
         while (endGame);
@@ -157,21 +159,25 @@ public class Game {
     }
 
     private String showLeaderCards(Player currentPlayer) {
-        String string="";
-        LeaderCard[] tempLeaders={currentPlayer.playerBoard.getLeaderCard(0),currentPlayer.playerBoard.getLeaderCard(1)};
 
-        for(int i = 0; i< tempLeaders.length; i++){
-            if(tempLeaders[i] == null)string = string.concat(
-                    "   \\ /    \n" +
-                    "    X       \n" +
-                    "   / \\    \n");
-            else{
-                string=string.concat(tempLeaders[i].view());
-                if(tempLeaders[i].getIsActive()) string=string.concat("is active");
+        LeaderCard[] tempLeaders={currentPlayer.playerBoard.getLeaderCard(0),currentPlayer.playerBoard.getLeaderCard(1)};
+        String[] sleaders = new String[2];
+        for (int i = 0; i<2; i++) {
+            String string="Leader "+(i+1)+". \t\n";
+            if (tempLeaders[i] == null) string = string.concat(
+                    "══════════════╗\n"+
+                    "   \\ /\t\t\n" +
+                    "    X\t\t\n" +
+                    "   / \\\t\t\n")+
+                    "══════════════╝\n";
+            else {
+                string = string.concat(tempLeaders[i].view());
+                if (tempLeaders[i].getIsActive()) string = string.concat("is active\t");
             }
+            sleaders[i] = string;
         }
 
-        return string;
+        return ViewHelper.displayS2S(sleaders);
     }
 
     private void showPlayersBoards(Player currentPlayer) throws DisconnectedException {

@@ -33,9 +33,13 @@ public class ResourceCounter {
        return string;
     }
 
-    public static String count1(Collection<Resource> resources){
-        String string1="";
-        int servant = 0;int shield = 0;int coin = 0;int stone = 0;
+    public static String count(Collection<Resource> resources){
+        return count(resources.toArray(new Resource[]{}));
+    }
+
+    public static int countTypes(Resource[] resources){
+        int number = 0;
+        int servant = 0, shield = 0, coin = 0, stone = 0;
         for (Resource resource : resources) {
             if (resource == Resource.STONE)
                 stone++;
@@ -47,18 +51,22 @@ public class ResourceCounter {
                 shield++;
         }
         if (servant > 0) {
-            string1 = string1.concat(servant + "" + Resource.SERVANT);
+            number++;
         }
         if (coin > 0) {
-            string1 = string1.concat(coin + "" + Resource.COIN);
+            number++;
         }
         if (shield > 0) {
-            string1 = string1.concat(shield + "" + Resource.SHIELD);
+            number++;
         }
         if (stone> 0) {
-            string1 = string1.concat(stone + "" + Resource.STONE);
+            number++;
         }
-        return string1;
-
+        return number;
     }
+
+    public static int countTypes(Collection<Resource> resources){
+        return countTypes(resources.toArray(Resource[]::new));
+    }
+
 }
