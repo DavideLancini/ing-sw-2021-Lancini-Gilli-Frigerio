@@ -14,7 +14,7 @@ public enum Resource {
 
     Resource(String escape) { this.escape = escape; }
 
-    private String escape;
+    private final String escape;
 
     @Override
     public String toString(){

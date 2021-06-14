@@ -20,6 +20,7 @@ public class Game {
     public DevCardBoard devCardBoard;
     public LeaderCardDeck leaderCardDeck;
     public Market market;
+    private Pope pope = Pope.FIRST;
 
     /**
      * Game constructor for single player
@@ -143,7 +144,7 @@ public class Game {
                     catch(EndTurnException | DisconnectedException e){done = true;}
                 }
             }
-            //TODO: Rapporti in Vaticano
+            checkPope();
             if(!endGame) endGame = checkEndGame();
         }
         while (endGame);
@@ -193,7 +194,7 @@ public class Game {
 
     private boolean checkEndGame(){
         for(Player each : this.players) {
-            if(each.playerBoard.getFaith() >= 20 || each.playerBoard.getDevCardsNumber() >= 7) {
+            if(each.playerBoard.getFaith() >= 24 || each.playerBoard.getDevCardsNumber() >= 7) {
                 for(Player every : this.players){
                     try{every.net.send(new ServerMessageView("The Game will be over at the end of this round!"));}
                     catch (DisconnectedException ignored){}
@@ -270,8 +271,6 @@ public class Game {
                     break;
                 }
             }
-
-
         }
 
         for(Player each : this.players){
@@ -289,5 +288,36 @@ public class Game {
             if (player.playerBoard != pb) player.playerBoard.addFaith(amount);
         }
     }
+
+    private void checkPope(){
+        String trigger = null;
+        for(Player each: players)
+            if (each.playerBoard.getFaith() >= pope.value) {
+                trigger = each.playerId;
+                break;
+            }
+        if(trigger == null)return;
+
+        for (Player each: players) {
+            try {
+                if (each.playerBoard.getFaith() >= pope.min) {
+                    each.playerBoard.addPope(pope.vp);
+                    each.net.send(new ServerMessageView(trigger.equals(each.playerId) ? "You" : trigger + " activated a new Vatican Report. You receive "+ pope.vp+" additional Victory Points."));
+                } else
+                    each.net.send(new ServerMessageView(trigger + " activated a new Vatican Report. Unfortunately you don't receive any additional Victory Points."));
+            }
+            catch (DisconnectedException ignored){}
+        }
+        switch (pope){
+            case FIRST: pope = Pope.SECOND;break;
+            case SECOND: pope = Pope.THIRD;break;
+            case THIRD: pope = Pope.DONE;break;
+            default: throw new IllegalStateException();
+        }
+
+        for (Player each : players) try{each.net.send(new ServerMessageView("Next Report will trigger at "+pope.value+" faith."));}catch (DisconnectedException ignored){}
+
+    }
+
 }
 

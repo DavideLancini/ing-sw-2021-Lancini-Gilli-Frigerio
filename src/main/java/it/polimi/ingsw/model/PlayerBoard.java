@@ -119,8 +119,6 @@ public class PlayerBoard {
     }
 
 
-    //TODO Exceptions and handling
-
     /**
      * addDevCard
      * @param newDevCard devCard bought from devCardDeck
@@ -190,13 +188,40 @@ public class PlayerBoard {
         this.leaderCards = leaderCards;
     }
 
+    public void addPope(int a){this.popeVP += a;}
+
     public int getDevCardsNumber() {
         return Math.toIntExact(Arrays.stream(this.devCards).filter(Objects::nonNull).count());
     }
 
+    /**
+     * calculates total victory points based on devcards, activated leader, faith and leftover resources
+     * @return total victory points obtained when the function is called
+     */
     public int getTotalVP(){
-        //TODO
-        return 0;
+        int vp = 0;
+
+        if(this.faithTrack >= 24) vp+=20;
+        else if (this.faithTrack >= 21) vp+=16;
+        else if (this.faithTrack >= 18) vp+=12;
+        else if (this.faithTrack >= 15) vp+=9;
+        else if (this.faithTrack >= 12) vp+=6;
+        else if (this.faithTrack >= 9) vp+=4;
+        else if (this.faithTrack >= 6) vp+=2;
+        else if (this.faithTrack >= 3) vp+=1;
+
+        for(DevCard[] row : this.devCards)for(DevCard card : row)if(card != null)vp += card.getVP();
+
+        for(LeaderCard each : this.leaderCards)if(each != null && each.getIsActive())vp += each.getVP();
+
+        int resources = 0;
+        for(int i = 0; i<10; i++){
+            if(this.depot.getResource(i) != Resource.EMPTY)resources++;
+        }
+        resources += Math.toIntExact(this.getStrongbox().getResources().size());
+        vp += (resources/5); //int division
+
+        return vp+popeVP;
     }
 
 }

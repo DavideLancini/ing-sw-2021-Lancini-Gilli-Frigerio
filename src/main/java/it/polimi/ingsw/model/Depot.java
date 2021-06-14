@@ -16,11 +16,6 @@ public class Depot {
         return this.contents[position];
     }
 
-    /**
-     * getLeaderType
-     * @return resources in LeaderDepot
-     */
-    public Resource[] getLeaderType(){return this.leaderType;}
     public Resource getLeaderType(int position){return this.leaderType[position];}
 
 

@@ -28,12 +28,12 @@ public class PcPlayerBoard {
         switch (pcTurn.getType()){
             case AddFaith:
                 this.darkFaith += 2;
-                if(this.darkFaith >= 20) throw new EndGameException(pcTurn.view()+darkFaithView());
+                if(this.darkFaith >= 24) throw new EndGameException(pcTurn.view()+darkFaithView());
                 break;
 
             case ShufflePile:
                 this.darkFaith += 1;
-                if(this.darkFaith >= 20) throw new EndGameException(pcTurn.view()+darkFaithView());
+                if(this.darkFaith >= 24) throw new EndGameException(pcTurn.view()+darkFaithView());
                 this.actionPile.setupActionPile();
                 break;
 
