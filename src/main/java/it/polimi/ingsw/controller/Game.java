@@ -143,11 +143,11 @@ public class Game {
                     }
                     catch(EndTurnException | DisconnectedException e){done = true;}
                 }
+                checkPope();
+                if(!endGame) endGame = checkEndGame();
             }
-            checkPope();
-            if(!endGame) endGame = checkEndGame();
         }
-        while (endGame);
+        while (!endGame);
         finalSummary();
     }
 
@@ -173,7 +173,7 @@ public class Game {
                     "══════════════╝\n";
             else {
                 string = string.concat(tempLeaders[i].view());
-                if (tempLeaders[i].getIsActive()) string = string.concat("is active\t");
+                string = string.concat(tempLeaders[i].getIsActive() ? "\tis active\t" : "\t");
             }
             sleaders[i] = string;
         }
@@ -183,7 +183,20 @@ public class Game {
 
     private void showPlayersBoards(Player currentPlayer) throws DisconnectedException {
         for (Player player : players) {
-            if(player!=currentPlayer) currentPlayer.net.send(new ServerMessageView(player.playerBoard.playerBoardView(player.playerId)));
+            if(player!=currentPlayer) {
+                currentPlayer.net.send(new ServerMessageView(player.playerBoard.playerBoardView(player.playerId)));
+
+                String[] cards = new String[2];
+
+                for(int i = 0; i<2; i++) cards[i] = player.playerBoard.getLeaderCard(i).getIsActive() ? player.playerBoard.getLeaderCard(i).view() :
+                        ("══════════════╗\n"+
+                         " ████████████  \n" +
+                         " ████████████  \n" +
+                         " ████████████  \n"+
+                         "══════════════╝\n");
+
+                currentPlayer.net.send(new ServerMessageView("Leader cards:\n"+ViewHelper.displayS2S(cards)));
+            }
         }
     }
 

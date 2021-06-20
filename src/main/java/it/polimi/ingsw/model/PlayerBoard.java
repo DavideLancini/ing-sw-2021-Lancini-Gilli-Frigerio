@@ -143,6 +143,23 @@ public class PlayerBoard {
 
     }
 
+    public boolean checkAddable(DevCard newDevCard, int position){
+        Level level = newDevCard.getLevel();
+        DevCard[] deck = this.devCards[position];
+
+        switch(level){
+            case ONE:
+                return deck[0] == null;
+            case TWO:
+                return deck[1] == null && deck[0].getLevel() == Level.ONE;
+            case THREE:
+                return deck[2] == null && deck[1].getLevel() == Level.TWO;
+            default:
+                return false;
+        }
+    }
+
+
     public String playerBoardView(String player){
         String string="";
         string=string.concat(player+"\n");

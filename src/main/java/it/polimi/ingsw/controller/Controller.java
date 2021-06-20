@@ -196,6 +196,11 @@ public class Controller {
             return false;
         }
 
+        if(!pb.checkAddable(board.getCard(color, level), column)){
+            net.send(new ServerMessageError("Cannot add the card in this column."));
+            return false;
+        }
+
         Resource[] stdCost = board.getCard(color, level).getCost();
 
         //LeaderSale effect
@@ -205,6 +210,7 @@ public class Controller {
         if (pb.getLeaderCard(1) != null &&pb.getLeaderCard(1).getIsActive() && pb.getLeaderCard(1) instanceof LeaderSale){
             stdCost = ((LeaderSale) pb.getLeaderCard(0)).downPrice(stdCost);
         }
+
 
 
         // Buy Card
