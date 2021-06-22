@@ -1,28 +1,42 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.Client;
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.network.ClientNetInterface;
+import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.ClientMessage;
+import it.polimi.ingsw.network.messages.ServerMessageView;
 
 
 import java.util.Collection;
 
 public abstract class Manager {
 
-    public ClientMessage turn(boolean action){
-        return null;
+    public abstract ClientMessage turn(boolean action);
+
+    public abstract void view(ServerMessageView view);
+
+    public abstract void displayError(String error);
+
+    public abstract ClientMessage arrangeDepot(Collection<Resource> resources);
+
+    public abstract ClientMessage chooseLeaders(String[] leaders);
+
+    public abstract ClientMessage addResource();
+
+    public abstract ClientMessage chooseResource(Resource[] resources);
+
+    public abstract int joinMatch();
+
+    public abstract void createCustomMatch(String s) throws DisconnectedException;
+
+    public abstract String[] showMainMenu();
+
+    public abstract boolean online();
+
+    public ClientNetInterface autoConnect() throws DisconnectedException{
+        return new ClientNetInterface("localhost",5555, Client.logger);
     }
 
-    public void view(String view){}
-
-    public void displayError(String error){}
-
-    public ClientMessage arrangeDepot(Collection<Resource> resources){
-        return null;
-    }
-
-    public ClientMessage chooseLeaders(String[] leaders) {return null;}
-
-    public ClientMessage addResource() {return null;}
-
-    public ClientMessage chooseResource(Resource[] resources) {return null;}
+    public abstract void waitForTurn();
 }

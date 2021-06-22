@@ -38,16 +38,13 @@ public class ClientNetInterface {
                 throw new DisconnectedException("failed to create fatherSocket");
             }
             //Open a listener on a runnable
-            Thread temp = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        listener = new Listener(father, logger);
-                    } catch (DisconnectedException e) {
-                        //TODO: probably this error is impossible
-                    }
+            Thread temp = new Thread(() -> {
+                try {
+                    listener = new Listener(father, logger);
+                } catch (DisconnectedException e) {
+                    //TODO: probably this error is impossible
                 }
-            };
+            });
             //Create a message to declare to the server what port should be used to receive messages
             ClientMessageLocalPort message;
             message = new ClientMessageLocalPort(father.getLocalPort());

@@ -4,9 +4,7 @@ import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.Message;
 import it.polimi.ingsw.network.messages.*;
-import it.polimi.ingsw.view.CLIActionManager;
 import it.polimi.ingsw.view.Manager;
-import it.polimi.ingsw.view.gui.GUIActionManager;
 
 public class ClientController {
     private ClientNetInterface net;
@@ -16,8 +14,8 @@ public class ClientController {
         this.net = net;
     }
 
-    public ClientController(boolean cli) {
-        this.manager = cli? new CLIActionManager() : new GUIActionManager();
+    public ClientController(Manager manager) {
+        this.manager = manager;
     }
 
 
@@ -35,7 +33,7 @@ public class ClientController {
                     break;
 
                 case View:
-                    manager.view(((ServerMessageView)message).view);
+                    manager.view((ServerMessageView)message);
                     break;
 
                 case Error:
@@ -48,6 +46,7 @@ public class ClientController {
 
                 case AddResource:
                     net.send(manager.addResource());
+                    manager.waitForTurn();
                     break;
 
                 case TwoMarbleLeaders:

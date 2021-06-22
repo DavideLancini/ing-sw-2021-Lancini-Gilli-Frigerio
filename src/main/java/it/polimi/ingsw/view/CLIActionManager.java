@@ -2,9 +2,10 @@ package it.polimi.ingsw.view;
 
 
 import it.polimi.ingsw.Client;
-import it.polimi.ingsw.controller.ClientController;
-import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.network.messages.ClientMessage;
+import it.polimi.ingsw.model.CardColor;
+import it.polimi.ingsw.model.Level;
+import it.polimi.ingsw.model.Reader;
+import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.*;
@@ -57,7 +58,7 @@ public class CLIActionManager extends Manager {
     }
 
 
-    public void view(String s){System.out.println(s);}
+    public void view(ServerMessageView s){System.out.println((String) s.getView(true));}
 
 
 
@@ -85,12 +86,12 @@ public class CLIActionManager extends Manager {
         }
     }*/
 
-    public static void autoConnect() throws DisconnectedException{
-        net = new ClientNetInterface("localhost",5555, Client.logger);
-    }
+
 
     public void displayError(String error){
         System.out.println("Server reports an error: "+ error);
+        System.out.println("Press Enter to continue.");
+        Reader.in.nextLine();
     }
 
 
@@ -135,9 +136,14 @@ public class CLIActionManager extends Manager {
 
 
 
-    public static boolean online(){
+    public boolean online(){
         System.out.println( "1.[online]\n2.[local]");
         return "1".equals(Reader.in.nextLine());
+    }
+
+    @Override
+    public void waitForTurn() {
+        System.out.println("Waiting for your turn...");
     }
 
     /**
@@ -245,6 +251,7 @@ public class CLIActionManager extends Manager {
                         return new ClientMessageSetResource(resource, res-1);
 
                     case 7: //ENDTURN
+                        waitForTurn();
                         return new ClientMessageEndTurn();
 
                     default:
@@ -262,7 +269,7 @@ public class CLIActionManager extends Manager {
 
     public ClientMessage chooseLeaders(String[] leaders){
         System.out.println("Choose two of the following four Leaders:");
-        int i = 0, j = 0;
+        int i = 0, j;
         String[] sleaders = new String[4];
         for (String each : leaders) {
             i++;
@@ -270,19 +277,11 @@ public class CLIActionManager extends Manager {
         }
         System.out.println(ViewHelper.displayS2S(sleaders));
 
-        i=0;
-        do {
-            try {
-                System.out.println("Enter the number of the first chosen Leader:");
-                i = readInt();
-                System.out.println("Enter the number of the second chosen Leader:");
-                j = readInt();
-            }
-            catch (NumberFormatException e) {
-                System.out.println("There's been an error, please retry.");
-                }
-        }
-        while (!(i!=j && i <= 4 && j <= 4 && i >= 1 && j >= 1));
+        System.out.println("Enter the number of the first chosen Leader:");
+        i = readInt(1,4);
+        System.out.println("Enter the number of the second chosen Leader:");
+        j = readInt(1,4);
+
         return new ClientMessageChosenLeaders(i-1,j-1);
     }
 
@@ -293,7 +292,7 @@ public class CLIActionManager extends Manager {
      * MainMenu
      * @return selected action of player/client
      */
-    public static String[] showMainMenu() {
+    public String[] showMainMenu() {
         String action;
         String playerID;
         System.out.println("playerID:");
@@ -305,7 +304,7 @@ public class CLIActionManager extends Manager {
         System.out.println("4. Create Custom Rule Set");
         System.out.println("5. Settings");
         System.out.println("6. Credits");
-        action = Reader.in.nextLine();
+        action = String.valueOf(readInt(1,7));
 
 
         return new String[]{action, playerID};
@@ -331,14 +330,14 @@ public class CLIActionManager extends Manager {
      * Create match ask number of players for starting game
      * @param s Player Id
      */
-    public static void createCustomMatch(String s) throws DisconnectedException {
+    public void createCustomMatch(String s) throws DisconnectedException {
         System.out.println("Number of players?");
         int numOfPlayers = readInt(1,4);
 
         ClientMessageCreateGame createMessage= new ClientMessageCreateGame(numOfPlayers,s);
         net.send(createMessage);
         ServerMessageView serverMessage= (ServerMessageView) net.receive();
-        System.out.println(serverMessage.view);
+        System.out.println(serverMessage.getView(true));
 
 
 
@@ -348,14 +347,8 @@ public class CLIActionManager extends Manager {
 
     }
 
-    public static void joinMatch(String playerId) throws DisconnectedException {
+    public int joinMatch() {
         System.out.println("How many players?");
-        int gameMode = readInt(1,4);
-        ClientMessageJoinGame messageJoin = new ClientMessageJoinGame(playerId, gameMode);
-        net.send(messageJoin);
-
-        ClientController controller = new ClientController(true);
-        controller.setup(net);
-        controller.main();
+        return  readInt(1,4);
     }
 }

@@ -4,8 +4,8 @@ import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.ClientMessageJoinGame;
-import it.polimi.ingsw.view.CLIActionManager;
 import it.polimi.ingsw.view.Manager;
+import it.polimi.ingsw.view.gui.GUIActionManager;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,15 +13,16 @@ import java.util.logging.Logger;
 /**
  * Client App
  */
-public class Client {
+public class ClientGUI {
     public static Logger logger = Logger.getLogger("ClientApp");
 
 
     public static void main(String[] args) {
 
-        Manager manager = new CLIActionManager();
+        Manager manager = new GUIActionManager();
         //Logger Creation
         logger.setLevel(Level.ALL);
+
         //Ask Online-Offline
         boolean isON = manager.online();
         if (isON) {
@@ -31,15 +32,17 @@ public class Client {
                 //CLIActionManager.Connect();
 
                 String[] selection = manager.showMainMenu();
+                logger.info(selection[0]);
+                logger.info(selection[1]);
+
                 switch (selection[0]) {
                     case "1":
-
+                        logger.info("joining game");
                         ClientMessageJoinGame messageJoin = new ClientMessageJoinGame(selection[1], manager.joinMatch());
                         net.send(messageJoin);
                         ClientController controller = new ClientController(manager);
                         controller.setup(net);
                         controller.main();
-
                         break;
                     case "2":
                         manager.createCustomMatch(selection[1]);
