@@ -27,7 +27,7 @@ public class LeadersChoiceMenu implements ActionListener {
             title.setAlignmentX(Component.CENTER_ALIGNMENT);
             title.setFont(new Font("", Font.PLAIN, 10));
 
-            frame.add(title);
+            panel.add(title);
             panel.add(Box.createRigidArea(new Dimension(0,50)));
 
 

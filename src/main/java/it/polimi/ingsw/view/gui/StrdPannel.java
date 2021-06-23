@@ -1,23 +1,27 @@
 package it.polimi.ingsw.view.gui;
 
+import it.polimi.ingsw.model.PlayerBoard;
+import it.polimi.ingsw.model.Resource;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 public class StrdPannel {
-public static GridBagConstraints gridBagConstraints;
     public static void main(String[] args) {
-         int n;
-        Object[] options = {"visualizza", "non visualizzare", "annulla"};
-        {
-            n = JOptionPane.showInternalOptionDialog(null, "sto provando", "tentare", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
-        }
+         JFrame frame = new JFrame();
+         frame.setTitle("Prova");
+         frame.setSize(1000,1000);
+         frame.setVisible(true);
+         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        if (n == JOptionPane.YES_OPTION) {
-            new Frame();
-        } else if (n==JOptionPane.NO_OPTION){
-            System.out.println("Cliccato su " + options[1]);
-        } else if (n == JOptionPane.CANCEL_OPTION) {
-            System.out.println("Cliccato su " + options[2]);
-        }
+         PlayerBoard pb = new PlayerBoard();
+         pb.getDepot().setContents(new Resource[]{
+                Resource.COIN, Resource.SHIELD, Resource.SHIELD, Resource.STONE, Resource.EMPTY, Resource.EMPTY, Resource.SERVANT, Resource.SERVANT, Resource.SERVANT, Resource.SERVANT
+         });
+
+         pb.getStrongbox().deposit(Arrays.asList(Resource.SERVANT, Resource.STONE, Resource.STONE, Resource.SHIELD, Resource.STONE));
+
+         frame.add(new PBPanel(pb));
     }
 }

@@ -7,6 +7,12 @@ public class ChoiceBox {
 
     public static int prompt(String message, String title, String[] options) {
         return JOptionPane.showOptionDialog(
-                null, message, title, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                null, message, title, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
     }
+
+    public static int prompt(String message, String title, ImageIcon[] options) {
+        return JOptionPane.showOptionDialog(
+                null, message, title, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+    }
+
 }

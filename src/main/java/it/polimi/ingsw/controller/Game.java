@@ -5,13 +5,16 @@ import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.singlePlayer.*;
 import it.polimi.ingsw.network.DisconnectedException;
+import it.polimi.ingsw.network.components.Serializer;
 import it.polimi.ingsw.network.messages.EndTurnException;
 import it.polimi.ingsw.network.messages.ServerMessageOK;
 import it.polimi.ingsw.network.messages.ServerMessageView;
 import it.polimi.ingsw.view.ViewHelper;
+import it.polimi.ingsw.view.gui.GUIElement;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.Serializable;
 import java.util.Arrays;
 
 
@@ -153,10 +156,10 @@ public class Game {
 
     private void showAllGame(Player currentPlayer) throws DisconnectedException {
         showPlayersBoards(currentPlayer);
-        currentPlayer.net.send(new ServerMessageView(devCardBoard.topView()));
-        currentPlayer.net.send(new ServerMessageView(currentPlayer.playerBoard.playerBoardView("YOU")));
+        currentPlayer.net.send(new ServerMessageView(devCardBoard.topView(), Serializer.serialize(devCardBoard), GUIElement.DevBoard));
+        currentPlayer.net.send(new ServerMessageView(currentPlayer.playerBoard.playerBoardView("YOU"), Serializer.serialize(currentPlayer.playerBoard), GUIElement.PB));
         currentPlayer.net.send(new ServerMessageView(showLeaderCards(currentPlayer)));
-        currentPlayer.net.send(new ServerMessageView(market.view()));
+        currentPlayer.net.send(new ServerMessageView(market.view(), Serializer.serialize(market), GUIElement.Market));
     }
 
     private String showLeaderCards(Player currentPlayer) {
@@ -184,7 +187,8 @@ public class Game {
     private void showPlayersBoards(Player currentPlayer) throws DisconnectedException {
         for (Player player : players) {
             if(player!=currentPlayer) {
-                currentPlayer.net.send(new ServerMessageView(player.playerBoard.playerBoardView(player.playerId)));
+
+                currentPlayer.net.send(new ServerMessageView(player.playerBoard.playerBoardView(player.playerId) , Serializer.serialize(player.playerBoard), GUIElement.OtherPB));
 
                 String[] cards = new String[2];
 
