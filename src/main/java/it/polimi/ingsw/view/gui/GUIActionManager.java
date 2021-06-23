@@ -1,14 +1,17 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Client;
+import it.polimi.ingsw.model.PlayerBoard;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.ClientMessage;
 import it.polimi.ingsw.network.messages.ClientMessageChosenLeaders;
+import it.polimi.ingsw.network.messages.ClientMessagePlaceResource;
 import it.polimi.ingsw.network.messages.ServerMessageView;
 import it.polimi.ingsw.view.Manager;
 
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -17,6 +20,7 @@ public class GUIActionManager extends Manager {
 
     private static Logger logger = Client.logger;
     private static ClientNetInterface net;
+    private static GameMenu gm = new GameMenu();
 
 
     public GUIActionManager() {
@@ -25,11 +29,11 @@ public class GUIActionManager extends Manager {
 
     @Override
     public ClientMessage turn(boolean action) {
-        return null;
+        return gm.turn(action);
     }
 
     public void view(ServerMessageView opanel) {
-
+        if(opanel.getView(false) != null)gm.display(opanel);
     }
 
     @Override
@@ -44,6 +48,7 @@ public class GUIActionManager extends Manager {
 
     @Override
     public ClientMessage chooseLeaders(String[] leaders) {
+        gm.setVisible();
         LeadersChoiceMenu lcm = new LeadersChoiceMenu(leaders);
         lcm.prompt();
 
@@ -52,7 +57,13 @@ public class GUIActionManager extends Manager {
 
     @Override
     public ClientMessage addResource() {
-        return null;
+        return new ClientMessagePlaceResource(Resource.values()[ChoiceBox.prompt("Choose a starting resource: ", "Initial Game Setup",
+                new ImageIcon[]{
+                        ResIcons.STONE.toIcon(),
+                        ResIcons.SHIELD.toIcon(),
+                        ResIcons.SERVANT.toIcon(),
+                        ResIcons.COIN.toIcon()
+                })]);
     }
 
     @Override

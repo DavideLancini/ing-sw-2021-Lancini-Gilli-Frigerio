@@ -6,7 +6,7 @@ import javax.swing.*;
  * Class LeaderCard
  * @author Gruppo 12
  */
-public abstract class LeaderCard {
+public class LeaderCard {
 
 
     protected int vp;
