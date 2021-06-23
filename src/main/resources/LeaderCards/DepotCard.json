@@ -1,6 +1,27 @@
 [
- {"requirements":"COIN","vp":3,"isActive":false,"type":"STONE"},
- {"requirements":"STONE","vp":3,"isActive":false,"type":"SERVANT"},
- {"requirements":"SHIELD","vp":3,"isActive":false,"type":"COIN"},
- {"requirements":"SERVANT","vp":3,"isActive":false,"type":"SHIELD"}
+ {
+  "requirements":"COIN",
+  "vp":3,
+  "isActive":false,
+  "type":"STONE",
+  "imagePath":"src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-53-1.png"
+ },{
+ "requirements":"STONE",
+ "vp":3,
+ "isActive":false,
+ "type":"SERVANT",
+ "imagePath":"src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-54-1.png"
+},{
+ "requirements":"SHIELD",
+ "vp":3,
+ "isActive":false,
+ "type":"COIN",
+ "imagePath":"src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-56-1.png"
+},{
+ "requirements":"SERVANT",
+ "vp":3,
+ "isActive":false,
+ "type":"SHIELD",
+ "imagePath":"src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-55-1.png"
+}
 ]

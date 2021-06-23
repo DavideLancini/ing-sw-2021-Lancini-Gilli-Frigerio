@@ -9,10 +9,11 @@ public class LeaderDepot extends LeaderCard {
     //hardcoded to 5 of the same resource, possible to be changed
     private final Resource requirements;
 
-    public LeaderDepot(int vp, Resource type, Resource requirements) {
+    public LeaderDepot(int vp, Resource type, Resource requirements, String imagePath) {
         this.vp = vp;
         this.type = type;
         this.requirements = requirements;
+        this.imagePath=imagePath;
     }
 
     /**

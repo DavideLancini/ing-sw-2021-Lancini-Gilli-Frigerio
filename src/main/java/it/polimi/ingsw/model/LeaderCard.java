@@ -1,4 +1,7 @@
 package it.polimi.ingsw.model;
+
+import javax.swing.*;
+
 /**
  * Class LeaderCard
  * @author Gruppo 12
@@ -9,7 +12,7 @@ public abstract class LeaderCard {
     protected int vp;
     protected boolean isActive = false;
     protected Resource type;
-
+    protected String imagePath;
 
     /**
      * getVP
@@ -54,6 +57,11 @@ public abstract class LeaderCard {
      * @return string to show
      */
     public String view(){return null;}
+
+    public  ImageIcon getImage(){
+        ImageIcon card =new ImageIcon(imagePath);
+        return card;
+    };
 }
 
 

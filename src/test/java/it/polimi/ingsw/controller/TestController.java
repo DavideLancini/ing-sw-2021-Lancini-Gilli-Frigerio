@@ -13,8 +13,8 @@ import java.util.Arrays;
 
 
 public class TestController {
-    LeaderCard[] leaders = new LeaderCard[]{new LeaderDepot(1, Resource.COIN, Resource.SHIELD),
-            new LeaderSale(2, Resource.SHIELD, new CardColor[]{CardColor.PURPLE})};
+    LeaderCard[] leaders = new LeaderCard[]{new LeaderDepot(1, Resource.COIN, Resource.SHIELD,"src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png"),
+            new LeaderSale(2, Resource.SHIELD, new CardColor[]{CardColor.PURPLE},"src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png")};
     PlayerBoard pb = new PlayerBoard(leaders);
     DevCardDeck[][] board;
 
@@ -40,7 +40,7 @@ public class TestController {
     @Test
     public void TestActivateLeader() throws DisconnectedException {
         try {
-            pb.addDevCard(new DevCard(Level.ONE, CardColor.PURPLE, 1, new Resource[]{Resource.COIN}, new Production(new Resource[]{Resource.SHIELD}, new Resource[]{Resource.COIN})), 0);
+            pb.addDevCard(new DevCard(Level.ONE, CardColor.PURPLE, 1, new Resource[]{Resource.COIN}, new Production(new Resource[]{Resource.SHIELD}, new Resource[]{Resource.COIN}),"src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-1-1.png"), 0);
         } catch (Exception e) {
             e.printStackTrace();
         }

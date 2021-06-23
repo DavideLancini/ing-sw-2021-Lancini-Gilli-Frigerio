@@ -16,7 +16,8 @@
       
       ],
       "faithOutput":1
-     }
+     },
+     "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-3-1.png"
     }, {
      "cost":[
       "COIN", "STONE", "SERVANT"
@@ -32,7 +33,8 @@
        "STONE"
       ],
       "faithOutput":0
-     }
+     },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-7-1.png"
     }, {
      "cost":[
       "COIN", "COIN", "COIN"
@@ -48,7 +50,8 @@
        "SHIELD", "SERVANT", "COIN"
       ],
       "faithOutput":0
-     }
+     },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-11-1.png"
     }, {
      "cost":[
       "COIN", "COIN", "SERVANT", "SERVANT"
@@ -64,7 +67,8 @@
        "SERVANT", "SERVANT"
       ],
       "faithOutput":1
-     }
+     },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-15-1.png"
     }
    ]},
   {"deck":[
@@ -82,7 +86,8 @@
      "output":[
      ],
      "faithOutput":2
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-19-1.png"
    }, {
     "cost":[
      "COIN", "COIN", "COIN", "STONE", "STONE"
@@ -98,7 +103,8 @@
       "SERVANT", "SERVANT", "SERVANT"
      ],
      "faithOutput":0
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-23-1.png"
    }, {
     "cost":[
      "COIN", "COIN", "COIN", "STONE", "STONE", "STONE"
@@ -114,7 +120,8 @@
       "STONE", "STONE"
      ],
      "faithOutput":1
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-31-1.png"
    }, {
     "cost":[
      "COIN", "COIN", "COIN", "COIN", "COIN"
@@ -130,7 +137,8 @@
       "SHIELD", "SHIELD"
      ],
      "faithOutput":2
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-27-1.png"
    }
   ]},
   {"deck":[
@@ -148,7 +156,8 @@
      "output":[
       "SHIELD"],
      "faithOutput":3
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-43-1.png"
    }, {
     "cost":[
      "COIN", "COIN", "COIN", "COIN", "COIN", "STONE", "STONE"
@@ -164,7 +173,8 @@
       "SERVANT", "SERVANT", "STONE", "STONE"
      ],
      "faithOutput":1
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-39-1.png"
    }, {
     "cost":[
      "COIN", "COIN", "COIN", "COIN", "COIN", "COIN"
@@ -180,7 +190,8 @@
       "SHIELD", "SHIELD", "SHIELD"
      ],
      "faithOutput":2
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-35-1.png"
    }, {
     "cost":[
      "COIN", "COIN", "COIN", "COIN", "STONE", "STONE", "STONE", "STONE"
@@ -196,7 +207,8 @@
       "COIN", "SHIELD", "SHIELD", "SHIELD"
      ],
      "faithOutput":0
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-47-1.png"
    }
   ]}
  ],
@@ -217,7 +229,8 @@
       "COIN","SERVANT","STONE"
      ],
      "faithOutput":0
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-12-1.png"
    },
    {
     "cost":[
@@ -234,7 +247,8 @@
       "SHIELD", "SHIELD"
      ],
      "faithOutput":1
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-16-1.png"
    },
    {
     "cost":[
@@ -251,7 +265,8 @@
        "COIN"
      ],
      "faithOutput":0
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-8-1.png"
    },
    {
     "cost":[
@@ -268,7 +283,8 @@
      
      ],
      "faithOutput":1
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-4-1.png"
    }
   ]},
   {"deck":[
@@ -286,7 +302,8 @@
      "output":[
      ],
      "faithOutput":2
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-20-1.png"
    },
    {
     "cost":[
@@ -303,7 +320,8 @@
       "SERVANT","SERVANT"
      ],
      "faithOutput":2
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-28-1.png"
    },
    {
     "cost":[
@@ -320,7 +338,8 @@
       "COIN","COIN","COIN"
      ],
      "faithOutput":0
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-24-1.png"
    },
    {
     "cost":[
@@ -337,13 +356,14 @@
       "COIN", "COIN"
      ],
      "faithOutput":1
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-32-1.png"
    }
   ]},
   {"deck":[
    {
     "cost":[
-     "STONE","STONE","STONE","STONE","STONE","STONE"
+     "STONE","STONE","STONE","STONE","STONE","STONE","STONE"
     ],
     "level":"THREE",
     "color":"YELLOW",
@@ -356,7 +376,8 @@
      "SERVANT"
      ],
      "faithOutput":3
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-44-1.png"
    },
    {
     "cost":[
@@ -373,7 +394,8 @@
       "SERVANT","SERVANT","SERVANT"
      ],
      "faithOutput":2
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-36-1.png"
    },
    {
     "cost":[
@@ -390,7 +412,8 @@
       "COIN","COIN","SHIELD", "SHIELD"
      ],
      "faithOutput":1
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-40-1.png"
    },
    {
     "cost":[
@@ -407,7 +430,8 @@
       "STONE","SERVANT", "SERVANT", "SERVANT"
      ],
      "faithOutput":0
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-48-1.png"
    }
   ]}
  ],
@@ -428,7 +452,8 @@
      
      ],
      "faithOutput":1
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-1-1.png"
    },
    {
     "cost":[
@@ -445,7 +470,8 @@
       "SERVANT"
      ],
      "faithOutput":0
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-5-1.png"
    },
    {
     "cost":[
@@ -462,7 +488,8 @@
       "COIN","COIN"
      ],
      "faithOutput":1
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-13-1.png"
    },
    {
     "cost":[
@@ -479,7 +506,8 @@
       "COIN","SHIELD", "STONE"
      ],
      "faithOutput":0
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-9-1.png"
    }
   ]},
   {"deck":[
@@ -498,7 +526,8 @@
       "SHIELD", "SHIELD"
      ],
      "faithOutput":1
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-29-1.png"
    },
    {
     "cost":[
@@ -515,7 +544,8 @@
       "STONE", "STONE"
      ],
      "faithOutput":2
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-25-1.png"
    },
    {
     "cost":[
@@ -532,7 +562,8 @@
        "STONE","STONE","STONE"
      ],
      "faithOutput":0
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-21-1.png"
    },
    {
     "cost":[
@@ -548,7 +579,8 @@
      "output":[
      ],
      "faithOutput":2
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-17-1.png"
    }
   ]},
   {"deck":[
@@ -567,7 +599,8 @@
       "STONE","STONE","STONE"
      ],
      "faithOutput":2
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-33-1.png"
    },
    {
     "cost":[
@@ -584,7 +617,8 @@
       "COIN"
      ],
      "faithOutput":3
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-1-1.png"
    },
    {
     "cost":[
@@ -601,7 +635,8 @@
       "SHIELD","COIN","COIN","COIN"
      ],
      "faithOutput":0
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-45-1.png"
    },
    {
     "cost":[
@@ -618,7 +653,8 @@
       "SHIELD","SHIELD","STONE", "STONE"
      ],
      "faithOutput":1
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-37-1.png"
    }
   ]}
 ],
@@ -639,7 +675,8 @@
       "STONE", "STONE"
      ],
      "faithOutput":0
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-14-1.png"
    },
    {
     "cost":[
@@ -656,7 +693,8 @@
       "SHIELD"
      ],
      "faithOutput":0
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-6-1.png"
    },
    {
     "cost":[
@@ -673,7 +711,8 @@
      
      ],
      "faithOutput":1
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-2-1.png"
    },
    {
     "cost":[
@@ -690,7 +729,8 @@
       "SHIELD", "SERVANT","STONE"
      ],
      "faithOutput":0
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-10-1.png"
    }
   ]},
   {"deck":[
@@ -709,7 +749,8 @@
       "SERVANT","SERVANT"
      ],
      "faithOutput":1
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-30-1.png"
    },
    {
     "cost":[
@@ -726,7 +767,8 @@
       "COIN","COIN"
      ],
      "faithOutput":2
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-26-1.png"
    },
    {
     "cost":[
@@ -742,7 +784,8 @@
      "output":[
      ],
      "faithOutput":2
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-18-1.png"
    },
    {
     "cost":[
@@ -759,7 +802,8 @@
       "SHIELD", "SHIELD","SHIELD"
      ],
      "faithOutput":0
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-22-1.png"
    }
   ]},
   {"deck":[
@@ -778,7 +822,8 @@
       "COIN","COIN","COIN"
      ],
      "faithOutput":2
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-34-1.png"
    },
    {
     "cost":[
@@ -795,7 +840,8 @@
       "COIN","COIN", "SERVANT","SERVANT"
      ],
      "faithOutput":1
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-38-1.png"
    },
    {
     "cost":[
@@ -812,7 +858,8 @@
       "STONE"
      ],
      "faithOutput":3
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-42-1.png"
    },
    {
     "cost":[
@@ -829,7 +876,8 @@
       "STONE", "STONE","STONE"
      ],
      "faithOutput":1
-    }
+    },
+    "imagePath": "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-46-1.png"
    }
   ]}
 ]

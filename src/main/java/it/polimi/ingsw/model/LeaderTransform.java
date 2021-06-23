@@ -8,10 +8,11 @@ package it.polimi.ingsw.model;
 public class LeaderTransform extends LeaderCard {
     private CardColor[] requirements;
 
-    public LeaderTransform(int vp,Resource type,CardColor[] requirements) {
+    public LeaderTransform(int vp,Resource type,CardColor[] requirements,String imagePath) {
         this.vp = vp;
         this.type = type;
         this.requirements = requirements;
+        this.imagePath= imagePath;
     }
 
     /**

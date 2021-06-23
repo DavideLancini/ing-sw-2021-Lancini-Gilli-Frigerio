@@ -11,12 +11,8 @@ public class Frame extends JFrame {
 
     public Frame(){
         super("Masters Of Renaissance");
-        JLabel imageLabel = new JLabel( new ImageIcon(scaledImg));
-        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        imageLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-        add(imageLabel);
-        setLayout(new GridLayout());
-        setSize(1920,1200);
+        setLayout(new FlowLayout());
+        setSize(1920,1000);
         setVisible(true);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

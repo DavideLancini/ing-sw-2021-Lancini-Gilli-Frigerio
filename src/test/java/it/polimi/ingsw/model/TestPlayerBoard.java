@@ -11,8 +11,8 @@ public class TestPlayerBoard {
     PlayerBoard pb = new PlayerBoard();
     Resource[] cost = {Resource.COIN, Resource.STONE};
     Production production = new Production(cost, cost);
-    DevCard newCard = new DevCard(Level.ONE, CardColor.BLUE, 5, cost, production);
-    DevCard newCard2 = new DevCard(Level.TWO, CardColor.GREEN, 7, cost, production);
+    DevCard newCard = new DevCard(Level.ONE, CardColor.BLUE, 5, cost, production,"src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-1-1.png");
+    DevCard newCard2 = new DevCard(Level.TWO, CardColor.GREEN, 7, cost, production,"src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-1-1.png");
     @Test
     public void testAddDevCard(){
 

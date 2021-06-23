@@ -10,11 +10,12 @@ public class LeaderProduction extends LeaderCard {
     private Resource choice = Resource.EMPTY;
     private final CardColor requirements;
 
-    public LeaderProduction(int vp, Resource type, CardColor requirements, Production production){
+    public LeaderProduction(int vp, Resource type, CardColor requirements, Production production,String imagePath){
         this.vp = vp;
         this.type = type;
         this.requirements = requirements;
         this.production = production;
+        this.imagePath=imagePath;
     }
 
 
