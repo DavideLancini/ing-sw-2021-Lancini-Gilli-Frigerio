@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.ClientMessage;
+import it.polimi.ingsw.network.messages.ServerMessageChooseLeaders;
 import it.polimi.ingsw.network.messages.ServerMessageView;
 
 
@@ -20,7 +21,7 @@ public abstract class Manager {
 
     public abstract ClientMessage arrangeDepot(Collection<Resource> resources);
 
-    public abstract ClientMessage chooseLeaders(String[] leaders);
+    public abstract ClientMessage chooseLeaders(ServerMessageChooseLeaders leaders);
 
     public abstract ClientMessage addResource();
 

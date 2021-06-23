@@ -1,14 +1,22 @@
 package it.polimi.ingsw.network.messages;
 
-import it.polimi.ingsw.model.LeaderCard;
+import javax.swing.*;
 
 public class ServerMessageChooseLeaders extends ServerMessage{
-    private String[] leaders = new String[4];
+    private final String[] leaders = new String[4];
+    private final String[] icons = new String[4];
 
     public ServerMessageChooseLeaders(String[] leaders){
         this.type = MessageType.ChooseLeaders;
         System.arraycopy(leaders, 0, this.leaders, 0, leaders.length);
     }
 
-    public String[] getLeaders(){return this.leaders;}
+    public ServerMessageChooseLeaders(String[] leaders, String[] icons){
+        this.type = MessageType.ChooseLeaders;
+        System.arraycopy(leaders, 0, this.leaders, 0, leaders.length);
+        System.arraycopy(icons, 0, this.icons, 0, leaders.length);
+
+    }
+
+    public String[] getLeaders(boolean string){return string ? this.leaders : this.icons;}
 }

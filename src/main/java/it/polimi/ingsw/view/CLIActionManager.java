@@ -267,7 +267,8 @@ public class CLIActionManager extends Manager {
 
     }
 
-    public ClientMessage chooseLeaders(String[] leaders){
+    public ClientMessage chooseLeaders(ServerMessageChooseLeaders message){
+        String[] leaders = (String[]) message.getLeaders(true);
         System.out.println("Choose two of the following four Leaders:");
         int i = 0, j;
         String[] sleaders = new String[4];

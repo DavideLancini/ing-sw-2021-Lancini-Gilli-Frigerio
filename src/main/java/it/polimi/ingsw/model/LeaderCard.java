@@ -58,10 +58,9 @@ public class LeaderCard {
      */
     public String view(){return null;}
 
-    public  ImageIcon getImage(){
-        ImageIcon card =new ImageIcon(imagePath);
-        return card;
-    };
+    public String getImage(){
+        return imagePath;
+    }
 }
 
 

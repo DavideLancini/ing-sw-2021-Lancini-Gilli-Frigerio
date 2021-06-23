@@ -16,8 +16,7 @@ public class MainMenu implements ActionListener {
 
 
     public void prompt(){
-
-
+        frame.setTitle("Masters of Renaissance");
 
         JPanel panel = new JPanel();
         JLabel title = new JLabel("Masters of Renaissance");
@@ -36,7 +35,7 @@ public class MainMenu implements ActionListener {
         panel.add(id);
         panel.add(Box.createRigidArea(new Dimension(0,20)));
 
-        frame.setSize(800, 1000);
+        //frame.setSize(800, 1000);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -54,9 +53,11 @@ public class MainMenu implements ActionListener {
             panel.add(Box.createRigidArea(new Dimension(0,20)));
         }
 
-
         frame.setVisible(true);
         frame.add(panel);
+        frame.pack();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 
         synchronized (this){
             while(this.choice<0) {

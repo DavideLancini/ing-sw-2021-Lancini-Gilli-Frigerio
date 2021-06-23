@@ -1,18 +1,13 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Client;
-import it.polimi.ingsw.model.PlayerBoard;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
-import it.polimi.ingsw.network.messages.ClientMessage;
-import it.polimi.ingsw.network.messages.ClientMessageChosenLeaders;
-import it.polimi.ingsw.network.messages.ClientMessagePlaceResource;
-import it.polimi.ingsw.network.messages.ServerMessageView;
+import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.view.Manager;
 
 import javax.swing.*;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.logging.Logger;
 
@@ -47,9 +42,10 @@ public class GUIActionManager extends Manager {
     }
 
     @Override
-    public ClientMessage chooseLeaders(String[] leaders) {
+    public ClientMessage chooseLeaders(ServerMessageChooseLeaders leaders) {
+        String[] icons = leaders.getLeaders(false);
         gm.setVisible();
-        LeadersChoiceMenu lcm = new LeadersChoiceMenu(leaders);
+        LeadersChoiceMenu lcm = new LeadersChoiceMenu(icons);
         lcm.prompt();
 
         return new ClientMessageChosenLeaders(lcm.choice[0], lcm.choice[1]);

@@ -23,6 +23,7 @@ public class GameMenu implements ActionListener {
         panel.add(this.wait);
         frame.add(panel);
         frame.setVisible(false);
+        frame.setTitle("Masters of Renaissance");
         frame.setSize(1920,1080);
         panel.setLayout(new GridBagLayout());
         pbc.gridy = 1;

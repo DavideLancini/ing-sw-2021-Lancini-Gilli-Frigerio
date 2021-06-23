@@ -41,7 +41,7 @@ public class ClientController {
                     break;
 
                 case ChooseLeaders:
-                    net.send(manager.chooseLeaders(((ServerMessageChooseLeaders)message).getLeaders()));
+                    net.send(manager.chooseLeaders((ServerMessageChooseLeaders)message));
                     break;
 
                 case AddResource:

@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.PlayerBoard;
 import it.polimi.ingsw.network.*;
 import it.polimi.ingsw.network.messages.*;
 
+import javax.swing.*;
 import java.net.ServerSocket;
 import java.util.logging.Logger;
 
@@ -76,9 +77,10 @@ public class Player extends Thread{
     public void drawLeaderCards(LeaderCard[] leaders) throws DisconnectedException {
         this.templeaders = leaders;
         String[] stringleaders = new String[4];
-        for(int i = 0;i< leaders.length; i++) stringleaders[i] = leaders[i].view();
+        String[] icons = new String[4];
+        for(int i = 0;i< leaders.length; i++) {stringleaders[i] = leaders[i].view(); icons[i] = leaders[i].getImage();}
 
-        net.send(new ServerMessageChooseLeaders(stringleaders));
+        net.send(new ServerMessageChooseLeaders(stringleaders, icons));
     }
 
     /**

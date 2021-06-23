@@ -10,11 +10,14 @@ public class LeadersChoiceMenu implements ActionListener {
 
         private final JFrame frame = new JFrame();
         final int[] choice;
-        private final String[] leaders;
+        private final ImageIcon[] leaders = new ImageIcon[4];
+        private final JLabel selected = new JLabel("Selected: ");
+        private final JButton[] buttons = new JButton[4];
+        private final JPanel panel = new JPanel();
 
-        public LeadersChoiceMenu(String[] leaders){
+    public LeadersChoiceMenu(String[] leaders){
             this.choice = new int[2];
-            this.leaders = leaders;
+            for(int i=0;i< leaders.length;i++)this.leaders[i]= new ImageIcon(leaders[i]);
         }
 
 
@@ -22,42 +25,53 @@ public class LeadersChoiceMenu implements ActionListener {
 
 
 
-            JPanel panel = new JPanel();
             JLabel title = new JLabel("Choose 2 of the following 4 leader cards:");
+            title.setFont(new Font(null, Font.PLAIN, 20));
             title.setAlignmentX(Component.CENTER_ALIGNMENT);
-            title.setFont(new Font("", Font.PLAIN, 10));
 
             panel.add(title);
-            panel.add(Box.createRigidArea(new Dimension(0,50)));
+            panel.add(Box.createRigidArea(new Dimension(0,30)));
 
 
-            frame.setSize(500, 500);
+            //frame.setSize(1100, 550);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setTitle("Initial Setup");
+
 
             panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
             panel.setBorder(new EmptyBorder(new Insets(80, 80, 80, 80)));
 
+            JPanel middle = new JPanel();
+            middle.setLayout(new BoxLayout(middle, BoxLayout.X_AXIS));
+            for(int i=0; i<leaders.length; i++){
 
-            for(String each : leaders){
-                JButton btn = new JButton(each);
-                btn.setAlignmentX(Component.CENTER_ALIGNMENT);
-                btn.setMaximumSize(new Dimension(300, 200));
+                buttons[i] = new JButton(new ImageIcon(leaders[i].getImage().getScaledInstance(180,270,Image.SCALE_DEFAULT)));
 
-                btn.addActionListener(this);
+                buttons[i].addActionListener(this);
 
-                panel.add(btn);
-                panel.add(Box.createRigidArea(new Dimension(0,20)));
+                middle.add(buttons[i]);
+                middle.add(Box.createRigidArea(new Dimension(5,0)));
             }
-            JLabel selected = new JLabel("Selected: ");
+            panel.add(middle);
+            panel.add(Box.createRigidArea(new Dimension(0, 10)));
+            selected.setAlignmentX(Component.CENTER_ALIGNMENT);
+            selected.setFont(new Font(null, Font.PLAIN, 15));
             panel.add(selected);
 
             JButton done = new JButton("Done");
+            done.setPreferredSize(new Dimension(30,20));
             done.addActionListener(this);
+            done.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+            panel.add(Box.createRigidArea(new Dimension(0,5)));
             panel.add(done);
 
 
             frame.setVisible(true);
             frame.add(panel);
+            frame.pack();
+            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+            frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 
             synchronized (this){
                 try {
@@ -72,18 +86,23 @@ public class LeadersChoiceMenu implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getActionCommand().equals("Done")){
+            if (e.getActionCommand().equals("Done") && choice[0] != choice[1]){
                 synchronized (this) {
                     this.notify();
                     frame.dispose();
                 }
             }
             else for(int i=0; i< leaders.length; i++){
-                if(leaders[i].equals(e.getActionCommand()) && choice[1] != i){
+                if(buttons[i].equals(e.getSource()) && choice[1] != i){
                     choice[0] = choice[1];
                     choice[1] = i;
                 }
             }
+
+            selected.setText("Selected: "+(choice[0]+1)+" and "+(choice[1]+1));
+            if(choice[0] == choice[1])selected.setText("Selected: "+(choice[0]+1));
+
+            SwingUtilities.updateComponentTreeUI(panel);
         }
 
 
