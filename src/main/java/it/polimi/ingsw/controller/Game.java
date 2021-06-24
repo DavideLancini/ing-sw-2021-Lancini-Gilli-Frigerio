@@ -189,14 +189,25 @@ public class Game {
 
                 currentPlayer.net.send(new ServerMessageView(player.playerBoard.playerBoardView(player.playerId) , Serializer.serialize(player.playerBoard), GUIElement.OtherPB));
 
-                String[] cards = new String[2];
+                String[] cards = new String[]{"",""};
 
-                for(int i = 0; i<2; i++) cards[i] = player.playerBoard.getLeaderCard(i).getIsActive() ? player.playerBoard.getLeaderCard(i).view() :
-                        ("══════════════╗\n"+
-                         " ████████████  \n" +
-                         " ████████████  \n" +
-                         " ████████████  \n"+
-                         "══════════════╝\n");
+                for(int i = 0; i<2; i++) {
+                    if(player.playerBoard.getLeaderCard(i)==null){
+                        cards[i] =cards[i].concat("══════════════╗\n"+
+                                "   \\ /\t\t\n" +
+                                "    X\t\t\n" +
+                                "   / \\\t\t\n")+
+                                "══════════════╝\n";
+                    }
+                    else {
+                        cards[i] = player.playerBoard.getLeaderCard(i).getIsActive() ? player.playerBoard.getLeaderCard(i).view() :
+                                ("══════════════╗\n" +
+                                        " ████████████  \n" +
+                                        " ████████████  \n" +
+                                        " ████████████  \n" +
+                                        "══════════════╝\n");
+                    }
+                }
 
                 currentPlayer.net.send(new ServerMessageView("Leader cards:\n"+ViewHelper.displayS2S(cards)));
             }
