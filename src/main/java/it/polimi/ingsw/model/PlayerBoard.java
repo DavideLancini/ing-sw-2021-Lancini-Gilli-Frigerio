@@ -151,9 +151,9 @@ public class PlayerBoard {
             case ONE:
                 return deck[0] == null;
             case TWO:
-                return deck[1] == null && deck[0].getLevel() == Level.ONE;
+                return deck[1] == null && deck[0] != null;
             case THREE:
-                return deck[2] == null && deck[1].getLevel() == Level.TWO;
+                return deck[2] == null && deck[1] != null;
             default:
                 return false;
         }
