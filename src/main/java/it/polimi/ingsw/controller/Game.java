@@ -103,11 +103,13 @@ public class Game {
             while(!done){
                 try {
                     showAllGame(players[0]);
-                    action = players[0].turn(action);
+                    if(!action) action = players[0].turn(false);
+                    else  players[0].turn(true);
                     Server.logger.info("Setting action to "+action);
                 }
                 catch(EndTurnException e){done = true;}
             }
+
             if(checkEndGame()) {
                 players[0].net.send(new ServerMessageView("The Game is now over! You have won."));
             }
@@ -124,10 +126,6 @@ public class Game {
     }
 
 
-
-
-
-
     /**
      * starts a multiplayer game
      */
@@ -141,7 +139,8 @@ public class Game {
                 while(!done){
                     try {
                         showAllGame(each);
-                        action = each.turn(action);
+                        if (!action) action = each.turn(false);
+                        else  each.turn(true);
                         Server.logger.info("Setting action to "+action);
                     }
                     catch(EndTurnException | DisconnectedException e){done = true;}
