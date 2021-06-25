@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model;
 
-import javax.swing.*;
-
 /**
  * Class DevCard
  * @author Gruppo 12
@@ -91,8 +89,7 @@ public class DevCard {
         return string;
     }
 
-    public ImageIcon getImage() {
-        ImageIcon card =new ImageIcon(imagePath);
-        return card;
+    public String getImage() {
+        return imagePath;
     }
 }

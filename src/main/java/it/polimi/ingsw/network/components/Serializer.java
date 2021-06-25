@@ -1,6 +1,7 @@
 package it.polimi.ingsw.network.components;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import it.polimi.ingsw.model.DevCardBoard;
 import it.polimi.ingsw.model.Market;
 import it.polimi.ingsw.model.PlayerBoard;
 import it.polimi.ingsw.network.messages.ClientMessage;
@@ -31,5 +32,10 @@ public class Serializer {
     public static Market deserializeMarket(String s) {
         Gson gson = new GsonBuilder().create();
         return gson.fromJson(s, Market.class);
+    }
+
+    public static DevCardBoard deserializeDB(String s) {
+        Gson gson = new GsonBuilder().create();
+        return gson.fromJson(s, DevCardBoard.class);
     }
 }

@@ -1,6 +1,7 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.playerboardPanels;
 
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.view.gui.ResIcons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,9 @@ public class SBPanel extends JPanel {
         this.add(labelbegin);
         this.add(Box.createRigidArea(new Dimension(10, 0)));
 
+        JLabel empty = new JLabel("Empty");
+        this.add(empty);
+
         int servant = 0;int shield = 0;int coin = 0;int stone = 0;
         for (Resource resource : resources) {
             if (resource == Resource.STONE)
@@ -28,6 +32,7 @@ public class SBPanel extends JPanel {
                 shield++;
         }
         if (servant > 0) {
+            this.remove(empty);
             JLabel label = new JLabel(String.valueOf(servant));
             label.setFont(new Font(null, Font.BOLD, 15));
             this.add(label);
@@ -35,6 +40,7 @@ public class SBPanel extends JPanel {
             this.add(Box.createRigidArea(new Dimension(10, 0)));
         }
         if (coin > 0) {
+            this.remove(empty);
             JLabel label = new JLabel(String.valueOf(coin));
             label.setFont(new Font(null, Font.BOLD, 15));
             this.add(label);
@@ -42,6 +48,7 @@ public class SBPanel extends JPanel {
             this.add(Box.createRigidArea(new Dimension(10, 0)));
         }
         if (shield > 0) {
+            this.remove(empty);
             JLabel label = new JLabel(String.valueOf(shield));
             label.setFont(new Font(null, Font.BOLD, 15));
             this.add(label);
@@ -49,6 +56,7 @@ public class SBPanel extends JPanel {
             this.add(Box.createRigidArea(new Dimension(10, 0)));
         }
         if (stone> 0) {
+            this.remove(empty);
             JLabel label = new JLabel(String.valueOf(stone));
             label.setFont(new Font(null, Font.BOLD, 15));
             this.add(label);
@@ -58,6 +66,7 @@ public class SBPanel extends JPanel {
 
         JLabel labelend = new JLabel("]");
         labelend.setFont(new Font(null, Font.BOLD, 30));
+        this.add(Box.createRigidArea(new Dimension(10, 0)));
         this.add(labelend);
 
 

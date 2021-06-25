@@ -248,21 +248,21 @@ public class Controller {
             if(each != null) productions[i+1] = each.getProduction();
 
             else {
-                net.send(new ServerMessageError("Invalid Production"));
+                net.send(new ServerMessageError("Invalid Production. There is no Development Card in position" +(i+1)+ "."));
 
                 return false;
             }
         }
 
-        for(int i = 0; i<2 && activated[4+i]; i++){
+        for(int i = 0; i<2; i++){
             LeaderCard each = pb.getLeaderCard(i);
-            if(each != null && each.getIsActive() && each instanceof LeaderProduction){
+            if(activated[4+i] && each != null && each.getIsActive() && each instanceof LeaderProduction){
                 productions[i+4] = ((LeaderProduction) each).getProduction();
                 choice[i]=((LeaderProduction) each).getChoice();
             }
 
             else {
-                net.send(new ServerMessageError("Invalid Production"));
+                net.send(new ServerMessageError("Invalid Production. There is no leader in position " + (i+1)+" capable of producing."));
 
                 return false;
             }
@@ -291,8 +291,8 @@ public class Controller {
 
         }
         catch (Exception e){
-            net.send(new ServerMessageError("Insufficient resources "+e.getMessage()));
-
+            Server.logger.info(e.getMessage());
+            net.send(new ServerMessageError("Your resources are insufficient for the indicated productions."));
             return false;
         }
         return true;

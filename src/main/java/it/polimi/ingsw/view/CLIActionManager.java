@@ -285,6 +285,7 @@ public class CLIActionManager extends Manager {
         String playerID;
         System.out.println("playerID:");
         playerID = Reader.in.nextLine();
+        if(playerID.equals(""))playerID = "player"+(int)Math.floor(Math.random()*1000000);
 
         System.out.println("1. Join Game");
         System.out.println("2. Create Custom Game");

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.playerboardPanels;
 
 import it.polimi.ingsw.model.Resource;
 

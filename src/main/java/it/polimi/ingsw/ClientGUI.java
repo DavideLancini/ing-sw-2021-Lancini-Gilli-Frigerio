@@ -5,7 +5,7 @@ import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.ClientMessageJoinGame;
 import it.polimi.ingsw.view.Manager;
-import it.polimi.ingsw.view.gui.GUIActionManager;
+import it.polimi.ingsw.view.gui.menus.GUIActionManager;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

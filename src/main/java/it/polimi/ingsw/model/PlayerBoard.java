@@ -17,7 +17,7 @@ public class PlayerBoard {
     private LeaderCard[] leaderCards;
     private final Depot depot= new Depot();
     //DevCard[colonna][livello]
-    private DevCard[][] devCards;
+    private final DevCard[][] devCards;
     private final DefaultProduction defaultProduction;
 
     /**
@@ -104,7 +104,7 @@ public class PlayerBoard {
     /**
      * getDevCard
      * @param column selected slot 0 to 2 (3 available)
-     * @param level level of devCard
+     * @param level level (0 to 2) of devCard
      * @return devCard
      */
     public DevCard getDevCard(int column, int level){return this.devCards[column][level];}

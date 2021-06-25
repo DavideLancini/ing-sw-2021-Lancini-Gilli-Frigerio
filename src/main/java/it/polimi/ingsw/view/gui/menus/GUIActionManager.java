@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.menus;
 
 import it.polimi.ingsw.Client;
 import it.polimi.ingsw.model.Resource;
@@ -6,6 +6,11 @@ import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.view.Manager;
+import it.polimi.ingsw.view.gui.ChoiceBox;
+import it.polimi.ingsw.view.gui.ResIcons;
+import it.polimi.ingsw.view.gui.menus.GameMenu;
+import it.polimi.ingsw.view.gui.menus.LeadersChoiceMenu;
+import it.polimi.ingsw.view.gui.menus.MainMenu;
 
 import javax.swing.*;
 import java.util.Collection;

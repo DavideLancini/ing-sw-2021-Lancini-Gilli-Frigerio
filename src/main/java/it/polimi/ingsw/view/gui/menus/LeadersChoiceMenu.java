@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.menus;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
