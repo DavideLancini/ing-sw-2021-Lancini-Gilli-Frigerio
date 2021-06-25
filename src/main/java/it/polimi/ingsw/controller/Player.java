@@ -10,14 +10,23 @@ import javax.swing.*;
 import java.net.ServerSocket;
 import java.util.logging.Logger;
 
+/**
+ * Class Player
+ * @author gruppo 12
+ */
 public class Player extends Thread{
     private static Logger logger;
     public ConnectionInterface net;
     public PlayerBoard playerBoard;
     public String playerId;
     private Controller controller;
-    private LeaderCard[] templeaders;
+    private LeaderCard[] tempLeaders;
 
+    /**
+     * Constructor
+     * @param father serverSocket
+     * @param logger Logger
+     */
     public Player(ServerSocket father, Logger logger){
         Player.logger = logger;
         try {
@@ -48,6 +57,13 @@ public class Player extends Thread{
         }
     }
 
+    /**
+     * manages turn of player
+     * @param mainAction true if player has done 1 of the three main action in this turn
+     * @return true if actions of player are done
+     * @throws EndTurnException if player ended the turn
+     * @throws DisconnectedException if unable to send or receive messages
+     */
     public boolean turn(boolean mainAction) throws EndTurnException, DisconnectedException {
         net.send(new ServerMessageTurn(mainAction));
         ClientMessage message = net.receive();
@@ -55,27 +71,47 @@ public class Player extends Thread{
         return message.resolve(controller);
     }
 
+    /**
+     * receives and set 2 selected leader cards into playerBoard
+     * @throws DisconnectedException if unable to send or receive messages
+     */
     public void receiveLeaders() throws DisconnectedException {
         ClientMessageChosenLeaders message = (ClientMessageChosenLeaders) net.receive();
         setLeaders(message.getPositions());
         logger.info("Leaders received and set");
     }
 
-
+    /**
+     * additional setup base on number of players
+     * @throws DisconnectedException if unable to send or receive messages
+     */
     public void secondPlayer() throws DisconnectedException {
         addResource(1);
     }
+    /**
+     * additional setup base on number of players
+     * @throws DisconnectedException if unable to send or receive messages
+     */
     public void thirdPlayer() throws DisconnectedException {
         addResource(1);
         playerBoard.addFaith(1);
     }
+    /**
+     * additional setup base on number of players
+     * @throws DisconnectedException if unable to send or receive messages
+     */
     public void fourthPlayer() throws DisconnectedException {
         addResource(2);
         playerBoard.addFaith(1);
     }
 
+    /**
+     * sends card to be selected by the player at the start of the game
+     * @param leaders 4 leader cards
+     * @throws DisconnectedException if unable to send or receive messages
+     */
     public void drawLeaderCards(LeaderCard[] leaders) throws DisconnectedException {
-        this.templeaders = leaders;
+        this.tempLeaders = leaders;
         String[] stringleaders = new String[4];
         String[] icons = new String[4];
         for(int i = 0;i< leaders.length; i++) {stringleaders[i] = leaders[i].view(); icons[i] = leaders[i].getImage();}
@@ -88,13 +124,15 @@ public class Player extends Thread{
      * @param positions received in message
      */
     private void setLeaders(int[] positions){
-        this.playerBoard.setLeaders(new LeaderCard[]{this.templeaders[positions[0]], this.templeaders[positions[1]]});
+        this.playerBoard.setLeaders(new LeaderCard[]{this.tempLeaders[positions[0]], this.tempLeaders[positions[1]]});
     }
 
     public void setController(Controller controller){this.controller = controller;}
 
 
-
+    /**
+     * thread of player/client
+     */
     @Override
     public void run() {
         //Get IdPlayer

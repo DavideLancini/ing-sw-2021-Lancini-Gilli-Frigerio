@@ -1,28 +1,38 @@
 package it.polimi.ingsw.model.singlePlayer;
 
 
+import it.polimi.ingsw.controller.EndGameException;
 import it.polimi.ingsw.model.CardColor;
 import it.polimi.ingsw.model.DevCardBoard;
 import it.polimi.ingsw.model.Level;
-import it.polimi.ingsw.network.ConnectionInterface;
-import it.polimi.ingsw.network.DisconnectedException;
-import it.polimi.ingsw.network.messages.ServerMessageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Class PcPlayerBoard
+ */
 public class PcPlayerBoard {
     public ActionPile actionPile;
     private int darkFaith;
     private DevCardBoard board;
 
+    /**
+     * constructor
+     * @param board current development cards board
+     */
     public PcPlayerBoard(DevCardBoard board){
         this.darkFaith=0;
         this.actionPile= new ActionPile();
         this.board = board;
     }
 
-    public String turn() throws EndGameException{
+    /**
+     * manage pc turn in a single player game
+     * @return action made by pc to show at player
+     * @throws EndGameException the game is ended
+     */
+    public String turn() throws EndGameException {
         ActionToken pcTurn=this.actionPile.getFirst();
 
         switch (pcTurn.getType()){
@@ -67,12 +77,12 @@ public class PcPlayerBoard {
 
     }
 
-
+    /**
+     * view of pc faith
+     * @return string to show
+     */
     public String darkFaithView(){
         return "DARK FAITH: \uD83D\uDD47\u001b[0m" + this.darkFaith;
     }
 
-    public int getDarkFaith() {
-        return this.darkFaith;
-    }
 }

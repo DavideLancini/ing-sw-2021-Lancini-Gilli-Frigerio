@@ -50,6 +50,10 @@ class ActionShuffle extends ActionToken{
 class ActionRemove extends ActionToken{
     private final CardColor cardColor;
 
+    /**
+     * removes 2 development card of lowest level and correct color from the game
+     * @param cardColor color of card to be removed
+     */
     public ActionRemove(CardColor cardColor){
         this.actionType=ActionType.RemoveDevCard;
         this.cardColor=cardColor;

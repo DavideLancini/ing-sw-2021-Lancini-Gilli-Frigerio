@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model;
 
-import javax.swing.*;
-
 /**
  * Class LeaderCard
  * @author Gruppo 12
@@ -58,6 +56,10 @@ public class LeaderCard {
      */
     public String view(){return null;}
 
+    /**
+     *
+     * @return path of associated imagine
+     */
     public String getImage(){
         return imagePath;
     }

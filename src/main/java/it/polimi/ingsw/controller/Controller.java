@@ -13,6 +13,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class Controller
+ * @author Gruppo 12
+ */
 public class Controller {
 
     private final PlayerBoard pb;
@@ -21,6 +25,14 @@ public class Controller {
     private ConnectionInterface net;
     private Game game;
 
+    /**
+     * Constructor of controller
+     * @param net network information
+     * @param pb Player to control
+     * @param board DevCards board
+     * @param market current Market
+     * @param game current Game
+     */
     public Controller(ConnectionInterface net, PlayerBoard pb, DevCardBoard board, Market market, Game game){
         this.pb = pb;
         this.board = board;
@@ -35,7 +47,11 @@ public class Controller {
         this.market = market;
     }
 
-
+    /**
+     * sellLeader deletes one leaderCard for 1 faith
+     * @param position selection of card (1 or 2)
+     * @throws DisconnectedException if the is a disconnection during the game
+     */
     public void sellLeader (int position) throws DisconnectedException {
         if(position != 0 && position!= 1){net.send(new ServerMessageError("Invalid Position.")); return;}
 
@@ -49,7 +65,11 @@ public class Controller {
         }
     }
 
-
+    /**
+     * activateLeader activates one leader card if requirements are met
+     * @param position selection of card (1 or 2)
+     * @throws DisconnectedException if the is a disconnection during the game
+     */
     public void activateLeader (int position) throws DisconnectedException {
         Server.logger.info("Activating leader");
         if(position != 0 && position!= 1){net.send(new ServerMessageError("Invalid Position.")); return;}
@@ -83,6 +103,11 @@ public class Controller {
 
     }
 
+    /**
+     * checks requirement during a leader card activation
+     * @param leader card to be activated
+     * @return true if requirement are met
+     */
     private boolean checkRequirements(LeaderCard leader){
 
         if(leader instanceof LeaderProduction){
@@ -149,7 +174,13 @@ public class Controller {
     }
 
 
-
+    /**
+     * tryDepotConfiguration is used while taking resources from Market
+     * @param input resources to be tested
+     * @param discardAmount number of resources not deposited  and faith to give to other players
+     * @return true if resources configuration is within Game's rules
+     * @throws DisconnectedException if the is a disconnection during the game
+     */
     public boolean tryDepotConfiguration(Resource[] input, int discardAmount) throws DisconnectedException {
         //input length is built to be 6
         if(valid(Arrays.copyOfRange(input, 1, 2))
@@ -170,6 +201,11 @@ public class Controller {
         }
     }
 
+    /**
+     * checks if resources in one shelf are equals or nulls
+     * @param subset resources to be tested
+     * @return true if is all within Game's rules
+     */
     private boolean valid(Resource[] subset){
         Resource type = Resource.EMPTY;
         for(Resource elem : subset){
@@ -180,6 +216,13 @@ public class Controller {
         return true;
     }
 
+    /**
+     * checks if resources are different in all three shelves
+     * @param a first shelf resource type
+     * @param b second shelf resource type
+     * @param c third shelf resource type
+     * @return true if is all within Game's rules
+     */
     private boolean different(Resource a, Resource b, Resource c){
         if(a == b && a != Resource.EMPTY) return false;
         else if(a == c && a != Resource.EMPTY) return false;
@@ -187,7 +230,14 @@ public class Controller {
     }
 
 
-
+    /**
+     * buy devCard from the development cards board
+     * @param level level of card the player wants to buy
+     * @param color color of card the player wants to buy
+     * @param column in which available slot of player board the player wants to place the card
+     * @return true if buying is successful
+     * @throws DisconnectedException if the is a disconnection during the game
+     */
     public boolean buyDevCard(Level level, CardColor color, int column) throws DisconnectedException {
         DevCard newCard;
 
@@ -351,6 +401,13 @@ public class Controller {
         return resources;
     }
 
+    /**
+     * market action
+     * @param isRow true if player want to take marbles from a row
+     * @param position number of row(1 to 3) / column (1 to 4)
+     * @return true if successful
+     * @throws DisconnectedException if the is a disconnection during the game
+     */
     public boolean takeResources(boolean isRow, int position) throws DisconnectedException {
         Marble[] marbles;
 
@@ -418,6 +475,12 @@ public class Controller {
         return true;
     }
 
+    /**
+     * converts marbles in resources
+     * @param marbles taken from market
+     * @return resources to place in the deposit
+     * @throws DisconnectedException if the is a disconnection during the game
+     */
     private Collection<Resource> convert (Marble[] marbles) throws DisconnectedException {
         ArrayList<Resource> resources = new ArrayList<>();
         ArrayList<LeaderCard> leaders = new ArrayList<>(Arrays.asList(pb.getLeaderCard(0), pb.getLeaderCard(1)));

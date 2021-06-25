@@ -7,7 +7,13 @@ package it.polimi.ingsw.model;
  */
 public class LeaderSale extends LeaderCard {
     private CardColor[] requirements;
-
+    /**
+     * constructor
+     * @param vp victory points
+     * @param type resource type that can be discounted
+     * @param requirements requirements to activate
+     * @param imagePath path of associated imagine
+     */
     public LeaderSale(int vp, Resource type, CardColor[] requirements,String imagePath) {
         this.vp = vp;
         this.type = type;
@@ -47,10 +53,6 @@ public class LeaderSale extends LeaderCard {
         }
         return reducedcost;
     }
-    /**
-     * LeaderCard view
-     * @return string to show
-     */
 
     public String view(){
         String string = "";

@@ -71,6 +71,10 @@ public class Strongbox {
         return true;
     }
 
+    /**
+     * view
+     * @return string to show
+     */
     public String StrongboxView(){
         String string="╔════════════╗\n╚═════╚╝═════╝\n  ";
         string=string.concat(ResourceCounter.count(this.resources));

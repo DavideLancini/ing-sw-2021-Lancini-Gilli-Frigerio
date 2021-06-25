@@ -9,6 +9,13 @@ public class LeaderDepot extends LeaderCard {
     //hardcoded to 5 of the same resource, possible to be changed
     private final Resource requirements;
 
+    /**
+     * constructor
+     * @param vp victory points
+     * @param type resource type that can be stored
+     * @param requirements requirements to activate
+     * @param imagePath path to path of associated imagine
+     */
     public LeaderDepot(int vp, Resource type, Resource requirements, String imagePath) {
         this.vp = vp;
         this.type = type;
@@ -27,6 +34,7 @@ public class LeaderDepot extends LeaderCard {
     }
 
     public Resource getRequirements(){return  this.requirements;}
+
 
     public String view(){
         String string = "";
