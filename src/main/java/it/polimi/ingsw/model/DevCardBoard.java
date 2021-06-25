@@ -58,6 +58,10 @@ public class DevCardBoard {
         return top;
     }
 
+    /**
+     * view of top 12 cards players can buy
+     * @return string to show
+     */
     public String topView() {
 
         String[] columns = new String[4];
@@ -114,6 +118,10 @@ public class DevCardBoard {
         return this.board[color.ordinal()][level.ordinal()].draw();
     }
 
+    /**
+     * shuffles all 12 decks
+     * @param board 12 devCardDecks
+     */
     private void shuffleDecks(DevCardDeck[][] board){
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 3; j++) Collections.shuffle(board[i][j].getDeck());

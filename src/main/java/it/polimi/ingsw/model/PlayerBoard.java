@@ -143,6 +143,12 @@ public class PlayerBoard {
 
     }
 
+    /**
+     * checks if devCard bought can be added
+     * @param newDevCard devCard bought
+     * @param position which slot to place newDevCard
+     * @return true if successful
+     */
     public boolean checkAddable(DevCard newDevCard, int position){
         Level level = newDevCard.getLevel();
         DevCard[] deck = this.devCards[position];
@@ -159,7 +165,11 @@ public class PlayerBoard {
         }
     }
 
-
+    /**
+     * view
+     * @param player player Id
+     * @return string to show
+     */
     public String playerBoardView(String player){
         String string="";
         string=string.concat(player+"\n");
@@ -170,6 +180,10 @@ public class PlayerBoard {
 
     }
 
+    /**
+     * view of devCards
+     * @return string to show
+     */
     private String devCardsView() {
 
         String[] columns = new String[3];
@@ -194,7 +208,10 @@ public class PlayerBoard {
 
     }
 
-
+    /**
+     * faith view
+     * @return string to show
+     */
     private String ShowFaithTrack() {
         String string="";
         string=string.concat(faithTrack+""+Resource.FAITH+"\n");
@@ -205,6 +222,10 @@ public class PlayerBoard {
         this.leaderCards = leaderCards;
     }
 
+    /**
+     * add faith based on track rules
+     * @param a number of victory points
+     */
     public void addPope(int a){this.popeVP += a;}
 
     public int getDevCardsNumber() {

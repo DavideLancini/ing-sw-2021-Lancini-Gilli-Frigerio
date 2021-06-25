@@ -9,7 +9,14 @@ public class LeaderProduction extends LeaderCard {
     private Production production;
     private Resource choice = Resource.EMPTY;
     private final CardColor requirements;
-
+    /**
+     * constructor
+     * @param vp victory points
+     * @param type resource type input of production
+     * @param requirements requirements to activate
+     * @param production production of this card
+     * @param imagePath path of associated imagine
+     */
     public LeaderProduction(int vp, Resource type, CardColor requirements, Production production,String imagePath){
         this.vp = vp;
         this.type = type;
@@ -39,6 +46,7 @@ public class LeaderProduction extends LeaderCard {
     public Resource getChoice() {
         return choice;
     }
+
 
     public String view(){
         String string = "";

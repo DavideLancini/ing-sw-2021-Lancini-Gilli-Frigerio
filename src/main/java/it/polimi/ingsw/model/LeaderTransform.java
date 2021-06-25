@@ -7,7 +7,13 @@ package it.polimi.ingsw.model;
  */
 public class LeaderTransform extends LeaderCard {
     private CardColor[] requirements;
-
+    /**
+     * constructor
+     * @param vp victory points
+     * @param type resource type to which white marbles are changed
+     * @param requirements requirements to activate
+     * @param imagePath path to path of associated imagine
+     */
     public LeaderTransform(int vp,Resource type,CardColor[] requirements,String imagePath) {
         this.vp = vp;
         this.type = type;

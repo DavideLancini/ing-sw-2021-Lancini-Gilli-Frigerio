@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.singlePlayer;
+package it.polimi.ingsw.controller;
 
 public class EndGameException extends Exception {
     private String message;

@@ -14,10 +14,12 @@ import it.polimi.ingsw.view.gui.GUIElement;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.Serializable;
 import java.util.Arrays;
 
-
+/**
+ * Class game
+ * @author  Gruppo 12
+ */
 public class Game {
     private Player[] players;
     public DevCardBoard devCardBoard;
@@ -92,7 +94,10 @@ public class Game {
         startGame();
     }
 
-
+    /**
+     * manages single player games
+     * @throws DisconnectedException if the is a disconnection during the game
+     */
     private void startSoloGame() throws DisconnectedException {
         PcPlayerBoard pc= new PcPlayerBoard(this.devCardBoard);
         Server.logger.info("Solo game actually started");
@@ -153,6 +158,11 @@ public class Game {
         finalSummary();
     }
 
+    /**
+     * shows all virtual table
+     * @param currentPlayer player on duty
+     * @throws DisconnectedException
+     */
     private void showAllGame(Player currentPlayer) throws DisconnectedException {
         showPlayersBoards(currentPlayer);
         currentPlayer.net.send(new ServerMessageView(devCardBoard.topView(), Serializer.serialize(devCardBoard), GUIElement.DevBoard));
@@ -161,6 +171,11 @@ public class Game {
         currentPlayer.net.send(new ServerMessageView(market.view(), Serializer.serialize(market), GUIElement.Market));
     }
 
+    /**
+     * show player on duty his leader cards
+     * @param currentPlayer player on duty
+     * @return what to send and print
+     */
     private String showLeaderCards(Player currentPlayer) {
 
         LeaderCard[] tempLeaders={currentPlayer.playerBoard.getLeaderCard(0),currentPlayer.playerBoard.getLeaderCard(1)};
@@ -183,6 +198,11 @@ public class Game {
         return ViewHelper.displayS2S(sleaders);
     }
 
+    /**
+     * shows all player Board in the game
+     * @param currentPlayer player on duty
+     * @throws DisconnectedException if the is a disconnection during the game
+     */
     private void showPlayersBoards(Player currentPlayer) throws DisconnectedException {
         for (Player player : players) {
             if(player!=currentPlayer) {
@@ -214,11 +234,18 @@ public class Game {
         }
     }
 
-
+    /**
+     * add players to the game
+     * @param players selected player for this game
+     */
     public void setPlayers(Player[] players) {
         this.players= players;
     }
 
+    /**
+     * checks end game
+     * @return true if game is ended
+     */
     private boolean checkEndGame(){
         for(Player each : this.players) {
             if(each.playerBoard.getFaith() >= 24 || each.playerBoard.getDevCardsNumber() >= 7) {
@@ -270,12 +297,18 @@ public class Game {
         System.arraycopy(leaderDepotDeck,0,deck,12,leaderDepotDeck.length);
         this.leaderCardDeck = new LeaderCardDeck(deck);
     }
-
+    /**
+     * creates Market
+     * @throws FileNotFoundException if files.json is not found
+     */
     private void createMarket() throws FileNotFoundException {
         Marble[] marbles= new Gson().fromJson(new FileReader("src/main/resources/Marbles.json"),Marble[].class);
         this.market = new Market(marbles);
     }
 
+    /**
+     * send rankings after the end of the game
+     */
     private void finalSummary(){
         int[] results = new int[this.players.length];
 
@@ -309,13 +342,20 @@ public class Game {
         }
     }
 
-
+    /**
+     * add faith to other player if not all resources taken from market are deposited
+     * @param pb player that took resources from market
+     * @param amount number of resources discharged
+     */
     public void discardsToFaith(PlayerBoard pb, int amount) {
         for (Player player : this.players) {
             if (player.playerBoard != pb) player.playerBoard.addFaith(amount);
         }
     }
 
+    /**
+     * faith track rules controller
+     */
     private void checkPope(){
         String trigger = null;
         for(Player each: players)

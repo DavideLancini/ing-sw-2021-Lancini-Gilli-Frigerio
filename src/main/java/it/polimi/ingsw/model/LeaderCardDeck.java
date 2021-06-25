@@ -23,6 +23,10 @@ private Stack<LeaderCard> deck;
         this.deck.addAll(leaders);
     }
 
+    /**
+     * draw 4 cards and removes them from deck
+     * @return 4 leader cards
+     */
     public LeaderCard[] draw4(){
         return new LeaderCard[]{deck.pop(), deck.pop(), deck.pop(), deck.pop()};
     }

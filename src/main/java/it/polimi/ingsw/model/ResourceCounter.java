@@ -2,9 +2,15 @@ package it.polimi.ingsw.model;
 
 import java.util.Collection;
 
-
+/**
+ * Class ResourceCounter
+ */
 public class ResourceCounter {
-
+    /**
+     * count number of resource type in "resources"
+     * @param resources resources to count
+     * @return string to show
+     */
     public  static String count(Resource[] resources){
         String string="";
         int servant = 0;int shield = 0;int coin = 0;int stone = 0;
@@ -32,11 +38,20 @@ public class ResourceCounter {
         }
        return string;
     }
-
+    /**
+     * count number of resource type in "resources"
+     * @param resources resources to count
+     * @return string to show
+     */
     public static String count(Collection<Resource> resources){
         return count(resources.toArray(new Resource[]{}));
     }
 
+    /**
+     * count number of resource type in "resources"
+     * @param resources resources to count
+     * @return number of resource types
+     */
     public static int countTypes(Resource[] resources){
         int number = 0;
         int servant = 0, shield = 0, coin = 0, stone = 0;
@@ -64,7 +79,11 @@ public class ResourceCounter {
         }
         return number;
     }
-
+    /**
+     * count number of resource type in "resources"
+     * @param resources resources to count
+     * @return number of resource types
+     */
     public static int countTypes(Collection<Resource> resources){
         return countTypes(resources.toArray(Resource[]::new));
     }

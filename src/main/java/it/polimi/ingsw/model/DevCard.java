@@ -70,6 +70,7 @@ public class DevCard {
 
     /**
      * devCardView
+     * @return string to show
      */
     public String devCardView(){
         String string="";
@@ -81,14 +82,19 @@ public class DevCard {
 
         return string;
     }
-
+    /**
+     * devCardView for covered cards(lower level)
+     * @return string to show
+     */
     public String coveredView(){
         String string="";
         string=string.concat("━━━━━━━━━━━━━━━━━━\n");
         string=string.concat("  "+this.level+" "+this.color+"\u001b[38:5:221m {"+this.VP+"}\u001b[m\n");// covered card possible view
         return string;
     }
-
+    /**
+    * @return path of associated image
+    */
     public String getImage() {
         return imagePath;
     }

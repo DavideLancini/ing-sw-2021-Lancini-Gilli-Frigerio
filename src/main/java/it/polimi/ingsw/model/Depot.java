@@ -55,8 +55,9 @@ public class Depot {
     }
 
     /**
+     * Check for input length and valid resource types is performed by controller
      */
-    //Check for input length and valid resource types is perfomed by controller
+
     public void setContents(Resource[] input){
         System.arraycopy(input, 0, this.contents, 0, input.length);
     }
@@ -76,6 +77,10 @@ public class Depot {
         return resource;
     }
 
+    /**
+     * view for depot
+     * @return string to show
+     */
     public String depotView(){
         String string="";
         string=string.concat("   /╲\t\n");

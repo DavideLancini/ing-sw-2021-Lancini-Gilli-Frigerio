@@ -10,6 +10,10 @@ public class DevCardDeck {
 
     private Stack<DevCard> deck;
 
+    /**
+     * constructor
+     * @param cards 4 development cards
+     */
     public DevCardDeck (DevCard[] cards){
         this.deck = new Stack<>();
         for(DevCard each : cards){

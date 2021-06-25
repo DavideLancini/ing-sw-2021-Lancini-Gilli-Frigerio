@@ -11,10 +11,16 @@ import java.util.*;
 public class ActionPile {
     private Stack<ActionToken> pile;
 
+    /**
+     * Constructor
+     */
     public ActionPile(){
        setupActionPile();
     }
 
+    /**
+     * add correct elements to pile and shuffles it
+     */
     public void setupActionPile() {
         this.pile= new Stack<>();
         this.pile.addAll(Arrays.asList(new ActionRemove(CardColor.BLUE), new ActionRemove(CardColor.GREEN), new ActionRemove(CardColor.YELLOW), new ActionRemove(CardColor.PURPLE)));
@@ -23,7 +29,10 @@ public class ActionPile {
         Collections.shuffle(this.pile);
     }
 
-
+    /**
+     *
+     * @return first element of pile
+     */
     public ActionToken getFirst() {
         return this.pile.pop();
     }

@@ -1,7 +1,9 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.network.DisconnectedException;
 
+/**
+ * Class Queue
+ */
 public class Queue{
     private static Player[] player2 = new Player[2];
     private static Player[] player3 = new Player[3];
@@ -10,6 +12,11 @@ public class Queue{
     private static int count3 = 0;
     private static int count4 = 0;
 
+    /**
+     * wait enough player to start a game of correct dimensions
+     * @param gameMode number of players selected for the game
+     * @param player  player wanting to paly
+     */
     public static void enterQueue(int gameMode, Player player){
         switch(gameMode){
             case 1:
