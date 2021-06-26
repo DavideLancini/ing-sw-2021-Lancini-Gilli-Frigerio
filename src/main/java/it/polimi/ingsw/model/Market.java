@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model;
 
-import com.google.gson.Gson;
-
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -19,7 +17,7 @@ public class Market {
      * Default market constructor
      */
     public Market() {
-        new Market(new Marble[]{Marble.BLUE, Marble.BLUE, Marble.WHITE, Marble.WHITE, Marble.WHITE,
+        this(new Marble[]{Marble.BLUE, Marble.BLUE, Marble.WHITE, Marble.WHITE, Marble.WHITE,
                 Marble.WHITE, Marble.GRAY, Marble.GRAY, Marble.YELLOW, Marble.YELLOW, Marble.PURPLE, Marble.PURPLE, Marble.RED});
     }
 

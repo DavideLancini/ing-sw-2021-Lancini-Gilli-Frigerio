@@ -6,7 +6,6 @@ import it.polimi.ingsw.model.PlayerBoard;
 import it.polimi.ingsw.network.*;
 import it.polimi.ingsw.network.messages.*;
 
-import javax.swing.*;
 import java.net.ServerSocket;
 import java.util.logging.Logger;
 
@@ -114,7 +113,7 @@ public class Player extends Thread{
         this.tempLeaders = leaders;
         String[] stringleaders = new String[4];
         String[] icons = new String[4];
-        for(int i = 0;i< leaders.length; i++) {stringleaders[i] = leaders[i].view(); icons[i] = leaders[i].getImage();}
+        for(int i = 0;i< leaders.length; i++) {stringleaders[i] = leaders[i].view(); icons[i] = leaders[i].getPath();}
 
         net.send(new ServerMessageChooseLeaders(stringleaders, icons));
     }

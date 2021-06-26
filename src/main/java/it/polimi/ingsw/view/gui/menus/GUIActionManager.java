@@ -8,9 +8,6 @@ import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.view.Manager;
 import it.polimi.ingsw.view.gui.ChoiceBox;
 import it.polimi.ingsw.view.gui.ResIcons;
-import it.polimi.ingsw.view.gui.menus.GameMenu;
-import it.polimi.ingsw.view.gui.menus.LeadersChoiceMenu;
-import it.polimi.ingsw.view.gui.menus.MainMenu;
 
 import javax.swing.*;
 import java.util.Collection;
@@ -20,12 +17,8 @@ public class GUIActionManager extends Manager {
 
     private static Logger logger = Client.logger;
     private static ClientNetInterface net;
-    private static GameMenu gm = new GameMenu();
+    private static final GameMenu gm = new GameMenu();
 
-
-    public GUIActionManager() {
-
-    }
 
     @Override
     public ClientMessage turn(boolean action) {
@@ -99,7 +92,7 @@ public class GUIActionManager extends Manager {
 
     @Override
     public void waitForTurn() {
-
+        gm.setWaiting();
     }
 
 }

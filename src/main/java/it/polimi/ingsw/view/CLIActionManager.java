@@ -55,7 +55,7 @@ public class CLIActionManager extends Manager {
     }
 
 
-    public void view(ServerMessageView s){System.out.println((String) s.getView(true));}
+    public void view(ServerMessageView s){System.out.println(s.getView(true));}
 
 
 
@@ -255,7 +255,7 @@ public class CLIActionManager extends Manager {
     }
 
     public ClientMessage chooseLeaders(ServerMessageChooseLeaders message){
-        String[] leaders = (String[]) message.getLeaders(true);
+        String[] leaders = message.getLeaders(true);
         System.out.println("Choose two of the following four Leaders:");
         int i = 0, j;
         String[] sleaders = new String[4];

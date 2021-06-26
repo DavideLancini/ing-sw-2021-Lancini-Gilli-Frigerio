@@ -95,7 +95,7 @@ public class DevCard {
     /**
     * @return path of associated image
     */
-    public String getImage() {
+    public String getPath() {
         return imagePath;
     }
 }

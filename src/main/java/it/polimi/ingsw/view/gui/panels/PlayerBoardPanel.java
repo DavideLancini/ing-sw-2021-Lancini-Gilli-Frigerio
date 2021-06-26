@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.gui.playerboardPanels;
+package it.polimi.ingsw.view.gui.panels;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.view.gui.ResIcons;
@@ -6,13 +6,10 @@ import it.polimi.ingsw.view.gui.ResIcons;
 import javax.swing.*;
 import java.awt.*;
 
-public class PBPanel extends JPanel {
+public class PlayerBoardPanel extends JPanel {
 
-    public PBPanel(){
-        super();
-    }
 
-    public PBPanel(PlayerBoard pb, boolean own){
+    public PlayerBoardPanel(PlayerBoard pb, boolean own){
         super();
         this.setLayout(new GridBagLayout());
         this.setBorder(BorderFactory.createLineBorder(Color.black, 2, true));
@@ -24,7 +21,7 @@ public class PBPanel extends JPanel {
         c.gridx=0;
         c.gridy=0;
 
-        JLabel player = new JLabel("player   "+pb.getFaith(), ResIcons.COIN.toIcon(), SwingConstants.TRAILING);
+        JLabel player = new JLabel("player   "+pb.getFaith(), ResIcons.FAITH.toIcon(), SwingConstants.TRAILING);
         player.setHorizontalTextPosition(JLabel.LEFT);
         player.setFont(new Font(null, Font.BOLD, 20));
         this.add(player,c);
@@ -50,7 +47,7 @@ public class PBPanel extends JPanel {
         sblabel.setFont(new Font(null, Font.BOLD, 15));
         this.add(sblabel, c);
 
-        SBPanel sbpanel = new SBPanel(pb.getStrongbox().getResources());
+        StrongBoxPanel sbpanel = new StrongBoxPanel(pb.getStrongbox().getResources());
         c.gridy++;
         c.insets = largegap;
         this.add(sbpanel, c);
@@ -63,7 +60,7 @@ public class PBPanel extends JPanel {
 
         c.gridy++;
         c.insets = largegap;
-        DPPanel dp = new DPPanel(pb.getDefaultProduction());
+        DefaultProdPanel dp = new DefaultProdPanel(pb.getDefaultProduction());
         this.add(dp,c);
 
         c.gridy++;
@@ -87,7 +84,7 @@ public class PBPanel extends JPanel {
         clabel.setFont(new Font(null, Font.BOLD, 15));
         this.add(clabel, c);
 
-        CardsPanel cpanel = new CardsPanel(pb);
+        DevCardsPanel cpanel = new DevCardsPanel(pb);
         c.gridy=1;
         c.insets = largegap;
         c.weightx=1;
@@ -108,7 +105,7 @@ public class PBPanel extends JPanel {
                 new LeaderSale(2, Resource.SHIELD, new CardColor[]{CardColor.PURPLE},"src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-50-1.png")};
         PlayerBoard pb = new PlayerBoard(leaders);
 
-        frame.add(new PBPanel(pb, true));
+        frame.add(new PlayerBoardPanel(pb, true));
     }
 
 }

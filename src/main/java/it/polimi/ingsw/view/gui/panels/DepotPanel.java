@@ -1,6 +1,7 @@
-package it.polimi.ingsw.view.gui.playerboardPanels;
+package it.polimi.ingsw.view.gui.panels;
 
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.view.gui.ResIcons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,13 +14,16 @@ public class DepotPanel extends JPanel {
 
         ImageIcon[] icons = new ImageIcon[depot.length];
 
+        int x = 24, y = 24;
+
+
         for(int i=0;i<depot.length;i++){
             switch (depot[i]){
-                case SERVANT: icons[i] = new ImageIcon("src/main/resources/ResourceIcons/Servant.PNG"); break;
-                case STONE: icons[i] = new ImageIcon("src/main/resources/ResourceIcons/Stone.PNG"); break;
-                case SHIELD: icons[i] = new ImageIcon("src/main/resources/ResourceIcons/Shield.PNG"); break;
-                case COIN: icons[i] = new ImageIcon("src/main/resources/ResourceIcons/Coin.PNG"); break;
-                case EMPTY: icons[i] = new ImageIcon("src/main/resources/ResourceIcons/Empty.PNG"); break;
+                case SERVANT: icons[i] = ResIcons.SERVANT.toIcon(x,y); break;
+                case STONE: icons[i] = ResIcons.STONE.toIcon(x,y); break;
+                case SHIELD: icons[i] = ResIcons.SHIELD.toIcon(x,y); break;
+                case COIN: icons[i] = ResIcons.COIN.toIcon(x,y); break;
+                case EMPTY: icons[i] = ResIcons.EMPTY.toIcon(x,y); break;
             }
         }
         GridBagConstraints c = new GridBagConstraints();

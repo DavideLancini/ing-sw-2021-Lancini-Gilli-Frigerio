@@ -60,7 +60,7 @@ public class LeaderCard {
      *
      * @return path of associated imagine
      */
-    public String getImage(){
+    public String getPath(){
         return imagePath;
     }
 }
