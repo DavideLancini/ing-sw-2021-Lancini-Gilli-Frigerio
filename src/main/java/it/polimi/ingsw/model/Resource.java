@@ -1,4 +1,9 @@
 package it.polimi.ingsw.model;
+
+import it.polimi.ingsw.view.gui.ResIcons;
+
+import javax.swing.*;
+
 /**
  * enum Resource
  * @author Gruppo 12
@@ -19,6 +24,14 @@ public enum Resource {
     @Override
     public String toString(){
         return escape;
+    }
+
+    public ImageIcon toIcon(){
+        return ResIcons.values()[this.ordinal()].toIcon();
+    }
+
+    public ImageIcon toIcon(int x, int y){
+        return ResIcons.values()[this.ordinal()].toIcon(x, y);
     }
 
 }

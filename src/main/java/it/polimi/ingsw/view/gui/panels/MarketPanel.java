@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.Marble;
 import it.polimi.ingsw.model.Market;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class MarketPanel extends JPanel {
@@ -13,6 +14,8 @@ public class MarketPanel extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.add(new JLabel(toIcon(m.getSideMarble())));
         this.add(Box.createRigidArea(new Dimension(40,0)));
+
+        this.setBorder(new EmptyBorder(new Insets(40,40,40,40)));
 
         JPanel market = new JPanel();
         market.setLayout(new GridLayout(3,4));
@@ -29,7 +32,7 @@ public class MarketPanel extends JPanel {
 
     }
 
-    private static ImageIcon toIcon(Marble marble){
+    public static ImageIcon toIcon(Marble marble){
         int x = 24, y = 24;
         switch(marble){
             case PURPLE: return new ImageIcon(new ImageIcon("src/main/resources/Icons/purple.PNG").getImage().getScaledInstance(x,y, Image.SCALE_DEFAULT));

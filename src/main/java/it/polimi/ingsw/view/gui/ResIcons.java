@@ -5,9 +5,9 @@ import java.awt.*;
 
 public enum ResIcons {
     STONE("src/main/resources/Icons/Stone.PNG"),
-    SHIELD("src/main/resources/Icons/Shield.PNG"),
-    COIN("src/main/resources/Icons/Coin.PNG"),
     SERVANT("src/main/resources/Icons/Servant.PNG"),
+    COIN("src/main/resources/Icons/Coin.PNG"),
+    SHIELD("src/main/resources/Icons/Shield.PNG"),
     EMPTY("src/main/resources/Icons/Empty.PNG"),
     FAITH("src/main/resources/Icons/Faith.PNG");
     private final String filename;

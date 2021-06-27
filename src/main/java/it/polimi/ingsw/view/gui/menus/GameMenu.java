@@ -1,11 +1,15 @@
 package it.polimi.ingsw.view.gui.menus;
 
-import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.DevCardBoard;
+import it.polimi.ingsw.model.Market;
+import it.polimi.ingsw.model.PlayerBoard;
 import it.polimi.ingsw.network.components.Serializer;
 import it.polimi.ingsw.network.messages.ClientMessage;
 import it.polimi.ingsw.network.messages.ClientMessageEndTurn;
 import it.polimi.ingsw.network.messages.ServerMessageView;
-import it.polimi.ingsw.view.gui.panels.*;
+import it.polimi.ingsw.view.gui.panels.DevBoardPanel;
+import it.polimi.ingsw.view.gui.panels.MarketPanel;
+import it.polimi.ingsw.view.gui.panels.PlayerBoardPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,10 +30,26 @@ public class GameMenu implements ActionListener {
     private int playerNumber;
     private JPanel mpanel;
     private JPanel dbpanel;
+    private String choice;
+
+    private Market market;
+    private DevCardBoard devCardBoard;
+    private PlayerBoard playerBoard;
+
+    //Buttons, order important
+    private final JButton[] options = new JButton[]{
+            new JButton("Take Resources from Market"),
+            new JButton("Buy Development Card"),
+            new JButton("Activate Productions"),
+            new JButton("Leader Cards Options"),
+            new JButton("Default Production Options"),
+            new JButton("End Turn")
+    };
 
     public GameMenu(){
         //order elements around
         wait.setFont(new Font(null, Font.PLAIN, 40));
+        internalPanel.add(wait);
         setWaiting();
         JScrollPane sp = new JScrollPane(internalPanel);
 
@@ -49,6 +69,7 @@ public class GameMenu implements ActionListener {
         dbc.gridx = 1;
         dbc.weightx = 0.5;
         pbc.weightx = 0.5;
+
     }
 
     public void setVisible(){
@@ -58,6 +79,7 @@ public class GameMenu implements ActionListener {
 
     public void setWaiting(){
         //TODO
+        hideButtons();
     }
 
 
@@ -74,21 +96,70 @@ public class GameMenu implements ActionListener {
         SwingUtilities.updateComponentTreeUI(frame);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //TODO
-    }
 
     //interactions
 
-    public ClientMessage turn(boolean action) {
-
-
-        //panel.add(this.wait);
-        return new ClientMessageEndTurn();
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        for (JButton option : this.options) {
+            if (option.equals(e.getSource())) {
+                synchronized (this) {
+                    this.choice = e.getActionCommand();
+                    this.notify();
+                }
+            }
+        }
     }
 
 
+
+    public ClientMessage turn(boolean action) {
+        showButtons(action);
+
+        synchronized (this){
+            while(this.choice == null || this.choice.equals("")) {
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        ClientMessage message = new ClientMessageEndTurn();
+        switch (choice){
+            case "Take Resources from Market":
+                TakeResourcesMenu trp = new TakeResourcesMenu(this.market);
+                message = trp.prompt();
+                break;
+
+            case "Buy Development Card":
+                //TODO v:
+
+                break;
+            case "Activate Productions":
+                break;
+            case "Leader Cards Options":
+                break;
+            case "Default Production Options":
+                break;
+            case "End Turn":
+                message = new ClientMessageEndTurn();
+                break;
+            default: throw new IllegalStateException();
+        }
+
+
+        choice = null;
+        return message;
+    }
+
+    private void showButtons(boolean action) {
+        //TODO: Highlight only possible actions
+    }
+
+    private void hideButtons(){
+        //TODO: hide all buttons to prevent preemptive choice stacking
+    }
 
 
     //create elements
@@ -99,6 +170,7 @@ public class GameMenu implements ActionListener {
         }
         catch (NullPointerException ignored){}
         this.pbpanel = new PlayerBoardPanel(pb,true);
+        this.playerBoard = pb;
         internalPanel.add(this.pbpanel, pbc);
     }
 
@@ -123,6 +195,7 @@ public class GameMenu implements ActionListener {
         }
         catch (NullPointerException ignored){}
         this.mpanel = new MarketPanel(m);
+        this.market = m;
         internalPanel.add(this.mpanel, mc);
     }
 
@@ -133,6 +206,7 @@ public class GameMenu implements ActionListener {
         }
         catch (NullPointerException ignored){}
         this.dbpanel = new DevBoardPanel(db);
+        this.devCardBoard = db;
         internalPanel.add(this.dbpanel, dbc);
     }
 }

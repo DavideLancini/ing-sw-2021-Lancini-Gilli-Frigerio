@@ -94,10 +94,10 @@ public class CLIActionManager extends Manager {
         Resource[] choice = new Resource[3];
 
         System.out.println("These are the resources to be arranged in your depot: ");
-        String toBeArrange = ResourceCounter.count(resources);
-        System.out.println(toBeArrange);
+        System.out.println(ResourceCounter.count(resources));
+
         for (int i = 1; i < 4; i++) {
-            System.out.print("Choose  which resources to put in row n° " + i + "(Max "+i+" resources): ");
+            System.out.print("Choose  which resources to put in row n° " + i + "  (Max "+i+" resources): ");
             for (int j = 1; j <= Resource.values().length - 1; j++) {
                 System.out.print("" + j + ". " + Resource.values()[j - 1].toString() + "   ");
                     }
@@ -124,7 +124,7 @@ public class CLIActionManager extends Manager {
 
     @Override
     public void waitForTurn() {
-        System.out.println("Waiting for your turn...");
+        System.out.println("Waiting for your turn...\n\n");
     }
 
     /**

@@ -73,7 +73,7 @@ public class PcPlayerBoard {
                 throw new IllegalStateException("Unexpected value: " + pcTurn.getType());
         }
 
-        return pcTurn.view()+darkFaithView();
+        return pcTurn.view()+darkFaithView()+"\n";
 
     }
 

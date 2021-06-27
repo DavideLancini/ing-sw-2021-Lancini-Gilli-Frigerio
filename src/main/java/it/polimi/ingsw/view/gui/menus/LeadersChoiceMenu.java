@@ -9,26 +9,23 @@ import java.awt.event.ActionListener;
 public class LeadersChoiceMenu implements ActionListener {
 
         private final JFrame frame = new JFrame();
-        final int[] choice;
+        private final int[] choice;
         private final ImageIcon[] leaders = new ImageIcon[4];
         private final JLabel selected = new JLabel("Selected: ");
         private final JButton[] buttons = new JButton[4];
-        private final JPanel panel = new JPanel();
 
-    public LeadersChoiceMenu(String[] leaders){
+        public LeadersChoiceMenu(String[] leaders){
             this.choice = new int[2];
             for(int i=0;i< leaders.length;i++)this.leaders[i]= new ImageIcon(leaders[i]);
         }
 
 
-        public void prompt(){
-
-
-
+        public int[] prompt(){
             JLabel title = new JLabel("Choose 2 of the following 4 leader cards:");
             title.setFont(new Font(null, Font.PLAIN, 20));
             title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+            JPanel panel = new JPanel();
             panel.add(title);
             panel.add(Box.createRigidArea(new Dimension(0,30)));
 
@@ -81,7 +78,7 @@ public class LeadersChoiceMenu implements ActionListener {
                 }
             }
 
-
+            return this.choice;
         }
 
         @Override
@@ -90,6 +87,7 @@ public class LeadersChoiceMenu implements ActionListener {
                 synchronized (this) {
                     this.notify();
                     frame.dispose();
+                    return;
                 }
             }
             else for(int i=0; i< leaders.length; i++){
@@ -102,7 +100,7 @@ public class LeadersChoiceMenu implements ActionListener {
             selected.setText("Selected: "+(choice[0]+1)+" and "+(choice[1]+1));
             if(choice[0] == choice[1])selected.setText("Selected: "+(choice[0]+1));
 
-            SwingUtilities.updateComponentTreeUI(panel);
+            SwingUtilities.updateComponentTreeUI(frame);
         }
 
 

@@ -179,7 +179,7 @@ public class Controller {
      * @param input resources to be tested
      * @param discardAmount number of resources not deposited  and faith to give to other players
      * @return true if resources configuration is within Game's rules
-     * @throws DisconnectedException if the is a disconnection during the game
+     * @throws DisconnectedException if there is a disconnection during the game
      */
     public boolean tryDepotConfiguration(Resource[] input, int discardAmount) throws DisconnectedException {
         //input length is built to be 6
@@ -466,10 +466,11 @@ public class Controller {
         }
 
 
-        net.send(new ServerMessageMarketReturn(resources));
-        Server.logger.info("About to try depot configuration");
-
-        ((ClientMessageTryDepotConfiguration)(net.receive())).resolve(this);
+        do {
+            net.send(new ServerMessageMarketReturn(resources));
+            Server.logger.info("About to try depot configuration");
+        }
+        while(!((ClientMessageTryDepotConfiguration) (net.receive())).resolve(this));
 
         Server.logger.info("Correctly tried depot configuration");
         return true;

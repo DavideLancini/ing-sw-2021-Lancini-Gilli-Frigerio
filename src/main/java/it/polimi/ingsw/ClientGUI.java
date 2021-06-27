@@ -38,12 +38,15 @@ public class ClientGUI {
                 switch (selection[0]) {
                     case "1":
                         logger.info("joining game");
-                        ClientMessageJoinGame messageJoin = new ClientMessageJoinGame(selection[1], manager.joinMatch());
+                        int players = manager.joinMatch();
+                        if(players < 1) break;
+                        ClientMessageJoinGame messageJoin = new ClientMessageJoinGame(selection[1], players);
                         net.send(messageJoin);
                         ClientController controller = new ClientController(manager);
                         controller.setup(net);
                         controller.main();
                         break;
+
                     case "2":
                         manager.createCustomMatch(selection[1]);
                         break;

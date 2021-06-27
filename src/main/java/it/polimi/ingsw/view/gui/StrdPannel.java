@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.view.gui.menus.TakeResourcesMenu;
 import it.polimi.ingsw.view.gui.panels.PlayerBoardPanel;
 
 import javax.swing.*;
@@ -30,9 +31,10 @@ public class StrdPannel {
                     , new LeaderSale(1, Resource.SERVANT, null, "src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png")});
          pb.getLeaderCard(0).toggleActive();
 
-         frame.add(new PlayerBoardPanel(pb,true));
+        // frame.add(new PlayerBoardPanel(pb,true));
         //frame.add(new MarketPanel(new Market()));
 
+        new TakeResourcesMenu(new Market()).prompt();
 
         frame.pack();
          frame.setVisible(true);
