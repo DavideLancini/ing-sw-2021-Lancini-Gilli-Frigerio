@@ -11,13 +11,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TakeResourcesMenu implements ActionListener {
+public class TakeResourcesMenu extends SubMenu implements ActionListener {
 
     private final Marble[][] marketBoard;
-    private final JFrame frame = new JFrame();
     private boolean isRow;
     private int position;
-    private JButton[] buttons = new JButton[7];
+    private final JButton[] buttons = new JButton[7];
 
     public TakeResourcesMenu(Market market) {
         this.marketBoard = market.getMarketBoard();
@@ -68,19 +67,10 @@ public class TakeResourcesMenu implements ActionListener {
         panel.add(middle);
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        frame.setVisible(true);
-        frame.add(panel);
-        frame.pack();
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 
-        synchronized (this){
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        frame.add(panel);
+
+        this.finalizeAndWait();
 
         return new ClientMessageTakeResources(this.isRow, this.position);
     }

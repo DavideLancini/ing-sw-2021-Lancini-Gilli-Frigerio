@@ -161,7 +161,7 @@ public class Game {
     /**
      * shows all virtual table
      * @param currentPlayer player on duty
-     * @throws DisconnectedException
+     * @throws DisconnectedException if impossible to send messages to player
      */
     private void showAllGame(Player currentPlayer) throws DisconnectedException {
         showPlayersBoards(currentPlayer);

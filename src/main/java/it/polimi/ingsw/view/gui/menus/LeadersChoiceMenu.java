@@ -6,9 +6,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LeadersChoiceMenu implements ActionListener {
+public class LeadersChoiceMenu extends SubMenu implements ActionListener {
 
-        private final JFrame frame = new JFrame();
         private final int[] choice;
         private final ImageIcon[] leaders = new ImageIcon[4];
         private final JLabel selected = new JLabel("Selected: ");
@@ -29,8 +28,6 @@ public class LeadersChoiceMenu implements ActionListener {
             panel.add(title);
             panel.add(Box.createRigidArea(new Dimension(0,30)));
 
-
-            //frame.setSize(1100, 550);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setTitle("Initial Setup");
 
@@ -63,20 +60,9 @@ public class LeadersChoiceMenu implements ActionListener {
             panel.add(Box.createRigidArea(new Dimension(0,5)));
             panel.add(done);
 
-
-            frame.setVisible(true);
             frame.add(panel);
-            frame.pack();
-            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-            frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 
-            synchronized (this){
-                try {
-                    this.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+            this.finalizeAndWait();
 
             return this.choice;
         }

@@ -105,12 +105,7 @@ public class CLIActionManager extends Manager {
                     choice[i-1] = Resource.values()[readInt(1,5) - 1];
                 }
 
-                if(resources.remove(choice[0])) newResources[0] = choice[0];
-                if(resources.remove(choice[1])) newResources[1] = choice[1];
-                if(resources.remove(choice[1])) newResources[2] = choice[1];
-                if(resources.remove(choice[2])) newResources[3] = choice[2];
-                if(resources.remove(choice[2])) newResources[4] = choice[2];
-                if(resources.remove(choice[2])) newResources[5] = choice[2];
+        Manager.assignDepot(resources, newResources, choice);
 
         return new ClientMessageTryDepotConfiguration(newResources, resources.size());
     }

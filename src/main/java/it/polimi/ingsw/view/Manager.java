@@ -40,4 +40,15 @@ public abstract class Manager {
     }
 
     public abstract void waitForTurn();
+
+
+
+    public static void assignDepot(Collection<Resource> resources, Resource[] newResources, Resource[] choice) {
+        if(resources.remove(choice[0])) newResources[0] = choice[0];
+        if(resources.remove(choice[1])) newResources[1] = choice[1];
+        if(resources.remove(choice[1])) newResources[2] = choice[1];
+        if(resources.remove(choice[2])) newResources[3] = choice[2];
+        if(resources.remove(choice[2])) newResources[4] = choice[2];
+        if(resources.remove(choice[2])) newResources[5] = choice[2];
+    }
 }

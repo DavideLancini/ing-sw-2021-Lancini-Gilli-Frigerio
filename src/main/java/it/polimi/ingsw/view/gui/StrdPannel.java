@@ -2,7 +2,6 @@ package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.view.gui.menus.TakeResourcesMenu;
-import it.polimi.ingsw.view.gui.panels.PlayerBoardPanel;
 
 import javax.swing.*;
 import java.util.Arrays;
