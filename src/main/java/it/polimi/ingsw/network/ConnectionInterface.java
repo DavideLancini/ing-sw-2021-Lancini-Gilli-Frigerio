@@ -28,6 +28,7 @@ public class ConnectionInterface{
         if(message instanceof ClientMessageLocalPort) {
             clientPort = ((ClientMessageLocalPort)message).getPort();
         }else{
+            this.listener.close();
             throw new DisconnectedException("Port not usable");
         }
         logger.info("ConnectionInterface received target port: " + clientPort);
@@ -36,12 +37,15 @@ public class ConnectionInterface{
             try {
                 sleep(1000);
             } catch (InterruptedException e) {
-                //TODO
+                //Nothing will interrupt this sleep
             }
             this.sender = new Sender(listener.getTargetAddress(), clientPort);
         } catch (DisconnectedException e) {
+            this.sender.close();
+            this.listener.close();
             throw new DisconnectedException("Failed to connect");
         }
+        ServerNetInterface.addPlayer();
     }
 
     public void send(Message message) throws DisconnectedException {
@@ -55,10 +59,20 @@ public class ConnectionInterface{
                 tries--;
             }
         }
+        this.sender.close();
+        this.listener.close();
+        ServerNetInterface.removePlayer();
         throw new DisconnectedException("Failed to send");
     }
 
     public ClientMessage receive() throws DisconnectedException{
-        return Serializer.deserializeMessage(listener.receive());
+        try {
+            return Serializer.deserializeMessage(listener.receive());
+        }catch(DisconnectedException e){
+            this.sender.close();
+            this.listener.close();
+            ServerNetInterface.removePlayer();
+            throw e;
+        }
     }
 }

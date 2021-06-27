@@ -16,10 +16,6 @@ public class CLIActionManager extends Manager {
     private static Logger logger = Client.logger;
     private static ClientNetInterface net;
 
-    public static void setLogger(Logger logger){
-        CLIActionManager.logger=logger;
-    }
-
     /**
      * Read a number from user input
      * @return a valid number

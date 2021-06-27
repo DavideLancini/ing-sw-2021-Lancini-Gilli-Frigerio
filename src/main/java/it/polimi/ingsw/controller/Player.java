@@ -34,7 +34,6 @@ public class Player extends Thread{
         } catch (DisconnectedException e) {
             logger.info("Player cannot create a connection");
         }
-        ServerNetInterface.addPlayer();
     }
 
     /**

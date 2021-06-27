@@ -51,4 +51,18 @@ public class Sender{
             throw new DisconnectedException("Sending Failed");
         }
     }
+
+    /**
+     * Close this Socket
+     *
+     * @author Lancini Davide
+     */
+    public void close() {
+        try {
+            this.socket.close();
+            senderLogger.info(this.logName + ": has been closed");
+        } catch (IOException e) {
+            senderLogger.warning(this.logName + ": has failed the closure procedure");
+        }
+    }
 }

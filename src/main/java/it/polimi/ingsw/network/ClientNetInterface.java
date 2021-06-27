@@ -35,6 +35,7 @@ public class ClientNetInterface {
             try {
                 father = new ServerSocket(0);
             } catch (IOException e) {
+                this.sender.close();
                 throw new DisconnectedException("failed to create fatherSocket");
             }
             //Open a listener on a runnable
@@ -69,10 +70,18 @@ public class ClientNetInterface {
                 tries--;
             }
         }
+        this.sender.close();
+        this.listener.close();
         return false;
     }
 
     public ServerMessage receive() throws DisconnectedException{
-        return Serializer.deserializeServerMessage(listener.receive());
+        try {
+            return Serializer.deserializeServerMessage(listener.receive());
+        }catch(DisconnectedException e){
+            this.sender.close();
+            this.listener.close();
+            throw e;
+        }
     }
 }

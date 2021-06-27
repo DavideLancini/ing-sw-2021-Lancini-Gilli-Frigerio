@@ -25,11 +25,12 @@ public class ServerNetInterface {
     private static final Thread connection = new Thread() {
         @Override
         public void run() {
-            for (int i = 0; i < maxSlots && isON && !isInterrupted(); i++) {
-                Player emptyPlayer = new Player(serverSocket, logger);
-                emptyPlayer.start();
+            while (isON && !isInterrupted()) {
+                if(activeSlots < maxSlots ){
+                    Player emptyPlayer = new Player(serverSocket, logger);
+                    emptyPlayer.start();
+                }
             }
-            //TODO: create an empty player and pass serverSocket
         }
     };
 
@@ -64,7 +65,6 @@ public class ServerNetInterface {
         }else{
             maxSlots = listenerMaxSlot;
             logger.log(Level.FINE, "Max Slots received and applied: "+maxSlots);
-            //TODO start new empty players if needed
         }
     }
 
@@ -133,7 +133,6 @@ public class ServerNetInterface {
     public static void stopServer(){
         try {
             isON = false; //mark the Network OFF
-            //TODO: close the player that is still waiting for a connection
             Socket emptyPlayerResolver = new Socket("localhost", port);
             try {
                 sleep(1000);
@@ -150,10 +149,12 @@ public class ServerNetInterface {
 
     public static void addPlayer(){
         activeSlots++;
+        logger.info("Slots: " + activeSlots + "/" + maxSlots);
     }
 
     public static void removePlayer(){
         activeSlots--;
+        logger.info("Slots: " + activeSlots + "/" + maxSlots);
     }
 
 

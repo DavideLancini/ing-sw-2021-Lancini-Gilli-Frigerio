@@ -86,4 +86,18 @@ public class Listener {
         logger.info(this.listenerName + ": has been requested its target address:" + address);
         return address;
     }
+
+    /**
+     * Close this Socket
+     *
+     * @author Lancini Davide
+     */
+    public void close() {
+        try {
+            this.listenerSocket.close();
+            logger.info(this.listenerName + ": has been closed");
+        } catch (IOException e) {
+            logger.warning(this.listenerName + ": has failed the closure procedure");
+        }
+    }
 }
