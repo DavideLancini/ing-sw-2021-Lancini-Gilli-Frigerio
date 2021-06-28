@@ -64,8 +64,10 @@ public class GUIActionManager extends Manager {
     public ClientMessage chooseLeaders(ServerMessageChooseLeaders leaders) {
         String[] icons = leaders.getLeaders(false);
         LeadersChoiceMenu lcm = new LeadersChoiceMenu(icons);
-        int[] choice = lcm.prompt();
-
+        int[] choice = null;
+        while(choice == null) {
+            choice = lcm.prompt();
+        }
         return new ClientMessageChosenLeaders(choice[0], choice[1]);
     }
 

@@ -12,7 +12,7 @@ public abstract class SubMenu {
         frame.setVisible(true);
         frame.pack();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 
         synchronized (this){
