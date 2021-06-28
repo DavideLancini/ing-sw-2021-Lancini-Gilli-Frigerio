@@ -4,9 +4,17 @@ import it.polimi.ingsw.model.Resource;
 
 import java.util.Collection;
 
+/**
+ * Class ServerMessageMarketReturn
+ * @author gruppo 12
+ */
 public class ServerMessageMarketReturn extends ServerMessage {
     private Collection<Resource> resources;
 
+    /**
+     * constructor
+     * @param resources resources taken from market
+     */
     public ServerMessageMarketReturn(Collection<Resource> resources){
         this.type = MessageType.MarketReturn;
         this.resources = resources;

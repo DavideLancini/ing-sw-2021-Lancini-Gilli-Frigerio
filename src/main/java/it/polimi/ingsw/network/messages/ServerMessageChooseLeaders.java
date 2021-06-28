@@ -1,6 +1,9 @@
 package it.polimi.ingsw.network.messages;
 
-import javax.swing.*;
+/**
+ * Class ServerMessageAddResource
+ * @author gruppo 12
+ */
 
 public class ServerMessageChooseLeaders extends ServerMessage{
     private final String[] leaders = new String[4];

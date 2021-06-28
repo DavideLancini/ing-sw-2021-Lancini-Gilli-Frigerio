@@ -1,15 +1,23 @@
 package it.polimi.ingsw.network.messages;
 
-import it.polimi.ingsw.controller.Player;
 
+/**
+ * Class ClientMessageCreateGame
+ * @author gruppo 12
+ */
 public class ClientMessageCreateGame extends ClientMessage {
     private final int players;
     public String playerId;
 
-    public ClientMessageCreateGame(int players, String s){
+    /**
+     * constructor
+     * @param players number of players
+     * @param playerId Player ID
+     */
+    public ClientMessageCreateGame(int players, String playerId){
         this.type=MessageType.CreateGame;
         this.players=players;
-        this.playerId=s;
+        this.playerId=playerId;
     }
 
     public String CreateGame(){

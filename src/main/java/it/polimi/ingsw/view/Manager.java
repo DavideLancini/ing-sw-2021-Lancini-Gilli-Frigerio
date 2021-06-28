@@ -11,6 +11,10 @@ import it.polimi.ingsw.network.messages.ServerMessageView;
 
 import java.util.Collection;
 
+/**
+ * Class Manager
+ * @author gruppo 12
+ */
 public abstract class Manager {
 
     public abstract ClientMessage turn(boolean action);

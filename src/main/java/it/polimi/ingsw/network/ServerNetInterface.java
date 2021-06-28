@@ -11,6 +11,10 @@ import java.util.logging.Logger;
 
 import static java.lang.Thread.sleep;
 
+/**
+ * Class ServerNetInterface
+ * @author gruppo 12
+ */
 public class ServerNetInterface {
     private static Logger logger;
     private static int port;

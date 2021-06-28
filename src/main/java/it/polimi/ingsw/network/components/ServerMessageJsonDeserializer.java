@@ -7,6 +7,10 @@ import it.polimi.ingsw.network.messages.ServerMessage;
 
 import java.lang.reflect.Type;
 
+/**
+ * Class ServerMessageJsonDeserializer
+ * @author gruppo 12
+ */
 public class ServerMessageJsonDeserializer implements JsonDeserializer<ServerMessage> {
     public ServerMessage deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context){
         String classtype = "it.polimi.ingsw.network.messages.ServerMessage" + json.getAsJsonObject().get("type").getAsString();

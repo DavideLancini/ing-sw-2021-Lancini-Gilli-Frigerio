@@ -39,7 +39,7 @@ public class Market {
     }
 
     /**
-     * getSideMarble
+     * get sideMarble
       * @return Marble outside the current marketBoard
      */
     public Marble getSideMarble() {
@@ -47,7 +47,7 @@ public class Market {
     }
 
     /**
-     * setSideMarble
+     * set sideMarble
      * @param  sideMarble selected marble type
      */
     public void setSideMarble(Marble sideMarble) {
@@ -55,7 +55,7 @@ public class Market {
     }
 
     /**
-     * getMarketBoard
+     * get marketBoard
      * @return the current market board
      */
     public Marble[][] getMarketBoard() {
@@ -63,7 +63,6 @@ public class Market {
     }
 
     /**
-     * setMarketBoard
      * set the starting market, use only on game start
      * @param inputMarketBoard initial marketBoard
      */
@@ -72,7 +71,6 @@ public class Market {
     }
 
     /**
-     * takeResources
      * take 3 or 4 marbles from current market and insert sideMarble in the new market
      * @param isRow if true user selected a row
      * @param position selection of first,second,third row/column

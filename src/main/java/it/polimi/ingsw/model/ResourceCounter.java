@@ -7,7 +7,7 @@ import java.util.Collection;
  */
 public class ResourceCounter {
     /**
-     * count number of resource type in "resources"
+     * count number of resource type in var resources
      * @param resources resources to count
      * @return string to show
      */
@@ -39,7 +39,7 @@ public class ResourceCounter {
        return string;
     }
     /**
-     * count number of resource type in "resources"
+     * count number of resource type in var resources
      * @param resources resources to count
      * @return string to show
      */
@@ -48,7 +48,7 @@ public class ResourceCounter {
     }
 
     /**
-     * count number of resource type in "resources"
+     * count number of resource type in var resources
      * @param resources resources to count
      * @return number of resource types
      */
@@ -80,7 +80,7 @@ public class ResourceCounter {
         return number;
     }
     /**
-     * count number of resource type in "resources"
+     * count number of resource type in var resources
      * @param resources resources to count
      * @return number of resource types
      */

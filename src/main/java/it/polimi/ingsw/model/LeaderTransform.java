@@ -21,10 +21,7 @@ public class LeaderTransform extends LeaderCard {
         this.imagePath= imagePath;
     }
 
-    /**
-     *
-     * @return array of requirements
-     */
+
     public CardColor[] getRequirements(){return this.requirements;}
 
 
