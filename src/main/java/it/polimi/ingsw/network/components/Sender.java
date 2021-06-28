@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * Socket class that send messages
  * The logger is shared with all the sender created
  *
- * @author Lancini Davide
+ * @author Group 12
  */
 public class Sender{
     private static Logger senderLogger = Logger.getLogger("SenderLogger");
@@ -21,6 +21,11 @@ public class Sender{
     private Socket socket;
     private DataOutputStream outStream;
 
+    /**
+     * Constructor for the Sender. The socket also tries to connect right away.
+     *
+     * @throws DisconnectedException when something fails (at this stage why it fails is not critical and is logged as warning)
+     */
     public Sender(String destinationAddress, int destinationPort) throws DisconnectedException {
 
         senderLogger.setLevel(Level.ALL);
@@ -42,6 +47,12 @@ public class Sender{
         }
     }
 
+    /**
+     * The Send Method is the Main method used for the Sender.
+     * It tries to send one string from its outStream.
+     *
+     * @throws DisconnectedException when the outStream is unavailable
+     */
     public void send(String rawMessage) throws DisconnectedException {
         try {
             outStream.writeUTF(rawMessage);
@@ -53,9 +64,7 @@ public class Sender{
     }
 
     /**
-     * Close this Socket
-     *
-     * @author Lancini Davide
+     * Close this Socket, the failure is not critical so it only logs a warning
      */
     public void close() {
         try {

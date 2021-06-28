@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * All Listeners are opened on the same Port but create different InputStream
  * All Listener shares the same logger (received from the initialization of the first Listener)
  *
- * @author Lancini Davide
+ * @author Group 12
  */
 public class Listener {
     private static Logger logger;
@@ -25,10 +25,9 @@ public class Listener {
     private String listenerName;
 
     /**
-     * Constructor for the Listener the listener will be stuck on accept until a connection is made.
+     * Constructor for the Listener. The socket will be stuck on accept until a connection is made.
      *
-     * @throws DisconnectedException when one of the function fail
-     * @author Lancini Davide
+     * @throws DisconnectedException when something fails (at this stage why it fails is not critical and is logged as warning)
      */
     public Listener(ServerSocket fatherSocket, Logger logger) throws DisconnectedException {
         Listener.logger = logger;
@@ -57,7 +56,6 @@ public class Listener {
      *
      * @return an empty string if there are no messages
      * @throws DisconnectedException when the Stream is unavailable
-     * @author Lancini Davide
      */
     public String receive() throws DisconnectedException {
         String rawMessage = "";
@@ -77,8 +75,6 @@ public class Listener {
      * the "/" and the port number (after a ":")
      * Ex.: /192.168.1.123:1001 -> 192.168.1.123
      * It's only used by the Server Network to open a Sender to the right Client
-     *
-     * @author Lancini Davide
      */
     public String getTargetAddress() {
         String address = this.listenerSocket.getRemoteSocketAddress().toString();
@@ -88,9 +84,7 @@ public class Listener {
     }
 
     /**
-     * Close this Socket
-     *
-     * @author Lancini Davide
+     * Close this Socket, the failure is not critical so it only logs a warning
      */
     public void close() {
         try {
