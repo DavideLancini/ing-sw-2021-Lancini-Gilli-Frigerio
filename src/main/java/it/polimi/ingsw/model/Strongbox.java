@@ -20,22 +20,9 @@ public class Strongbox {
     //Temporary, would be better without giving access
     public Collection<Resource> getResources() {return this.resources;}
 
-    /**
-     * extract
-     * @param cost resources to remove from strongbox
-     * @throws Exception if all cost elements aren't contained within resources collection
-     */
-    //TODO: Handle Exception
-    //removes cost elements from resources if all are contained within, otherwise throws exception
-    public void extract(Collection<Resource> cost) throws Exception{
-        if (this.contains(cost)){
-            for(Resource elem : cost) this.resources.remove(elem);
-        }
-        else throw new Exception("");
-    }
 
     /**
-     * extract
+     * extracts resource from StrongBox
      * @param elem singular resource to remove from strongbox
      * @throws Exception if the element isn't contained within resources collection
      */
@@ -47,7 +34,7 @@ public class Strongbox {
 
 
     /**
-     * deposit
+     * deposit resources in StrongBox
      * @param new_resources resource from production to deposit
      * @return current StrongBox
      */
@@ -57,7 +44,7 @@ public class Strongbox {
     }
 
     /**
-     * contains
+     * research specific resource in strongBox
      * @param subset resources wanted
      * @return true if subset is contained in the strongBox else false
      */

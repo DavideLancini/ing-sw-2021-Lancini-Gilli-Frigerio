@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.logging.Logger;
 
+/**
+ * Class ClientNetInterface
+ * @author gruppo 12
+ */
 public class ClientNetInterface {
     private String serverAddress;
     private int serverPort;

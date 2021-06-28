@@ -7,6 +7,10 @@ import it.polimi.ingsw.model.PlayerBoard;
 import it.polimi.ingsw.network.messages.ClientMessage;
 import it.polimi.ingsw.network.messages.ServerMessage;
 
+/**
+ * Class Serializer
+ * @author gruppo 12
+ */
 public class Serializer {
     public static String serialize(Object o){
         Gson gson = new GsonBuilder().serializeNulls().create();

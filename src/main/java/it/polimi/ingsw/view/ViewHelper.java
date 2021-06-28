@@ -1,6 +1,16 @@
 package it.polimi.ingsw.view;
 
+/**
+ * Class ViewHelper
+ * @author  gruppo 12
+ */
 public class ViewHelper {
+    /**
+     * takes two views and arranges them horizontally
+     * @param first left view
+     * @param second right view
+     * @return result view
+     */
     public static String displayS2S(String first, String second){
         String[] afirst = first.split("\n");
         String[] asecond = second.split("\n");
@@ -15,7 +25,11 @@ public class ViewHelper {
         return result;
     }
 
-
+    /**
+     * takes n views and arranges them horizontally
+     * @param strings n view
+     * @return result view
+     */
     public static String displayS2S(String[] strings){
         String result = strings[0];
         for(int i = 0; i < strings.length-1; i++){
@@ -24,6 +38,13 @@ public class ViewHelper {
         return result;
     }
 
+    /**
+     * takes n views and arranges them horizontally
+     * @param a left view
+     * @param b middle view
+     * @param c right view
+     * @return result view
+     */
     public static  String displayS2S(String a, String b, String c){
         return displayS2S(displayS2S(a,b),c);
 

@@ -10,6 +10,10 @@ import it.polimi.ingsw.network.messages.*;
 import java.util.Collection;
 import java.util.logging.Logger;
 
+/**
+ * Class CLIActionManager
+ * @author gruppo 12
+ */
 public class CLIActionManager extends Manager {
 
 
@@ -50,8 +54,11 @@ public class CLIActionManager extends Manager {
         }
     }
 
-
-    public void view(ServerMessageView s){System.out.println(s.getView(true));}
+    /**
+     * prints the view
+     * @param view view
+     */
+    public void view(ServerMessageView view){System.out.println(view.getView(true));}
 
 
 
@@ -80,14 +87,21 @@ public class CLIActionManager extends Manager {
     }*/
 
 
-
+    /**
+     * display occurred error
+     * @param error error description
+     */
     public void displayError(String error){
         System.out.println("Server reports an error: "+ error);
         System.out.println("Press Enter to continue.");
         Reader.in.nextLine();
     }
 
-
+    /**
+     * Player select of to arrange the depot
+     * @param resources resources to be arranged
+     * @return new ClientMessageTryDepotConfiguration(newResources, resources.size())
+     */
     public ClientMessage arrangeDepot(Collection<Resource> resources) {
 
         Resource[] newResources = new Resource[]{Resource.EMPTY,Resource.EMPTY,Resource.EMPTY,Resource.EMPTY,Resource.EMPTY,Resource.EMPTY};
@@ -111,7 +125,10 @@ public class CLIActionManager extends Manager {
     }
 
 
-
+    /**
+     * player selects to play online or local
+     * @return true if player selected online
+     */
     public boolean online(){
         System.out.println( "1.[online]\n2.[local]");
         return "1".equals(Reader.in.nextLine());
@@ -245,6 +262,11 @@ public class CLIActionManager extends Manager {
 
     }
 
+    /**
+     * Player selects 2 leader card
+     * @param message ServerMessage containing 4 leader cards
+     * @return ClientMessageChosenLeaders(first selected,second selected)
+     */
     public ClientMessage chooseLeaders(ServerMessageChooseLeaders message){
         String[] leaders = message.getLeaders(true);
         System.out.println("Choose two of the following four Leaders:");
@@ -290,6 +312,10 @@ public class CLIActionManager extends Manager {
         return new String[]{action, playerID};
     }
 
+    /**
+     * player selects 1 resource to deposit
+     * @return ClientMessagePlaceResource(selected resource)
+     */
     public ClientMessage addResource(){
         System.out.print("[Select your starting resource]: ");
         for (int i = 1; i <= Resource.values().length -2; i++){System.out.print(""+i+". "+Resource.values()[i-1].toString()+"   ");}
@@ -298,6 +324,11 @@ public class CLIActionManager extends Manager {
       return new ClientMessagePlaceResource(resource);
     }
 
+    /**
+     * player selects which active LeaderTransform to use(if 2 are active at same time)
+     * @param choice first and second LeaderTransform resource type
+     * @return ClientMessageChosenWhite(selected leaderTransform)
+     */
     public ClientMessage chooseResource(Resource[] choice){
         System.out.println("Select which resource to convert a white marble to:\t[0]. "+choice[0]+"\t[1]. "+choice[1]);
         boolean position = readInt(0,1) == 1;
@@ -327,6 +358,10 @@ public class CLIActionManager extends Manager {
 
     }
 
+    /**
+     * player selects the number of players in the game to join
+     * @return number of players
+     */
     public int joinMatch() {
         System.out.println("How many players?");
         return  readInt(1,4);

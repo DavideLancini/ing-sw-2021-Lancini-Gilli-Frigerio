@@ -2,10 +2,17 @@ package it.polimi.ingsw.network.messages;
 
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.network.DisconnectedException;
-
+/**
+ * Class ClientMessageProduce
+ * @author gruppo 12
+ */
 public class ClientMessageProduce extends ClientMessage {
     private boolean[] activated = new boolean[6];
 
+    /**
+     * constructor
+     * @param activated true if production is selected (for all those available)
+     */
     public ClientMessageProduce(boolean[] activated) {
         System.arraycopy(activated, 0, this.activated, 0, activated.length);
         this.type = MessageType.Produce;

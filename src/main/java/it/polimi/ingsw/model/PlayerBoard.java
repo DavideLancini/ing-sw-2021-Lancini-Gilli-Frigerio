@@ -228,6 +228,10 @@ public class PlayerBoard {
      */
     public void addPope(int a){this.popeVP += a;}
 
+    /**
+     * counts number of devCards bought
+     * @return number of devCards
+     */
     public int getDevCardsNumber() {
         return Math.toIntExact(Arrays.stream(this.devCards).filter(Objects::nonNull).count());
     }

@@ -8,15 +8,14 @@ import java.awt.*;
 
 public class PlayerBoardPanel extends JPanel {
 
-
     public PlayerBoardPanel(PlayerBoard pb, boolean own){
         super();
         this.setLayout(new GridBagLayout());
         this.setBorder(BorderFactory.createLineBorder(Color.black, 2, true));
 
         GridBagConstraints c = new GridBagConstraints();
-        Insets largegap = new Insets(5,15,25,20);
-        Insets smallgap = new Insets(5,15,5,20);
+        Insets largeGap = new Insets(5,15,25,20);
+        Insets smallGap = new Insets(5,15,5,20);
 
         c.gridx=0;
         c.gridy=0;
@@ -28,49 +27,49 @@ public class PlayerBoardPanel extends JPanel {
 
 
         c.gridy++;
-        JLabel depotlabel = new JLabel("Depot:");
-        depotlabel.setFont(new Font(null, Font.BOLD, 15));
-        this.add(depotlabel,c);
+        JLabel depotLabel = new JLabel("Depot:");
+        depotLabel.setFont(new Font(null, Font.BOLD, 15));
+        this.add(depotLabel,c);
 
         c.gridy++;
-        c.insets = largegap;
+        c.insets = largeGap;
         Resource[] depot = new Resource[6];
         for(int i=0; i<depot.length; i++){
             depot[i] = pb.getDepot().getResource(i);
         }
-        DepotPanel dpanel = new DepotPanel(depot);
-        this.add(dpanel, c);
+        DepotPanel dPanel = new DepotPanel(depot);
+        this.add(dPanel, c);
 
         c.gridy++;
-        c.insets = smallgap;
-        JLabel sblabel = new JLabel("Strongbox:");
-        sblabel.setFont(new Font(null, Font.BOLD, 15));
-        this.add(sblabel, c);
+        c.insets = smallGap;
+        JLabel sbLabel = new JLabel("Strongbox:");
+        sbLabel.setFont(new Font(null, Font.BOLD, 15));
+        this.add(sbLabel, c);
 
-        StrongBoxPanel sbpanel = new StrongBoxPanel(pb.getStrongbox().getResources());
+        StrongBoxPanel sbPanel = new StrongBoxPanel(pb.getStrongbox().getResources());
         c.gridy++;
-        c.insets = largegap;
-        this.add(sbpanel, c);
-
-        c.gridy++;
-        c.insets = smallgap;
-        JLabel dplabel = new JLabel("Default Production:");
-        dplabel.setFont(new Font(null, Font.BOLD, 15));
-        this.add(dplabel, c);
+        c.insets = largeGap;
+        this.add(sbPanel, c);
 
         c.gridy++;
-        c.insets = largegap;
+        c.insets = smallGap;
+        JLabel dpLabel = new JLabel("Default Production:");
+        dpLabel.setFont(new Font(null, Font.BOLD, 15));
+        this.add(dpLabel, c);
+
+        c.gridy++;
+        c.insets = largeGap;
         DefaultProdPanel dp = new DefaultProdPanel(pb.getDefaultProduction());
         this.add(dp,c);
 
         c.gridy++;
-        c.insets = smallgap;
-        JLabel llabel = new JLabel("Leaders:");
-        llabel.setFont(new Font(null, Font.BOLD, 15));
-        this.add(llabel, c);
+        c.insets = smallGap;
+        JLabel lLabel = new JLabel("Leaders:");
+        lLabel.setFont(new Font(null, Font.BOLD, 15));
+        this.add(lLabel, c);
 
         c.gridy++;
-        c.insets = largegap;
+        c.insets = largeGap;
         LeadersPanel lp = new LeadersPanel(pb.getLeaderCard(0), pb.getLeaderCard(1), own);
         this.add(lp,c);
 
@@ -79,14 +78,14 @@ public class PlayerBoardPanel extends JPanel {
         //SECOND COLUMN
         c.gridy=0;
         c.gridx=1;
-        c.insets = smallgap;
-        JLabel clabel = new JLabel("Development Cards:");
-        clabel.setFont(new Font(null, Font.BOLD, 15));
-        this.add(clabel, c);
+        c.insets = smallGap;
+        JLabel cLabel = new JLabel("Development Cards:");
+        cLabel.setFont(new Font(null, Font.BOLD, 15));
+        this.add(cLabel, c);
 
         DevCardsPanel cpanel = new DevCardsPanel(pb);
         c.gridy=1;
-        c.insets = largegap;
+        c.insets = largeGap;
         c.weightx=1;
         c.weighty=1;
         c.gridheight = 10;
