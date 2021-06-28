@@ -17,7 +17,7 @@ public class LeadersPanel extends JPanel {
         if(lc1 != null){
             ImageIcon i1 = new ImageIcon(new ImageIcon(lc1.getPath()).getImage().getScaledInstance(x,y, Image.SCALE_DEFAULT));
             this.add(lc1.getIsActive() ? new JLabel(i1)
-                            : own ? new JLabel(new ImageIcon(GrayFilter.createDisabledImage(i1.getImage())))
+                            : own ? new JLabel(new ImageIcon(GrayFilter.createDisabledImage(i1.getImage()))) //TODO: find better way to mark active and inactive leaders.
                                     : new JLabel(covered));
         }
 

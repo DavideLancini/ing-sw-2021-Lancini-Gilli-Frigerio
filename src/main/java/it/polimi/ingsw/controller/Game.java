@@ -149,6 +149,7 @@ public class Game {
                         Server.logger.info("Setting action to "+action);
                     }
                     catch(EndTurnException | DisconnectedException e){done = true;}
+                    //TODO: handle disconnection of all players.
                 }
                 checkPope();
                 if(!endGame) endGame = checkEndGame();
@@ -178,7 +179,7 @@ public class Game {
      */
     private String showLeaderCards(Player currentPlayer) {
 
-        LeaderCard[] tempLeaders={currentPlayer.playerBoard.getLeaderCard(0),currentPlayer.playerBoard.getLeaderCard(1)};
+        LeaderCard[] tempLeaders = currentPlayer.playerBoard.getLeaderCard();
         String[] sleaders = new String[2];
         for (int i = 0; i<2; i++) {
             String string="Leader "+(i+1)+". \t\n";

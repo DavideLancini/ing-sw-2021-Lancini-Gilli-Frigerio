@@ -484,7 +484,7 @@ public class Controller {
      */
     private Collection<Resource> convert (Marble[] marbles) throws DisconnectedException {
         ArrayList<Resource> resources = new ArrayList<>();
-        ArrayList<LeaderCard> leaders = new ArrayList<>(Arrays.asList(pb.getLeaderCard(0), pb.getLeaderCard(1)));
+        ArrayList<LeaderCard> leaders = new ArrayList<>(Arrays.asList(pb.getLeaderCard()));
 
         //filter leader cards for only actives and Transform type
         List<LeaderCard> listleaders = leaders.stream().filter(x -> x!=null && x.getIsActive() && x instanceof LeaderTransform).collect(Collectors.toList());

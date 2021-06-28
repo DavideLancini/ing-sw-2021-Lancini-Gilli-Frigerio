@@ -32,7 +32,7 @@ public class GUIActionManager extends Manager {
 
     @Override
     public void displayError(String error) {
-        //TODO:
+        ChoiceBox.prompt(error, "Invalid Action", new String[]{"Continue"});
     }
 
     @Override
@@ -42,6 +42,7 @@ public class GUIActionManager extends Manager {
 
         for (int i = 1; i < 4; i++) {
             int result;
+            //TODO: fix display
             do {result = ChoiceBox.prompt(
                     "Resources to arrange: " + ResourceCounter.count(resources) +
                             "\n" +

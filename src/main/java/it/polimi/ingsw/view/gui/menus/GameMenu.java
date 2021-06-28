@@ -35,6 +35,7 @@ public class GameMenu implements ActionListener {
     private Market market;
     private DevCardBoard devCardBoard;
     private PlayerBoard playerBoard;
+    private boolean first;
 
     //Buttons, order important
     private final JButton[] options = new JButton[]{
@@ -53,6 +54,8 @@ public class GameMenu implements ActionListener {
         setWaiting();
         JScrollPane sp = new JScrollPane(internalPanel);
 
+        for(JButton each : this.options)each.addActionListener(this);
+
         frame.getContentPane().add(sp);
         frame.setVisible(false);
         frame.setTitle("Masters of Renaissance");
@@ -60,16 +63,14 @@ public class GameMenu implements ActionListener {
         internalPanel.setLayout(new GridBagLayout());
         pbc.gridy = 1;
         pbc.gridx = 2;
-        mc.gridy = 1;
+        pbc.gridheight = 3;
+        mc.gridy = 2;
         mc.gridx = 0;
         mc.weightx = 0;
-
-
-        dbc.gridy = 1;
+        dbc.gridy = 2;
         dbc.gridx = 1;
         dbc.weightx = 0.5;
         pbc.weightx = 0.5;
-
     }
 
     public void setVisible(){
@@ -78,15 +79,40 @@ public class GameMenu implements ActionListener {
     }
 
     public void setWaiting(){
-        //TODO
+        //TODO: fix glassPane
         hideButtons();
+    }
+
+    private void displayFirst(){
+        internalPanel.remove(wait);
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = mc.gridx;
+        c.gridy = mc.gridy-1;
+        JLabel label = new JLabel("Market");
+        label.setFont(new Font(null, Font.BOLD,15));
+        internalPanel.add(label, c);
+        c.gridy = mc.gridy + 1;
+        internalPanel.add(options[0],c);
+
+        c.gridx = dbc.gridx;
+        c.gridy = dbc.gridy-1;
+        label = new JLabel("Development Cards Board");
+        label.setFont(new Font(null, Font.BOLD,15));
+        internalPanel.add(label, c);
+        c.gridy = dbc.gridy + 1;
+        internalPanel.add(options[1],c);
+
+        c.gridx = 4;
+        c.gridy = 5;
+        internalPanel.add(options[5],c);
     }
 
 
     public void display(ServerMessageView opanel) {
+        if(!first)displayFirst();
+        first = true;
         //activate elements
-        internalPanel.remove(wait);
-
         switch(opanel.getElem()){
             case PB: displayPB(Serializer.deserializePB(opanel.getView(false))); break;
             case OtherPB: displayOPB(Serializer.deserializePB(opanel.getView(false))); break;
@@ -125,40 +151,56 @@ public class GameMenu implements ActionListener {
                 }
             }
         }
-        ClientMessage message = new ClientMessageEndTurn();
-        switch (choice){
-            case "Take Resources from Market":
-                TakeResourcesMenu trp = new TakeResourcesMenu(this.market);
-                message = trp.prompt();
-                break;
-
-            case "Buy Development Card":
-                //TODO v:
-
-                break;
-            case "Activate Productions":
-                break;
-            case "Leader Cards Options":
-                break;
-            case "Default Production Options":
-                break;
-            case "End Turn":
-                message = new ClientMessageEndTurn();
-                break;
-            default: throw new IllegalStateException();
+        ClientMessage message = null;
+        while(message == null) {
+            switch (choice) {
+                case "Take Resources from Market":
+                    message = new TakeResourcesMenu(this.market).prompt();
+                    break;
+                case "Buy Development Card":
+                    message = new BuyDevCardMenu(this.devCardBoard.getTop()).prompt();
+                    break;
+                case "Activate Productions":
+                    message = new ProduceMenu(this.playerBoard).prompt();
+                    break;
+                case "Leader Cards Options":
+                    message = new LeaderOptionsMenu(this.playerBoard.getLeaderCard()).prompt();
+                    break;
+                case "Default Production Options":
+                    message = new DefaultProductionMenu(this.playerBoard.getDefaultProduction()).prompt();
+                    break;
+                case "End Turn":
+                    message = new ClientMessageEndTurn();
+                    break;
+                default:
+                    throw new IllegalStateException();
+            }
         }
-
-
         choice = null;
+        hideButtons();
         return message;
     }
 
     private void showButtons(boolean action) {
-        //TODO: Highlight only possible actions
+        //TODO: position the other buttons
+        GridBagConstraints c = new GridBagConstraints();
+        if(!action) {
+            c.gridx = mc.gridx;
+            c.gridy = mc.gridy + 1;
+            internalPanel.add(options[0], c);
+
+            c.gridx = dbc.gridx;
+            c.gridy = dbc.gridy + 1;
+            internalPanel.add(options[1], c);
+        }
+
+        c.gridx = 4;
+        c.gridy = 5;
+        internalPanel.add(options[5],c);
     }
 
     private void hideButtons(){
-        //TODO: hide all buttons to prevent preemptive choice stacking
+        for(JButton each : options)internalPanel.remove(each);
     }
 
 
@@ -181,9 +223,10 @@ public class GameMenu implements ActionListener {
         catch (NullPointerException ignored){}
 
         GridBagConstraints c = new GridBagConstraints();
-        c.gridy = 0;
+        c.gridy = 5;
         c.gridx = playerNumber;
         c.weightx = 1;
+        c.insets = new Insets(0,5,15,5);
         others[playerNumber] = new PlayerBoardPanel(pb, false);
         internalPanel.add(others[playerNumber], c);
         playerNumber++;
@@ -197,6 +240,7 @@ public class GameMenu implements ActionListener {
         this.mpanel = new MarketPanel(m);
         this.market = m;
         internalPanel.add(this.mpanel, mc);
+
     }
 
     private void displayDev(DevCardBoard db){

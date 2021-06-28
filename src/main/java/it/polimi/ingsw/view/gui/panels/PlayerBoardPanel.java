@@ -95,17 +95,4 @@ public class PlayerBoardPanel extends JPanel {
         SwingUtilities.updateComponentTreeUI(this);
     }
 
-    public static void main(String[] args){
-        JFrame frame = new JFrame();
-        frame.setSize(1920,1080);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        LeaderCard[] leaders = new LeaderCard[]{new LeaderDepot(1, Resource.COIN, Resource.SHIELD,"src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-56-1.png"),
-                new LeaderSale(2, Resource.SHIELD, new CardColor[]{CardColor.PURPLE},"src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-50-1.png")};
-        PlayerBoard pb = new PlayerBoard(leaders);
-
-        frame.add(new PlayerBoardPanel(pb, true));
-    }
-
 }

@@ -16,30 +16,21 @@ public class LeadersChoiceMenu extends SubMenu implements ActionListener {
         public LeadersChoiceMenu(String[] leaders){
             this.choice = new int[2];
             for(int i=0;i< leaders.length;i++)this.leaders[i]= new ImageIcon(leaders[i]);
-        }
-
-
-        public int[] prompt(){
-            JLabel title = new JLabel("Choose 2 of the following 4 leader cards:");
-            title.setFont(new Font(null, Font.PLAIN, 20));
-            title.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-            JPanel panel = new JPanel();
-            panel.add(title);
-            panel.add(Box.createRigidArea(new Dimension(0,30)));
-
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setTitle("Initial Setup");
 
 
             panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
             panel.setBorder(new EmptyBorder(new Insets(80, 80, 80, 80)));
+            this.setHeader("Choose 2 of the following 4 leader cards:");
+            panel.add(Box.createRigidArea(new Dimension(0,30)));
+
+            frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            frame.setTitle("Initial Setup");
 
             JPanel middle = new JPanel();
             middle.setLayout(new BoxLayout(middle, BoxLayout.X_AXIS));
             for(int i=0; i<leaders.length; i++){
 
-                buttons[i] = new JButton(new ImageIcon(leaders[i].getImage().getScaledInstance(180,270,Image.SCALE_DEFAULT)));
+                buttons[i] = new JButton(new ImageIcon(this.leaders[i].getImage().getScaledInstance(180,270,Image.SCALE_DEFAULT)));
 
                 buttons[i].addActionListener(this);
 
@@ -59,11 +50,11 @@ public class LeadersChoiceMenu extends SubMenu implements ActionListener {
 
             panel.add(Box.createRigidArea(new Dimension(0,5)));
             panel.add(done);
+        }
 
-            frame.add(panel);
 
+        public int[] prompt(){
             this.finalizeAndWait();
-
             return this.choice;
         }
 

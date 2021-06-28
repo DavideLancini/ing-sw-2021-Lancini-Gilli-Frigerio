@@ -8,7 +8,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DefaultProdPanel extends JPanel{
-    public DefaultProdPanel(DefaultProduction defaultProduction) {
+    public DefaultProdPanel(DefaultProduction defaultProduction){
+        this(defaultProduction, 24,24);
+    }
+
+    public DefaultProdPanel(DefaultProduction defaultProduction, int x, int y) {
         super();
 
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -18,10 +22,6 @@ public class DefaultProdPanel extends JPanel{
 
         Resource[] resources = new Resource[]{defaultProduction.getInput()[0], defaultProduction.getInput()[1], defaultProduction.getOutput()[0]};
         ImageIcon[] icons = new ImageIcon[3];
-
-        int x = 24, y = 24;
-
-
 
         for(int i=0;i<icons.length;i++){
             switch (resources[i]){
@@ -39,11 +39,15 @@ public class DefaultProdPanel extends JPanel{
         this.add(input);
 
 
-        this.add(new JLabel(new ImageIcon(new ImageIcon("src/main/resources/Icons/bracket.png").getImage().getScaledInstance(15, 48, Image.SCALE_DEFAULT))));
+        this.add(bracket(15,48));
 
         this.add(new JLabel(icons[2]));
 
         SwingUtilities.updateComponentTreeUI(this);
 
+    }
+
+    public static JLabel bracket(int x, int y){
+        return new JLabel(new ImageIcon(new ImageIcon("src/main/resources/Icons/bracket.png").getImage().getScaledInstance(x, y, Image.SCALE_DEFAULT)));
     }
 }

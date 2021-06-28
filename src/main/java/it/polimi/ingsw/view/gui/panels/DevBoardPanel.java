@@ -13,16 +13,10 @@ public class DevBoardPanel extends JPanel {
 
         int x = 100, y = 150;
 
-        DevCard[][] trasposed = new DevCard[db.getTop()[0].length][db.getTop().length];
-
-        for(int i = 0; i<db.getTop().length; i++){
-            for(int j = 0; j<db.getTop()[0].length; j++){
-                trasposed[j][i] = db.getTop()[i][j];
-            }
-        }
+        DevCard[][] transposed = transpose(db.getTop());
 
 
-        for(DevCard[] row : trasposed){
+        for(DevCard[] row : transposed){
             for(DevCard each : row){
                 this.add(each == null ?
                         new JLabel(new ImageIcon(new ImageIcon("src/main/resources/Icons/back.PNG").getImage().getScaledInstance(x,y,Image.SCALE_DEFAULT)))
@@ -30,5 +24,16 @@ public class DevBoardPanel extends JPanel {
             }
         }
 
+    }
+
+    public static DevCard[][] transpose(DevCard[][] db){
+        DevCard[][] transposed = new DevCard[db[0].length][db.length];
+
+        for(int i = 0; i<db.length; i++){
+            for(int j = 0; j<db[0].length; j++){
+                transposed[j][i] = db[i][j];
+            }
+        }
+        return transposed;
     }
 }

@@ -75,6 +75,11 @@ public class PlayerBoard {
         return this.leaderCards[position];
     }
 
+    public LeaderCard[] getLeaderCard() {
+        return this.leaderCards;
+    }
+
+
     /**
      * Sell card for 1 faith
      * @param position 0 or 1
