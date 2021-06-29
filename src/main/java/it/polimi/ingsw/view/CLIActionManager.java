@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view;
 
 
-import it.polimi.ingsw.Client;
 import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.controller.Player;
 import it.polimi.ingsw.model.*;
@@ -10,7 +9,6 @@ import it.polimi.ingsw.network.NetInterface;
 import it.polimi.ingsw.network.messages.*;
 
 import java.util.Collection;
-import java.util.logging.Logger;
 
 /**
  * Class CLIActionManager
@@ -19,7 +17,6 @@ import java.util.logging.Logger;
 public class CLIActionManager extends Manager {
 
 
-    private static Logger logger = Client.logger;
     private static ClientNetInterface net;
 
     /**
@@ -81,7 +78,7 @@ public class CLIActionManager extends Manager {
             }
 
             try {
-                net = new ClientNetInterface(serverAddress,serverPort, Client.logger);
+                net = new ClientNetInterface(serverAddress,serverPort, Log.logger);
             } catch (DisconnectedException e) {
                 //warning
             }
@@ -157,30 +154,30 @@ public class CLIActionManager extends Manager {
     public void startOfflineGame(Manager manager){
         //Create Local Interface
         NetInterface net = new NetInterface();
-        logger.info("Net Created");
+        Log.logger.info("Net Created");
 
         try {
             //Create Local Player
             Player offlinePlayer = new Player();
-            logger.info("OK Player");
+            Log.logger.info("OK Player");
             //Start the Player on a thread
             offlinePlayer.start();
-            logger.info("OK Start");
+            Log.logger.info("OK Start");
 
             //Ask for a Local Game
             net.send(new ClientMessageJoinGame("Offline", 1));
-            logger.info("OK Message");
+            Log.logger.info("OK Message");
 
             ClientController controller = new ClientController(manager);
-            logger.info("OK Controller");
+            Log.logger.info("OK Controller");
             controller.setup(net);
-            logger.info("OK Setup");
+            Log.logger.info("OK Setup");
 
 
             controller.main();
-            logger.info("OK Main");
+            Log.logger.info("OK Main");
         } catch (Exception e) {
-            logger.warning("ERROR");
+            Log.logger.warning("ERROR");
         }
     }
 

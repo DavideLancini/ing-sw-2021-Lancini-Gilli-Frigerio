@@ -7,11 +7,7 @@ import it.polimi.ingsw.network.ServerNetInterface;
 import it.polimi.ingsw.network.components.ListenerOccupiedException;
 import org.junit.Test;
 
-import java.util.logging.Logger;
-
 public class CompleteMatchTest {
-
-    private static Logger logger = Logger.getLogger("Test Logger");
 
     @Test
     public void main(){
@@ -77,7 +73,6 @@ public class CompleteMatchTest {
                 } catch (DisconnectedException e) {
                     e.printStackTrace();
                 }
-                //TODO: when the login method is working insert HERE
                 //TODO: start game
             }
         };
@@ -91,7 +86,6 @@ public class CompleteMatchTest {
                 } catch (DisconnectedException e) {
                     e.printStackTrace();
                 }
-                //TODO: when the login method is working insert HERE
                 //TODO: start game
             }
         };

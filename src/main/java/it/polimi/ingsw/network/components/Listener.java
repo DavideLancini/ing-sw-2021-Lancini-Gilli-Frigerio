@@ -1,24 +1,22 @@
 package it.polimi.ingsw.network.components;
 
 import it.polimi.ingsw.network.DisconnectedException;
+import it.polimi.ingsw.view.Log;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Logger;
 
 /**
  * A Listener is a Socket that receive Strings from the Sender.
  * It needs a fatherSocket (ServerSocket) to be initialized.
  * All Listeners are opened on the same Port but create different InputStream
- * All Listener shares the same logger (received from the initialization of the first Listener)
  *
  * @author Group 12
  */
 public class Listener {
-    private static Logger logger;
 
     private Socket listenerSocket;
     private DataInputStream inputStream;
@@ -29,23 +27,22 @@ public class Listener {
      *
      * @throws DisconnectedException when something fails (at this stage why it fails is not critical and is logged as warning)
      */
-    public Listener(ServerSocket fatherSocket, Logger logger) throws DisconnectedException {
-        Listener.logger = logger;
+    public Listener(ServerSocket fatherSocket) throws DisconnectedException {
         //Accept connection
         try {
             this.listenerSocket = fatherSocket.accept();
             this.listenerName = "Listener" + getTargetAddress();
-            logger.info(this.listenerName + " has accepted a connection");
+            Log.logger.info(this.listenerName + " has accepted a connection");
         } catch (IOException error) {
-            logger.warning("Cannot accept a connection");
+            Log.logger.warning("Cannot accept a connection");
             throw new DisconnectedException("Listener cannot accept connection");
         }
         //Open input stream
         try {
             this.inputStream = new DataInputStream(new BufferedInputStream(this.listenerSocket.getInputStream()));
-            logger.info(this.listenerName + "has created a stream ");
+            Log.logger.info(this.listenerName + "has created a stream ");
         } catch (IOException error) {
-            logger.warning(this.listenerName + "Listener failed to open a stream");
+            Log.logger.warning(this.listenerName + "Listener failed to open a stream");
             throw new DisconnectedException("Failed to open a stream");
         }
     }
@@ -62,7 +59,7 @@ public class Listener {
         while(rawMessage.equals("")){
             try {
                 rawMessage = this.inputStream.readUTF();
-                logger.info(this.listenerName + "has received: " + rawMessage);
+                Log.logger.info(this.listenerName + "has received: " + rawMessage);
             } catch (IOException e) {
                 throw new DisconnectedException("Failed to receive");
             }
@@ -79,7 +76,7 @@ public class Listener {
     public String getTargetAddress() {
         String address = this.listenerSocket.getRemoteSocketAddress().toString();
         address = address.substring(1, address.indexOf(":"));
-        logger.info(this.listenerName + ": has been requested its target address:" + address);
+        Log.logger.info(this.listenerName + ": has been requested its target address:" + address);
         return address;
     }
 
@@ -89,9 +86,9 @@ public class Listener {
     public void close() {
         try {
             this.listenerSocket.close();
-            logger.info(this.listenerName + ": has been closed");
+            Log.logger.info(this.listenerName + ": has been closed");
         } catch (IOException e) {
-            logger.warning(this.listenerName + ": has failed the closure procedure");
+            Log.logger.warning(this.listenerName + ": has failed the closure procedure");
         }
     }
 }

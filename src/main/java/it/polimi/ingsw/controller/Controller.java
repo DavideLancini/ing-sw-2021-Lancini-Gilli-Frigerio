@@ -1,12 +1,11 @@
 package it.polimi.ingsw.controller;
 
 
-import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.network.NetInterface;
-import it.polimi.ingsw.network.ServerNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
+import it.polimi.ingsw.network.NetInterface;
 import it.polimi.ingsw.network.messages.*;
+import it.polimi.ingsw.view.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -72,7 +71,7 @@ public class Controller {
      * @throws DisconnectedException if the is a disconnection during the game
      */
     public void activateLeader (int position) throws DisconnectedException {
-        Server.logger.info("Activating leader");
+        Log.logger.info("Activating leader");
         if(position != 0 && position!= 1){net.send(new ServerMessageError("Invalid Position.")); return;}
 
         LeaderCard leader = this.pb.getLeaderCard(position);
@@ -82,7 +81,7 @@ public class Controller {
 
             return;
         }
-        Server.logger.info("Checking requirements");
+        Log.logger.info("Checking requirements");
         if(!checkRequirements(leader)) {
             net.send(new ServerMessageError("Leader requirements not met"));
 
@@ -112,7 +111,7 @@ public class Controller {
     private boolean checkRequirements(LeaderCard leader){
 
         if(leader instanceof LeaderProduction){
-            Server.logger.info("Found LeaderProduction");
+            Log.logger.info("Found LeaderProduction");
             for(int i=0; i<3; i++) {
                 DevCard card = this.pb.getDevCard(i, 1);
                 if(card != null && card.getColor() == ((LeaderProduction) leader).getRequirements())return true;
@@ -123,7 +122,7 @@ public class Controller {
 
 
         else if(leader instanceof LeaderDepot){
-            Server.logger.info("Found LeaderDepot");
+            Log.logger.info("Found LeaderDepot");
             int check = 0;
             Resource requirements = ((LeaderDepot) leader).getRequirements();
 
@@ -152,19 +151,19 @@ public class Controller {
                        if(pb.getDevCard(i,j) != null) devCards.add(pb.getDevCard(i,j));
                 }
             }
-            Server.logger.info("Requirements: "+ Arrays.toString(requirements));
-            Server.logger.info("Devcards: "+devCards.toString());
+            Log.logger.info("Requirements: "+ Arrays.toString(requirements));
+            Log.logger.info("Devcards: "+devCards.toString());
 
             for(CardColor each : requirements){
                 boolean found = false;
-                Server.logger.info("Requirement: "+each.toString());
+                Log.logger.info("Requirement: "+each.toString());
                 for(int i=0; i<devCards.size(); i++) {
                     DevCard every = devCards.get(i);
                     if (every.getColor().equals(each)){
                         if(!devCards.remove(every)) return false;
                         else {found = true; break;}
                     }
-                    Server.logger.info("Devcards: "+devCards.toString());
+                    Log.logger.info("Devcards: "+devCards.toString());
                 }
                 if(!found) return false;
             }
@@ -189,9 +188,9 @@ public class Controller {
         && different(input[0], input[1], input[3])
         ){
             net.send(new ServerMessageOK());
-            Server.logger.info(pb.getDepot().depotView());
+            Log.logger.info(pb.getDepot().depotView());
             pb.getDepot().setContents(input);
-            Server.logger.info(pb.getDepot().depotView());
+            Log.logger.info(pb.getDepot().depotView());
             game.discardsToFaith(pb, discardAmount);
 
             return true;
@@ -323,7 +322,7 @@ public class Controller {
         try {
             for(int i = 0; i<activated.length; i++) {
                 if(activated[i]){
-                    Server.logger.info("Producing "+i+"with input "+ Arrays.toString(productions[i].getInput()) +" and output "+ Arrays.toString(productions[i].getOutput()));
+                    Log.logger.info("Producing "+i+"with input "+ Arrays.toString(productions[i].getInput()) +" and output "+ Arrays.toString(productions[i].getOutput()));
                     totalinput.addAll(Arrays.asList(productions[i].getInput()));
                     totaloutput.addAll(Arrays.asList(productions[i].getOutput()));
                     if (i>=4){
@@ -332,17 +331,17 @@ public class Controller {
                     totalfaith += productions[i].getFaith();
                 }
             }
-            Server.logger.info("Total required of: "+totalinput);
+            Log.logger.info("Total required of: "+totalinput);
             extractCost(totalinput.toArray(new Resource[0]));
-            Server.logger.info("Extracted.");
+            Log.logger.info("Extracted.");
 
             pb.getStrongbox().deposit(totaloutput);
-            Server.logger.info("Deposited.");
+            Log.logger.info("Deposited.");
             pb.addFaith(totalfaith);
 
         }
         catch (Exception e){
-            Server.logger.info(e.getMessage());
+            Log.logger.info(e.getMessage());
             net.send(new ServerMessageError("Your resources are insufficient for the indicated productions."));
             return false;
         }
@@ -365,7 +364,7 @@ public class Controller {
 
 
     private ArrayList<Resource> extractCost(Resource[] cost) throws Exception{
-        Server.logger.info("Extraction started.");
+        Log.logger.info("Extraction started.");
         ArrayList<Resource> resources= new ArrayList<>();
         Resource[] depotCopy = {null, null, null, null, null, null, null, null, null, null};
         for(int i=0; i<10; i++){
@@ -428,21 +427,21 @@ public class Controller {
         Collection<Resource> resources;
 
         resources = this.convert(marbles);
-        Server.logger.info("Marbles converted, collected: "+resources);
-        Server.logger.info(pb.getDepot().depotView());
+        Log.logger.info("Marbles converted, collected: "+resources);
+        Log.logger.info(pb.getDepot().depotView());
         //Empties depot to be reorganized
         try {
             for (int i = 0; i < 6; i++) {
                 Resource resource = pb.getDepot().extract(i);
                 if (resource != Resource.EMPTY) resources.add(resource);
             }
-            Server.logger.info("Depot Emptied, total collected: "+resources);
+            Log.logger.info("Depot Emptied, total collected: "+resources);
         }
         catch(Exception e){
             //TODO: critical error, resources will get lost in process
-            Server.logger.info("Critical error");
+            Log.logger.info("Critical error");
         }
-        Server.logger.info(pb.getDepot().depotView());
+        Log.logger.info(pb.getDepot().depotView());
 
 
         //Automatically deposits resources in leader depot slots
@@ -469,11 +468,11 @@ public class Controller {
 
         do {
             net.send(new ServerMessageMarketReturn(resources));
-            Server.logger.info("About to try depot configuration");
+            Log.logger.info("About to try depot configuration");
         }
         while(!((ClientMessageTryDepotConfiguration) (net.receive())).resolve(this));
 
-        Server.logger.info("Correctly tried depot configuration");
+        Log.logger.info("Correctly tried depot configuration");
         return true;
     }
 

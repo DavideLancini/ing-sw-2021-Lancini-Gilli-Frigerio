@@ -1,14 +1,13 @@
 package it.polimi.ingsw.network;
 
-import it.polimi.ingsw.Server;
 import it.polimi.ingsw.network.components.Listener;
 import it.polimi.ingsw.network.components.Sender;
 import it.polimi.ingsw.network.components.Serializer;
 import it.polimi.ingsw.network.messages.ClientMessage;
 import it.polimi.ingsw.network.messages.ClientMessageLocalPort;
+import it.polimi.ingsw.view.Log;
 
 import java.net.ServerSocket;
-import java.util.logging.Logger;
 
 import static java.lang.Thread.sleep;
 
@@ -29,21 +28,21 @@ public class ServerNetInterface extends NetInterface{
      *
      * @throws DisconnectedException if something fails, and whatever is created to that point is closed
      */
-    public ServerNetInterface(ServerSocket fatherSocket, Logger logger) throws DisconnectedException {
+    public ServerNetInterface(ServerSocket fatherSocket) throws DisconnectedException {
         //Create a new Listener
-        this.listener = new Listener(fatherSocket, logger);
-        Server.logger.info("Listener created");
+        this.listener = new Listener(fatherSocket);
+        Log.logger.info("Listener created");
         //Receive the port to witch connect from the first message
         int clientPort;
         Message message = Serializer.deserializeMessage(listener.receive());
-        logger.info("ConnectionInterface is collecting the target port for the sender");
+        Log.logger.info("ConnectionInterface is collecting the target port for the sender");
         if(message instanceof ClientMessageLocalPort) {
             clientPort = ((ClientMessageLocalPort)message).getPort();
         }else{
             this.listener.close();
             throw new DisconnectedException("Port not usable");
         }
-        logger.info("ConnectionInterface received target port: " + clientPort);
+        Log.logger.info("ConnectionInterface received target port: " + clientPort);
         //Create a Sender
         try {
             try {

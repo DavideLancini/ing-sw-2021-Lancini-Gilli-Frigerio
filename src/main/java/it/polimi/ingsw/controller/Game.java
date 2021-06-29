@@ -1,14 +1,14 @@
 package it.polimi.ingsw.controller;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.model.singlePlayer.*;
+import it.polimi.ingsw.model.singlePlayer.PcPlayerBoard;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.components.Serializer;
 import it.polimi.ingsw.network.messages.EndTurnException;
 import it.polimi.ingsw.network.messages.ServerMessageOK;
 import it.polimi.ingsw.network.messages.ServerMessageView;
+import it.polimi.ingsw.view.Log;
 import it.polimi.ingsw.view.ViewHelper;
 import it.polimi.ingsw.view.gui.GUIElement;
 
@@ -32,24 +32,24 @@ public class Game {
      * @param player single Player information
      */
     public Game(Player player) throws Exception {
-        Server.logger.info("Game Created");
+        Log.logger.info("Game Created");
         player.net.send(new ServerMessageOK());
-        Server.logger.finest("TEST OK");
+        Log.logger.finest("TEST OK");
         setupGame();
-        Server.logger.finest("Setup OK");
+        Log.logger.finest("Setup OK");
         setPlayers(new Player[]{player});
 
         System.out.println("Starting Solo Game");
 
-        Server.logger.info("OK5");
+        Log.logger.info("OK5");
 
         player.drawLeaderCards(leaderCardDeck.draw4());
         player.playerBoard = new PlayerBoard();
         player.setController(new Controller(player.net, player.playerBoard, this.devCardBoard, this.market, this));
 
-        Server.logger.info("OK6");
+        Log.logger.info("OK6");
         player.receiveLeaders();
-        Server.logger.info("OK7");
+        Log.logger.info("OK7");
 
         startSoloGame();
     }
@@ -61,30 +61,30 @@ public class Game {
      * @param players Players playing the game
      */
     public Game(Player[] players) throws Exception {
-        Server.logger.info("Game Created");
+        Log.logger.info("Game Created");
 
         for(Player each: players) {
             each.net.send(new ServerMessageOK());
         }
 
         setupGame();
-        Server.logger.finest("Setup OK");
+        Log.logger.finest("Setup OK");
         setPlayers(players);
 
         System.out.println("Starting Game with "+players.length+" players...");
 
-        Server.logger.info("OK5");
+        Log.logger.info("OK5");
         for(Player each: players) {
             each.drawLeaderCards(leaderCardDeck.draw4());
             each.playerBoard = new PlayerBoard();
             each.setController(new Controller(each.net, each.playerBoard, this.devCardBoard, this.market, this));
         }
-        Server.logger.info("OK6");
+        Log.logger.info("OK6");
 
         for(Player each: players){
             each.receiveLeaders();
         }
-        Server.logger.info("OK7");
+        Log.logger.info("OK7");
 
 
         if(players.length>=2)players[1].secondPlayer();
@@ -101,7 +101,7 @@ public class Game {
      */
     private void startSoloGame() throws DisconnectedException {
         PcPlayerBoard pc= new PcPlayerBoard(this.devCardBoard);
-        Server.logger.info("Solo game actually started");
+        Log.logger.info("Solo game actually started");
 
         do{
             boolean done = false;
@@ -111,7 +111,7 @@ public class Game {
                     showAllGame(players[0]);
                     if(!action) action = players[0].turn(false);
                     else  players[0].turn(true);
-                    Server.logger.info("Setting action to "+action);
+                    Log.logger.info("Setting action to "+action);
                 }
                 catch(EndTurnException e){done = true;}
             }
@@ -136,7 +136,7 @@ public class Game {
      * starts a multiplayer game
      */
     private void startGame(){
-        Server.logger.info("Game actually started");
+        Log.logger.info("Game actually started");
         boolean endGame = false;
         do {
             for(Player each : this.players) {
@@ -147,7 +147,7 @@ public class Game {
                         showAllGame(each);
                         if (!action) action = each.turn(false);
                         else  each.turn(true);
-                        Server.logger.info("Setting action to "+action);
+                        Log.logger.info("Setting action to "+action);
                     }
                     catch(EndTurnException | DisconnectedException e){done = true;}
                     //TODO: handle disconnection of all players.
@@ -268,11 +268,11 @@ public class Game {
      */
     private void setupGame() throws FileNotFoundException {
         createDevCardBoard();
-        Server.logger.info("OK1 ");
+        Log.logger.info("OK1 ");
         createLeaderDeck();
-        Server.logger.info("OK2 ");
+        Log.logger.info("OK2 ");
         createMarket();
-        Server.logger.info("OK3 ");
+        Log.logger.info("OK3 ");
     }
     /**
      * creates DevCardBoard

@@ -1,13 +1,11 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.Client;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.ClientMessage;
 import it.polimi.ingsw.network.messages.ServerMessageChooseLeaders;
 import it.polimi.ingsw.network.messages.ServerMessageView;
-
 
 import java.util.Collection;
 
@@ -38,7 +36,7 @@ public abstract class Manager {
     public abstract boolean online();
 
     public ClientNetInterface autoConnect() throws DisconnectedException{
-        return new ClientNetInterface("localhost",5555, Client.logger);
+        return new ClientNetInterface("localhost",5555);
     }
 
     public abstract void waitForTurn();

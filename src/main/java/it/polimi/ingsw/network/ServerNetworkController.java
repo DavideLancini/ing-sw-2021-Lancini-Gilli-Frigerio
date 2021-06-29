@@ -2,12 +2,11 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.controller.Player;
 import it.polimi.ingsw.network.components.ListenerOccupiedException;
+import it.polimi.ingsw.view.Log;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static java.lang.Thread.sleep;
 
@@ -16,7 +15,6 @@ import static java.lang.Thread.sleep;
  * @author Group 12
  */
 public class ServerNetworkController {
-    private static Logger logger;
     private static int port;
     private static int maxSlots;
     public static boolean isON = false;
@@ -34,7 +32,7 @@ public class ServerNetworkController {
         public void run() {
             while (isON && !isInterrupted()) {
                 if(activeSlots < maxSlots ){
-                    Player emptyPlayer = new Player(serverSocket, logger);
+                    Player emptyPlayer = new Player(serverSocket);
                     emptyPlayer.start();
                 }
             }
@@ -42,21 +40,15 @@ public class ServerNetworkController {
     };
 
     /**
-     * Setter for the Logger
-     */
-    public static void setLogger(Logger logger) {
-        ServerNetworkController.logger = logger;
-    }
-
-    /**
      * Setter for the Server Port.
      */
     public static void setPort(int listenerPort) throws ListenerOccupiedException {
         if(isON){
-            logger.log(Level.WARNING,"Listener occupied, the port cannot be modified", new ListenerOccupiedException("ERROR"));
+            Log.logger.warning("Listener occupied, the port cannot be modified");
+            throw new ListenerOccupiedException("ERROR");
         }else{
             port = listenerPort;
-            logger.log(Level.FINE,"Port received and applied: "+port);
+            Log.logger.fine("Port received and applied: "+port);
         }
     }
 
@@ -65,18 +57,12 @@ public class ServerNetworkController {
      */
     public static void setMaxSlots(int listenerMaxSlot) throws InstantiationException {
         if(isON & activeSlots > listenerMaxSlot){
-            logger.log(Level.WARNING, "Slots requests exceed Max Slots",new InstantiationException());
+            Log.logger.warning("Slots requests exceed Max Slots");
+            throw new InstantiationException();
         }else{
             maxSlots = listenerMaxSlot;
-            logger.log(Level.FINE, "Max Slots received and applied: "+maxSlots);
+            Log.logger.fine("Max Slots received and applied: "+maxSlots);
         }
-    }
-
-    /**
-     * Getter for the Logger.
-     */
-    public static Logger getLogger() {
-        return logger;
     }
 
     /**
@@ -103,14 +89,14 @@ public class ServerNetworkController {
      */
     public static void startServer(){
         if(isON){
-            logger.log(Level.WARNING,"The server is already ON");
+            Log.logger.warning("The server is already ON");
         }else{
             try {
                 serverSocket = new ServerSocket(port);
-                logger.log(Level.INFO, "Father Socket Created on: "+port);
+                Log.logger.info("Father Socket Created on: "+port);
                 isON = true;
             } catch (IOException e) {
-                logger.log(Level.WARNING,"Opening failed");
+                Log.logger.warning("Opening failed");
                 isON = false;
             }
         }
@@ -132,7 +118,7 @@ public class ServerNetworkController {
             serverSocket.close(); //close the Main Socket
             connection.interrupt(); //Interrupt the connection creator
         } catch (IOException | InterruptedException e) {
-            logger.log(Level.WARNING,"Closing failed");
+            Log.logger.warning("Closing failed");
         }
     }
 
@@ -141,7 +127,7 @@ public class ServerNetworkController {
      */
     public static void addPlayer(){
         activeSlots++;
-        logger.info("Slots: " + activeSlots + "/" + maxSlots);
+        Log.logger.info("Slots: " + activeSlots + "/" + maxSlots);
     }
 
     /**
@@ -149,6 +135,6 @@ public class ServerNetworkController {
      */
     public static void removePlayer(){
         activeSlots--;
-        logger.info("Slots: " + activeSlots + "/" + maxSlots);
+        Log.logger.info("Slots: " + activeSlots + "/" + maxSlots);
     }
 }

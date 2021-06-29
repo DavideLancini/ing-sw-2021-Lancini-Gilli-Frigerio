@@ -1,9 +1,9 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.view.Log;
 import it.polimi.ingsw.view.ServerView;
 
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Server App
@@ -11,11 +11,9 @@ import java.util.logging.Logger;
  * @author Group 12
  */
 public class Server {
-    public static Logger logger = Logger.getLogger("ServerApp");
     public static void main( String[] args ){
-        //Logger Creation
-        logger.setLevel(Level.ALL);
-        ServerView.setLogger(logger);
+        //Logger Setup
+        Log.logger.setLevel(Level.ALL);
         //Loading parameters from the properties file or standard par. if FNF
         ServerView.loadParameters();
         //Main Cycle of the Server Interface
@@ -47,14 +45,3 @@ public class Server {
         }
     }
 }
-
-//Logger Levels, suggested OFF for normal use
-//Level.OFF     -> Nothing is logged
-//Level.SEVERE  -> Fatal Error
-//Level.WARNING -> Big Error
-//Level.INFO    -> Important Messages that should always be in the console
-//Level.CONFIG  -> Important Messages for debug
-//Level.FINE    -> Recoverable Failure
-//Level.FINER   -> Logging calls for entering, returning, or throwing an exception
-//Level.FINEST  -> Highly detailed tracking
-//Level.ALL     -> Everything is logged

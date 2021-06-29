@@ -1,21 +1,21 @@
 package it.polimi.ingsw.controller;
 
-
-import it.polimi.ingsw.Client;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.PlayerBoard;
-import it.polimi.ingsw.network.*;
+import it.polimi.ingsw.network.DisconnectedException;
+import it.polimi.ingsw.network.Message;
+import it.polimi.ingsw.network.NetInterface;
+import it.polimi.ingsw.network.ServerNetInterface;
 import it.polimi.ingsw.network.messages.*;
+import it.polimi.ingsw.view.Log;
 
 import java.net.ServerSocket;
-import java.util.logging.Logger;
 
 /**
  * Class Player
  * @author Group 12
  */
 public class Player extends Thread{
-    private static Logger logger;
     public NetInterface net;
     public PlayerBoard playerBoard;
     public String playerId;
@@ -24,22 +24,19 @@ public class Player extends Thread{
 
     public Player(){
         this.net = new NetInterface();
-        Client.logger.info("Offline Player Initialized");
-        Player.logger = Client.logger;
+        Log.logger.info("Offline Player Initialized");
     }
 
     /**
      * Constructor
      * @param father serverSocket
-     * @param logger Logger
      */
-    public Player(ServerSocket father, Logger logger){
-        Player.logger = logger;
+    public Player(ServerSocket father){
         try {
-            this.net = new ServerNetInterface(father, logger);
-            logger.info("player created");
+            this.net = new ServerNetInterface(father);
+            Log.logger.info("player created");
         } catch (DisconnectedException e) {
-            logger.info("Player cannot create a connection");
+            Log.logger.info("Player cannot create a connection");
         }
     }
 
@@ -51,13 +48,13 @@ public class Player extends Thread{
     private void addResource(int numOfResource) throws DisconnectedException {
         for(int i=0;i<numOfResource;i++) {
             net.send(new ServerMessageAddResource());
-            logger.info("waiting Player selected Resource");
+            Log.logger.info("waiting Player selected Resource");
             ClientMessagePlaceResource message = (ClientMessagePlaceResource) net.receive();
-            logger.info("Player selected Resource");
+            Log.logger.info("Player selected Resource");
             try {
                 playerBoard.getDepot().deposit(message.getResource(),i);
             } catch (Exception e) {
-                logger.info("THIS SHOULD NOT BE POSSIBLE");
+                Log.logger.info("THIS SHOULD NOT BE POSSIBLE");
             }
         }
     }
@@ -83,7 +80,7 @@ public class Player extends Thread{
     public void receiveLeaders() throws DisconnectedException {
         ClientMessageChosenLeaders message = (ClientMessageChosenLeaders) net.receive();
         setLeaders(message.getPositions());
-        logger.info("Leaders received and set");
+        Log.logger.info("Leaders received and set");
     }
 
     /**

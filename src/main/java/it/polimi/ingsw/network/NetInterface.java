@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network;
 
-import it.polimi.ingsw.Client;
+import it.polimi.ingsw.view.Log;
 
 import java.util.LinkedList;
 
@@ -13,20 +13,20 @@ public class NetInterface {
     public NetInterface(){
         if (isFirst){
             isFirst = false;
-            Client.logger.info("Net Interface initialized for the Client");
+            Log.logger.info("Net Interface initialized for the Client");
         }else{
             this.isClient = false;
-            Client.logger.info("Net Interface initialized for the Offline Server");
+            Log.logger.info("Net Interface initialized for the Offline Server");
         }
     }
 
     public void send(Message message) throws DisconnectedException{
         if(isClient){
             ClientQueue.addLast(message);
-            Client.logger.info("Client has written: " + message);
+            Log.logger.info("Client has written: " + message);
         }else{
             ServerQueue.addLast(message);
-            Client.logger.info("Offline Server has written: " + message);
+            Log.logger.info("Offline Server has written: " + message);
         }
     }
 
@@ -40,7 +40,7 @@ public class NetInterface {
                 message = ClientQueue.pollFirst();
             }
         }
-        Client.logger.info("Read: " + message);
+        Log.logger.info("Read: " + message);
         return message;
     }
 }

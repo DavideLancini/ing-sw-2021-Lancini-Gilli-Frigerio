@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.gui.menus;
 
-import it.polimi.ingsw.Client;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceCounter;
 import it.polimi.ingsw.network.ClientNetInterface;
@@ -11,11 +10,9 @@ import it.polimi.ingsw.view.gui.ResIcons;
 
 import javax.swing.*;
 import java.util.Collection;
-import java.util.logging.Logger;
 
 public class GUIActionManager extends Manager {
 
-    private static Logger logger = Client.logger;
     private static ClientNetInterface net;
     private static final GameMenu gm = new GameMenu();
 

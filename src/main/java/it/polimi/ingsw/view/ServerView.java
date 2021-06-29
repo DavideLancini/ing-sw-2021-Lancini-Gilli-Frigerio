@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static java.lang.Integer.parseInt;
 
@@ -19,15 +18,6 @@ import static java.lang.Integer.parseInt;
  * @author Group 12
  */
 public class ServerView {
-    private static Logger logger;
-
-    /**
-     * Import Logger from the ServerApp and pass it to the Network Interface
-     */
-    public static void setLogger(Logger logger) {
-        ServerView.logger = logger;
-        ServerNetworkController.setLogger(logger);
-    }
 
     /**
      * Load all server Parameters from server.properties, in case of failure standard parameters will be loaded.
@@ -49,33 +39,33 @@ public class ServerView {
             maxSlots = parseInt(serverProperties.getProperty("maxSlots"));
             port = parseInt(serverProperties.getProperty("port"));
             file.close();
-            logger.log(Level.CONFIG,"Server.properties successfully loaded from file");
+            Log.logger.config("Server.properties successfully loaded from file");
         }
         catch (FileNotFoundException FileNotFoundException) {
             maxSlots = 8;
             port = 5555;
-            logger.log(Level.WARNING,"Server.properties not found, loaded standard parameters");
+            Log.logger.warning("Server.properties not found, loaded standard parameters");
         }
         catch (IOException IOException){
             maxSlots = 8;
             port = 5555;
-            logger.log(Level.WARNING,"IO Error, loaded standard parameters");
+            Log.logger.warning("IO Error, loaded standard parameters");
         }
-        logger.log(Level.INFO,"Parameters Loaded: (Port: "+port+") (Max Slots: "+maxSlots+")");
+        Log.logger.info("Parameters Loaded: (Port: "+port+") (Max Slots: "+maxSlots+")");
         try {
             ServerNetworkController.setMaxSlots(maxSlots);
-            logger.log(Level.CONFIG,"Max Slots successfully applied");
+            Log.logger.config("Max Slots successfully applied");
         }
         catch (InstantiationException InstantiationException) {
-            logger.log(Level.WARNING,"Active Slots exceed Requested Max Slots");
+            Log.logger.warning("Active Slots exceed Requested Max Slots");
         }
 
         try {
             ServerNetworkController.setPort(port);
-            logger.log(Level.CONFIG,"Port successfully applied");
+            Log.logger.config("Port successfully applied");
         }
         catch (ListenerOccupiedException listenerOccupiedException) {
-            logger.log(Level.WARNING,"The Listener is ON, the port cannot be changed");
+            Log.logger.warning("The Listener is ON, the port cannot be changed");
         }
     }
 
@@ -104,10 +94,10 @@ public class ServerView {
     public static void toggleServer() {
         if (ServerNetworkController.getStatus()) {
             ServerNetworkController.stopServer();
-            logger.log(Level.INFO, "Server Stopped");
+            Log.logger.info("Server Stopped");
         } else {
             ServerNetworkController.startServer();
-            logger.log(Level.INFO, "Server Started");
+            Log.logger.info("Server Started");
         }
     }
 
@@ -125,7 +115,7 @@ public class ServerView {
      * Only works if the Logger is OFF
      */
     private static void clearConsole(){
-        if(logger.getLevel() == Level.OFF){
+        if(Log.logger.getLevel() == Level.OFF){
             try {
                 if (System.getProperty("os.name").contains("Windows")) {
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -134,7 +124,7 @@ public class ServerView {
                 }
             }
             catch (IOException | InterruptedException e1) {
-                logger.log(Level.WARNING,"IOException, console not cleaned");
+                Log.logger.warning("IOException, console not cleaned");
             }
         }
     }

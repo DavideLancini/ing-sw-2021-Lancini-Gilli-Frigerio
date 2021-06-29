@@ -8,7 +8,6 @@ import it.polimi.ingsw.network.messages.ServerMessage;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.util.logging.Logger;
 
 /**
  * Class Client Network Interface.
@@ -19,7 +18,6 @@ public class ClientNetInterface extends NetInterface{
     private String serverAddress;
     private int serverPort;
     private int localPort;
-    private static Logger logger;
 
     private boolean isConnected = false;
     private boolean isLogged = false;
@@ -36,7 +34,7 @@ public class ClientNetInterface extends NetInterface{
      *
      * @throws DisconnectedException if something fails, and whatever is created to that point is closed
      */
-    public ClientNetInterface(String serverAddress, int serverPort, Logger logger) throws DisconnectedException {
+    public ClientNetInterface(String serverAddress, int serverPort) throws DisconnectedException {
 
         if (!isConnected & !isLogged) {
             //create sender
@@ -54,7 +52,7 @@ public class ClientNetInterface extends NetInterface{
             //Open a listener on a runnable
             Thread temp = new Thread(() -> {
                 try {
-                    listener = new Listener(father, logger);
+                    listener = new Listener(father);
                 } catch (DisconnectedException e) {
                     //TODO: probably this error is impossible
                 }

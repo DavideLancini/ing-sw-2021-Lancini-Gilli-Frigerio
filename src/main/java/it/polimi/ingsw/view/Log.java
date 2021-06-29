@@ -1,11 +1,11 @@
 package it.polimi.ingsw.view;
 
-import javax.lang.model.type.NullType;
 import java.io.IOException;
 import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 public class Log extends Thread{
-    public static java.util.logging.Logger logger = java.util.logging.Logger.getLogger("MainLogger");
+    public static Logger logger = Logger.getLogger("MainLogger");
 
     public static void saveLog(){
         FileHandler file = null;
@@ -29,3 +29,14 @@ public class Log extends Thread{
         }
     }
 }
+
+//Logger Levels
+//Level.OFF     -> Nothing is logged
+//Level.SEVERE  -> Fatal Error
+//Level.WARNING -> Big Error
+//Level.INFO    -> Important Messages that should always be in the console
+//Level.CONFIG  -> Important Messages for debug
+//Level.FINE    -> Recoverable Failure
+//Level.FINER   -> Logging calls for entering, returning, or throwing an exception
+//Level.FINEST  -> Highly detailed tracking
+//Level.ALL     -> Everything is logged

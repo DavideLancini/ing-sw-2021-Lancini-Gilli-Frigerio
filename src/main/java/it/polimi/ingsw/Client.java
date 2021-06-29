@@ -5,23 +5,20 @@ import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.ClientMessageJoinGame;
 import it.polimi.ingsw.view.CLIActionManager;
+import it.polimi.ingsw.view.Log;
 import it.polimi.ingsw.view.Manager;
 
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Client App
  */
 public class Client {
-    public static Logger logger = Logger.getLogger("ClientApp");
     public static boolean isOn = true;
 
     public static void main(String[] args) {
-
+        Log.logger.setLevel(Level.ALL);
         Manager manager = new CLIActionManager();
-        //Logger Creation
-        logger.setLevel(Level.ALL);
         //Ask Online-Offline
         boolean isOnline = manager.online();
         while(isOn){
