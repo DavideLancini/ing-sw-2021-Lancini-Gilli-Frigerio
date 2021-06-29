@@ -34,6 +34,7 @@ public class Game {
     public Game(Player player) throws Exception {
         Server.logger.info("Game Created");
         player.net.send(new ServerMessageOK());
+        Server.logger.finest("TEST OK");
         setupGame();
         Server.logger.finest("Setup OK");
         setPlayers(new Player[]{player});

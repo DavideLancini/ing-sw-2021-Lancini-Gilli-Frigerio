@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * Used by the Client App to connect to the server
  * @author Group 12
  */
-public class ClientNetInterface {
+public class ClientNetInterface extends NetInterface{
     private String serverAddress;
     private int serverPort;
     private int localPort;
@@ -89,7 +89,7 @@ public class ClientNetInterface {
         }
         this.sender.close();
         this.listener.close();
-        ServerNetInterface.removePlayer();
+        ServerNetworkController.removePlayer();
         throw new DisconnectedException("Failed to send");
     }
 

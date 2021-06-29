@@ -1,7 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.Reader;
-import it.polimi.ingsw.network.ServerNetInterface;
+import it.polimi.ingsw.network.ServerNetworkController;
 import it.polimi.ingsw.network.components.ListenerOccupiedException;
 
 import java.io.FileInputStream;
@@ -26,7 +26,7 @@ public class ServerView {
      */
     public static void setLogger(Logger logger) {
         ServerView.logger = logger;
-        ServerNetInterface.setLogger(logger);
+        ServerNetworkController.setLogger(logger);
     }
 
     /**
@@ -63,7 +63,7 @@ public class ServerView {
         }
         logger.log(Level.INFO,"Parameters Loaded: (Port: "+port+") (Max Slots: "+maxSlots+")");
         try {
-            ServerNetInterface.setMaxSlots(maxSlots);
+            ServerNetworkController.setMaxSlots(maxSlots);
             logger.log(Level.CONFIG,"Max Slots successfully applied");
         }
         catch (InstantiationException InstantiationException) {
@@ -71,7 +71,7 @@ public class ServerView {
         }
 
         try {
-            ServerNetInterface.setPort(port);
+            ServerNetworkController.setPort(port);
             logger.log(Level.CONFIG,"Port successfully applied");
         }
         catch (ListenerOccupiedException listenerOccupiedException) {
@@ -84,10 +84,10 @@ public class ServerView {
      */
     public static String serverMenu() {
         clearConsole();
-        if (ServerNetInterface.getStatus()) {
+        if (ServerNetworkController.getStatus()) {
             System.out.println("The server is ON ");
-            System.out.println(" - Port: "+ ServerNetInterface.getPort());
-            System.out.println(" - Max Slots: "+ ServerNetInterface.getMaxSlots());
+            System.out.println(" - Port: "+ ServerNetworkController.getPort());
+            System.out.println(" - Max Slots: "+ ServerNetworkController.getMaxSlots());
             System.out.println("1. Stop Server");
         } else {
             System.out.println("The server is OFF");
@@ -102,11 +102,11 @@ public class ServerView {
      * Toggle Server ON/OFF
      */
     public static void toggleServer() {
-        if (ServerNetInterface.getStatus()) {
-            ServerNetInterface.stopServer();
+        if (ServerNetworkController.getStatus()) {
+            ServerNetworkController.stopServer();
             logger.log(Level.INFO, "Server Stopped");
         } else {
-            ServerNetInterface.startServer();
+            ServerNetworkController.startServer();
             logger.log(Level.INFO, "Server Started");
         }
     }

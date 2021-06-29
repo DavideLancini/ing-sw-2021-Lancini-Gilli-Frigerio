@@ -2,9 +2,12 @@ package it.polimi.ingsw.view;
 
 
 import it.polimi.ingsw.Client;
+import it.polimi.ingsw.controller.Game;
+import it.polimi.ingsw.controller.Player;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
+import it.polimi.ingsw.network.NetInterface;
 import it.polimi.ingsw.network.messages.*;
 
 import java.util.Collection;
@@ -153,10 +156,21 @@ public class CLIActionManager extends Manager {
     }
 
     @Override
-    public void startOfflineGame() {
-        //self host a player
-        //autostart a 1
-
+    public void startOfflineGame(){
+        NetInterface net = new NetInterface(logger);
+        logger.info("Net Created");
+        ClientMessageJoinGame message = new ClientMessageJoinGame("Offline", 1);
+        logger.info("OK");
+        try {
+            net.send(message);
+            logger.info("OK MESSAGE");
+            Player offlinePlayer = new Player(logger);
+            logger.info("OK Player");
+            offlinePlayer.start();
+            logger.info("OK Start");
+        } catch (Exception e) {
+            logger.warning("Finish");
+        }
     }
 
     @Override

@@ -15,11 +15,15 @@ import java.util.logging.Logger;
  */
 public class Player extends Thread{
     private static Logger logger;
-    public ConnectionInterface net;
+    public NetInterface net;
     public PlayerBoard playerBoard;
     public String playerId;
     private Controller controller;
     private LeaderCard[] tempLeaders;
+
+    public Player(Logger logger){
+        this.net = new NetInterface(logger);
+    }
 
     /**
      * Constructor
@@ -29,7 +33,7 @@ public class Player extends Thread{
     public Player(ServerSocket father, Logger logger){
         Player.logger = logger;
         try {
-            this.net = new ConnectionInterface(father, logger);
+            this.net = new ServerNetInterface(father, logger);
             logger.info("player created");
         } catch (DisconnectedException e) {
             logger.info("Player cannot create a connection");
@@ -64,7 +68,7 @@ public class Player extends Thread{
      */
     public boolean turn(boolean mainAction) throws EndTurnException, DisconnectedException {
         net.send(new ServerMessageTurn(mainAction));
-        ClientMessage message = net.receive();
+        ClientMessage message = (ClientMessage) net.receive();
 
         return message.resolve(controller);
     }

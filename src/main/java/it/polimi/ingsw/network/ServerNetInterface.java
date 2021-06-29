@@ -1,154 +1,103 @@
 package it.polimi.ingsw.network;
 
-import it.polimi.ingsw.controller.Player;
-import it.polimi.ingsw.network.components.ListenerOccupiedException;
+import it.polimi.ingsw.network.components.Listener;
+import it.polimi.ingsw.network.components.Sender;
+import it.polimi.ingsw.network.components.Serializer;
+import it.polimi.ingsw.network.messages.ClientMessage;
+import it.polimi.ingsw.network.messages.ClientMessageLocalPort;
 
-import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static java.lang.Thread.sleep;
 
 /**
- * Class ServerNetInterface
+ * Class Server Network Interface.
+ * Used by the Server App and identifies a single connection between Server and Client
+ *
  * @author Group 12
  */
-public class ServerNetInterface {
+public class ServerNetInterface extends NetInterface{
     private static Logger logger;
-    private static int port;
-    private static int maxSlots;
-    public static boolean isON = false;
-
-    private static int activeSlots = 0;
-
-    private static ServerSocket serverSocket;
+    private Sender sender;
+    private Listener listener;
 
     /**
-     * Definition for a small thread that starts single connection
+     * Constructor for the Server Network Interface. It receive parameters for the connection and the logger.
+     * It first creates a listener and waits for a connection. It will then receive the port on witch to connect the
+     * sender
      *
+     * @throws DisconnectedException if something fails, and whatever is created to that point is closed
      */
-    private static final Thread connection = new Thread() {
-        @Override
-        public void run() {
-            while (isON && !isInterrupted()) {
-                if(activeSlots < maxSlots ){
-                    Player emptyPlayer = new Player(serverSocket, logger);
-                    emptyPlayer.start();
-                }
-            }
-        }
-    };
-
-    /**
-     * Setter for the Logger
-     */
-    public static void setLogger(Logger logger) {
+    public ServerNetInterface(ServerSocket fatherSocket, Logger logger) throws DisconnectedException {
         ServerNetInterface.logger = logger;
-    }
-
-    /**
-     * Setter for the Server Port.
-     */
-    public static void setPort(int listenerPort) throws ListenerOccupiedException {
-        if(isON){
-            logger.log(Level.WARNING,"Listener occupied, the port cannot be modified", new ListenerOccupiedException("ERROR"));
+        //Create a new Listener
+        this.listener = new Listener(fatherSocket, logger);
+        logger.info("Listener created");
+        //Receive the port to witch connect from the first message
+        int clientPort;
+        Message message = Serializer.deserializeMessage(listener.receive());
+        logger.info("ConnectionInterface is collecting the target port for the sender");
+        if(message instanceof ClientMessageLocalPort) {
+            clientPort = ((ClientMessageLocalPort)message).getPort();
         }else{
-            port = listenerPort;
-            logger.log(Level.FINE,"Port received and applied: "+port);
+            this.listener.close();
+            throw new DisconnectedException("Port not usable");
         }
-    }
-
-    /**
-     * Setter for the Server Max Slot.
-     */
-    public static void setMaxSlots(int listenerMaxSlot) throws InstantiationException {
-        if(isON & activeSlots > listenerMaxSlot){
-            logger.log(Level.WARNING, "Slots requests exceed Max Slots",new InstantiationException());
-        }else{
-            maxSlots = listenerMaxSlot;
-            logger.log(Level.FINE, "Max Slots received and applied: "+maxSlots);
-        }
-    }
-
-    /**
-     * Getter for the Logger.
-     */
-    public static Logger getLogger() {
-        return logger;
-    }
-
-    /**
-     * Getter for the Server Port.
-     */
-    public static int getPort(){
-        return port;
-    }
-
-    /**
-     * Getter for the Server Max Slot.
-     */
-    public static int getMaxSlots() {
-        return maxSlots;
-    }
-
-    /**
-     * Getter for the Status
-     */
-    public static boolean getStatus(){ return isON;}
-
-    /**
-     * Main Server Method
-     */
-    public static void startServer(){
-        if(isON){
-            logger.log(Level.WARNING,"The server is already ON");
-        }else{
+        logger.info("ConnectionInterface received target port: " + clientPort);
+        //Create a Sender
+        try {
             try {
-                serverSocket = new ServerSocket(port);
-                logger.log(Level.INFO, "Father Socket Created on: "+port);
-                isON = true;
-            } catch (IOException e) {
-                logger.log(Level.WARNING,"Opening failed");
-                isON = false;
+                sleep(1000);
+            } catch (InterruptedException e) {
+                //Nothing will interrupt this sleep
+            }
+            this.sender = new Sender(listener.getTargetAddress(), clientPort);
+        } catch (DisconnectedException e) {
+            this.sender.close();
+            this.listener.close();
+            throw new DisconnectedException("Failed to connect");
+        }
+        ServerNetworkController.addPlayer();
+    }
+
+    /**
+     * The send method take a message, serialize it with the Serializer and send the string via the sender.
+     * It tries to send the message 5 times, afterwards the connection is declared Interrupted
+     *
+     * @throws DisconnectedException after 5 failed tries and every component is closed
+     */
+    public void send(Message message) throws DisconnectedException {
+        int tries = 5;
+        while(tries>0){
+            try{
+                String rawMessage = Serializer.serialize(message);
+                sender.send(rawMessage);
+                return;
+            }catch (DisconnectedException e){
+                tries--;
             }
         }
-        if(connection.isInterrupted()){
-            connection.checkAccess();
-        }else{
-            connection.start();
-        }
+        this.sender.close();
+        this.listener.close();
+        ServerNetworkController.removePlayer();
+        throw new DisconnectedException("Failed to send");
     }
 
     /**
-     * Stop the entire server network, every components will be shutdown without saving
+     * The receive method, use the Listener.receive method to receive a string from the input stream, then its converted
+     * to Message with the deserializer
+     *
+     * @throws DisconnectedException when it receive an error from the listener, it also closes every component
      */
-    public static void stopServer(){
+    public ClientMessage receive() throws DisconnectedException{
         try {
-            isON = false; //mark the Network OFF
-            Socket emptyPlayerResolver = new Socket("localhost", port);
-            sleep(1000);
-            serverSocket.close(); //close the Main Socket
-            connection.interrupt(); //Interrupt the connection creator
-        } catch (IOException | InterruptedException e) {
-            logger.log(Level.WARNING,"Closing failed");
+            return Serializer.deserializeMessage(listener.receive());
+        }catch(DisconnectedException e){
+            this.sender.close();
+            this.listener.close();
+            ServerNetworkController.removePlayer();
+            throw e;
         }
-    }
-
-    /**
-     * Increase the Active Slots Count when a new connection is made
-     */
-    public static void addPlayer(){
-        activeSlots++;
-        logger.info("Slots: " + activeSlots + "/" + maxSlots);
-    }
-
-    /**
-     * Decrease the Active Slots Count when a connection is lost
-     */
-    public static void removePlayer(){
-        activeSlots--;
-        logger.info("Slots: " + activeSlots + "/" + maxSlots);
     }
 }

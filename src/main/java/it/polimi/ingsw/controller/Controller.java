@@ -3,7 +3,8 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.network.ConnectionInterface;
+import it.polimi.ingsw.network.NetInterface;
+import it.polimi.ingsw.network.ServerNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.*;
 
@@ -22,7 +23,7 @@ public class Controller {
     private final PlayerBoard pb;
     private final DevCardBoard board;
     private final Market market;
-    private ConnectionInterface net;
+    private NetInterface net;
     private Game game;
 
     /**
@@ -33,7 +34,7 @@ public class Controller {
      * @param market current Market
      * @param game current Game
      */
-    public Controller(ConnectionInterface net, PlayerBoard pb, DevCardBoard board, Market market, Game game){
+    public Controller(NetInterface net, PlayerBoard pb, DevCardBoard board, Market market, Game game){
         this.pb = pb;
         this.board = board;
         this.market = market;
