@@ -15,7 +15,7 @@ public class MarketPanel extends JPanel {
         this.add(new JLabel(toIcon(m.getSideMarble())));
         this.add(Box.createRigidArea(new Dimension(40,0)));
 
-        this.setBorder(new EmptyBorder(new Insets(40,40,40,40)));
+        this.setBorder(new EmptyBorder(new Insets(5,5,5,5)));
 
         JPanel market = new JPanel();
         market.setLayout(new GridLayout(3,4));

@@ -28,7 +28,7 @@ public class NetworkTest {
                 }
                 ServerNetInterface.startServer();
                 while(!isEnded){ //WARNING: do not simplify isEnded
-                    //TODO: wait for the match to end
+                    wait for the match to end
                 }
                 ServerNetInterface.stopServer();
             }

@@ -5,9 +5,9 @@ package it.polimi.ingsw.controller;
  * Class Queue
  */
 public class Queue{
-    private static Player[] player2 = new Player[2];
-    private static Player[] player3 = new Player[3];
-    private static Player[] player4 = new Player[4];
+    private static final Player[] player2 = new Player[2];
+    private static final Player[] player3 = new Player[3];
+    private static final Player[] player4 = new Player[4];
     private static int count2 = 0;
     private static int count3 = 0;
     private static int count4 = 0;
