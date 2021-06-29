@@ -21,8 +21,8 @@ public class Player extends Thread{
     private Controller controller;
     private LeaderCard[] tempLeaders;
 
-    public Player(Logger logger){
-        this.net = new NetInterface(logger);
+    public Player(){
+        this.net = new NetInterface();
     }
 
     /**

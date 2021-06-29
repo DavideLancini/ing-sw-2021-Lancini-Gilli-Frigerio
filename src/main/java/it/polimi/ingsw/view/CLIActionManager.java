@@ -157,14 +157,14 @@ public class CLIActionManager extends Manager {
 
     @Override
     public void startOfflineGame(){
-        NetInterface net = new NetInterface(logger);
+        NetInterface net = new NetInterface();
         logger.info("Net Created");
         ClientMessageJoinGame message = new ClientMessageJoinGame("Offline", 1);
         logger.info("OK");
         try {
             net.send(message);
             logger.info("OK MESSAGE");
-            Player offlinePlayer = new Player(logger);
+            Player offlinePlayer = new Player();
             logger.info("OK Player");
             offlinePlayer.start();
             logger.info("OK Start");
