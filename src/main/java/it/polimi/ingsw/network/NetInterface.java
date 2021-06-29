@@ -16,11 +16,11 @@ public class NetInterface {
 
     public void send(Message message) throws DisconnectedException{
         MessageQueue = message;
-        logger.info("Message written");
+        logger.info("Message written: " + MessageQueue);
     }
 
     public Message receive() throws DisconnectedException{
-        logger.info("Message readed");
+        logger.info("Message read: " + MessageQueue);
         return MessageQueue;
     }
 }
