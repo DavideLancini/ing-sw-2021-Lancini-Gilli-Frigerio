@@ -4,7 +4,7 @@ import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.network.DisconnectedException;
 /**
  * Class ClientMessageProduce
- * @author gruppo 12
+ * @author Group 12
  */
 public class ClientMessageProduce extends ClientMessage {
     private boolean[] activated = new boolean[6];

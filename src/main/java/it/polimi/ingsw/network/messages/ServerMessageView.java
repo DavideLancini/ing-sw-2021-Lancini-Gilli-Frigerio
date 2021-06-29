@@ -4,7 +4,7 @@ import it.polimi.ingsw.view.gui.GUIElement;
 
 /**
  * Class ServerMessageView
- * @author gruppo 12
+ * @author Group 12
  */
 
 public class ServerMessageView extends ServerMessage {

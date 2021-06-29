@@ -2,7 +2,7 @@ package it.polimi.ingsw.model;
 
 /**
  * enum CardColor
- * @author Gruppo 12
+ * @author Group 12
  */
 public enum CardColor {
     BLUE("\u001b[38;5;12m██\u001b[0m"),

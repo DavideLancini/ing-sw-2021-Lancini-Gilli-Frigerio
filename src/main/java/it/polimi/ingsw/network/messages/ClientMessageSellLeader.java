@@ -4,7 +4,7 @@ import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.network.DisconnectedException;
 /**
  * Class ClientMessageSellLeader
- * @author gruppo 12
+ * @author Group 12
  */
 public class ClientMessageSellLeader extends ClientMessage {
     private int position;

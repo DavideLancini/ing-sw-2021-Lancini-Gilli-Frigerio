@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 import java.util.Arrays;
 /**
  * Class Production
- * @author Gruppo 12
+ * @author Group 12
  */
 public class Production {
     protected Resource[] input;

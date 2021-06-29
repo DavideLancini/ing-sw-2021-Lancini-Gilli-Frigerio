@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model;
 /**
  * enum Marble
- * @author Gruppo 12
+ * @author Group 12
  */
 public enum Marble {
     WHITE("\u001b[38;5;15m⏺\u001b[0m"),

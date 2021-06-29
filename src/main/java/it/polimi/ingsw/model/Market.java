@@ -5,7 +5,7 @@ import java.util.Collections;
 
 /**
  * Class Market
- * @author Gruppo 12
+ * @author Group 12
  */
 public class Market {
 

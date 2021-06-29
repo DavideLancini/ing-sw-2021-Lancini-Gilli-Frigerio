@@ -2,7 +2,7 @@ package it.polimi.ingsw.model;
 
 /**
  * Class DevCard
- * @author Gruppo 12
+ * @author Group 12
  */
 public class DevCard {
     private final Resource[] cost;

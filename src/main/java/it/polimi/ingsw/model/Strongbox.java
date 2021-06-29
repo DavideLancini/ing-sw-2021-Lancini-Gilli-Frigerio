@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 /**
  * Class Strongbox
- * @author Gruppo 12
+ * @author Group 12
  */
 public class Strongbox {
     private Collection<Resource> resources;

@@ -4,7 +4,7 @@ import it.polimi.ingsw.network.messages.MessageType;
 
 /**
  * Class Message
- * @author gruppo 12
+ * @author Group 12
  */
 public abstract class Message {
     protected MessageType type;

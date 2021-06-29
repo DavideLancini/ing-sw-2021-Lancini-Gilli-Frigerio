@@ -11,8 +11,9 @@ import java.net.ServerSocket;
 import java.util.logging.Logger;
 
 /**
- * Class ClientNetInterface
- * @author gruppo 12
+ * Class Client Network Interface.
+ * Used by the Client App to connect to the server
+ * @author Group 12
  */
 public class ClientNetInterface {
     private String serverAddress;
@@ -27,6 +28,14 @@ public class ClientNetInterface {
     private Listener listener;
     private ServerSocket father;
 
+    /**
+     * Constructor for the Client Network Interface. It receive parameters for the connection and the logger.
+     * It first creates a Sender and a ServerSocket that will host the Listener.
+     * The listener is created on a thread as the first Server/Listener operation needs to be parallel, afterwards are
+     * both sequential.
+     *
+     * @throws DisconnectedException if something fails, and whatever is created to that point is closed
+     */
     public ClientNetInterface(String serverAddress, int serverPort, Logger logger) throws DisconnectedException {
 
         if (!isConnected & !isLogged) {
@@ -61,24 +70,35 @@ public class ClientNetInterface {
         }
     }
 
-    public boolean send(Message message) throws DisconnectedException {
-        String rawMessage = Serializer.serialize(message);
-
-
+    /**
+     * The send method take a message, serialize it with the Serializer and send the string via the sender.
+     * It tries to send the message 5 times, afterwards the connection is declared Interrupted
+     *
+     * @throws DisconnectedException after 5 failed tries and every component is closed
+     */
+    public void send(Message message) throws DisconnectedException {
         int tries = 5;
         while(tries>0){
             try{
+                String rawMessage = Serializer.serialize(message);
                 sender.send(rawMessage);
-                return true;
+                return;
             }catch (DisconnectedException e){
                 tries--;
             }
         }
         this.sender.close();
         this.listener.close();
-        return false;
+        ServerNetInterface.removePlayer();
+        throw new DisconnectedException("Failed to send");
     }
 
+    /**
+     * The receive method, use the Listener.receive method to receive a string from the input stream, then its converted
+     * to Message with the deserializer
+     *
+     * @throws DisconnectedException when it receive an error from the listener, it also closes every component
+     */
     public ServerMessage receive() throws DisconnectedException{
         try {
             return Serializer.deserializeServerMessage(listener.receive());

@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 /**
  * Class LeaderSale extends LeaderCard
  *
- * @author Gruppo 12
+ * @author Group 12
  */
 public class LeaderSale extends LeaderCard {
     private CardColor[] requirements;

@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.network.DisconnectedException;
 /**
  * Class ClientMessageBuyDevCard
- * @author gruppo 12
+ * @author Group 12
  */
 public class ClientMessageBuyDevCard extends ClientMessage {
     private Level level;

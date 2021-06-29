@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
 /**
  * Class ClientMessageJsonDeserializer
  * custom gson deserializer for subclasses of abstract class ClientMessage
- * @author gruppo 12
+ * @author Group 12
  */
 public class ClientMessageJsonDeserializer implements JsonDeserializer<ClientMessage> {
     public ClientMessage deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context){

@@ -18,7 +18,7 @@ import java.util.Arrays;
 
 /**
  * Class game
- * @author  Gruppo 12
+ * @author Group 12
  */
 public class Game {
     private Player[] players;

@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 /**
  * Class LeaderDepot extends LeaderCard
  *
- * @author Gruppo 12
+ * @author Group 12
  */
 public class LeaderDepot extends LeaderCard {
     //hardcoded to 5 of the same resource, possible to be changed

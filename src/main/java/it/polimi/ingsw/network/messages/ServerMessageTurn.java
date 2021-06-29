@@ -1,7 +1,7 @@
 package it.polimi.ingsw.network.messages;
 /**
  * Class ServerMessageTurn
- * @author gruppo 12
+ * @author Group 12
  */
 public class ServerMessageTurn extends ServerMessage {
     //Track if in this turn an action has already been performed

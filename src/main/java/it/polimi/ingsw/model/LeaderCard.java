@@ -2,7 +2,7 @@ package it.polimi.ingsw.model;
 
 /**
  * Class LeaderCard
- * @author Gruppo 12
+ * @author Group 12
  */
 public class LeaderCard {
 

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.network.messages;
 /**
  * Class ClientMessageChosenLeaders
- * @author gruppo 12
+ * @author Group 12
  */
 public class ClientMessageChosenLeaders extends ClientMessage{
     private int[] positions = new int[2];

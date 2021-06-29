@@ -4,7 +4,7 @@ import java.util.Stack;
 
 /**
  * Class DevCardDeck
- * @author Gruppo 12
+ * @author Group 12
  */
 public class DevCardDeck {
 

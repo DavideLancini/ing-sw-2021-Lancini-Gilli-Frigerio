@@ -3,7 +3,7 @@ package it.polimi.ingsw.network;
 /**
  * Network Testing
  *
- * @author Lancini Davide
+ * @author Group 12
  */
 public class NetworkTest {
     /*

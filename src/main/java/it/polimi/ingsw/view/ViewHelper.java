@@ -2,7 +2,7 @@ package it.polimi.ingsw.view;
 
 /**
  * Class ViewHelper
- * @author  gruppo 12
+ * @author Group 12
  */
 public class ViewHelper {
     /**

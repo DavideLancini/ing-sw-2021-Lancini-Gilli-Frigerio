@@ -16,14 +16,13 @@ import static java.lang.Integer.parseInt;
 /**
  * View for the Server Application
  *
- * @author Lancini Davide
+ * @author Group 12
  */
 public class ServerView {
     private static Logger logger;
 
     /**
      * Import Logger from the ServerApp and pass it to the Network Interface
-     * @author Lancini Davide
      */
     public static void setLogger(Logger logger) {
         ServerView.logger = logger;
@@ -39,7 +38,6 @@ public class ServerView {
      * @warning ListenerOccupiedException: Do Nothing
      * @warning FileNotFoundException: Load standard parameters
      * @warning IOException: Load standard parameters
-     * @author Lancini Davide
      */
     public static void loadParameters() {
         int port;
@@ -83,7 +81,6 @@ public class ServerView {
 
     /**
      * Print server status and the available commands
-     * @author Lancini Davide
      */
     public static String serverMenu() {
         clearConsole();
@@ -91,7 +88,6 @@ public class ServerView {
             System.out.println("The server is ON ");
             System.out.println(" - Port: "+ ServerNetInterface.getPort());
             System.out.println(" - Max Slots: "+ ServerNetInterface.getMaxSlots());
-            System.out.println(" - Active Games: "+ ServerNetInterface.getActiveGames());
             System.out.println("1. Stop Server");
         } else {
             System.out.println("The server is OFF");
@@ -104,7 +100,6 @@ public class ServerView {
 
     /**
      * Toggle Server ON/OFF
-     * @author Lancini Davide
      */
     public static void toggleServer() {
         if (ServerNetInterface.getStatus()) {
@@ -120,7 +115,6 @@ public class ServerView {
      * Edit the standard parameters for the server.
      * Most parameters can be modified with the Server Online.
      * Parameters that need a reboot to be activated will still be saved in the properties file (with no effect)
-     * @author Lancini Davide
      */
     public static void editParameters() {
         //TODO editParameters(): for now edit the properties file
@@ -129,7 +123,6 @@ public class ServerView {
     /**
      * Simple feature to keep the console clean, tested on windows, mac os and some linux distros.
      * Only works if the Logger is OFF
-     * @author Lancini Davide
      */
     private static void clearConsole(){
         if(logger.getLevel() == Level.OFF){

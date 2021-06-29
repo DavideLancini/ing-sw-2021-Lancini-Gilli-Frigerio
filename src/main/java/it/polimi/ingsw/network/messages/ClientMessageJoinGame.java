@@ -1,7 +1,7 @@
 package it.polimi.ingsw.network.messages;
 /**
  * Class ClientMessageJoinGame
- * @author gruppo 12
+ * @author Group 12
  */
 public class ClientMessageJoinGame extends ClientMessage {
     private String playerId;

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.network.messages;
 /**
  * Class ClientMessageChosenWhite
- * @author gruppo 12
+ * @author Group 12
  */
 public class ClientMessageChosenWhite extends ClientMessage{
     private final boolean position;

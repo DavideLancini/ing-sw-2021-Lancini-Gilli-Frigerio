@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 /**
  * Class CLIActionManager
- * @author gruppo 12
+ * @author Group 12
  */
 public class CLIActionManager extends Manager {
 

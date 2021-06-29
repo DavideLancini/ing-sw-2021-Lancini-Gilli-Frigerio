@@ -10,7 +10,7 @@ import it.polimi.ingsw.network.messages.ServerMessage;
 /**
  * Class Serializer
  * Utility class to rapidly build and use gson
- * @author gruppo 12
+ * @author Group 12
  */
 public class Serializer {
     /**

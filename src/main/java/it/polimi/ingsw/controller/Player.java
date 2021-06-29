@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  * Class Player
- * @author gruppo 12
+ * @author Group 12
  */
 public class Player extends Thread{
     private static Logger logger;

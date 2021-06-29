@@ -13,7 +13,7 @@ import static java.lang.Thread.sleep;
 
 /**
  * Class ServerNetInterface
- * @author gruppo 12
+ * @author Group 12
  */
 public class ServerNetInterface {
     private static Logger logger;
@@ -22,10 +22,13 @@ public class ServerNetInterface {
     public static boolean isON = false;
 
     private static int activeSlots = 0;
-    private static int activeGames = 0;
 
     private static ServerSocket serverSocket;
 
+    /**
+     * Definition for a small thread that starts single connection
+     *
+     */
     private static final Thread connection = new Thread() {
         @Override
         public void run() {
@@ -40,7 +43,6 @@ public class ServerNetInterface {
 
     /**
      * Setter for the Logger
-     * @author Lancini Davide
      */
     public static void setLogger(Logger logger) {
         ServerNetInterface.logger = logger;
@@ -48,7 +50,6 @@ public class ServerNetInterface {
 
     /**
      * Setter for the Server Port.
-     * @author Lancini Davide
      */
     public static void setPort(int listenerPort) throws ListenerOccupiedException {
         if(isON){
@@ -61,7 +62,6 @@ public class ServerNetInterface {
 
     /**
      * Setter for the Server Max Slot.
-     * @author Lancini Davide
      */
     public static void setMaxSlots(int listenerMaxSlot) throws InstantiationException {
         if(isON & activeSlots > listenerMaxSlot){
@@ -74,7 +74,6 @@ public class ServerNetInterface {
 
     /**
      * Getter for the Logger.
-     * @author Lancini Davide
      */
     public static Logger getLogger() {
         return logger;
@@ -82,7 +81,6 @@ public class ServerNetInterface {
 
     /**
      * Getter for the Server Port.
-     * @author Lancini Davide
      */
     public static int getPort(){
         return port;
@@ -90,7 +88,6 @@ public class ServerNetInterface {
 
     /**
      * Getter for the Server Max Slot.
-     * @author Lancini Davide
      */
     public static int getMaxSlots() {
         return maxSlots;
@@ -98,17 +95,11 @@ public class ServerNetInterface {
 
     /**
      * Getter for the Status
-     * @author Lancini Davide
      */
     public static boolean getStatus(){ return isON;}
 
-    public static int getActiveGames() {
-        return activeGames;
-    }
-
     /**
      * Main Server Method
-     * @author Lancini Davide
      */
     public static void startServer(){
         if(isON){
@@ -131,35 +122,33 @@ public class ServerNetInterface {
     }
 
     /**
-     * Stop Listener without save (for now).
-     * @author Lancini Davide
+     * Stop the entire server network, every components will be shutdown without saving
      */
     public static void stopServer(){
         try {
             isON = false; //mark the Network OFF
             Socket emptyPlayerResolver = new Socket("localhost", port);
-            try {
-                sleep(1000);
-            } catch (InterruptedException e) {
-                //TODO
-            }
+            sleep(1000);
             serverSocket.close(); //close the Main Socket
             connection.interrupt(); //Interrupt the connection creator
-
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             logger.log(Level.WARNING,"Closing failed");
         }
     }
 
+    /**
+     * Increase the Active Slots Count when a new connection is made
+     */
     public static void addPlayer(){
         activeSlots++;
         logger.info("Slots: " + activeSlots + "/" + maxSlots);
     }
 
+    /**
+     * Decrease the Active Slots Count when a connection is lost
+     */
     public static void removePlayer(){
         activeSlots--;
         logger.info("Slots: " + activeSlots + "/" + maxSlots);
     }
-
-
 }

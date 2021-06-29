@@ -6,7 +6,7 @@ import it.polimi.ingsw.network.Message;
 
 /**
  * Class ClientMessage
- * @author gruppo 12
+ * @author Group 12
  */
 public abstract class ClientMessage extends Message {
     /**

@@ -2,7 +2,7 @@ package it.polimi.ingsw.model;
 
 /**
  * Class efaultProduction
- * @author gruppo 12
+ * @author Group 12
  */
 public class DefaultProduction extends Production{
     /**

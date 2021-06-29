@@ -6,7 +6,7 @@ import javax.swing.*;
 
 /**
  * enum Resource
- * @author Gruppo 12
+ * @author Group 12
  */
 public enum Resource {
     STONE("\u001b[38;5;246m⛘\u001b[0m"),

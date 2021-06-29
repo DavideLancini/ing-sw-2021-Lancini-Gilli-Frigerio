@@ -7,7 +7,7 @@ import java.util.Objects;
 
 /**
  * Class PlayerBoard
- * @author Gruppo 12
+ * @author Group 12
  */
 public class PlayerBoard {
 

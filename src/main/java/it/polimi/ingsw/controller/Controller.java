@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 /**
  * Class Controller
- * @author Gruppo 12
+ * @author Group 12
  */
 public class Controller {
 

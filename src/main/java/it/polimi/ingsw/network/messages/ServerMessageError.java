@@ -1,7 +1,7 @@
 package it.polimi.ingsw.network.messages;
 /**
  * Class ServerMessageError
- * @author gruppo 12
+ * @author Group 12
  */
 public class ServerMessageError extends ServerMessage {
     private String error;

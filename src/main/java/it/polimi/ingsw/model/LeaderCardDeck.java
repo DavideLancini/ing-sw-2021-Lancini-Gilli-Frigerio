@@ -7,7 +7,7 @@ import java.util.Stack;
 
 /**
  * Class LeaderCardDeck
- * @author Gruppo 12
+ * @author Group 12
  */
 public class LeaderCardDeck {
 

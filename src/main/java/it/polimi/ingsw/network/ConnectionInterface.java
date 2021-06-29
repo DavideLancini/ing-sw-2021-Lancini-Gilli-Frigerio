@@ -11,11 +11,24 @@ import java.util.logging.Logger;
 
 import static java.lang.Thread.sleep;
 
+/**
+ * Class Connection Interface.
+ * Used by the Server App and identifies a single connection between Server and Client
+ *
+ * @author Group 12
+ */
 public class ConnectionInterface{
     private static Logger logger;
     private Sender sender;
     private Listener listener;
 
+    /**
+     * Constructor for the Connection Interface. It receive parameters for the connection and the logger.
+     * It first creates a listener and waits for a connection. It will then receive the port on witch to connect the
+     * sender
+     *
+     * @throws DisconnectedException if something fails, and whatever is created to that point is closed
+     */
     public ConnectionInterface(ServerSocket fatherSocket, Logger logger) throws DisconnectedException {
         ConnectionInterface.logger = logger;
         //Create a new Listener
@@ -48,6 +61,12 @@ public class ConnectionInterface{
         ServerNetInterface.addPlayer();
     }
 
+    /**
+     * The send method take a message, serialize it with the Serializer and send the string via the sender.
+     * It tries to send the message 5 times, afterwards the connection is declared Interrupted
+     *
+     * @throws DisconnectedException after 5 failed tries and every component is closed
+     */
     public void send(Message message) throws DisconnectedException {
         int tries = 5;
         while(tries>0){
@@ -65,6 +84,12 @@ public class ConnectionInterface{
         throw new DisconnectedException("Failed to send");
     }
 
+    /**
+     * The receive method, use the Listener.receive method to receive a string from the input stream, then its converted
+     * to Message with the deserializer
+     *
+     * @throws DisconnectedException when it receive an error from the listener, it also closes every component
+     */
     public ClientMessage receive() throws DisconnectedException{
         try {
             return Serializer.deserializeMessage(listener.receive());

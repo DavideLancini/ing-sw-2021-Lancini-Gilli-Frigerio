@@ -6,7 +6,7 @@ import java.util.*;
 
 /**
  * class ActionPile
- * @author Gruppo 12
+ * @author Group 12
  */
 public class ActionPile {
     private Stack<ActionToken> pile;

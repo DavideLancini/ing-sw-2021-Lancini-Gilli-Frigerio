@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 /**
  * Class LeaderProduction extends LeaderCard
  *
- * @author Gruppo 12
+ * @author Group 12
  */
 public class LeaderProduction extends LeaderCard {
     private Production production;

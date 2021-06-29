@@ -3,7 +3,7 @@ package it.polimi.ingsw.network.messages;
 import it.polimi.ingsw.model.Resource;
 /**
  * Class ServerMessageTwoMarbleLeaders
- * @author gruppo 12
+ * @author Group 12
  */
 public class ServerMessageTwoMarbleLeaders extends ServerMessage{
     Resource one, two;

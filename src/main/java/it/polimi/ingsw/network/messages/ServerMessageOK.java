@@ -1,7 +1,7 @@
 package it.polimi.ingsw.network.messages;
 /**
  * Class ServerMessageOK
- * @author gruppo 12
+ * @author Group 12
  */
 public class ServerMessageOK extends ServerMessage {
 

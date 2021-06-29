@@ -3,7 +3,7 @@ package it.polimi.ingsw.network.messages;
 
 /**
  * Class ClientMessageCreateGame
- * @author gruppo 12
+ * @author Group 12
  */
 public class ClientMessageCreateGame extends ClientMessage {
     private final int players;

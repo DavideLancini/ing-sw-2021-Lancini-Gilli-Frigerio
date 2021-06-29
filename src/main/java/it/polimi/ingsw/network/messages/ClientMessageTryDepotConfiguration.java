@@ -6,7 +6,7 @@ import it.polimi.ingsw.network.DisconnectedException;
 
 /**
  * Class ClientMessageTryDepotConfiguration
- * @author gruppo 12
+ * @author Group 12
  */
 public class ClientMessageTryDepotConfiguration extends ClientMessage {
     private Resource[] input = new Resource[6];

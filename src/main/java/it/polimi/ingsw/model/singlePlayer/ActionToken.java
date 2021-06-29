@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.*;
 
 /**
  * class ActionToken
- * @author Gruppo 12
+ * @author Group 12
  */
 public abstract class ActionToken {
     protected ActionType actionType;
@@ -17,7 +17,7 @@ public abstract class ActionToken {
 }
 /**
  * class ActionFaith extends ActionToken
- * @author Gruppo 12
+ * @author Group 12
  */
 class ActionFaith extends ActionToken{
     public ActionFaith(){
@@ -31,7 +31,7 @@ class ActionFaith extends ActionToken{
 }
 /**
  * class ActionShuffle extends ActionToken
- * @author Gruppo 12
+ * @author Group 12
  */
 class ActionShuffle extends ActionToken{
     public ActionShuffle(){
@@ -45,7 +45,7 @@ class ActionShuffle extends ActionToken{
 }
 /**
  * class ActionRemove extends ActionToken
- * @author Gruppo 12
+ * @author Group 12
  */
 class ActionRemove extends ActionToken{
     private final CardColor cardColor;

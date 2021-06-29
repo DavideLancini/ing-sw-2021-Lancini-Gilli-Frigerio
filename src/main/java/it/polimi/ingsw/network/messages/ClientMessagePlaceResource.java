@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.Resource;
 
 /**
  * Class ClientMessagePlaceResource
- * @author gruppo 12
+ * @author Group 12
  */
 public class ClientMessagePlaceResource extends ClientMessage{
     private final Resource resource;

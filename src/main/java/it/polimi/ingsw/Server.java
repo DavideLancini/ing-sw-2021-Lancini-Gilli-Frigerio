@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 /**
  * Server App
  *
- * @author Lancini Davide
+ * @author Group 12
  */
 public class Server {
     public static Logger logger = Logger.getLogger("ServerApp");

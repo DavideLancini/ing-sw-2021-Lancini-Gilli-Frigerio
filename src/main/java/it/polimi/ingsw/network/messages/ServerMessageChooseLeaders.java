@@ -2,7 +2,7 @@ package it.polimi.ingsw.network.messages;
 
 /**
  * Class ServerMessageAddResource
- * @author gruppo 12
+ * @author Group 12
  */
 
 public class ServerMessageChooseLeaders extends ServerMessage{

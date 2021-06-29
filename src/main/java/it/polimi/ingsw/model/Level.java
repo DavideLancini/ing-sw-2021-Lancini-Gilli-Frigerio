@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model;
 /**
  * enum Level
- * @author Gruppo 12
+ * @author Group 12
  */
 public enum Level {
     ONE("."),

@@ -13,7 +13,7 @@ import java.util.Collection;
 
 /**
  * Class Manager
- * @author gruppo 12
+ * @author Group 12
  */
 public abstract class Manager {
 
