@@ -1,9 +1,13 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.controller.ClientController;
+import it.polimi.ingsw.controller.Player;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
+import it.polimi.ingsw.network.NetInterface;
 import it.polimi.ingsw.network.messages.ClientMessage;
+import it.polimi.ingsw.network.messages.ClientMessageJoinGame;
 import it.polimi.ingsw.network.messages.ServerMessageChooseLeaders;
 import it.polimi.ingsw.network.messages.ServerMessageView;
 
@@ -54,7 +58,35 @@ public abstract class Manager {
 
     public abstract String showOfflineMenu();
 
-    public abstract void startOfflineGame(Manager manager);
+    public void startOfflineGame(Manager manager){
+        //Create Local Interface
+        NetInterface net = new NetInterface();
+        Log.logger.info("Net Created");
+
+        try {
+            //Create Local Player
+            Player offlinePlayer = new Player();
+            Log.logger.info("OK Player");
+            //Start the Player on a thread
+            offlinePlayer.start();
+            Log.logger.info("OK Start");
+
+            //Ask for a Local Game
+            net.send(new ClientMessageJoinGame("Offline", 1));
+            Log.logger.info("OK Message");
+
+            ClientController controller = new ClientController(manager);
+            Log.logger.info("OK Controller");
+            controller.setup(net);
+            Log.logger.info("OK Setup");
+
+
+            controller.main();
+            Log.logger.info("OK Main");
+        } catch (Exception e) {
+            Log.logger.warning("ERROR");
+        }
+    }
 
     public abstract void showCredits();
 }
