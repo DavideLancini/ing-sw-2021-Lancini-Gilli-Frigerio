@@ -175,6 +175,7 @@ public class CLIActionManager extends Manager {
 
     @Override
     public void showCredits() {
+        //TODO: showCredits
 
     }
 
