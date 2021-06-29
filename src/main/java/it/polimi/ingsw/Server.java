@@ -36,7 +36,7 @@ public class Server {
                     ServerView.editParameters();
                     break;
                 case "3":
-                    //Shutdown WITHOUT save, turn OFF the server first to save all the matches
+                    //Shutdown WITHOUT save
                     isON = false;
                     System.exit(0);
                     break;

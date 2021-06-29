@@ -31,7 +31,7 @@ public class ClientGUI {
                 ClientNetInterface net = manager.autoConnect(); //Only for Testing
                 //CLIActionManager.Connect();
 
-                String[] selection = manager.showMainMenu();
+                String[] selection = manager.showOnlineMenu();
                 logger.info(selection[0]);
                 logger.info(selection[1]);
 
@@ -48,7 +48,7 @@ public class ClientGUI {
                         break;
 
                     case "2":
-                        manager.createCustomMatch(selection[1]);
+                        // manager.createCustomMatch(selection[1]);
                         break;
                     case "3":
                         //TODO: Join Custom Match

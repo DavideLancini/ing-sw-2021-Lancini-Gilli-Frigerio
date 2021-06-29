@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public class Client {
     public static Logger logger = Logger.getLogger("ClientApp");
-
+    public static boolean isOn = true;
 
     public static void main(String[] args) {
 
@@ -23,62 +23,54 @@ public class Client {
         //Logger Creation
         logger.setLevel(Level.ALL);
         //Ask Online-Offline
-        boolean isON = manager.online();
-        if (isON) {
-            try {
+        boolean isOnline = manager.online();
+        while(isOn){
+            if (isOnline) {
+                try {
+                    ClientNetInterface net = manager.autoConnect(); //Only for Testing
+                    //CLIActionManager.Connect();
 
-                ClientNetInterface net = manager.autoConnect(); //Only for Testing
-                //CLIActionManager.Connect();
+                    String[] selection = manager.showOnlineMenu();
+                    switch (selection[0]) {
+                        case "1":
 
-                String[] selection = manager.showMainMenu();
-                switch (selection[0]) {
+                            ClientMessageJoinGame messageJoin = new ClientMessageJoinGame(selection[1], manager.joinMatch());
+                            net.send(messageJoin);
+                            ClientController controller = new ClientController(manager);
+                            controller.setup(net);
+                            controller.main();
+
+                            break;
+                        case "2":
+                            manager.showCredits();
+                            break;
+                        case "3":
+                            isOn = false;
+                            break;
+                        default:
+                            //Don't do anything and show again the main menu
+                            break;
+                    }
+                } catch (DisconnectedException e) {
+                    isOn = false;
+                }
+            } else {
+                switch (manager.showOfflineMenu()) {
                     case "1":
-
-                        ClientMessageJoinGame messageJoin = new ClientMessageJoinGame(selection[1], manager.joinMatch());
-                        net.send(messageJoin);
-                        ClientController controller = new ClientController(manager);
-                        controller.setup(net);
-                        controller.main();
-
+                        manager.startOfflineGame();
                         break;
                     case "2":
-                        manager.createCustomMatch(selection[1]);
+                        manager.showCredits();
                         break;
                     case "3":
-                        //TODO: Join Custom Match
-                        break;
-                    case "4":
-                        //TODO: Create custom rule set
-                        break;
-                    case "5":
-                        //TODO: Settings
-                        break;
-                    case "6":
-                        //TODO: Credits
-                        break;
-                    case "7":
-                        isON = false;
+                        isOn = false;
                         break;
                     default:
                         //Don't do anything and show again the main menu
                         break;
                 }
-            } catch (DisconnectedException e) {
-                isON = false;
             }
-        } else {
-            //TODO: Offline menu
         }
+
     }
 }
-
-//Logger Levels
-//Level.OFF     -> Nothing is logged
-//Level.SEVERE  -> Fatal Error
-//Level.WARNING -> Big Error
-//Level.INFO    -> Important Messages that should always be in the console
-//Level.CONFIG  -> Important Messages for debug
-//Level.FINE    -> Recoverable Failure
-//Level.FINER   -> Logging calls for entering, returning, or throwing an exception
-//Level.FINEST  -> Highly detailed tracking
-//Level.ALL     -> Everything is logged

@@ -139,6 +139,31 @@ public class CLIActionManager extends Manager {
         System.out.println("Waiting for your turn...\n\n");
     }
 
+    @Override
+    public String showOfflineMenu() {
+        String action;
+
+        System.out.println("1. Offline Game");
+        System.out.println("2. Credits");
+        System.out.println("3. Exit");
+        action = String.valueOf(readInt(1,3));
+
+
+        return action;
+    }
+
+    @Override
+    public void startOfflineGame() {
+        //self host a player
+        //autostart a 1
+
+    }
+
+    @Override
+    public void showCredits() {
+
+    }
+
     /**
      * CLI Interface for in-game actions
      * @param mainActionDone true if already took resources, bought a card or produced in this game turn
@@ -293,7 +318,7 @@ public class CLIActionManager extends Manager {
      * MainMenu
      * @return selected action of player/client
      */
-    public String[] showMainMenu() {
+    public String[] showOnlineMenu() {
         String action;
         String playerID;
         System.out.println("playerID:");
@@ -301,12 +326,9 @@ public class CLIActionManager extends Manager {
         if(playerID.equals(""))playerID = "player"+(int)Math.floor(Math.random()*1000000);
 
         System.out.println("1. Join Game");
-        System.out.println("2. Create Custom Game");
-        System.out.println("3. Join Custom Game");
-        System.out.println("4. Create Custom Rule Set");
-        System.out.println("5. Settings");
-        System.out.println("6. Credits");
-        action = String.valueOf(readInt(1,7));
+        System.out.println("2. Credits");
+        System.out.println("3. Exit");
+        action = String.valueOf(readInt(1,3));
 
 
         return new String[]{action, playerID};
@@ -334,28 +356,6 @@ public class CLIActionManager extends Manager {
         boolean position = readInt(0,1) == 1;
 
         return new ClientMessageChosenWhite(position);
-    }
-
-
-    /**
-     * Create match ask number of players for starting game
-     * @param s Player Id
-     */
-    public void createCustomMatch(String s) throws DisconnectedException {
-        System.out.println("Number of players?");
-        int numOfPlayers = readInt(1,4);
-
-        ClientMessageCreateGame createMessage= new ClientMessageCreateGame(numOfPlayers,s);
-        net.send(createMessage);
-        ServerMessageView serverMessage= (ServerMessageView) net.receive();
-        System.out.println(serverMessage.getView(true));
-
-
-
-        //TODO: create MessageCreateGame
-        //net.send (message)
-        //TODO: entra nella funzione InGame che da ora pilota il client
-
     }
 
     /**

@@ -97,14 +97,8 @@ public class GUIActionManager extends Manager {
         return ChoiceBox.prompt("How many players?", "Join Game", new String[]{"Singleplayer", "2 players", "3 players",  "4 players"})+1;
     }
 
-
     @Override
-    public void createCustomMatch(String s) throws DisconnectedException {
-        //TODO: possibly to remove
-    }
-
-    @Override
-    public String[] showMainMenu() {
+    public String[] showOnlineMenu() {
         MainMenu mm = new MainMenu();
         mm.prompt();
         return new String[]{String.valueOf(mm.choice), mm.id.getText().equals("") ? mm.playerid : mm.id.getText()};
@@ -120,6 +114,21 @@ public class GUIActionManager extends Manager {
     @Override
     public void waitForTurn() {
         gm.setWaiting();
+    }
+
+    @Override
+    public String showOfflineMenu() {
+        return null;
+    }
+
+    @Override
+    public void startOfflineGame() {
+
+    }
+
+    @Override
+    public void showCredits() {
+
     }
 
 }

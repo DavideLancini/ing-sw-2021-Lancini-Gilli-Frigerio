@@ -33,9 +33,7 @@ public abstract class Manager {
 
     public abstract int joinMatch();
 
-    public abstract void createCustomMatch(String s) throws DisconnectedException;
-
-    public abstract String[] showMainMenu();
+    public abstract String[] showOnlineMenu();
 
     public abstract boolean online();
 
@@ -55,4 +53,10 @@ public abstract class Manager {
         if(resources.remove(choice[2])) newResources[4] = choice[2];
         if(resources.remove(choice[2])) newResources[5] = choice[2];
     }
+
+    public abstract String showOfflineMenu();
+
+    public abstract void startOfflineGame();
+
+    public abstract void showCredits();
 }
