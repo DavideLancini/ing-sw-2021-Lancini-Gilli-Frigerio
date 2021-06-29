@@ -1,10 +1,11 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.view.gui.menus.*;
+import it.polimi.ingsw.view.gui.menus.LeaderOptionsMenu;
 
 import javax.swing.*;
 import java.util.Arrays;
+
 //USED ONLY TO TEST GUI
 public class StrdPannel {
     public static void main(String[] args) throws Exception {
@@ -27,9 +28,9 @@ public class StrdPannel {
 
          pb.setLeaders(new LeaderCard[]{
                  new LeaderSale(1, Resource.SERVANT, null, "src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png")
-                    , new LeaderSale(1, Resource.SERVANT, null, "src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png")});
+                    , new LeaderProduction(1, Resource.SERVANT, null, null, "src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png")});
          pb.getLeaderCard(0).toggleActive();
-
+        ((LeaderProduction)pb.getLeaderCard(1)).setChoice(Resource.SERVANT);
 
 
         Resource[] r1= {Resource.SHIELD,Resource.SERVANT,Resource.SHIELD,Resource.SHIELD};
@@ -56,13 +57,13 @@ public class StrdPannel {
 
 
 
-        //frame.add(new PlayerBoardPanel(pb,true));
+        //frame.add(new PlayerBoardPanel(pb,true, "YOU"));
         //frame.add(new MarketPanel(new Market()));
-        new TakeResourcesMenu(new Market()).prompt();
-        new BuyDevCardMenu(dcb.getTop()).prompt();
-        new DefaultProductionMenu(new DefaultProduction()).prompt();
+        //new TakeResourcesMenu(new Market()).prompt();
+        //new BuyDevCardMenu(dcb.getTop()).prompt();
+        //new DefaultProductionMenu(new DefaultProduction()).prompt();
         new LeaderOptionsMenu(pb.getLeaderCard()).prompt();
-        new ProduceMenu(pb).prompt();
+        //new ProduceMenu(pb).prompt();
 
         frame.pack();
         frame.setVisible(true);

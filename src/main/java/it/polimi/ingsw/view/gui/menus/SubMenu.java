@@ -3,8 +3,8 @@ package it.polimi.ingsw.view.gui.menus;
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class SubMenu {
-    JFrame frame =  new JFrame();
+public abstract class SubMenu extends JFrame{
+    JFrame frame = this;
     JPanel panel = new JPanel();
 
     void finalizeAndWait(){
@@ -12,7 +12,7 @@ public abstract class SubMenu {
         frame.setVisible(true);
         frame.pack();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 
         synchronized (this){

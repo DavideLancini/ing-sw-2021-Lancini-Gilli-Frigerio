@@ -438,9 +438,9 @@ public class Controller {
             }
             Server.logger.info("Depot Emptied, total collected: "+resources);
         }
-        catch(Exception e){
-            //TODO: critical error, resources will get lost in process
-            Server.logger.info("Critical error");
+        catch(Exception ignored){
+            //critical error, resources will get lost in process. Cannot happen due to constraints on i
+            //Server.logger.info("Critical error");
         }
         Server.logger.info(pb.getDepot().depotView());
 

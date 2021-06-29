@@ -6,6 +6,7 @@ import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.ClientMessageJoinGame;
 import it.polimi.ingsw.view.CLIActionManager;
 import it.polimi.ingsw.view.Manager;
+import it.polimi.ingsw.view.gui.menus.GUIActionManager;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,14 +18,18 @@ public class Client {
     public static Logger logger = Logger.getLogger("ClientApp");
     public static boolean isOn = true;
 
-    public static void main(String[] args) {
+    public static void run(String version, String[] args) {
 
-        Manager manager = new CLIActionManager();
+        Manager manager;
+        if(version.equals("cli"))manager = new CLIActionManager();
+        else manager = new GUIActionManager();
+
         //Logger Creation
         logger.setLevel(Level.ALL);
-        //Ask Online-Offline
-        boolean isOnline = manager.online();
+
         while(isOn){
+            //Ask Online-Offline
+            boolean isOnline = manager.online();
             if (isOnline) {
                 try {
                     ClientNetInterface net = manager.autoConnect(); //Only for Testing
@@ -34,7 +39,9 @@ public class Client {
                     switch (selection[0]) {
                         case "1":
 
-                            ClientMessageJoinGame messageJoin = new ClientMessageJoinGame(selection[1], manager.joinMatch());
+                            int players = manager.joinMatch();
+                            if(players < 1) break; //Used in GUI if dialog is closed, shouldn't happen in cli
+                            ClientMessageJoinGame messageJoin = new ClientMessageJoinGame(selection[1], players);
                             net.send(messageJoin);
                             ClientController controller = new ClientController(manager);
                             controller.setup(net);
@@ -52,6 +59,8 @@ public class Client {
                             break;
                     }
                 } catch (DisconnectedException e) {
+                    //Display error, then quit
+                    manager.displayError("You are no longer connected to the server.");
                     isOn = false;
                 }
             } else {
@@ -71,6 +80,6 @@ public class Client {
                 }
             }
         }
-
+        System.exit(0);
     }
 }

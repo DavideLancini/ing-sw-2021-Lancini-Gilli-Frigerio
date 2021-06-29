@@ -1,9 +1,7 @@
 package it.polimi.ingsw.view.gui.menus;
 
-import it.polimi.ingsw.Client;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceCounter;
-import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.view.Manager;
 import it.polimi.ingsw.view.gui.ChoiceBox;
@@ -11,12 +9,9 @@ import it.polimi.ingsw.view.gui.ResIcons;
 
 import javax.swing.*;
 import java.util.Collection;
-import java.util.logging.Logger;
 
 public class GUIActionManager extends Manager {
 
-    private static Logger logger = Client.logger;
-    private static ClientNetInterface net;
     private static final GameMenu gm = new GameMenu();
 
 
@@ -93,20 +88,25 @@ public class GUIActionManager extends Manager {
     @Override
     public int joinMatch() {
         gm.setVisible();
-        return ChoiceBox.prompt("How many players?", "Join Game", new String[]{"Singleplayer", "2 players", "3 players",  "4 players"})+1;
+        int choice = ChoiceBox.prompt("How many players?", "Join Game", new String[]{"Singleplayer", "2 players", "3 players",  "4 players"})+1;
+        if(choice<1)gm.close();
+        return choice;
     }
 
     @Override
     public String[] showOnlineMenu() {
         MainMenu mm = new MainMenu();
-        mm.prompt();
-        return new String[]{String.valueOf(mm.choice), mm.id.getText().equals("") ? mm.playerid : mm.id.getText()};
+        String playerid = "player"+(int)Math.floor(Math.random()*1000000);
+        int choice = mm.prompt();
+        return new String[]{String.valueOf(choice), mm.id.getText().equals("") ? playerid : mm.id.getText()};
     }
 
     @Override
     public boolean online() {
         int choice = ChoiceBox.prompt("Play Online?", "Masters of Renaissance",new String[]{"Online", "Offline"});
-        if(choice < 0) throw new RuntimeException("Application Closed by User");
+        if(choice < 0) {
+            throw new RuntimeException("Application Closed by User");
+        }
         return choice == 0;
     }
 
@@ -117,17 +117,20 @@ public class GUIActionManager extends Manager {
 
     @Override
     public String showOfflineMenu() {
-        return null;
+        OfflineMenu mm = new OfflineMenu();
+        int choice = mm.prompt();
+        return String.valueOf(choice);
     }
 
     @Override
     public void startOfflineGame(Manager manager) {
-
+        gm.setVisible();
+        super.startOfflineGame(manager);
     }
 
     @Override
     public void showCredits() {
-
+        //TODO: show credits
     }
 
 }

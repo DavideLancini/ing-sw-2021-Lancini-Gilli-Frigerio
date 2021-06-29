@@ -14,8 +14,7 @@ public class GameTest{
     {
         try {
             fatherSocket = new ServerSocket();
-        } catch (IOException e) {
-            //TODO
+        } catch (IOException ignored) {
         }
     }
 

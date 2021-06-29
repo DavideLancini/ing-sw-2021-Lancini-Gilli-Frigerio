@@ -23,7 +23,6 @@ public class LeadersChoiceMenu extends SubMenu implements ActionListener {
             this.setHeader("Choose 2 of the following 4 leader cards:");
             panel.add(Box.createRigidArea(new Dimension(0,30)));
 
-            frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             frame.setTitle("Initial Setup");
 
             JPanel middle = new JPanel();

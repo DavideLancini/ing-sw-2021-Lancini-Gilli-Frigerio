@@ -12,6 +12,7 @@ import it.polimi.ingsw.view.gui.panels.MarketPanel;
 import it.polimi.ingsw.view.gui.panels.PlayerBoardPanel;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,11 +28,13 @@ public class GameMenu implements ActionListener {
     private final GridBagConstraints pbc = new GridBagConstraints();
     private final GridBagConstraints mc = new GridBagConstraints();
     private final GridBagConstraints dbc = new GridBagConstraints();
+    private final GridBagConstraints bc = new GridBagConstraints();
+
     private int playerNumber;
     private JPanel mpanel;
     private JPanel dbpanel;
+    private JPanel buttonpanel;
     private String choice;
-
     private Market market;
     private DevCardBoard devCardBoard;
     private PlayerBoard playerBoard;
@@ -49,33 +52,56 @@ public class GameMenu implements ActionListener {
 
     public GameMenu(){
         //order elements around
+
+        JScrollPane sp = new JScrollPane(internalPanel);
+
+
+        for(JButton each : this.options){
+            each.addActionListener(this);
+            each.setAlignmentX(Component.CENTER_ALIGNMENT);
+            each.setMaximumSize(new Dimension(200, each.getMinimumSize().height));
+        }
+
         wait.setFont(new Font(null, Font.PLAIN, 40));
         internalPanel.add(wait);
         setWaiting();
-        JScrollPane sp = new JScrollPane(internalPanel);
 
-        for(JButton each : this.options)each.addActionListener(this);
-
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().add(sp);
         frame.setVisible(false);
         frame.setTitle("Masters of Renaissance");
         frame.setSize(1920,1080);
         internalPanel.setLayout(new GridBagLayout());
+        internalPanel.setBorder(new EmptyBorder(new Insets(20,20,30,30)));
+
+
+
+        //Constraints setup
         pbc.gridy = 1;
         pbc.gridx = 2;
-        pbc.gridheight = 3;
-        mc.gridy = 2;
+        pbc.gridheight = 4;
+        mc.gridy = 4;
         mc.gridx = 0;
         mc.weightx = 0;
+        mc.weighty = 0;
+        mc.gridheight = 1;
         dbc.gridy = 2;
         dbc.gridx = 1;
+        dbc.gridheight = pbc.gridheight-1;
         dbc.weightx = 0.5;
         pbc.weightx = 0.5;
+        bc.gridy = mc.gridy-2;
+        bc.gridx = 0;
+
     }
 
     public void setVisible(){
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
+    }
+
+    public void close(){
+        frame.dispose();
     }
 
     public void setWaiting(){
@@ -88,24 +114,22 @@ public class GameMenu implements ActionListener {
 
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = mc.gridx;
+        c.gridy = mc.gridy - 1;
+        c.gridheight = 2;
+        internalPanel.add(new ButtonPanel(false), c);
+
+        c.gridheight = 1;
+        c.gridx = mc.gridx;
         c.gridy = mc.gridy-1;
         JLabel label = new JLabel("Market");
         label.setFont(new Font(null, Font.BOLD,15));
         internalPanel.add(label, c);
-        c.gridy = mc.gridy + 1;
-        internalPanel.add(options[0],c);
 
         c.gridx = dbc.gridx;
         c.gridy = dbc.gridy-1;
         label = new JLabel("Development Cards Board");
         label.setFont(new Font(null, Font.BOLD,15));
         internalPanel.add(label, c);
-        c.gridy = dbc.gridy + 1;
-        internalPanel.add(options[1],c);
-
-        c.gridx = 4;
-        c.gridy = 5;
-        internalPanel.add(options[5],c);
     }
 
 
@@ -115,7 +139,10 @@ public class GameMenu implements ActionListener {
         //activate elements
         switch(opanel.getElem()){
             case PB: displayPB(Serializer.deserializePB(opanel.getView(false))); break;
-            case OtherPB: displayOPB(Serializer.deserializePB(opanel.getView(false))); break;
+            case OtherPB:
+                displayOPB(Serializer.deserializePB(opanel.getView(false)),
+                        opanel.getView(true).split("\n",2)[0]);
+                break;
             case Market: displayMarket(Serializer.deserializeMarket(opanel.getView(false))); break;
             case DevBoard: displayDev(Serializer.deserializeDB(opanel.getView(false))); break;
         }
@@ -182,25 +209,18 @@ public class GameMenu implements ActionListener {
     }
 
     private void showButtons(boolean action) {
-        //TODO: position the other buttons
-        GridBagConstraints c = new GridBagConstraints();
-        if(!action) {
-            c.gridx = mc.gridx;
-            c.gridy = mc.gridy + 1;
-            internalPanel.add(options[0], c);
-
-            c.gridx = dbc.gridx;
-            c.gridy = dbc.gridy + 1;
-            internalPanel.add(options[1], c);
-        }
-
-        c.gridx = 4;
-        c.gridy = 5;
-        internalPanel.add(options[5],c);
+        buttonpanel = new ButtonPanel(action);
+        internalPanel.add(buttonpanel, bc);
+        SwingUtilities.updateComponentTreeUI(frame);
     }
 
     private void hideButtons(){
-        for(JButton each : options)internalPanel.remove(each);
+        try{
+            internalPanel.remove(buttonpanel);
+        }
+        catch (NullPointerException ignored){}
+        internalPanel.add(Box.createRigidArea(new Dimension(10,10)),bc);
+        SwingUtilities.updateComponentTreeUI(frame);
     }
 
 
@@ -211,23 +231,23 @@ public class GameMenu implements ActionListener {
             internalPanel.remove(pbpanel);
         }
         catch (NullPointerException ignored){}
-        this.pbpanel = new PlayerBoardPanel(pb,true);
+        this.pbpanel = new PlayerBoardPanel(pb,true, "YOU");
         this.playerBoard = pb;
         internalPanel.add(this.pbpanel, pbc);
     }
 
-    private void displayOPB(PlayerBoard pb){
+    private void displayOPB(PlayerBoard pb, String id){
         try{
             internalPanel.remove(others[playerNumber]);
         }
         catch (NullPointerException ignored){}
 
         GridBagConstraints c = new GridBagConstraints();
-        c.gridy = 5;
+        c.gridy = 10;
         c.gridx = playerNumber;
         c.weightx = 1;
         c.insets = new Insets(0,5,15,5);
-        others[playerNumber] = new PlayerBoardPanel(pb, false);
+        others[playerNumber] = new PlayerBoardPanel(pb, false, id);
         internalPanel.add(others[playerNumber], c);
         playerNumber++;
     }
@@ -253,4 +273,21 @@ public class GameMenu implements ActionListener {
         this.devCardBoard = db;
         internalPanel.add(this.dbpanel, dbc);
     }
+
+    private class ButtonPanel extends JPanel{
+        ButtonPanel(boolean action){
+            super();
+            this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+            for(int i = 0; i<3 && !action; i++){
+                this.add(options[i]);
+                this.add(Box.createRigidArea(new Dimension(0,5)));
+            }
+            for(int i = 3; i<options.length; i++){
+                this.add(options[i]);
+                this.add(Box.createRigidArea(new Dimension(0,5)));
+            }
+        }
+
+    }
 }
+

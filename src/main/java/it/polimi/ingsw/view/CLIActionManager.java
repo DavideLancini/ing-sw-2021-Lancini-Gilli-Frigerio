@@ -1,16 +1,10 @@
 package it.polimi.ingsw.view;
 
 
-import it.polimi.ingsw.Client;
-import it.polimi.ingsw.controller.ClientController;
-import it.polimi.ingsw.controller.Player;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.network.ClientNetInterface;
-import it.polimi.ingsw.network.NetInterface;
 import it.polimi.ingsw.network.messages.*;
 
 import java.util.Collection;
-import java.util.logging.Logger;
 
 /**
  * Class CLIActionManager
@@ -18,9 +12,6 @@ import java.util.logging.Logger;
  */
 public class CLIActionManager extends Manager {
 
-
-    private static Logger logger = Client.logger;
-    private static ClientNetInterface net;
 
     /**
      * Read a number from user input
@@ -153,36 +144,6 @@ public class CLIActionManager extends Manager {
         return action;
     }
 
-    @Override
-    public void startOfflineGame(Manager manager){
-        //Create Local Interface
-        NetInterface net = new NetInterface();
-        logger.info("Net Created");
-
-        try {
-            //Create Local Player
-            Player offlinePlayer = new Player();
-            logger.info("OK Player");
-            //Start the Player on a thread
-            offlinePlayer.start();
-            logger.info("OK Start");
-
-            //Ask for a Local Game
-            net.send(new ClientMessageJoinGame("Offline", 1));
-            logger.info("OK Message");
-
-            ClientController controller = new ClientController(manager);
-            logger.info("OK Controller");
-            controller.setup(net);
-            logger.info("OK Setup");
-
-
-            controller.main();
-            logger.info("OK Main");
-        } catch (Exception e) {
-            logger.warning("ERROR");
-        }
-    }
 
     @Override
     public void showCredits() {
@@ -329,11 +290,14 @@ public class CLIActionManager extends Manager {
         }
         System.out.println(ViewHelper.displayS2S(sleaders));
 
-        System.out.println("Enter the number of the first chosen Leader:");
-        i = readInt(1,4);
-        System.out.println("Enter the number of the second chosen Leader:");
-        j = readInt(1,4);
-
+        do {
+            System.out.println("Enter the number of the first chosen Leader:");
+            i = readInt(1, 4);
+            System.out.println("Enter the number of the second chosen Leader:");
+            j = readInt(1, 4);
+            if(i == j)System.out.println("You can't choose the same Leader twice.\n");
+        }
+        while(i == j);
         return new ClientMessageChosenLeaders(i-1,j-1);
     }
 
@@ -355,7 +319,6 @@ public class CLIActionManager extends Manager {
         System.out.println("2. Credits");
         System.out.println("3. Exit");
         action = String.valueOf(readInt(1,3));
-
 
         return new String[]{action, playerID};
     }
@@ -390,6 +353,6 @@ public class CLIActionManager extends Manager {
      */
     public int joinMatch() {
         System.out.println("How many players?");
-        return  readInt(1,4);
+        return readInt(1,4);
     }
 }

@@ -8,17 +8,15 @@ import java.awt.event.ActionListener;
 
 public class MainMenu implements ActionListener {
     int choice = -1;
-    String playerid = "player"+(int)Math.floor(Math.random()*1000000);
     JTextField id = new JTextField();
-    private final JFrame frame = new JFrame();
+    JLabel username = new JLabel("Username:");
+    final JPanel panel = new JPanel();
+    final JFrame frame = new JFrame();
+    String[] options = {"Join Game", "Credits", "Quit"};
 
-    private final String[] options = {"Join Game", "Create Custom Game", "Join Custom Game", "Create Custom Rule Set", "Settings", "Credits", "Quit"};
-
-
-    public void prompt(){
+    public MainMenu(){
         frame.setTitle("Masters of Renaissance");
 
-        JPanel panel = new JPanel();
         JLabel title = new JLabel("Masters of Renaissance");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setFont(new Font("", Font.BOLD, 40));
@@ -26,7 +24,6 @@ public class MainMenu implements ActionListener {
         panel.add(title);
         panel.add(Box.createRigidArea(new Dimension(0,50)));
 
-        JLabel username = new JLabel("Username:");
         username.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(username);
 
@@ -41,6 +38,12 @@ public class MainMenu implements ActionListener {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(new EmptyBorder(new Insets(50, 80, 50, 80)));
 
+
+
+    }
+
+
+    public int prompt(){
 
         for(String each : options){
             JButton btn = new JButton(each);
@@ -68,8 +71,7 @@ public class MainMenu implements ActionListener {
                 }
             }
         }
-
-
+        return this.choice;
     }
 
     @Override

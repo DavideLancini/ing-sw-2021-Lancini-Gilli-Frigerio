@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class PlayerBoardPanel extends JPanel {
 
-    public PlayerBoardPanel(PlayerBoard pb, boolean own){
+    public PlayerBoardPanel(PlayerBoard pb, boolean own, String id){
         super();
         this.setLayout(new GridBagLayout());
         this.setBorder(BorderFactory.createLineBorder(Color.black, 2, true));
@@ -20,7 +20,7 @@ public class PlayerBoardPanel extends JPanel {
         c.gridx=0;
         c.gridy=0;
 
-        JLabel player = new JLabel("player   "+pb.getFaith(), ResIcons.FAITH.toIcon(), SwingConstants.TRAILING);
+        JLabel player = new JLabel(id+"   "+pb.getFaith(), ResIcons.FAITH.toIcon(), SwingConstants.TRAILING);
         player.setHorizontalTextPosition(JLabel.LEFT);
         player.setFont(new Font(null, Font.BOLD, 20));
         this.add(player,c);
