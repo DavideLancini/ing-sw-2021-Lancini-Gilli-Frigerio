@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.Message;
+import it.polimi.ingsw.network.NetInterface;
 import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.view.Manager;
 
@@ -11,14 +12,14 @@ import it.polimi.ingsw.view.Manager;
  * @author Group 12
  */
 public class ClientController {
-    private ClientNetInterface net;
+    private NetInterface net;
     private final Manager manager;
 
     /**
      * setup net information
      * @param net contains all network information
      */
-    public void setup (ClientNetInterface net){
+    public void setup (NetInterface net){
         this.net = net;
     }
 

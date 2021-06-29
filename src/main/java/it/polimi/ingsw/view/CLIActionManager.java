@@ -2,11 +2,10 @@ package it.polimi.ingsw.view;
 
 
 import it.polimi.ingsw.Client;
-import it.polimi.ingsw.controller.Game;
+import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.controller.Player;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.ClientNetInterface;
-import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.NetInterface;
 import it.polimi.ingsw.network.messages.*;
 
@@ -151,25 +150,37 @@ public class CLIActionManager extends Manager {
         System.out.println("3. Exit");
         action = String.valueOf(readInt(1,3));
 
-
         return action;
     }
 
     @Override
-    public void startOfflineGame(){
+    public void startOfflineGame(Manager manager){
+        //Create Local Interface
         NetInterface net = new NetInterface();
         logger.info("Net Created");
-        ClientMessageJoinGame message = new ClientMessageJoinGame("Offline", 1);
-        logger.info("OK");
+
         try {
-            net.send(message);
-            logger.info("OK MESSAGE");
+            //Create Local Player
             Player offlinePlayer = new Player();
             logger.info("OK Player");
+            //Start the Player on a thread
             offlinePlayer.start();
             logger.info("OK Start");
+
+            //Ask for a Local Game
+            net.send(new ClientMessageJoinGame("Offline", 1));
+            logger.info("OK Message");
+
+            ClientController controller = new ClientController(manager);
+            logger.info("OK Controller");
+            controller.setup(net);
+            logger.info("OK Setup");
+
+
+            controller.main();
+            logger.info("OK Main");
         } catch (Exception e) {
-            logger.warning("Finish");
+            logger.warning("ERROR");
         }
     }
 

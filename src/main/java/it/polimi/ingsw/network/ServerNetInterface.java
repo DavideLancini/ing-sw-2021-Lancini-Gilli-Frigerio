@@ -1,5 +1,6 @@
 package it.polimi.ingsw.network;
 
+import it.polimi.ingsw.Server;
 import it.polimi.ingsw.network.components.Listener;
 import it.polimi.ingsw.network.components.Sender;
 import it.polimi.ingsw.network.components.Serializer;
@@ -18,7 +19,6 @@ import static java.lang.Thread.sleep;
  * @author Group 12
  */
 public class ServerNetInterface extends NetInterface{
-    private static Logger logger;
     private Sender sender;
     private Listener listener;
 
@@ -30,10 +30,9 @@ public class ServerNetInterface extends NetInterface{
      * @throws DisconnectedException if something fails, and whatever is created to that point is closed
      */
     public ServerNetInterface(ServerSocket fatherSocket, Logger logger) throws DisconnectedException {
-        ServerNetInterface.logger = logger;
         //Create a new Listener
         this.listener = new Listener(fatherSocket, logger);
-        logger.info("Listener created");
+        Server.logger.info("Listener created");
         //Receive the port to witch connect from the first message
         int clientPort;
         Message message = Serializer.deserializeMessage(listener.receive());

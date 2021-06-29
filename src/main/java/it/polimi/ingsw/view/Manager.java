@@ -56,7 +56,7 @@ public abstract class Manager {
 
     public abstract String showOfflineMenu();
 
-    public abstract void startOfflineGame();
+    public abstract void startOfflineGame(Manager manager);
 
     public abstract void showCredits();
 }

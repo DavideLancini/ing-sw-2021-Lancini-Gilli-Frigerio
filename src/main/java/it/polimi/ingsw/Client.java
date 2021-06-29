@@ -57,7 +57,7 @@ public class Client {
             } else {
                 switch (manager.showOfflineMenu()) {
                     case "1":
-                        manager.startOfflineGame();
+                        manager.startOfflineGame(manager);
                         break;
                     case "2":
                         manager.showCredits();

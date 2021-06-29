@@ -4,7 +4,6 @@ import it.polimi.ingsw.Client;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceCounter;
 import it.polimi.ingsw.network.ClientNetInterface;
-import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.view.Manager;
 import it.polimi.ingsw.view.gui.ChoiceBox;
@@ -122,7 +121,7 @@ public class GUIActionManager extends Manager {
     }
 
     @Override
-    public void startOfflineGame() {
+    public void startOfflineGame(Manager manager) {
 
     }
 

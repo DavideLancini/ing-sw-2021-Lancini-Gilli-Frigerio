@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 
+import it.polimi.ingsw.Client;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.PlayerBoard;
 import it.polimi.ingsw.network.*;
@@ -23,6 +24,8 @@ public class Player extends Thread{
 
     public Player(){
         this.net = new NetInterface();
+        Client.logger.info("Offline Player Initialized");
+        Player.logger = Client.logger;
     }
 
     /**
