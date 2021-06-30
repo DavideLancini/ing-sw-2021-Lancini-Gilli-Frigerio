@@ -1,9 +1,12 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.view.gui.menus.ArrangeMenu;
 import it.polimi.ingsw.view.gui.menus.LeaderOptionsMenu;
+import it.polimi.ingsw.view.gui.menus.ProduceMenu;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 //USED ONLY TO TEST GUI
@@ -27,8 +30,9 @@ public class StrdPannel {
          pb.getDefaultProduction().setOutput(Resource.SERVANT);
 
          pb.setLeaders(new LeaderCard[]{
-                 new LeaderSale(1, Resource.SERVANT, null, "src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png")
-                    , new LeaderProduction(1, Resource.SERVANT, null, null, "src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png")});
+                 new LeaderSale(1, Resource.SERVANT, null, "src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png"),
+                 new LeaderProduction(1, Resource.SERVANT, null, null, "src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png")});
+
          pb.getLeaderCard(0).toggleActive();
         ((LeaderProduction)pb.getLeaderCard(1)).setChoice(Resource.SERVANT);
 
@@ -64,6 +68,7 @@ public class StrdPannel {
         //new DefaultProductionMenu(new DefaultProduction()).prompt();
         new LeaderOptionsMenu(pb.getLeaderCard()).prompt();
         //new ProduceMenu(pb).prompt();
+        //new ArrangeMenu(Arrays.asList(Resource.SERVANT, Resource.COIN),1).prompt();
 
         frame.pack();
         frame.setVisible(true);

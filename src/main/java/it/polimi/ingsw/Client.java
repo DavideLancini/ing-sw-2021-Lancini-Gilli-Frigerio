@@ -19,14 +19,14 @@ public class Client {
 
     public static void run(String version, String[] args) {
 
-        Manager manager;
-        if(version.equals("cli"))manager = new CLIActionManager();
-        else manager = new GUIActionManager();
-
         //Logger Setup
         Log.logger.setLevel(Level.ALL);
-
         while(isOn){
+
+            Manager manager;
+            if(version.equals("cli"))manager = new CLIActionManager();
+            else manager = new GUIActionManager();
+
             //Ask Online-Offline
             boolean isOnline = manager.online();
             if (isOnline) {
@@ -77,7 +77,11 @@ public class Client {
                         //Don't do anything and show again the main menu
                         break;
                 }
+                //offline server doesn't handle recreation
+                //credo ci sia qualche static di troppo, per ora faccio che chiude
+                isOn = false;
             }
+            manager.close();
         }
         System.exit(0);
     }

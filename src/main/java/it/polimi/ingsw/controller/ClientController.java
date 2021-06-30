@@ -69,6 +69,7 @@ public class ClientController {
                     break;
 
                 case GameOver:
+                    manager.close();
                     return;
             }
         }

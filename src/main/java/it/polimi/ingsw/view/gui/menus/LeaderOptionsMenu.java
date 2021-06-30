@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.gui.menus;
 
 import it.polimi.ingsw.model.LeaderCard;
-import it.polimi.ingsw.model.LeaderProduction;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.messages.ClientMessage;
 import it.polimi.ingsw.network.messages.ClientMessageLeaderActivation;
@@ -24,18 +23,15 @@ public class LeaderOptionsMenu extends SubMenu implements ActionListener {
     public LeaderOptionsMenu(LeaderCard[] leaderCards) {
         int x = 150, y = 225;
 
+
         buttons[0] = new JButton("Activate Leader");
         buttons[2] = new JButton("Discard Leader");
         buttons[1] = new JButton("Activate Leader");
         buttons[3] = new JButton("Discard Leader");
-        if(leaderCards[0] instanceof LeaderProduction) {
-            buttons[4] = new JButton("Set Produced Resource", ((LeaderProduction) leaderCards[0]).getChoice().toIcon(20,20));
-        }
-        else buttons[4] = new JButton("Set Produced Resource");
-        if(leaderCards[1] instanceof LeaderProduction) {
-            buttons[5] = new JButton("Set Produced Resource", ((LeaderProduction) leaderCards[1]).getChoice().toIcon(20,20));
-        }
-        else buttons[5] = new JButton("Set Produced Resource");
+        buttons[4] = new JButton("Set Produced Resource");
+        buttons[5] = new JButton("Set Produced Resource");
+
+        //if(production(leaderCards))
 
 
         for (JButton button : buttons) button.addActionListener(this);
@@ -52,13 +48,17 @@ public class LeaderOptionsMenu extends SubMenu implements ActionListener {
         cards.setLayout(new BoxLayout(cards, BoxLayout.X_AXIS));
         cards.add(Box.createRigidArea(new Dimension(30,0)));
 
+
         for(LeaderCard each : leaderCards){
-            cards.add(new JLabel(new ImageIcon(new ImageIcon(each.getPath()).getImage().getScaledInstance(x,y, Image.SCALE_DEFAULT))));
+            cards.add(new JLabel(new ImageIcon(
+                    (each != null ? new ImageIcon(each.getPath()).getImage() : new ImageIcon("src/main/resources/Icons/back.PNG").getImage())
+                    .getScaledInstance(x,y, Image.SCALE_DEFAULT))));
             cards.add(Box.createRigidArea(new Dimension(30,0)));
         }
 
         panel.add(cards);
         panel.add(Box.createRigidArea(new Dimension(0,10)));
+
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridBagLayout());
@@ -73,9 +73,11 @@ public class LeaderOptionsMenu extends SubMenu implements ActionListener {
             if(c.gridx == 2){c.gridx = 0; c.gridy++;}
         }
 
-        if(leaderCards[0] instanceof LeaderProduction)buttonPanel.add(buttons[4],c);
+        if(isProduction(leaderCards[0]))buttonPanel.add(buttons[4],c);
         c.gridx = 1;
-        if(leaderCards[1] instanceof LeaderProduction)buttonPanel.add(buttons[5],c);
+        if(isProduction(leaderCards[1]))buttonPanel.add(buttons[5],c);
+
+
 
         panel.add(buttonPanel);
     }
@@ -111,5 +113,18 @@ public class LeaderOptionsMenu extends SubMenu implements ActionListener {
     public ClientMessage prompt() {
         this.finalizeAndWait();
         return message;
+    }
+
+    public static boolean isProduction(LeaderCard leader){
+        if(leader == null)return false;
+        String[] paths = {"src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-61-1.png",
+                "src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-62-1.png",
+                "src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-63-1.png",
+                "src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-64-1.png"
+        };
+        for(String each : paths){
+            if(leader.getPath().equals(each))return true;
+        }
+        return false;
     }
 }

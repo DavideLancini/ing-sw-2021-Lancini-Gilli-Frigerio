@@ -7,9 +7,11 @@ import it.polimi.ingsw.network.components.Serializer;
 import it.polimi.ingsw.network.messages.ClientMessage;
 import it.polimi.ingsw.network.messages.ClientMessageEndTurn;
 import it.polimi.ingsw.network.messages.ServerMessageView;
+import it.polimi.ingsw.view.gui.ChoiceBox;
 import it.polimi.ingsw.view.gui.panels.DevBoardPanel;
 import it.polimi.ingsw.view.gui.panels.MarketPanel;
 import it.polimi.ingsw.view.gui.panels.PlayerBoardPanel;
+import it.polimi.ingsw.view.gui.panels.SoloPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -22,7 +24,7 @@ public class GameMenu implements ActionListener {
     private final JPanel internalPanel = new JPanel();
     private final JLabel wait = new JLabel("Waiting for the other players...");
     private PlayerBoardPanel pbpanel;
-    private final PlayerBoardPanel[] others = new PlayerBoardPanel[3];
+    private final JPanel[] others = new JPanel[3];
 
 
     private final GridBagConstraints pbc = new GridBagConstraints();
@@ -82,7 +84,7 @@ public class GameMenu implements ActionListener {
         pbc.gridheight = 4;
         mc.gridy = 4;
         mc.gridx = 0;
-        mc.weightx = 0;
+        mc.weightx = 0.5;
         mc.weighty = 0;
         mc.gridheight = 1;
         dbc.gridy = 2;
@@ -92,7 +94,7 @@ public class GameMenu implements ActionListener {
         pbc.weightx = 0.5;
         bc.gridy = mc.gridy-2;
         bc.gridx = 0;
-
+        bc.weighty = 0;
     }
 
     public void setVisible(){
@@ -102,6 +104,7 @@ public class GameMenu implements ActionListener {
 
     public void close(){
         frame.dispose();
+        this.notify();
     }
 
     public void setWaiting(){
@@ -145,9 +148,12 @@ public class GameMenu implements ActionListener {
                 break;
             case Market: displayMarket(Serializer.deserializeMarket(opanel.getView(false))); break;
             case DevBoard: displayDev(Serializer.deserializeDB(opanel.getView(false))); break;
+            case Pure: ChoiceBox.prompt(opanel.getView(true), "Game Information", new String[]{"Continue"}); break;
+            case Solo: displaySolo(opanel.getView(true)); break;
         }
-        SwingUtilities.updateComponentTreeUI(frame);
     }
+
+
 
 
     //interactions
@@ -220,7 +226,6 @@ public class GameMenu implements ActionListener {
         }
         catch (NullPointerException ignored){}
         internalPanel.add(Box.createRigidArea(new Dimension(10,10)),bc);
-        SwingUtilities.updateComponentTreeUI(frame);
     }
 
 
@@ -274,6 +279,21 @@ public class GameMenu implements ActionListener {
         internalPanel.add(this.dbpanel, dbc);
     }
 
+    private void displaySolo(String view) {
+        try{
+            internalPanel.remove(others[0]);
+        }
+        catch (NullPointerException ignored){}
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridy = 10;
+        c.gridx = 0;
+        c.weightx = 1;
+        c.insets = new Insets(0,5,15,5);
+        others[0] = new SoloPanel(view);
+        internalPanel.add(others[0], c);
+    }
+
     private class ButtonPanel extends JPanel{
         ButtonPanel(boolean action){
             super();
@@ -286,6 +306,7 @@ public class GameMenu implements ActionListener {
                 this.add(options[i]);
                 this.add(Box.createRigidArea(new Dimension(0,5)));
             }
+            this.add(Box.createRigidArea(new Dimension(0,150)));
         }
 
     }

@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.singlePlayer.PcPlayerBoard;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.components.Serializer;
 import it.polimi.ingsw.network.messages.EndTurnException;
+import it.polimi.ingsw.network.messages.ServerMessageGameOver;
 import it.polimi.ingsw.network.messages.ServerMessageOK;
 import it.polimi.ingsw.network.messages.ServerMessageView;
 import it.polimi.ingsw.view.Log;
@@ -100,35 +101,75 @@ public class Game {
      * @throws DisconnectedException if the is a disconnection during the game
      */
     private void startSoloGame() throws DisconnectedException {
-        PcPlayerBoard pc= new PcPlayerBoard(this.devCardBoard);
+        PcPlayerBoard pc = new PcPlayerBoard(this.devCardBoard);
         Log.logger.info("Solo game actually started");
 
-        do{
+        do {
             boolean done = false;
             boolean action = false;
-            while(!done){
+            while (!done) {
                 try {
                     showAllGame(players[0]);
-                    if(!action) action = players[0].turn(false);
-                    else  players[0].turn(true);
-                    Log.logger.info("Setting action to "+action);
+                    if (!action) action = players[0].turn(false);
+                    else players[0].turn(true);
+                    Log.logger.info("Setting action to " + action);
+                } catch (EndTurnException e) {
+                    done = true;
                 }
-                catch(EndTurnException e){done = true;}
             }
 
-            if(checkEndGame()) {
-                players[0].net.send(new ServerMessageView("The Game is now over! You have won."));
-            }
-            String turn;
-            try{turn = pc.turn();}
-            catch (EndGameException e){
-                players[0].net.send(new ServerMessageView(e.getMessage()));
-                players[0].net.send(new ServerMessageView("The Game is now over! You have lost."));
+            //CheckPope for player
+            checkPope();
+
+
+            if (checkEndGame()) {
+                players[0].net.send(new ServerMessageView("The Game is now over! You have won.\n Total points: "
+                        + players[0].playerBoard.getTotalVP(), null, GUIElement.Pure));
+                players[0].net.send(new ServerMessageGameOver());
+
                 return;
             }
-            players[0].net.send(new ServerMessageView(turn));
+            String turn;
+            try {
+                turn = pc.turn();
+            } catch (EndGameException e) {
+                players[0].net.send(new ServerMessageView(e.getMessage(), null, GUIElement.Solo));
+                players[0].net.send(new ServerMessageView("The Game is now over! You have lost.\n Total points: "
+                        + players[0].playerBoard.getTotalVP(), null, GUIElement.Pure));
+                players[0].net.send(new ServerMessageGameOver());
+
+                return;
+            }
+            players[0].net.send(new ServerMessageView(turn, null, GUIElement.Solo));
+
+            //Check Pope for pc
+            if (pc.getDarkFaith() >= pope.value) {
+                if (players[0].playerBoard.getFaith() >= pope.min) {
+                    players[0].playerBoard.addPope(pope.vp);
+                    players[0].net.send(new ServerMessageView(
+                            "Lorenzo il Magnifico activated a new Vatican Report. You receive " + pope.vp + " additional Victory Points.",
+                            null, GUIElement.Pure));
+                } else
+                    players[0].net.send(new ServerMessageView(
+                            "Lorenzo il Magnifico activated a new Vatican Report. Unfortunately you don't receive any additional Victory Points.",
+                            null, GUIElement.Pure));
+
+
+                nextPope();
+
+                players[0].net.send(new ServerMessageView("Next Report will trigger at "+pope.value+" faith.",null,GUIElement.Pure));
+            }
         }
         while(true);
+    }
+
+    private void nextPope() {
+        switch (pope){
+            case FIRST: pope = Pope.SECOND;break;
+            case SECOND: pope = Pope.THIRD;break;
+            case THIRD: pope = Pope.DONE;break;
+            default: throw new IllegalStateException();
+        }
     }
 
 
@@ -139,6 +180,7 @@ public class Game {
         Log.logger.info("Game actually started");
         boolean endGame = false;
         do {
+            int disconnectionCounter = 0;
             for(Player each : this.players) {
                 boolean done = false;
                 boolean action = false;
@@ -149,12 +191,13 @@ public class Game {
                         else  each.turn(true);
                         Log.logger.info("Setting action to "+action);
                     }
-                    catch(EndTurnException | DisconnectedException e){done = true;}
-                    //TODO: handle disconnection of all players.
+                    catch(EndTurnException e){done = true;}
+                    catch(DisconnectedException e){done = true; disconnectionCounter++;}
                 }
                 checkPope();
                 if(!endGame) endGame = checkEndGame();
             }
+            if (disconnectionCounter >= players.length)return;
         }
         while (!endGame);
         finalSummary();
@@ -252,7 +295,7 @@ public class Game {
         for(Player each : this.players) {
             if(each.playerBoard.getFaith() >= 24 || each.playerBoard.getDevCardsNumber() >= 7) {
                 for(Player every : this.players){
-                    try{every.net.send(new ServerMessageView("The Game will be over at the end of this round!"));}
+                    try{every.net.send(new ServerMessageView("The Game will be over at the end of this round!",null,GUIElement.Pure));}
                     catch (DisconnectedException ignored){}
                 }
 
@@ -337,8 +380,8 @@ public class Game {
 
         for(Player each : this.players){
             try {
-                each.net.send(new ServerMessageView(string));
-                each.net.send(new ServerMessageView(each.equals(winner) ? "You Won!" : "You Lost!"));
+                each.net.send(new ServerMessageView(string+"\n"+(each.equals(winner) ? "You Won!" : "You Lost!"),null,GUIElement.Pure));
+                each.net.send(new ServerMessageGameOver());
             }
             catch (DisconnectedException ignored){}
         }
@@ -371,20 +414,20 @@ public class Game {
             try {
                 if (each.playerBoard.getFaith() >= pope.min) {
                     each.playerBoard.addPope(pope.vp);
-                    each.net.send(new ServerMessageView(trigger.equals(each.playerId) ? "You" : trigger + " activated a new Vatican Report. You receive "+ pope.vp+" additional Victory Points."));
+                    each.net.send(new ServerMessageView(trigger.equals(each.playerId) ?
+                            "You" : trigger + " activated a new Vatican Report. You receive "+ pope.vp+" additional Victory Points.",
+                            null, GUIElement.Pure));
                 } else
-                    each.net.send(new ServerMessageView(trigger + " activated a new Vatican Report. Unfortunately you don't receive any additional Victory Points."));
+                    each.net.send(new ServerMessageView(
+                            trigger + " activated a new Vatican Report. Unfortunately you don't receive any additional Victory Points.",
+                            null, GUIElement.Pure));
             }
             catch (DisconnectedException ignored){}
         }
-        switch (pope){
-            case FIRST: pope = Pope.SECOND;break;
-            case SECOND: pope = Pope.THIRD;break;
-            case THIRD: pope = Pope.DONE;break;
-            default: throw new IllegalStateException();
-        }
+        nextPope();
 
-        for (Player each : players) try{each.net.send(new ServerMessageView("Next Report will trigger at "+pope.value+" faith."));}catch (DisconnectedException ignored){}
+        for (Player each : players) try{each.net.send(new ServerMessageView("Next Report will trigger at "+pope.value+" faith.",null,GUIElement.Pure));}
+        catch (DisconnectedException ignored){}
 
     }
 

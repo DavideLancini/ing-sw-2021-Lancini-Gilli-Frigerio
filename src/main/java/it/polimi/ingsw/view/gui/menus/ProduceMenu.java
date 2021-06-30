@@ -46,10 +46,24 @@ public class ProduceMenu extends SubMenu implements ActionListener {
         c.gridy = 1;
         c.gridx = 0;
         c.weighty = 0;
-        for(int i=0; i<6; i++){
+
+        buttons[0] = new JButton("Disabled");
+        buttons[0].addActionListener(this);
+        grid.add(buttons[0],c);
+        c.gridx++;
+
+        for(int i=1; i<4; i++){
             buttons[i] = new JButton("Disabled");
             buttons[i].addActionListener(this);
-            grid.add(buttons[i],c);
+            if(playerBoard.getDevCard(i-1) != null)grid.add(buttons[i],c);
+            c.gridx++;
+        }
+
+        for(int i = 4; i<6; i++){
+            buttons[i] = new JButton("Disabled");
+            buttons[i].addActionListener(this);
+            if(playerBoard.getLeaderCard(i-4) != null && LeaderOptionsMenu.isProduction(playerBoard.getLeaderCard(i-4)))
+                grid.add(buttons[i],c);
             c.gridx++;
         }
 
@@ -67,12 +81,15 @@ public class ProduceMenu extends SubMenu implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Done")  /*TODO: and filter at least one true*/ ){
-
-            synchronized (this) {
-                this.notify();
-                frame.dispose();
-                return;
+        if (e.getActionCommand().equals("Done")){
+            for(boolean each : activated){
+                if(each){
+                    synchronized (this) {
+                        this.notify();
+                        frame.dispose();
+                        return;
+                    }
+                }
             }
         }
         else for(int i=0; i<buttons.length; i++){

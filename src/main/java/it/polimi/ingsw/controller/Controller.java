@@ -55,6 +55,11 @@ public class Controller {
     public void sellLeader (int position) throws DisconnectedException {
         if(position != 0 && position!= 1){net.send(new ServerMessageError("Invalid Position.")); return;}
 
+        if(pb.getLeaderCard(position) == null){
+            net.send(new ServerMessageError("You don't have a Leader at this position."));
+            return;
+        }
+
         if (!pb.getLeaderCard(position).getIsActive()) {
             pb.sellLeader(position);
 
@@ -293,6 +298,12 @@ public class Controller {
         Resource[] choice=new Resource[2];
         Production[] productions = new Production[6];
         productions[0] = pb.getDefaultProduction();
+
+        if(productions[0].getInput()[0] == Resource.EMPTY || productions[0].getInput()[1] == Resource.EMPTY ||
+                productions[0].getOutput()[0] == Resource.EMPTY){
+            net.send(new ServerMessageError("Default Production cannot contain empty resources."));
+            return false;
+        }
 
         for(int i = 0; i<2; i++){
             DevCard each = pb.getDevCard(i);

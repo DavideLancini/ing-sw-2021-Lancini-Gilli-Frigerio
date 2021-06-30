@@ -54,32 +54,26 @@ public class CLIActionManager extends Manager {
     public void view(ServerMessageView view){System.out.println(view.getView(true));}
 
 
- public ClientNetInterface connect() throws DisconnectedException {
-     String serverAddress;
-     int serverPort;
-     int localPort;
+    public ClientNetInterface connect() throws DisconnectedException {
+        String serverAddress;
+        int serverPort;
+        int localPort;
 
-     while (true) {
-         System.out.println("serverAddress: ");
-         serverAddress = Reader.in.nextLine();
+        System.out.println("serverAddress: ");
+        serverAddress = Reader.in.nextLine();
 
-         System.out.println("serverPort: ");
-         try {
-             serverPort = readInt();
-         } catch (NumberFormatException e) {
-             return null;
-         }
+        System.out.println("serverPort: ");
+        serverPort = readInt();
 
-         System.out.println("localPort: ");
-         try {
-             localPort = readInt();
-         } catch (NumberFormatException e) {
-             return null;
-         }
+        System.out.println("localPort: ");
+        localPort = readInt();
 
-         return new ClientNetInterface(serverAddress, serverPort, localPort);
-     }
+        return new ClientNetInterface(serverAddress, serverPort, localPort);
  }
+
+    @Override
+    public void close() {
+    }
 
 
     /**

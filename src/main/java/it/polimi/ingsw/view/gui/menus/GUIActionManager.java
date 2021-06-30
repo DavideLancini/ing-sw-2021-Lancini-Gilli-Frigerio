@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.gui.menus;
 
 import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.model.ResourceCounter;
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.*;
@@ -14,7 +13,7 @@ import java.util.Collection;
 
 public class GUIActionManager extends Manager {
 
-    private static final GameMenu gm = new GameMenu();
+    private final GameMenu gm = new GameMenu();
 
 
     @Override
@@ -23,7 +22,7 @@ public class GUIActionManager extends Manager {
     }
 
     public void view(ServerMessageView messView) {
-        if(messView.getView(false) != null)gm.display(messView);
+        if(messView.getElem() != null)gm.display(messView);
     }
 
     @Override
@@ -37,18 +36,7 @@ public class GUIActionManager extends Manager {
         Resource[] choice = new Resource[3];
 
         for (int i = 1; i < 4; i++) {
-            int result;
-            //TODO: fix display
-            do {result = ChoiceBox.prompt(
-                    "Resources to arrange: " + ResourceCounter.count(resources) +
-                            "\n" +
-                            "Choose  which resources to put in row n° " + i + "  (Max "+i+" resources): ",
-                    "Arranging resources in your depot",
-                    new ImageIcon[]{ResIcons.STONE.toIcon(), ResIcons.SERVANT.toIcon(), ResIcons.COIN.toIcon(), ResIcons.SHIELD.toIcon(), ResIcons.EMPTY.toIcon()}
-            );}
-            while (result < 0);
-            choice[i-1] = Resource.values()[result];
-
+            choice[i-1] = new ArrangeMenu(resources,i).prompt();
         }
 
         Manager.assignDepot(resources, newResources, choice);
@@ -105,7 +93,7 @@ public class GUIActionManager extends Manager {
 
     @Override
     public boolean online() {
-        int choice = ChoiceBox.prompt("Play Online?", "Masters of Renaissance",new String[]{"Online", "Offline"});
+        int choice = ChoiceBox.prompt("Play Online?", "Masters of Renaissance",new String[]{"Online", "Local"});
         if(choice < 0) {
             throw new RuntimeException("Application Closed by User");
         }
@@ -119,6 +107,7 @@ public class GUIActionManager extends Manager {
 
     @Override
     public String showOfflineMenu() {
+        System.out.println("show offline");
         OfflineMenu mm = new OfflineMenu();
         int choice = mm.prompt();
         return String.valueOf(choice);
@@ -140,6 +129,14 @@ public class GUIActionManager extends Manager {
         ConnectMenu cm = new ConnectMenu();
         int[] info = cm.prompt();
         return new ClientNetInterface(cm.address.getText(), info[1], info[2]);
+    }
+
+    @Override
+    public void close() {
+        try {
+            gm.close();
+        }
+        catch (Exception ignored){}
     }
 
 }

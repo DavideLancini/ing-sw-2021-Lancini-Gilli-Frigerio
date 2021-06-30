@@ -87,11 +87,13 @@ public abstract class Manager {
             controller.main();
             Log.logger.info("OK Main");
         } catch (Exception e) {
-            Log.logger.warning("ERROR");
+            e.printStackTrace();
         }
     }
 
     public abstract void showCredits();
 
     public abstract ClientNetInterface connect() throws DisconnectedException;
+
+    public abstract void close();
 }

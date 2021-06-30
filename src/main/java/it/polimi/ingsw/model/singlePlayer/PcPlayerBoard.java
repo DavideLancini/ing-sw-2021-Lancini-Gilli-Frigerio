@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class PcPlayerBoard {
     public ActionPile actionPile;
     private int darkFaith;
-    private DevCardBoard board;
+    private final DevCardBoard board;
 
     /**
      * constructor
@@ -38,12 +38,12 @@ public class PcPlayerBoard {
         switch (pcTurn.getType()){
             case AddFaith:
                 this.darkFaith += 2;
-                if(this.darkFaith >= 24) throw new EndGameException(pcTurn.view()+darkFaithView());
+                if(this.darkFaith >= 24) throw new EndGameException("Lorenzo il Magnifico:\n"+pcTurn.view()+darkFaithView()+"\n");
                 break;
 
             case ShufflePile:
                 this.darkFaith += 1;
-                if(this.darkFaith >= 24) throw new EndGameException(pcTurn.view()+darkFaithView());
+                if(this.darkFaith >= 24) throw new EndGameException("Lorenzo il Magnifico:\n"+pcTurn.view()+darkFaithView()+"\n");
                 this.actionPile.setupActionPile();
                 break;
 
@@ -73,7 +73,7 @@ public class PcPlayerBoard {
                 throw new IllegalStateException("Unexpected value: " + pcTurn.getType());
         }
 
-        return pcTurn.view()+darkFaithView()+"\n";
+        return "Lorenzo il Magnifico:\n"+pcTurn.view()+darkFaithView()+"\n";
 
     }
 
@@ -82,7 +82,8 @@ public class PcPlayerBoard {
      * @return string to show
      */
     public String darkFaithView(){
-        return "DARK FAITH: \uD83D\uDD47\u001b[0m" + this.darkFaith;
+        return "FAITH: \uD83D\uDD47\u001b[0m" + this.darkFaith;
     }
 
+    public int getDarkFaith(){return darkFaith;}
 }

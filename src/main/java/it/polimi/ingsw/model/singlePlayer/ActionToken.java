@@ -26,7 +26,7 @@ class ActionFaith extends ActionToken{
 
     @Override
     public String view() {
-        return "┃     +2"+ Resource.FAITH+"     ┃\n";
+        return "┃    +2"+ Resource.FAITH+"    ┃\n";
     }
 }
 /**
@@ -40,7 +40,7 @@ class ActionShuffle extends ActionToken{
 
     @Override
     public String view() {
-        return "┃+1"+ Resource.FAITH+" + shuffle    ┃\n";
+        return "┃ +1"+ Resource.FAITH+" + shuffle ┃\n";
     }
 }
 /**
@@ -64,6 +64,6 @@ class ActionRemove extends ActionToken{
 
     @Override
     public String view() {
-        return "┃    -2"+this.cardColor+"     ┃\n";
+        return "┃    -2"+this.cardColor+"    ┃\n";
     }
 }
