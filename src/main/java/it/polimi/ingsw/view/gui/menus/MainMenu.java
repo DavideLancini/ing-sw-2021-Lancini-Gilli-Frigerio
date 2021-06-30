@@ -32,7 +32,6 @@ public class MainMenu implements ActionListener {
         panel.add(id);
         panel.add(Box.createRigidArea(new Dimension(0,20)));
 
-        //frame.setSize(800, 1000);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

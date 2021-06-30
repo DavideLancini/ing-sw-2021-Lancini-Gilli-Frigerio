@@ -137,7 +137,9 @@ public class GUIActionManager extends Manager {
 
     @Override
     public ClientNetInterface connect() throws DisconnectedException {
-        return null;
+        ConnectMenu cm = new ConnectMenu();
+        int[] info = cm.prompt();
+        return new ClientNetInterface(cm.address.getText(), info[1], info[2]);
     }
 
 }
