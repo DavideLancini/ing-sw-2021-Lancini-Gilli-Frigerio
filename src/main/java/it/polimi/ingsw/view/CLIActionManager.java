@@ -13,10 +13,6 @@ import java.util.Collection;
  * @author Group 12
  */
 public class CLIActionManager extends Manager {
-
-
-    private static ClientNetInterface net;
-
     /**
      * Read a number from user input
      * @return a valid number
@@ -58,7 +54,7 @@ public class CLIActionManager extends Manager {
     public void view(ServerMessageView view){System.out.println(view.getView(true));}
 
 
- public static ClientNetInterface connect() throws DisconnectedException {
+ public ClientNetInterface connect() throws DisconnectedException {
      String serverAddress;
      int serverPort;
      int localPort;
@@ -81,11 +77,7 @@ public class CLIActionManager extends Manager {
              return null;
          }
 
-         try {
-             net = new ClientNetInterface(serverAddress, serverPort, localPort);
-         } catch (DisconnectedException e) {
-             //TODO: Warning
-         }
+         return new ClientNetInterface(serverAddress, serverPort, localPort);
      }
  }
 

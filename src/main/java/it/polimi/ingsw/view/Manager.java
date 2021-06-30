@@ -92,4 +92,6 @@ public abstract class Manager {
     }
 
     public abstract void showCredits();
+
+    public abstract ClientNetInterface connect() throws DisconnectedException;
 }

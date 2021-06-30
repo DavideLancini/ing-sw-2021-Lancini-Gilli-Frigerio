@@ -26,8 +26,8 @@ public class ClientGUI {
         if (isON) {
             try {
 
-                ClientNetInterface net = manager.autoConnect(); //Only for Testing
-                //CLIActionManager.Connect();
+                //ClientNetInterface net = manager.autoConnect(); //Only for Testing
+                ClientNetInterface net = manager.connect();
 
                 String[] selection = manager.showOnlineMenu();
                 Log.logger.info(selection[0]);

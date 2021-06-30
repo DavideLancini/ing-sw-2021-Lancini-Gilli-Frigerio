@@ -31,8 +31,8 @@ public class Client {
             boolean isOnline = manager.online();
             if (isOnline) {
                 try {
-                    ClientNetInterface net = manager.autoConnect(); //Only for Testing
-                    //CLIActionManager.Connect();
+                    //ClientNetInterface net = manager.autoConnect(); //Only for Testing
+                    ClientNetInterface net = manager.connect();
 
                     String[] selection = manager.showOnlineMenu();
                     switch (selection[0]) {
