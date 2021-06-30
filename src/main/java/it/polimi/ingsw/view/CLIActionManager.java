@@ -3,6 +3,7 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.ClientNetInterface;
+import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.messages.*;
 
 import java.util.Collection;
@@ -57,30 +58,36 @@ public class CLIActionManager extends Manager {
     public void view(ServerMessageView view){System.out.println(view.getView(true));}
 
 
+ public static ClientNetInterface connect() throws DisconnectedException {
+     String serverAddress;
+     int serverPort;
+     int localPort;
 
- /*   CREDO CI SIA QUALCOSA DI SBAGLIATO CON QUESTO METODO, FINCHE' NON E' UTILIZZATO TANTO VALE TENERLO COMMENTATO
- public static ClientNetInterface connect() throws DisconnectedException{
-        String serverAddress;
-        int serverPort;
+     while (true) {
+         System.out.println("serverAddress: ");
+         serverAddress = Reader.in.nextLine();
 
-        while(true){
-            System.out.println( "serverAddress: " );
-            serverAddress=Reader.in.nextLine();
+         System.out.println("serverPort: ");
+         try {
+             serverPort = readInt();
+         } catch (NumberFormatException e) {
+             return null;
+         }
 
-            System.out.println( "serverPort: " );
-            try {
-                serverPort= readInt();
-            } catch (NumberFormatException e) {
-                return null;
-            }
+         System.out.println("localPort: ");
+         try {
+             localPort = readInt();
+         } catch (NumberFormatException e) {
+             return null;
+         }
 
-            try {
-                net = new ClientNetInterface(serverAddress,serverPort, Log.logger);
-            } catch (DisconnectedException e) {
-                //warning
-            }
-        }
-    }*/
+         try {
+             net = new ClientNetInterface(serverAddress, serverPort, localPort);
+         } catch (DisconnectedException e) {
+             //TODO: Warning
+         }
+     }
+ }
 
 
     /**

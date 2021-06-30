@@ -34,7 +34,7 @@ public class ClientNetInterface extends NetInterface{
      *
      * @throws DisconnectedException if something fails, and whatever is created to that point is closed
      */
-    public ClientNetInterface(String serverAddress, int serverPort) throws DisconnectedException {
+    public ClientNetInterface(String serverAddress, int serverPort, int localPort) throws DisconnectedException {
 
         if (!isConnected & !isLogged) {
             //create sender
@@ -44,7 +44,7 @@ public class ClientNetInterface extends NetInterface{
                 throw new DisconnectedException("failed to create a sender");
             }
             try {
-                father = new ServerSocket(0);
+                father = new ServerSocket(localPort);
             } catch (IOException e) {
                 this.sender.close();
                 throw new DisconnectedException("failed to create fatherSocket");

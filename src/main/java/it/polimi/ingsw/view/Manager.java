@@ -44,11 +44,10 @@ public abstract class Manager {
         //ask address
         System.out.println("server address:");
         String address= Reader.in.nextLine();
-        return new ClientNetInterface(address,5555);
+        return new ClientNetInterface(address,5555, 0);
     }
 
     public abstract void waitForTurn();
-
 
 
     public static void assignDepot(Collection<Resource> resources, Resource[] newResources, Resource[] choice) {
