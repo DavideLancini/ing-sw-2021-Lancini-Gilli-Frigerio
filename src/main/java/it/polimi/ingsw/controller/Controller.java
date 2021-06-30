@@ -286,35 +286,38 @@ public class Controller {
      */
 
     public boolean produce(boolean[] activated) throws DisconnectedException {
-        ArrayList<Resource> totalinput = new ArrayList<>();
-        ArrayList<Resource> totaloutput = new ArrayList<>();
-        int totalfaith = 0;
+        ArrayList<Resource> totalInput = new ArrayList<>();
+        ArrayList<Resource> totalOutput = new ArrayList<>();
+        int totalFaith = 0;
+
         Resource[] choice=new Resource[2];
         Production[] productions = new Production[6];
         productions[0] = pb.getDefaultProduction();
 
-        for(int i = 0; i<2 && activated[1+i]; i++){
+        for(int i = 0; i<2; i++){
             DevCard each = pb.getDevCard(i);
-            if(each != null) productions[i+1] = each.getProduction();
+            if(activated[1+i]) {
+                if(each != null) productions[i + 1] = each.getProduction();
 
-            else {
-                net.send(new ServerMessageError("Invalid Production. There is no Development Card in position" +(i+1)+ "."));
+                else {
+                    net.send(new ServerMessageError("Invalid Production. There is no Development Card in position" + (i + 1) + "."));
 
-                return false;
+                    return false;
+                }
             }
         }
 
         for(int i = 0; i<2; i++){
             LeaderCard each = pb.getLeaderCard(i);
-            if(activated[4+i] && each != null && each.getIsActive() && each instanceof LeaderProduction){
-                productions[i+4] = ((LeaderProduction) each).getProduction();
-                choice[i]=((LeaderProduction) each).getChoice();
-            }
+            if(each != null && activated[4 + i] ) {
+                if(each.getIsActive() && each instanceof LeaderProduction) {
+                    productions[i + 4] = ((LeaderProduction) each).getProduction();
+                    choice[i] = ((LeaderProduction) each).getChoice();
+                } else {
+                    net.send(new ServerMessageError("Invalid Production. There is no leader in position " + (i + 1) + " capable of producing."));
 
-            else {
-                net.send(new ServerMessageError("Invalid Production. There is no leader in position " + (i+1)+" capable of producing."));
-
-                return false;
+                    return false;
+                }
             }
         }
 
@@ -323,21 +326,21 @@ public class Controller {
             for(int i = 0; i<activated.length; i++) {
                 if(activated[i]){
                     Log.logger.info("Producing "+i+"with input "+ Arrays.toString(productions[i].getInput()) +" and output "+ Arrays.toString(productions[i].getOutput()));
-                    totalinput.addAll(Arrays.asList(productions[i].getInput()));
-                    totaloutput.addAll(Arrays.asList(productions[i].getOutput()));
+                    totalInput.addAll(Arrays.asList(productions[i].getInput()));
+                    totalOutput.addAll(Arrays.asList(productions[i].getOutput()));
                     if (i>=4){
-                        totaloutput.add(choice[i-4]);
+                        totalOutput.add(choice[i-4]);
                     }
-                    totalfaith += productions[i].getFaith();
+                    totalFaith += productions[i].getFaith();
                 }
             }
-            Log.logger.info("Total required of: "+totalinput);
-            extractCost(totalinput.toArray(new Resource[0]));
+            Log.logger.info("Total required of: "+totalInput);
+            extractCost(totalInput.toArray(new Resource[0]));
             Log.logger.info("Extracted.");
 
-            pb.getStrongbox().deposit(totaloutput);
+            pb.getStrongbox().deposit(totalOutput);
             Log.logger.info("Deposited.");
-            pb.addFaith(totalfaith);
+            pb.addFaith(totalFaith);
 
         }
         catch (Exception e){
@@ -351,7 +354,7 @@ public class Controller {
 
     /**
      *
-     * @param position 0 to 1 for defaultProduciton input, 2 for output, 3 to 4 for LeaderProduction choice
+     * @param position 0 to 1 for defaultProduction input, 2 for output, 3 to 4 for LeaderProduction choice
      * @param resource Resource to be set
      */
     public void setResource(int position, Resource resource){
@@ -385,7 +388,7 @@ public class Controller {
         }
 
 
-        //try extracting the resource from the depot, if unavaible extract from the strongbox
+        //try extracting the resource from the depot, if unavailable extract from the strongbox
         for(Resource elem : cost){
             try{
                 int index = Arrays.asList(depotCopy).indexOf(elem);
