@@ -158,6 +158,7 @@ public class Player extends Thread{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //TODO: Catch nullpointer and return?
         //This player is in a game
 
     }

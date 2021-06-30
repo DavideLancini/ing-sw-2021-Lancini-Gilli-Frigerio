@@ -45,7 +45,7 @@ public class DepotPanel extends JPanel {
         c.gridy = 2;
         this.add(new JLabel(icons[5]), c);
 
-
+        //TODO: add LeaderDepot
     }
 
 }

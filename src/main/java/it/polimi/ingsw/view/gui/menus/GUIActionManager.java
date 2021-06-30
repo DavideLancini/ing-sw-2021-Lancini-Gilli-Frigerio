@@ -22,7 +22,7 @@ public class GUIActionManager extends Manager {
     }
 
     public void view(ServerMessageView messView) {
-        if(messView.getElem() != null)gm.display(messView);
+        if(messView.getElem() != null)SwingUtilities.invokeLater(() -> gm.display(messView));
     }
 
     @Override

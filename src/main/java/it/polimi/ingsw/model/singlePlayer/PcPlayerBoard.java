@@ -86,4 +86,8 @@ public class PcPlayerBoard {
     }
 
     public int getDarkFaith(){return darkFaith;}
+
+    public void addFaith(int amount) {
+        this.darkFaith += amount;
+    }
 }

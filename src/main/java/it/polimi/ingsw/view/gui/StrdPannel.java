@@ -1,7 +1,9 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.network.messages.ServerMessageView;
 import it.polimi.ingsw.view.gui.menus.ArrangeMenu;
+import it.polimi.ingsw.view.gui.menus.GameMenu;
 import it.polimi.ingsw.view.gui.menus.LeaderOptionsMenu;
 import it.polimi.ingsw.view.gui.menus.ProduceMenu;
 
@@ -66,12 +68,14 @@ public class StrdPannel {
         //new TakeResourcesMenu(new Market()).prompt();
         //new BuyDevCardMenu(dcb.getTop()).prompt();
         //new DefaultProductionMenu(new DefaultProduction()).prompt();
-        new LeaderOptionsMenu(pb.getLeaderCard()).prompt();
+        //new LeaderOptionsMenu(pb.getLeaderCard()).prompt();
         //new ProduceMenu(pb).prompt();
         //new ArrangeMenu(Arrays.asList(Resource.SERVANT, Resource.COIN),1).prompt();
-
-        frame.pack();
-        frame.setVisible(true);
-        SwingUtilities.updateComponentTreeUI(frame);
+        GameMenu gm = new GameMenu();
+        gm.setVisible();
+        gm.setWaiting();
+        //frame.pack();
+        //frame.setVisible(true);
+        //SwingUtilities.updateComponentTreeUI(frame);
     }
 }

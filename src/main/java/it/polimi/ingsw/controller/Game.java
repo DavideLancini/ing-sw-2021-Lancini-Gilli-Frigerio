@@ -27,7 +27,7 @@ public class Game {
     public LeaderCardDeck leaderCardDeck;
     public Market market;
     private Pope pope = Pope.FIRST;
-
+    private PcPlayerBoard pc;
     /**
      * Game constructor for single player
      * @param player single Player information
@@ -101,7 +101,7 @@ public class Game {
      * @throws DisconnectedException if the is a disconnection during the game
      */
     private void startSoloGame() throws DisconnectedException {
-        PcPlayerBoard pc = new PcPlayerBoard(this.devCardBoard);
+        this.pc = new PcPlayerBoard(this.devCardBoard);
         Log.logger.info("Solo game actually started");
 
         do {
@@ -147,17 +147,17 @@ public class Game {
                 if (players[0].playerBoard.getFaith() >= pope.min) {
                     players[0].playerBoard.addPope(pope.vp);
                     players[0].net.send(new ServerMessageView(
-                            "Lorenzo il Magnifico activated a new Vatican Report. You receive " + pope.vp + " additional Victory Points.",
+                            "Lorenzo il Magnifico activated a new Vatican Report. You receive " + pope.vp + " additional Victory Points.\n" +
+                                    "Next Report will trigger at "+pope.value+" faith.",
                             null, GUIElement.Pure));
                 } else
                     players[0].net.send(new ServerMessageView(
-                            "Lorenzo il Magnifico activated a new Vatican Report. Unfortunately you don't receive any additional Victory Points.",
+                            "Lorenzo il Magnifico activated a new Vatican Report. Unfortunately you don't receive any additional Victory Points.\n" +
+                                    "Next Report will trigger at "+pope.value+" faith.",
                             null, GUIElement.Pure));
 
 
                 nextPope();
-
-                players[0].net.send(new ServerMessageView("Next Report will trigger at "+pope.value+" faith.",null,GUIElement.Pure));
             }
         }
         while(true);
@@ -396,6 +396,7 @@ public class Game {
         for (Player player : this.players) {
             if (player.playerBoard != pb) player.playerBoard.addFaith(amount);
         }
+        if(pc != null)pc.addFaith(amount);
     }
 
     /**
@@ -415,20 +416,18 @@ public class Game {
                 if (each.playerBoard.getFaith() >= pope.min) {
                     each.playerBoard.addPope(pope.vp);
                     each.net.send(new ServerMessageView(trigger.equals(each.playerId) ?
-                            "You" : trigger + " activated a new Vatican Report. You receive "+ pope.vp+" additional Victory Points.",
+                            "You" : trigger + " activated a new Vatican Report. You receive "+ pope.vp+" additional Victory Points.\n" +
+                            "Next Report will trigger at "+pope.value+" faith.",
                             null, GUIElement.Pure));
                 } else
                     each.net.send(new ServerMessageView(
-                            trigger + " activated a new Vatican Report. Unfortunately you don't receive any additional Victory Points.",
+                            trigger + " activated a new Vatican Report. Unfortunately you don't receive any additional Victory Points.\n" +
+                                    "Next Report will trigger at "+pope.value+" faith.",
                             null, GUIElement.Pure));
             }
             catch (DisconnectedException ignored){}
         }
         nextPope();
-
-        for (Player each : players) try{each.net.send(new ServerMessageView("Next Report will trigger at "+pope.value+" faith.",null,GUIElement.Pure));}
-        catch (DisconnectedException ignored){}
-
     }
 
 }

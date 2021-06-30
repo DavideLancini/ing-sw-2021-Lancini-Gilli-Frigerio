@@ -299,13 +299,13 @@ public class Controller {
         Production[] productions = new Production[6];
         productions[0] = pb.getDefaultProduction();
 
-        if(productions[0].getInput()[0] == Resource.EMPTY || productions[0].getInput()[1] == Resource.EMPTY ||
-                productions[0].getOutput()[0] == Resource.EMPTY){
+        if(activated[0] && (productions[0].getInput()[0] == Resource.EMPTY || productions[0].getInput()[1] == Resource.EMPTY ||
+                productions[0].getOutput()[0] == Resource.EMPTY)){
             net.send(new ServerMessageError("Default Production cannot contain empty resources."));
             return false;
         }
 
-        for(int i = 0; i<2; i++){
+        for(int i = 0; i<3; i++){
             DevCard each = pb.getDevCard(i);
             if(activated[1+i]) {
                 if(each != null) productions[i + 1] = each.getProduction();
@@ -451,9 +451,10 @@ public class Controller {
             }
             Log.logger.info("Depot Emptied, total collected: "+resources);
         }
-        catch(Exception e){
-            //TODO: critical error, resources will get lost in process
-            Log.logger.info("Critical error");
+        catch(Exception ignored){
+            //shouldn't happen due to restraints on i
+            //critical error, resources will get lost in process
+            //Log.logger.info("Critical error");
         }
         Log.logger.info(pb.getDepot().depotView());
 

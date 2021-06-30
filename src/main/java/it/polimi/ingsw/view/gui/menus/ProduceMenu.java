@@ -62,7 +62,9 @@ public class ProduceMenu extends SubMenu implements ActionListener {
         for(int i = 4; i<6; i++){
             buttons[i] = new JButton("Disabled");
             buttons[i].addActionListener(this);
-            if(playerBoard.getLeaderCard(i-4) != null && LeaderOptionsMenu.isProduction(playerBoard.getLeaderCard(i-4)))
+            if(playerBoard.getLeaderCard(i-4) != null
+                    && LeaderOptionsMenu.isProduction(playerBoard.getLeaderCard(i-4))
+                    && playerBoard.getLeaderCard(i-4).getIsActive())
                 grid.add(buttons[i],c);
             c.gridx++;
         }

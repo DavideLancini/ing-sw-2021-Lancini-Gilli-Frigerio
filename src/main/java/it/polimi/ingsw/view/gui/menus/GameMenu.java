@@ -27,10 +27,10 @@ public class GameMenu implements ActionListener {
     private final JPanel[] others = new JPanel[3];
 
 
-    private final GridBagConstraints pbc = new GridBagConstraints();
-    private final GridBagConstraints mc = new GridBagConstraints();
-    private final GridBagConstraints dbc = new GridBagConstraints();
-    private final GridBagConstraints bc = new GridBagConstraints();
+    private final GridBagConstraints PlayerBoardConstraints = new GridBagConstraints();
+    private final GridBagConstraints MarketConstraints = new GridBagConstraints();
+    private final GridBagConstraints DevBoardConstraints = new GridBagConstraints();
+    private final GridBagConstraints ButtonsConstraints = new GridBagConstraints();
 
     private int playerNumber;
     private JPanel mpanel;
@@ -64,8 +64,7 @@ public class GameMenu implements ActionListener {
             each.setMaximumSize(new Dimension(200, each.getMinimumSize().height));
         }
 
-        wait.setFont(new Font(null, Font.PLAIN, 40));
-        internalPanel.add(wait);
+        wait.setFont(new Font(null, Font.PLAIN, 30));
         setWaiting();
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -79,22 +78,23 @@ public class GameMenu implements ActionListener {
 
 
         //Constraints setup
-        pbc.gridy = 1;
-        pbc.gridx = 2;
-        pbc.gridheight = 4;
-        mc.gridy = 4;
-        mc.gridx = 0;
-        mc.weightx = 0.5;
-        mc.weighty = 0;
-        mc.gridheight = 1;
-        dbc.gridy = 2;
-        dbc.gridx = 1;
-        dbc.gridheight = pbc.gridheight-1;
-        dbc.weightx = 0.5;
-        pbc.weightx = 0.5;
-        bc.gridy = mc.gridy-2;
-        bc.gridx = 0;
-        bc.weighty = 0;
+        PlayerBoardConstraints.gridy = 1;
+        PlayerBoardConstraints.gridx = 2;
+        PlayerBoardConstraints.gridheight = 4;
+        MarketConstraints.gridy = 4;
+        MarketConstraints.gridx = 0;
+        MarketConstraints.weightx = 0.5;
+        MarketConstraints.weighty = 0;
+        MarketConstraints.gridheight = 1;
+        DevBoardConstraints.gridy = 2;
+        DevBoardConstraints.gridx = 1;
+        DevBoardConstraints.gridheight = PlayerBoardConstraints.gridheight-1;
+        DevBoardConstraints.weightx = 0.5;
+        PlayerBoardConstraints.weightx = 0.5;
+        ButtonsConstraints.gridy = MarketConstraints.gridy-2;
+        ButtonsConstraints.gridx = 0;
+        ButtonsConstraints.weighty = 0;
+        ButtonsConstraints.insets = new Insets(5,5,150,5);
     }
 
     public void setVisible(){
@@ -108,28 +108,29 @@ public class GameMenu implements ActionListener {
     }
 
     public void setWaiting(){
-        //TODO: fix glassPane
         hideButtons();
+        SwingUtilities.invokeLater(() -> internalPanel.add(wait,ButtonsConstraints));
+        SwingUtilities.updateComponentTreeUI(frame);
     }
 
     private void displayFirst(){
-        internalPanel.remove(wait);
+
 
         GridBagConstraints c = new GridBagConstraints();
-        c.gridx = mc.gridx;
-        c.gridy = mc.gridy - 1;
+        c.gridx = MarketConstraints.gridx;
+        c.gridy = MarketConstraints.gridy - 1;
         c.gridheight = 2;
         internalPanel.add(new ButtonPanel(false), c);
 
         c.gridheight = 1;
-        c.gridx = mc.gridx;
-        c.gridy = mc.gridy-1;
+        c.gridx = MarketConstraints.gridx;
+        c.gridy = MarketConstraints.gridy-1;
         JLabel label = new JLabel("Market");
         label.setFont(new Font(null, Font.BOLD,15));
         internalPanel.add(label, c);
 
-        c.gridx = dbc.gridx;
-        c.gridy = dbc.gridy-1;
+        c.gridx = DevBoardConstraints.gridx;
+        c.gridy = DevBoardConstraints.gridy-1;
         label = new JLabel("Development Cards Board");
         label.setFont(new Font(null, Font.BOLD,15));
         internalPanel.add(label, c);
@@ -139,6 +140,7 @@ public class GameMenu implements ActionListener {
     public void display(ServerMessageView opanel) {
         if(!first)displayFirst();
         first = true;
+        try{internalPanel.remove(wait);} catch (NullPointerException ignored){}
         //activate elements
         switch(opanel.getElem()){
             case PB: displayPB(Serializer.deserializePB(opanel.getView(false))); break;
@@ -203,6 +205,7 @@ public class GameMenu implements ActionListener {
                     message = new DefaultProductionMenu(this.playerBoard.getDefaultProduction()).prompt();
                     break;
                 case "End Turn":
+                    setWaiting();
                     message = new ClientMessageEndTurn();
                     break;
                 default:
@@ -210,13 +213,12 @@ public class GameMenu implements ActionListener {
             }
         }
         choice = null;
-        hideButtons();
         return message;
     }
 
     private void showButtons(boolean action) {
         buttonpanel = new ButtonPanel(action);
-        internalPanel.add(buttonpanel, bc);
+        internalPanel.add(buttonpanel, ButtonsConstraints);
         SwingUtilities.updateComponentTreeUI(frame);
     }
 
@@ -225,7 +227,7 @@ public class GameMenu implements ActionListener {
             internalPanel.remove(buttonpanel);
         }
         catch (NullPointerException ignored){}
-        internalPanel.add(Box.createRigidArea(new Dimension(10,10)),bc);
+        //internalPanel.add(Box.createRigidArea(new Dimension(10,10)), ButtonsConstraints);
     }
 
 
@@ -238,7 +240,7 @@ public class GameMenu implements ActionListener {
         catch (NullPointerException ignored){}
         this.pbpanel = new PlayerBoardPanel(pb,true, "YOU");
         this.playerBoard = pb;
-        internalPanel.add(this.pbpanel, pbc);
+        internalPanel.add(this.pbpanel, PlayerBoardConstraints);
     }
 
     private void displayOPB(PlayerBoard pb, String id){
@@ -264,7 +266,7 @@ public class GameMenu implements ActionListener {
         catch (NullPointerException ignored){}
         this.mpanel = new MarketPanel(m);
         this.market = m;
-        internalPanel.add(this.mpanel, mc);
+        internalPanel.add(this.mpanel, MarketConstraints);
 
     }
 
@@ -276,7 +278,7 @@ public class GameMenu implements ActionListener {
         catch (NullPointerException ignored){}
         this.dbpanel = new DevBoardPanel(db);
         this.devCardBoard = db;
-        internalPanel.add(this.dbpanel, dbc);
+        internalPanel.add(this.dbpanel, DevBoardConstraints);
     }
 
     private void displaySolo(String view) {
@@ -306,7 +308,6 @@ public class GameMenu implements ActionListener {
                 this.add(options[i]);
                 this.add(Box.createRigidArea(new Dimension(0,5)));
             }
-            this.add(Box.createRigidArea(new Dimension(0,150)));
         }
 
     }

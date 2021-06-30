@@ -28,7 +28,9 @@ public class BuyDevCardMenu extends SubMenu implements ActionListener {
         int i = 0;
         for(DevCard[] row : board){
             for(DevCard each : row){
-                buttons[i] = new JButton(new ImageIcon(new ImageIcon(each.getPath()).getImage().getScaledInstance(x,y,Image.SCALE_DEFAULT)));
+                buttons[i] = new JButton(new ImageIcon(
+                        new ImageIcon(each != null ? each.getPath() : "src/main/resources/Icons/back.PNG")
+                                .getImage().getScaledInstance(x,y,Image.SCALE_DEFAULT)));
                 buttons[i].addActionListener(this);
                 i++;
             }
