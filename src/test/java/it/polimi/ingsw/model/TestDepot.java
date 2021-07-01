@@ -6,8 +6,8 @@ import static org.junit.Assert.assertSame;
 
 
 public class TestDepot {
-    Depot depot = new Depot();
-    Resource resource = Resource.COIN;
+    final Depot depot = new Depot();
+    final Resource resource = Resource.COIN;
 
 
     @Test
@@ -18,7 +18,7 @@ public class TestDepot {
         try {
             depot.deposit(resource, 0);
         }
-        catch (Exception e) {}
+        catch (Exception ignored) {}
 
         assertSame(resource, depot.getResource(0));
 
@@ -30,11 +30,11 @@ public class TestDepot {
         try {
             depot.deposit(resource, 0);
         }
-        catch (Exception e) {}
+        catch (Exception ignored) {}
 
         Resource extracted = Resource.EMPTY;
         try {extracted = depot.extract(0);}
-        catch (Exception e){}
+        catch (Exception ignored){}
 
         assertSame(resource,extracted);
         assertSame(Resource.EMPTY,depot.getResource(0));

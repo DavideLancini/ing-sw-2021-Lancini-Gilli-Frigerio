@@ -7,8 +7,8 @@ import it.polimi.ingsw.model.Resource;
  * @author Group 12
  */
 public class ClientMessageSetResource extends ClientMessage {
-    private Resource resource;
-    private int position;
+    private final Resource resource;
+    private final int position;
 
     /**
      * constructor

@@ -8,5 +8,5 @@ import java.util.Scanner;
  * @author Group 12
  */
 public class Reader {
-    public static Scanner in= new Scanner(System.in);
+    public static final Scanner in= new Scanner(System.in);
 }

@@ -13,7 +13,7 @@ import java.util.Arrays;
  * Class PcPlayerBoard
  */
 public class PcPlayerBoard {
-    public ActionPile actionPile;
+    public final ActionPile actionPile;
     private int darkFaith;
     private final DevCardBoard board;
 

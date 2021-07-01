@@ -56,7 +56,6 @@ public class ArrangeMenu extends SubMenu implements ActionListener {
         for (int i = 0; i<this.buttons.length; i++){
             if (this.buttons[i].equals(e.getSource())){
                 this.choice = Resource.values()[i];
-                System.out.println(choice);
                 synchronized (this) {
                     this.notify();
                     frame.dispose();

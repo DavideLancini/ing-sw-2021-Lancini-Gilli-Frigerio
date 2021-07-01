@@ -7,8 +7,8 @@ import it.polimi.ingsw.network.DisconnectedException;
  * @author Group 12
  */
 public class ClientMessageTakeResources extends ClientMessage {
-    private boolean isRow;
-    public int position;
+    private final boolean isRow;
+    public final int position;
 
     /**
      * constructor

@@ -4,7 +4,7 @@ package it.polimi.ingsw.network.messages;
  * @author Group 12
  */
 public class ServerMessageError extends ServerMessage {
-    private String error;
+    private final String error;
 
     /**
      * constructor

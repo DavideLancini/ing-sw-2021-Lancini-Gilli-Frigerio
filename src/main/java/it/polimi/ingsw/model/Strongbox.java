@@ -7,7 +7,7 @@ import java.util.Collection;
  * @author Group 12
  */
 public class Strongbox {
-    private Collection<Resource> resources;
+    private final Collection<Resource> resources;
 
     /**
      * class constructor
@@ -36,11 +36,9 @@ public class Strongbox {
     /**
      * deposit resources in StrongBox
      * @param new_resources resource from production to deposit
-     * @return current StrongBox
      */
-    public Collection<Resource> deposit(Collection<Resource> new_resources) {
+    public void deposit(Collection<Resource> new_resources) {
         this.resources.addAll(new_resources);
-        return this.resources;
     }
 
     /**

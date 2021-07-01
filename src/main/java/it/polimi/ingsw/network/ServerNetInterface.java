@@ -19,7 +19,7 @@ import static java.lang.Thread.sleep;
  */
 public class ServerNetInterface extends NetInterface{
     private Sender sender;
-    private Listener listener;
+    private final Listener listener;
 
     /**
      * Constructor for the Server Network Interface. It receive parameters for the connection and the logger.
@@ -47,7 +47,7 @@ public class ServerNetInterface extends NetInterface{
         try {
             try {
                 sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
                 //Nothing will interrupt this sleep
             }
             this.sender = new Sender(listener.getTargetAddress(), clientPort);
@@ -66,21 +66,9 @@ public class ServerNetInterface extends NetInterface{
      * @throws DisconnectedException after 5 failed tries and every component is closed
      */
     public void send(Message message) throws DisconnectedException {
-        int tries = 5;
-        while(tries>0){
-            try{
-                String rawMessage = Serializer.serialize(message);
-                sender.send(rawMessage);
-                return;
-            }catch (DisconnectedException e){
-                tries--;
-            }
-        }
-        this.sender.close();
-        this.listener.close();
-        ServerNetworkController.removePlayer();
-        throw new DisconnectedException("Failed to send");
+        send(message, sender, this.listener);
     }
+
 
     /**
      * The receive method, use the Listener.receive method to receive a string from the input stream, then its converted

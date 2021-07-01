@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Production {
     protected Resource[] input;
     protected Resource[] output;
-    private int faithOutput;
+    private final int faithOutput;
 
     /**
      * class constructor

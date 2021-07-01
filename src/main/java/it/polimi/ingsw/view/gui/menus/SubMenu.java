@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public abstract class SubMenu extends JFrame{
-    JFrame frame = this;
-    JPanel panel = new JPanel();
+    final JFrame frame = this;
+    final JPanel panel = new JPanel();
 
     void finalizeAndWait(){
         frame.add(panel);

@@ -6,7 +6,7 @@ package it.polimi.ingsw.model;
  * @author Group 12
  */
 public class LeaderSale extends LeaderCard {
-    private CardColor[] requirements;
+    private final CardColor[] requirements;
     /**
      * constructor
      * @param vp victory points

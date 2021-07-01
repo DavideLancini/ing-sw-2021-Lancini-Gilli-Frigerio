@@ -9,9 +9,9 @@ import it.polimi.ingsw.network.DisconnectedException;
  * @author Group 12
  */
 public class ClientMessageBuyDevCard extends ClientMessage {
-    private Level level;
-    private CardColor color;
-    private int column;
+    private final Level level;
+    private final CardColor color;
+    private final int column;
 
     /**
      * constructor

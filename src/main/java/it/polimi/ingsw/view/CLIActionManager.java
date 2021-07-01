@@ -119,7 +119,7 @@ public class CLIActionManager extends Manager {
      * @return true if player selected online
      */
     public boolean online(){
-        System.out.println( "1.[online]\n2.[local]");
+        System.out.println( "1. Online\n2. Local");
         return "1".equals(Reader.in.nextLine());
     }
 
@@ -142,8 +142,7 @@ public class CLIActionManager extends Manager {
 
     @Override
     public void showCredits() {
-        //TODO: showCredits
-
+        System.out.println("Created by:\nAndrea Gilli\nDavide Frigerio\nDavide Lancini\n\nBased on Masters of Renaissance by Cranio Games");
     }
 
     /**
@@ -172,11 +171,11 @@ public class CLIActionManager extends Manager {
 
                     case 1: //TAKE RESOURCES FROM MARKET
                         if(mainActionDone){
-                            System.out.println("Already done an action this turn!");
+                            System.out.println("You already performed an action in this turn!");
                             break;
                         }
 
-                        System.out.println("ROW: [1], COLUMN: [2]");
+                        System.out.println("1. Select a row\n2. Select a column");
                         boolean isRow = readInt(1,2) == 1;
                         System.out.println("Enter number of "+(isRow ? "row" : "column")+":");
                         int position = isRow? readInt(1,3) : readInt(1,4);
@@ -185,7 +184,7 @@ public class CLIActionManager extends Manager {
                     case 2: // BUY DEVCARD
 
                         if(mainActionDone){
-                            System.out.println("Already done an action this turn!");
+                            System.out.println("You already performed an action in this turn!");
                             break;
                         }
 
@@ -199,7 +198,7 @@ public class CLIActionManager extends Manager {
                         System.out.println();
                         CardColor color = CardColor.values()[readInt(1,CardColor.values().length)-1];
 
-                        System.out.println("Column in which to put it: ");
+                        System.out.println("Choose in which column to place this card: ");
                         int column = readInt(1,3)-1;
                         return new ClientMessageBuyDevCard(level, color, column);
 
@@ -208,18 +207,18 @@ public class CLIActionManager extends Manager {
                     case 3: //PRODUCE
 
                         if(mainActionDone){
-                            System.out.println("Already done an action this turn!");
+                            System.out.println("You already performed an action in this turn!");
                             break;
                         }
 
                         boolean[] activated = new boolean[6];
                         String[] text = {
-                                "1 to produce with default production, 0 to skip it",
-                                "1 to produce with DevCard in first column, 0 to skip it",
-                                "1 to produce with DevCard in second column, 0 to skip it",
-                                "1 to produce with DevCard in third column, 0 to skip it",
-                                "1 to produce with first Leader Card, 0 to skip it",
-                                "1 to produce with second Leader Card, 0 to skip it"
+                                "Enter 1 to produce with default production, enter 0 to skip it",
+                                "Enter 1 to produce with Development Card in first column, enter 0 to skip it",
+                                "Enter 1 to produce with Development Card in second column, enter 0 to skip it",
+                                "Enter 1 to produce with Development Card in third column, enter 0 to skip it",
+                                "Enter 1 to produce with first Leader Card, enter 0 to skip it",
+                                "Enter 1 to produce with second Leader Card, enter 0 to skip it"
                         };
 
                         for(int i = 0; i<6; i++){
@@ -303,7 +302,7 @@ public class CLIActionManager extends Manager {
     public String[] showOnlineMenu() {
         String action;
         String playerID;
-        System.out.println("playerID:");
+        System.out.println("Player ID:");
         playerID = Reader.in.nextLine();
         if(playerID.equals(""))playerID = "player"+(int)Math.floor(Math.random()*1000000);
 
@@ -321,8 +320,8 @@ public class CLIActionManager extends Manager {
      * @return ClientMessagePlaceResource(selected resource)
      */
     public ClientMessage addResource(){
-        System.out.print("[Select your starting resource]: ");
-        for (int i = 1; i <= Resource.values().length -2; i++){System.out.print(""+i+". "+Resource.values()[i-1].toString()+"   ");}
+        System.out.print("Select your starting resource: ");
+        for (int i = 1; i <= Resource.values().length -2; i++){System.out.print(""+i+". "+Resource.values()[i-1].toString()+"      ");}
         System.out.println();
         Resource resource = Resource.values()[readInt(1,4)-1];
       return new ClientMessagePlaceResource(resource);
@@ -345,7 +344,7 @@ public class CLIActionManager extends Manager {
      * @return number of players
      */
     public int joinMatch() {
-        System.out.println("How many players?");
+        System.out.println("Enter the number of players for this game (Max 4 Players):");
         return  readInt(1,4);
     }
 }

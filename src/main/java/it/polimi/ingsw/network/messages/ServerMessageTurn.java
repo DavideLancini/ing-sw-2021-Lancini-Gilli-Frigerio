@@ -5,7 +5,7 @@ package it.polimi.ingsw.network.messages;
  */
 public class ServerMessageTurn extends ServerMessage {
     //Track if in this turn an action has already been performed
-    private boolean mainAction;
+    private final boolean mainAction;
 
     /**
      * constructor

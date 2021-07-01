@@ -2,7 +2,6 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.controller.Player;
-import it.polimi.ingsw.model.Reader;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.network.ClientNetInterface;
 import it.polimi.ingsw.network.DisconnectedException;
@@ -40,12 +39,14 @@ public abstract class Manager {
 
     public abstract boolean online();
 
-    public ClientNetInterface autoConnect() throws DisconnectedException{
-        //ask address
-        System.out.println("server address:");
-        String address= Reader.in.nextLine();
-        return new ClientNetInterface(address,5555, 0);
-    }
+// --Commented out by Inspection START (01/07/2021 17:09):
+//    public ClientNetInterface autoConnect() throws DisconnectedException{
+//        //ask address
+//        System.out.println("server address:");
+//        String address= Reader.in.nextLine();
+//        return new ClientNetInterface(address,5555, 0);
+//    }
+// --Commented out by Inspection STOP (01/07/2021 17:09)
 
     public abstract void waitForTurn();
 

@@ -15,16 +15,11 @@ import java.net.ServerSocket;
  * @author Group 12
  */
 public class ClientNetInterface extends NetInterface{
-    private String serverAddress;
-    private int serverPort;
-    private int localPort;
 
-    private boolean isConnected = false;
-    private boolean isLogged = false;
 
-    private Sender sender;
+    private final Sender sender;
     private Listener listener;
-    private ServerSocket father;
+    private final ServerSocket father;
 
     /**
      * Constructor for the Client Network Interface. It receive parameters for the connection and the logger.
@@ -36,36 +31,33 @@ public class ClientNetInterface extends NetInterface{
      */
     public ClientNetInterface(String serverAddress, int serverPort, int localPort) throws DisconnectedException {
 
-        if (!isConnected & !isLogged) {
-            //create sender
-            try {
-                this.sender = new Sender(serverAddress, serverPort);
-            } catch (DisconnectedException e) {
-                throw new DisconnectedException("failed to create a sender");
-            }
-            try {
-                father = new ServerSocket(localPort);
-            } catch (IOException e) {
-                this.sender.close();
-                throw new DisconnectedException("failed to create fatherSocket");
-            }
-            //Open a listener on a runnable
-            Thread temp = new Thread(() -> {
-                try {
-                    listener = new Listener(father);
-                } catch (DisconnectedException e) {
-                    //TODO: probably this error is impossible
-                }
-            });
-            //Create a message to declare to the server what port should be used to receive messages
-            ClientMessageLocalPort message;
-            message = new ClientMessageLocalPort(father.getLocalPort());
-            String rawMessage = Serializer.serialize(message);
-            sender.send(rawMessage);
-            temp.start();
-        } else {
-            //TODO: warning
+        //create sender
+        try {
+            this.sender = new Sender(serverAddress, serverPort);
+        } catch (DisconnectedException e) {
+            throw new DisconnectedException("failed to create a sender");
         }
+        try {
+            father = new ServerSocket(localPort);
+        } catch (IOException e) {
+            this.sender.close();
+            throw new DisconnectedException("failed to create fatherSocket");
+        }
+        //Open a listener on a runnable
+        Thread temp = new Thread(() -> {
+            try {
+                listener = new Listener(father);
+            } catch (DisconnectedException ignored) {
+                //probably this error is impossible
+            }
+        });
+        //Create a message to declare to the server what port should be used to receive messages
+        ClientMessageLocalPort message;
+        message = new ClientMessageLocalPort(father.getLocalPort());
+        String rawMessage = Serializer.serialize(message);
+        sender.send(rawMessage);
+        temp.start();
+
     }
 
     /**
@@ -75,20 +67,7 @@ public class ClientNetInterface extends NetInterface{
      * @throws DisconnectedException after 5 failed tries and every component is closed
      */
     public void send(Message message) throws DisconnectedException {
-        int tries = 5;
-        while(tries>0){
-            try{
-                String rawMessage = Serializer.serialize(message);
-                sender.send(rawMessage);
-                return;
-            }catch (DisconnectedException e){
-                tries--;
-            }
-        }
-        this.sender.close();
-        this.listener.close();
-        ServerNetworkController.removePlayer();
-        throw new DisconnectedException("Failed to send");
+        send(message, sender, this.listener);
     }
 
     /**

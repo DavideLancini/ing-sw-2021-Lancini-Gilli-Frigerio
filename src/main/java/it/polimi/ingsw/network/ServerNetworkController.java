@@ -6,7 +6,6 @@ import it.polimi.ingsw.view.Log;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
 
 import static java.lang.Thread.sleep;
 
@@ -113,7 +112,6 @@ public class ServerNetworkController {
     public static void stopServer(){
         try {
             isON = false; //mark the Network OFF
-            Socket emptyPlayerResolver = new Socket("localhost", port);
             sleep(1000);
             serverSocket.close(); //close the Main Socket
             connection.interrupt(); //Interrupt the connection creator

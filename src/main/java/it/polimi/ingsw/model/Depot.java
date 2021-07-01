@@ -5,8 +5,8 @@ package it.polimi.ingsw.model;
  */
 public class Depot {
 
-    private Resource[] contents;
-    private Resource[] leaderType;
+    private final Resource[] contents;
+    private final Resource[] leaderType;
     /**
      * getResource
      * @param position selected depot position resource to show

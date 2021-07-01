@@ -13,9 +13,9 @@ import java.net.Socket;
  * @author Group 12
  */
 public class Sender{
-    private String logName;
-    private Socket socket;
-    private DataOutputStream outStream;
+    private final String logName;
+    private final Socket socket;
+    private final DataOutputStream outStream;
 
     /**
      * Constructor for the Sender. The socket also tries to connect right away.

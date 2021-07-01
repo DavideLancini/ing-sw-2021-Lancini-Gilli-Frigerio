@@ -11,7 +11,7 @@ import java.util.Stack;
  */
 public class LeaderCardDeck {
 
-private Stack<LeaderCard> deck;
+private final Stack<LeaderCard> deck;
     /**
      * LeaderCardDeck constructor
      * @param leaderCards initialized leaderCards for the deck
@@ -19,7 +19,7 @@ private Stack<LeaderCard> deck;
     public LeaderCardDeck(LeaderCard[] leaderCards) {
         ArrayList<LeaderCard> leaders = new ArrayList<>(Arrays.asList(leaderCards));
         Collections.shuffle(leaders);
-        this.deck = new Stack<LeaderCard>();
+        this.deck = new Stack<>();
         this.deck.addAll(leaders);
     }
 

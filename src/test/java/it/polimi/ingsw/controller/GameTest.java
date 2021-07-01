@@ -15,12 +15,11 @@ public class GameTest{
         }
     }
 
-    Player[] pbs= new Player[]{new Player(fatherSocket)};
+    final Player[] pbs= new Player[]{new Player(fatherSocket)};
 
     @Test
-    public void Game() throws Exception {
-        Game game= new Game(pbs);
-
+    public void Game(){
+        new Game(pbs);
     }
 
 }

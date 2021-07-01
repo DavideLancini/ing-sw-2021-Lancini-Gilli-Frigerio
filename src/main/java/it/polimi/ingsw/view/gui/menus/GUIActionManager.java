@@ -68,7 +68,6 @@ public class GUIActionManager extends Manager {
 
     @Override
     public ClientMessage chooseResource(Resource[] choice) {
-        System.out.println("Select which resource to convert a white marble to:\t[0]. "+choice[0]+"\t[1]. "+choice[1]);
         boolean position = ChoiceBox.prompt("Select which resource to convert a white marble to:", "Taking Resources", new ImageIcon[]
                 {choice[0].toIcon(), choice[1].toIcon()}) == 1;
 
@@ -107,7 +106,6 @@ public class GUIActionManager extends Manager {
 
     @Override
     public String showOfflineMenu() {
-        System.out.println("show offline");
         OfflineMenu mm = new OfflineMenu();
         int choice = mm.prompt();
         return String.valueOf(choice);
@@ -121,7 +119,7 @@ public class GUIActionManager extends Manager {
 
     @Override
     public void showCredits() {
-        //TODO: show credits
+        ChoiceBox.prompt("Created by:\nAndrea Gilli\nDavide Frigerio\nDavide Lancini\n\nBased on Masters of Renaissance by Cranio Games", "Credits", new String[]{"Continue"});
     }
 
     @Override

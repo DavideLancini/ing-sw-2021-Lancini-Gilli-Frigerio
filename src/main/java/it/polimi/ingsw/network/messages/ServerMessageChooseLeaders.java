@@ -9,11 +9,6 @@ public class ServerMessageChooseLeaders extends ServerMessage{
     private final String[] leaders = new String[4];
     private final String[] icons = new String[4];
 
-    public ServerMessageChooseLeaders(String[] leaders){
-        this.type = MessageType.ChooseLeaders;
-        System.arraycopy(leaders, 0, this.leaders, 0, leaders.length);
-    }
-
     public ServerMessageChooseLeaders(String[] leaders, String[] icons){
         this.type = MessageType.ChooseLeaders;
         System.arraycopy(leaders, 0, this.leaders, 0, leaders.length);

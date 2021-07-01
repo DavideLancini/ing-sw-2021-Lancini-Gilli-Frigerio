@@ -9,7 +9,7 @@ import java.util.Collection;
  * @author Group 12
  */
 public class ServerMessageMarketReturn extends ServerMessage {
-    private Collection<Resource> resources;
+    private final Collection<Resource> resources;
 
     /**
      * constructor

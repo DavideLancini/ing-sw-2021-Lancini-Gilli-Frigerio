@@ -8,7 +8,7 @@ import java.util.Stack;
  */
 public class DevCardDeck {
 
-    private Stack<DevCard> deck;
+    private final Stack<DevCard> deck;
 
     /**
      * constructor

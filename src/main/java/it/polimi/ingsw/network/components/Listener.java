@@ -18,9 +18,9 @@ import java.net.Socket;
  */
 public class Listener {
 
-    private Socket listenerSocket;
-    private DataInputStream inputStream;
-    private String listenerName;
+    private final Socket listenerSocket;
+    private final DataInputStream inputStream;
+    private final String listenerName;
 
     /**
      * Constructor for the Listener. The socket will be stuck on accept until a connection is made.

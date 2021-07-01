@@ -5,7 +5,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 public class Log extends Thread{
-    public static Logger logger = Logger.getLogger("MainLogger");
+    public static final Logger logger = Logger.getLogger("MainLogger");
 
     public static void saveLog(){
         FileHandler file = null;

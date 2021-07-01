@@ -17,12 +17,11 @@ public class Server {
         //Loading parameters from the properties file or standard par. if FNF
         ServerView.loadParameters();
         //Main Cycle of the Server Interface
-        boolean isON = true;
 
         //TURN SERVER ON RIGHT AWAY
         ServerView.toggleServer();
 
-        while(isON){
+        while(true){
             //Asking for a command
             switch (ServerView.serverMenu()) {
                 case "1":
@@ -35,7 +34,6 @@ public class Server {
                     break;
                 case "3":
                     //Shutdown WITHOUT save
-                    isON = false;
                     System.exit(0);
                     break;
                 default:

@@ -140,11 +140,7 @@ public class Player extends Thread{
         //Get IdPlayer
         try {
             Message temp1=net.receive();
-            if(temp1.getType()== MessageType.CreateGame) {
-                ClientMessageCreateGame createGame = (ClientMessageCreateGame) temp1;
-                this.playerId= createGame.CreateGame();
-            }
-            else {
+
                 ClientMessageJoinGame joinGame = (ClientMessageJoinGame) temp1;
                 this.playerId= joinGame.getPlayerId();
                 //Enter queue
@@ -152,13 +148,12 @@ public class Player extends Thread{
                 if (gameMode==1)
                     new Game(this);
                 else Queue.enterQueue(gameMode, this);
-            }
-        } catch (DisconnectedException e) {
-            //TODO: manage error
+
+        } catch (DisconnectedException | NullPointerException ignored) {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //TODO: Catch nullpointer and return?
+
         //This player is in a game
 
     }

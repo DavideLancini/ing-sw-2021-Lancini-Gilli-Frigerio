@@ -7,7 +7,7 @@ import it.polimi.ingsw.network.DisconnectedException;
  * @author Group 12
  */
 public class ClientMessageSellLeader extends ClientMessage {
-    private int position;
+    private final int position;
 
     /**
      * constructor

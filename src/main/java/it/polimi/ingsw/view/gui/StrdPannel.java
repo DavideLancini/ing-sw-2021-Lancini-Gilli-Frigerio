@@ -1,17 +1,13 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.network.messages.ServerMessageView;
-import it.polimi.ingsw.view.gui.menus.ArrangeMenu;
 import it.polimi.ingsw.view.gui.menus.GameMenu;
-import it.polimi.ingsw.view.gui.menus.LeaderOptionsMenu;
-import it.polimi.ingsw.view.gui.menus.ProduceMenu;
 
 import javax.swing.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 //USED ONLY TO TEST GUI
+@SuppressWarnings("ALL")
 public class StrdPannel {
     public static void main(String[] args) throws Exception {
          JFrame frame = new JFrame();

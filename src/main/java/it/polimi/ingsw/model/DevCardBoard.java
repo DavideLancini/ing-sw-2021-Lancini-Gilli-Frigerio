@@ -11,7 +11,7 @@ import java.util.*;
 public class DevCardBoard {
 
     //First index x for color, second index y for level
-    private  DevCardDeck[][] board;//X:0=BLUE 1=YELLOW 2=GREEN 3= PURPLE
+    private final DevCardDeck[][] board;//X:0=BLUE 1=YELLOW 2=GREEN 3= PURPLE
                                   //Y:0=ONE 1=TWO 2=THREE
 
     /**
@@ -31,10 +31,6 @@ public class DevCardBoard {
             i++;
         }
 
-    }
-
-    public DevCardDeck[][] getBoard() {
-        return this.board;
     }
 
     /**

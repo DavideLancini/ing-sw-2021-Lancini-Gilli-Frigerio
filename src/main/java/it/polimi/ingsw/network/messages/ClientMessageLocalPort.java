@@ -4,7 +4,7 @@ package it.polimi.ingsw.network.messages;
  * @author Group 12
  */
 public class ClientMessageLocalPort extends ClientMessage {
-    private int localPort;
+    private final int localPort;
 
     public ClientMessageLocalPort(int localPort){
         this.type=MessageType.LocalPort;

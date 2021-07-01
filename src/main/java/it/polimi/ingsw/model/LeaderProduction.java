@@ -6,7 +6,7 @@ package it.polimi.ingsw.model;
  * @author Group 12
  */
 public class LeaderProduction extends LeaderCard {
-    private Production production;
+    private final Production production;
     private Resource choice = Resource.EMPTY;
     private final CardColor requirements;
     /**

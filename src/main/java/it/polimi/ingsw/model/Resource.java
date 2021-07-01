@@ -15,7 +15,6 @@ public enum Resource {
     SHIELD("\u001b[38;5;12m⛊\u001b[0m"),
     EMPTY("⊗"),
     FAITH("\u001b[38;5;9m\uD83D\uDD47\u001b[0m");
-    static final String RESET="\u001b[0m";
 
     Resource(String escape) { this.escape = escape; }
 
@@ -30,8 +29,6 @@ public enum Resource {
         return ResIcons.values()[this.ordinal()].toIcon();
     }
 
-    public ImageIcon toIcon(int x, int y){
-        return ResIcons.values()[this.ordinal()].toIcon(x, y);
-    }
-
 }
+
+//RESET="\u001b[0m";

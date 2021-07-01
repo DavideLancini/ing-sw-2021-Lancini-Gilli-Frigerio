@@ -5,10 +5,7 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.singlePlayer.PcPlayerBoard;
 import it.polimi.ingsw.network.DisconnectedException;
 import it.polimi.ingsw.network.components.Serializer;
-import it.polimi.ingsw.network.messages.EndTurnException;
-import it.polimi.ingsw.network.messages.ServerMessageGameOver;
-import it.polimi.ingsw.network.messages.ServerMessageOK;
-import it.polimi.ingsw.network.messages.ServerMessageView;
+import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.view.Log;
 import it.polimi.ingsw.view.ViewHelper;
 import it.polimi.ingsw.view.gui.GUIElement;
@@ -32,27 +29,36 @@ public class Game {
      * Game constructor for single player
      * @param player single Player information
      */
-    public Game(Player player) throws Exception {
+    public Game(Player player) {
         Log.logger.info("Game Created");
-        player.net.send(new ServerMessageOK());
-        Log.logger.finest("TEST OK");
-        setupGame();
-        Log.logger.finest("Setup OK");
-        setPlayers(new Player[]{player});
+        try {
+            player.net.send(new ServerMessageOK());
+            Log.logger.finest("TEST OK");
+            setupGame();
+            Log.logger.finest("Setup OK");
+            setPlayers(new Player[]{player});
 
-        System.out.println("Starting Solo Game");
+            System.out.println("Starting Solo Game");
 
-        Log.logger.info("OK5");
+            Log.logger.info("OK5");
 
-        player.drawLeaderCards(leaderCardDeck.draw4());
-        player.playerBoard = new PlayerBoard();
-        player.setController(new Controller(player.net, player.playerBoard, this.devCardBoard, this.market, this));
+            player.drawLeaderCards(leaderCardDeck.draw4());
+            player.playerBoard = new PlayerBoard();
+            player.setController(new Controller(player.net, player.playerBoard, this.devCardBoard, this.market, this));
 
-        Log.logger.info("OK6");
-        player.receiveLeaders();
-        Log.logger.info("OK7");
-
-        startSoloGame();
+            Log.logger.info("OK6");
+            player.receiveLeaders();
+            Log.logger.info("OK7");
+            startSoloGame();
+        }
+        catch (DisconnectedException | FileNotFoundException e){
+            try {
+                player.net.send(new ServerMessageError("There has been an error while starting the game, please retry."));
+                player.net.send(new ServerMessageGameOver());
+                Log.logger.warning("Game aborted during creation: "+e.getMessage());
+            } catch (DisconnectedException ignored) {
+            }
+        }
     }
 
 
@@ -61,37 +67,48 @@ public class Game {
      * Game constructor
      * @param players Players playing the game
      */
-    public Game(Player[] players) throws Exception {
+    public Game(Player[] players) {
         Log.logger.info("Game Created");
 
-        for(Player each: players) {
-            each.net.send(new ServerMessageOK());
+        try {
+            for (Player each : players) {
+                each.net.send(new ServerMessageOK());
+            }
+
+            setupGame();
+            Log.logger.finest("Setup OK");
+            setPlayers(players);
+
+            System.out.println("Starting Game with " + players.length + " players...");
+
+            Log.logger.info("OK5");
+            for (Player each : players) {
+                each.drawLeaderCards(leaderCardDeck.draw4());
+                each.playerBoard = new PlayerBoard();
+                each.setController(new Controller(each.net, each.playerBoard, this.devCardBoard, this.market, this));
+            }
+            Log.logger.info("OK6");
+
+            for (Player each : players) {
+                each.receiveLeaders();
+            }
+            Log.logger.info("OK7");
+
+
+            if (players.length >= 2) players[1].secondPlayer();
+            if (players.length >= 3) players[2].thirdPlayer();
+            if (players.length >= 4) players[3].fourthPlayer();
         }
-
-        setupGame();
-        Log.logger.finest("Setup OK");
-        setPlayers(players);
-
-        System.out.println("Starting Game with "+players.length+" players...");
-
-        Log.logger.info("OK5");
-        for(Player each: players) {
-            each.drawLeaderCards(leaderCardDeck.draw4());
-            each.playerBoard = new PlayerBoard();
-            each.setController(new Controller(each.net, each.playerBoard, this.devCardBoard, this.market, this));
+        catch (DisconnectedException | FileNotFoundException e){
+            for (Player each : players) {
+                try {
+                    each.net.send(new ServerMessageError("There has been an error while starting the game, please retry."));
+                    each.net.send(new ServerMessageGameOver());
+                    Log.logger.warning("Game aborted during creation: "+e.getMessage());
+                } catch (DisconnectedException ignored) {
+                }
+            }
         }
-        Log.logger.info("OK6");
-
-        for(Player each: players){
-            each.receiveLeaders();
-        }
-        Log.logger.info("OK7");
-
-
-        if(players.length>=2)players[1].secondPlayer();
-        if(players.length>=3)players[2].thirdPlayer();
-        if(players.length>=4)players[3].fourthPlayer();
-        if(players.length>=5)throw new Exception("Number of players out of range");
 
         startGame();
     }

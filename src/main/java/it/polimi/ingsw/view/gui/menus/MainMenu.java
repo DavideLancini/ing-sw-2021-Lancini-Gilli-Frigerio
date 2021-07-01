@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 
 public class MainMenu implements ActionListener {
     int choice = -1;
-    JTextField id = new JTextField();
-    JLabel username = new JLabel("Username:");
+    final JTextField id = new JTextField();
+    final JLabel username = new JLabel("Username:");
     final JPanel panel = new JPanel();
     final JFrame frame = new JFrame();
     String[] options = {"Join Game", "Credits", "Quit"};

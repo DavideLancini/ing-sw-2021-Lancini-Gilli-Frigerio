@@ -6,7 +6,8 @@ import it.polimi.ingsw.model.Resource;
  * @author Group 12
  */
 public class ServerMessageTwoMarbleLeaders extends ServerMessage{
-    Resource one, two;
+    final Resource one;
+    final Resource two;
 
     /**
      * constructor

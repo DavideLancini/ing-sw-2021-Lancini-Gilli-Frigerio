@@ -15,7 +15,7 @@ public class TestProduction {
         try {
             returnedOutput = testProduction.produce(in);
         }
-        catch(Exception e){}
+        catch(Exception ignored){}
         assertSame(out, returnedOutput);
     }
 }

@@ -13,9 +13,9 @@ import java.util.Arrays;
 
 
 public class TestController {
-    LeaderCard[] leaders = new LeaderCard[]{new LeaderDepot(1, Resource.COIN, Resource.SHIELD,"src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png"),
+    final LeaderCard[] leaders = new LeaderCard[]{new LeaderDepot(1, Resource.COIN, Resource.SHIELD,"src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png"),
             new LeaderSale(2, Resource.SHIELD, new CardColor[]{CardColor.PURPLE},"src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png")};
-    PlayerBoard pb = new PlayerBoard(leaders);
+    final PlayerBoard pb = new PlayerBoard(leaders);
     DevCardDeck[][] board;
 
     {
@@ -26,9 +26,9 @@ public class TestController {
         }
     }
 
-    DevCardBoard dcb = new DevCardBoard(board);
-    Market market = new Market();
-    Controller controller = new Controller(pb, dcb, market);
+    final DevCardBoard dcb = new DevCardBoard(board);
+    final Market market = new Market();
+    final Controller controller = new Controller(pb, dcb, market);
 
     @Test
     public void TestSellLeader() throws DisconnectedException {
@@ -60,8 +60,6 @@ public class TestController {
         controller.buyDevCard(Level.ONE, CardColor.GREEN, 1);
         assertSame(card, pb.getDevCard(1));
 
-        /*card.devCardView();
-        pb.playerBoardView();*/
     }
 
     @Test

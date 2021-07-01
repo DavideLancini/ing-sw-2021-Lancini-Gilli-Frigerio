@@ -1,11 +1,14 @@
 package it.polimi.ingsw.network.messages;
+
+import it.polimi.ingsw.view.Log;
+
 /**
  * Class ClientMessageJoinGame
  * @author Group 12
  */
 public class ClientMessageJoinGame extends ClientMessage {
-    private String playerId;
-    private int gameMode;
+    private final String playerId;
+    private final int gameMode;
 
     /**
      * constructor
@@ -19,7 +22,7 @@ public class ClientMessageJoinGame extends ClientMessage {
     }
 
     public String getPlayerId() {
-        System.out.println("im joining the game");
+        Log.logger.info(playerId+" is joining a game");
         return this.playerId;
     }
 

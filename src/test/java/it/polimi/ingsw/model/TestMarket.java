@@ -5,17 +5,16 @@ package it.polimi.ingsw.model;
 import org.junit.Before;
 import org.junit.Test;
 
-import static it.polimi.ingsw.model.Market.*;
 import static org.junit.Assert.*;
 
 public class TestMarket {
-    Market market = new Market();
-    Marble[][] testMarketBoard = {
+    final Market market = new Market();
+    final Marble[][] testMarketBoard = {
             {Marble.WHITE, Marble.BLUE, Marble.GRAY, Marble.YELLOW},
             {Marble.PURPLE, Marble.RED, Marble.WHITE, Marble.BLUE},
             {Marble.GRAY, Marble.YELLOW, Marble.PURPLE, Marble.RED}
     };
-    Marble testSideMarble = Marble.RED;
+    final Marble testSideMarble = Marble.RED;
 
     @Before
     @Test

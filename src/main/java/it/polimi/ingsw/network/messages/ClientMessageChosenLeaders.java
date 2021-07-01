@@ -4,7 +4,7 @@ package it.polimi.ingsw.network.messages;
  * @author Group 12
  */
 public class ClientMessageChosenLeaders extends ClientMessage{
-    private int[] positions = new int[2];
+    private final int[] positions = new int[2];
 
     /**
      * constructor

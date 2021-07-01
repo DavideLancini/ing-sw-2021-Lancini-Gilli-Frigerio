@@ -7,7 +7,7 @@ import it.polimi.ingsw.network.DisconnectedException;
  * @author Group 12
  */
 public class ClientMessageProduce extends ClientMessage {
-    private boolean[] activated = new boolean[6];
+    private final boolean[] activated = new boolean[6];
 
     /**
      * constructor

@@ -9,8 +9,8 @@ import it.polimi.ingsw.network.DisconnectedException;
  * @author Group 12
  */
 public class ClientMessageTryDepotConfiguration extends ClientMessage {
-    private Resource[] input = new Resource[6];
-    private int discardAmount;
+    private final Resource[] input = new Resource[6];
+    private final int discardAmount;
 
     /**
      * constructor
