@@ -1,7 +1,7 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.view.gui.menus.GameMenu;
+import it.polimi.ingsw.view.gui.panels.PlayerBoardPanel;
 
 import javax.swing.*;
 import java.util.Arrays;
@@ -17,7 +17,7 @@ public class StrdPannel {
 
          PlayerBoard pb = new PlayerBoard();
          pb.getDepot().setContents(new Resource[]{
-                Resource.COIN, Resource.SHIELD, Resource.SHIELD, Resource.STONE, Resource.EMPTY, Resource.EMPTY, Resource.SERVANT, Resource.SERVANT, Resource.SERVANT, Resource.SERVANT
+                Resource.COIN, Resource.SHIELD, Resource.SHIELD, Resource.STONE, Resource.EMPTY, Resource.EMPTY, Resource.SHIELD, Resource.EMPTY, Resource.EMPTY, Resource.STONE
          });
          pb.addDevCard(new DevCard(Level.ONE, CardColor.BLUE, 1, null, null, "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-1-1.png"), 0);
         pb.addDevCard(new DevCard(Level.ONE, CardColor.BLUE, 1, null, null, "src/main/resources/DevCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-2-1.png"), 2);
@@ -28,7 +28,7 @@ public class StrdPannel {
          pb.getDefaultProduction().setOutput(Resource.SERVANT);
 
          pb.setLeaders(new LeaderCard[]{
-                 new LeaderSale(1, Resource.SERVANT, null, "src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png"),
+                 new LeaderDepot(1, Resource.SERVANT, null, "src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png"),
                  new LeaderProduction(1, Resource.SERVANT, null, null, "src/main/resources/LeaderCardImg/Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png")});
 
          pb.getLeaderCard(0).toggleActive();
@@ -58,8 +58,7 @@ public class StrdPannel {
 
 
 
-
-        //frame.add(new PlayerBoardPanel(pb,true, "YOU"));
+        frame.add(new PlayerBoardPanel(pb,true, "YOU"));
         //frame.add(new MarketPanel(new Market()));
         //new TakeResourcesMenu(new Market()).prompt();
         //new BuyDevCardMenu(dcb.getTop()).prompt();
@@ -67,11 +66,11 @@ public class StrdPannel {
         //new LeaderOptionsMenu(pb.getLeaderCard()).prompt();
         //new ProduceMenu(pb).prompt();
         //new ArrangeMenu(Arrays.asList(Resource.SERVANT, Resource.COIN),1).prompt();
-        GameMenu gm = new GameMenu();
-        gm.setVisible();
-        gm.setWaiting();
-        //frame.pack();
-        //frame.setVisible(true);
-        //SwingUtilities.updateComponentTreeUI(frame);
+        //GameMenu gm = new GameMenu();
+        //gm.setVisible();
+        //gm.setWaiting();
+        frame.pack();
+        frame.setVisible(true);
+        SwingUtilities.updateComponentTreeUI(frame);
     }
 }

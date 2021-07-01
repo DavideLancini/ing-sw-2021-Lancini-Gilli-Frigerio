@@ -33,7 +33,7 @@ public class PlayerBoardPanel extends JPanel {
 
         c.gridy++;
         c.insets = largeGap;
-        Resource[] depot = new Resource[6];
+        Resource[] depot = new Resource[10];
         for(int i=0; i<depot.length; i++){
             depot[i] = pb.getDepot().getResource(i);
         }

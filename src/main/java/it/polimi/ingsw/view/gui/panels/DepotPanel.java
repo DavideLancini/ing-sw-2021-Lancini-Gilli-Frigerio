@@ -45,7 +45,21 @@ public class DepotPanel extends JPanel {
         c.gridy = 2;
         this.add(new JLabel(icons[5]), c);
 
-        //TODO: add LeaderDepot
+        c.gridy = 3;
+        c.insets = new Insets(10,0,0,0);
+        if(depot[6] != Resource.EMPTY){
+            c.gridx = 0;
+            this.add(new JLabel(icons[6]),c);
+            c.gridx = 1;
+            this.add(new JLabel(icons[7]),c);
+        }
+        if(depot[8] != Resource.EMPTY){
+            c.gridx = 3;
+            this.add(new JLabel(icons[8]),c);
+            c.gridx = 4;
+            this.add(new JLabel(icons[9]),c);
+        }
+
     }
 
 }

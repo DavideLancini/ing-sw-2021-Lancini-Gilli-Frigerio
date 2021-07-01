@@ -17,7 +17,6 @@ import static java.lang.Integer.parseInt;
  *
  * @author Group 12
  */
-@SuppressWarnings("CommentedOutCode")
 public class ServerView {
 
     /**
@@ -102,14 +101,14 @@ public class ServerView {
         }
     }
 
-    /*
-      Edit the standard parameters for the server.
-      Most parameters can be modified with the Server Online.
-      Parameters that need a reboot to be activated will still be saved in the properties file (with no effect)
+    /**
+     * Edit the standard parameters for the server.
+     * Most parameters can be modified with the Server Online.
+     * Parameters that need a reboot to be activated will still be saved in the properties file (with no effect)
      */
-    /*public static void editParameters() {
+    public static void editParameters() {
         //editParameters(): for now edit the properties file
-    }*/
+    }
 
     /**
      * Simple feature to keep the console clean, tested on windows, mac os and some linux distros.
