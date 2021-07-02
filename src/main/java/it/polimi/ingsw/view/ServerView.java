@@ -103,11 +103,11 @@ public class ServerView {
 
     /**
      * Edit the standard parameters for the server.
-     * Most parameters can be modified with the Server Online.
-     * Parameters that need a reboot to be activated will still be saved in the properties file (with no effect)
+     * For parameters can be modified with the Server Online.
      */
     public static void editParameters() {
-        //editParameters(): for now edit the properties file
+        //ethe server has zro parameters that can be changed while is online
+        System.out.println("Parameters must be changed in the properties file while the server is offs");
     }
 
     /**
