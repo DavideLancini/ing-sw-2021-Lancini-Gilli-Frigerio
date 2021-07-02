@@ -20,7 +20,7 @@ public class Client {
     public static void run(String version) {
 
         //Logger Setup
-        Log.logger.setLevel(Level.ALL);
+        Log.logger.setLevel(Level.OFF);
 
         Manager manager;
         if(version.equals("cli"))manager = new CLIActionManager();

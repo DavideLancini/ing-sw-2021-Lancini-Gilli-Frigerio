@@ -13,7 +13,7 @@ import java.util.logging.Level;
 public class Server {
     public static void main( String[] args ){
         //Logger Setup
-        Log.logger.setLevel(Level.ALL);
+        Log.logger.setLevel(Level.OFF);
         //Loading parameters from the properties file or standard par. if FNF
         ServerView.loadParameters();
         //Main Cycle of the Server Interface
