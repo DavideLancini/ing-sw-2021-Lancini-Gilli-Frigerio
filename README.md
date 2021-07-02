@@ -1,14 +1,8 @@
 # ing-sw-2021-Lancini-Gilli-Frigerio
-## TODO
-### Frigerio
-- lobby
-- controllerClient
+## Componenti del Gruppo
+### Davide Lancini, Andrea Gilli, Davide Frigerio
 
-### Gilli
-- start game (initialize cards,who starts, resource choice)
+## Funzionalità Implementate
+### Regole Complete + CLI + GUI + Socket + 2 FA ()
 
-### Lancini
-- login method
-- better message handling
-- server comodity feature (change parameters with server ON,... )
-- server thread optimization (activate threads on demand)
+## Istruzioni
