@@ -106,7 +106,7 @@ public class ServerView {
      * For parameters can be modified with the Server Online.
      */
     public static void editParameters() {
-        //ethe server has zro parameters that can be changed while is online
+        //the server has zero parameters that can be changed while is online
         System.out.println("Parameters must be changed in the properties file while the server is offs");
     }
 

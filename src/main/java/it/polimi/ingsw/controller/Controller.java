@@ -311,7 +311,7 @@ public class Controller {
                 if(each != null) productions[i + 1] = each.getProduction();
 
                 else {
-                    net.send(new ServerMessageError("Invalid Production. There is no Development Card in position" + (i + 1) + "."));
+                    net.send(new ServerMessageError("Invalid Production. There is no Development Card in position  " + (i + 1) + "."));
 
                     return false;
                 }
@@ -320,14 +320,17 @@ public class Controller {
 
         for(int i = 0; i<2; i++){
             LeaderCard each = pb.getLeaderCard(i);
-            if(each != null && activated[4 + i] ) {
-                if(each.getIsActive() && each instanceof LeaderProduction) {
-                    productions[i + 4] = ((LeaderProduction) each).getProduction();
-                    choice[i] = ((LeaderProduction) each).getChoice();
-                } else {
-                    net.send(new ServerMessageError("Invalid Production. There is no leader in position " + (i + 1) + " capable of producing."));
+            if(activated[4 + i] ) {
+                if(each == null)net.send(new ServerMessageError("Invalid Production. There is no Leader Card in position " +(i+1)+"."));
+                else {
+                    if (each.getIsActive() && each instanceof LeaderProduction) {
+                        productions[i + 4] = ((LeaderProduction) each).getProduction();
+                        choice[i] = ((LeaderProduction) each).getChoice();
+                    } else {
+                        net.send(new ServerMessageError("Invalid Production. There is no leader in position " + (i + 1) + " capable of producing."));
 
-                    return false;
+                        return false;
+                    }
                 }
             }
         }

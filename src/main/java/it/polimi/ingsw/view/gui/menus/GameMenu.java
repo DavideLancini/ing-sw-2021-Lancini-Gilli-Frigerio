@@ -109,7 +109,7 @@ public class GameMenu implements ActionListener {
 
     public void setWaiting(){
         hideButtons();
-        SwingUtilities.invokeLater(() -> internalPanel.add(wait,ButtonsConstraints));
+        internalPanel.add(wait,ButtonsConstraints);
         SwingUtilities.updateComponentTreeUI(frame);
     }
 
@@ -117,10 +117,6 @@ public class GameMenu implements ActionListener {
 
 
         GridBagConstraints c = new GridBagConstraints();
-        c.gridx = MarketConstraints.gridx;
-        c.gridy = MarketConstraints.gridy - 1;
-        c.gridheight = 2;
-        internalPanel.add(new ButtonPanel(false), c);
 
         c.gridheight = 1;
         c.gridx = MarketConstraints.gridx;
@@ -175,7 +171,7 @@ public class GameMenu implements ActionListener {
 
 
     public ClientMessage turn(boolean action) {
-        showButtons(action);
+        SwingUtilities.invokeLater(()->showButtons(action));
 
         synchronized (this){
             while(this.choice == null || this.choice.equals("")) {
@@ -205,7 +201,7 @@ public class GameMenu implements ActionListener {
                     message = new DefaultProductionMenu(this.playerBoard.getDefaultProduction()).prompt();
                     break;
                 case "End Turn":
-                    setWaiting();
+                    SwingUtilities.invokeLater(this::setWaiting);
                     message = new ClientMessageEndTurn();
                     break;
                 default:
@@ -217,6 +213,10 @@ public class GameMenu implements ActionListener {
     }
 
     private void showButtons(boolean action) {
+        try{
+            internalPanel.remove(buttonpanel);
+        }
+        catch (NullPointerException ignored){}
         buttonpanel = new ButtonPanel(action);
         internalPanel.add(buttonpanel, ButtonsConstraints);
         SwingUtilities.updateComponentTreeUI(frame);

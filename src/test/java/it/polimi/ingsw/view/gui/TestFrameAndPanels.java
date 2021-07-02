@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 //USED ONLY TO TEST GUI
 @SuppressWarnings("ALL")
-public class StrdPannel {
+public class TestFrameAndPanels {
     public static void main(String[] args) throws Exception {
          JFrame frame = new JFrame();
          frame.setTitle("Prova");
