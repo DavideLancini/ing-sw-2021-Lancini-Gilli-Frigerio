@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-07-02T13:20:29.336Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.102 Safari/537.36" etag="m7OQeMFk_7Rm_toFuY_8" version="14.6.6" type="github">
+<mxfile host="app.diagrams.net" modified="2021-07-02T13:39:18.653Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.102 Safari/537.36" etag="V6wnh-cEeFV-Y2UQZgwz" version="14.6.6" type="github">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">
-    <mxGraphModel dx="994" dy="617" grid="0" gridSize="5" guides="1" tooltips="0" connect="1" arrows="0" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" background="none" math="0" shadow="0">
+    <mxGraphModel dx="1202" dy="745" grid="1" gridSize="5" guides="1" tooltips="0" connect="1" arrows="0" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -577,7 +577,7 @@
         <mxCell id="1gG3ntM72JU_8PpS5YJa-224" value="" style="points=[];perimeter=orthogonalPerimeter;shadow=0;strokeWidth=1;" vertex="1" parent="1gG3ntM72JU_8PpS5YJa-223">
           <mxGeometry x="35" y="60" width="10" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="1gG3ntM72JU_8PpS5YJa-225" value="API: Java Socket" style="verticalAlign=middle;endArrow=block;shadow=0;strokeWidth=1;labelBorderColor=#CCCCCC;fontSize=9;" edge="1" parent="1">
+        <mxCell id="1gG3ntM72JU_8PpS5YJa-225" value="API: Java Socket" style="verticalAlign=middle;endArrow=block;shadow=0;strokeWidth=1;labelBorderColor=#CCCCCC;fontSize=9;exitX=0;exitY=0.75;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="1gG3ntM72JU_8PpS5YJa-218">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="736" y="1644" as="sourcePoint" />
             <mxPoint x="467" y="1644" as="targetPoint" />
@@ -586,9 +586,9 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="1gG3ntM72JU_8PpS5YJa-226" value="return" style="verticalAlign=middle;endArrow=open;dashed=1;endSize=8;shadow=0;strokeWidth=1;sketch=0;align=center;labelBorderColor=#CCCCCC;fontSize=9;exitX=1.168;exitY=0.804;exitDx=0;exitDy=0;exitPerimeter=0;entryX=-0.111;entryY=0.789;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="1gG3ntM72JU_8PpS5YJa-212">
+        <mxCell id="1gG3ntM72JU_8PpS5YJa-226" value="return" style="verticalAlign=middle;endArrow=open;dashed=1;endSize=8;shadow=0;strokeWidth=1;sketch=0;align=center;labelBorderColor=#CCCCCC;fontSize=9;exitX=1.168;exitY=0.804;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="1gG3ntM72JU_8PpS5YJa-212">
           <mxGeometry x="0.0004" relative="1" as="geometry">
-            <mxPoint x="735.8899999999999" y="1655.58" as="targetPoint" />
+            <mxPoint x="856" y="1654" as="targetPoint" />
             <mxPoint x="588.11" y="1654.7" as="sourcePoint" />
             <Array as="points">
               <mxPoint x="657" y="1655" />
@@ -695,7 +695,7 @@
         <mxCell id="1gG3ntM72JU_8PpS5YJa-237" value="Constructor(serverPort) " style="verticalAlign=middle;endArrow=block;shadow=0;strokeWidth=1;labelBorderColor=#CCCCCC;fontSize=9;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1097" y="1634" as="sourcePoint" />
-            <mxPoint x="747" y="1634" as="targetPoint" />
+            <mxPoint x="867" y="1633" as="targetPoint" />
             <Array as="points" />
           </mxGeometry>
         </mxCell>
@@ -781,16 +781,16 @@
         </mxCell>
         <mxCell id="1gG3ntM72JU_8PpS5YJa-261" value="API: Java Socket" style="verticalAlign=middle;endArrow=block;shadow=0;strokeWidth=1;labelBorderColor=#CCCCCC;fontSize=9;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="736" y="2044" as="sourcePoint" />
+            <mxPoint x="856" y="2044" as="sourcePoint" />
             <mxPoint x="467" y="2044" as="targetPoint" />
             <Array as="points">
               <mxPoint x="655" y="2044" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="1gG3ntM72JU_8PpS5YJa-262" value="return" style="verticalAlign=middle;endArrow=open;dashed=1;endSize=8;shadow=0;strokeWidth=1;sketch=0;align=center;labelBorderColor=#CCCCCC;fontSize=9;exitX=1.168;exitY=0.804;exitDx=0;exitDy=0;exitPerimeter=0;entryX=-0.111;entryY=0.789;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="1gG3ntM72JU_8PpS5YJa-248">
+        <mxCell id="1gG3ntM72JU_8PpS5YJa-262" value="return" style="verticalAlign=middle;endArrow=open;dashed=1;endSize=8;shadow=0;strokeWidth=1;sketch=0;align=center;labelBorderColor=#CCCCCC;fontSize=9;exitX=1.168;exitY=0.804;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="1gG3ntM72JU_8PpS5YJa-248">
           <mxGeometry x="0.0004" relative="1" as="geometry">
-            <mxPoint x="735.8899999999999" y="2055.58" as="targetPoint" />
+            <mxPoint x="856" y="2055" as="targetPoint" />
             <mxPoint x="588.11" y="2054.7" as="sourcePoint" />
             <Array as="points">
               <mxPoint x="657" y="2055" />
@@ -874,7 +874,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="1gG3ntM72JU_8PpS5YJa-271" value="activateLeader(&#xa;LeaderCard)" style="verticalAlign=middle;endArrow=block;shadow=0;strokeWidth=1;labelBorderColor=#CCCCCC;fontSize=9;" edge="1" parent="1">
+        <mxCell id="1gG3ntM72JU_8PpS5YJa-271" value="takeResource()" style="verticalAlign=middle;endArrow=block;shadow=0;strokeWidth=1;labelBorderColor=#CCCCCC;fontSize=9;" edge="1" parent="1">
           <mxGeometry x="-0.0393" relative="1" as="geometry">
             <mxPoint x="1106.9999999999995" y="1994" as="sourcePoint" />
             <mxPoint x="1216.9999999999995" y="1994" as="targetPoint" />
@@ -884,7 +884,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="1gG3ntM72JU_8PpS5YJa-272" value="send(&#xa;message*)" style="verticalAlign=middle;endArrow=block;shadow=0;strokeWidth=1;labelBorderColor=#CCCCCC;fontSize=9;exitX=-0.112;exitY=0.628;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.879;entryY=0.15;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="1gG3ntM72JU_8PpS5YJa-260">
+        <mxCell id="1gG3ntM72JU_8PpS5YJa-272" value="send(ServerMessage&#xa;MarketReturn)" style="verticalAlign=middle;endArrow=block;shadow=0;strokeWidth=1;labelBorderColor=#CCCCCC;fontSize=9;exitX=-0.112;exitY=0.628;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.879;entryY=0.15;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="1gG3ntM72JU_8PpS5YJa-260">
           <mxGeometry x="0.0143" relative="1" as="geometry">
             <mxPoint x="1218.5900000000001" y="2019.8" as="sourcePoint" />
             <mxPoint x="1106.9999999999995" y="2019" as="targetPoint" />
@@ -895,7 +895,7 @@
         <mxCell id="1gG3ntM72JU_8PpS5YJa-273" value="Constructor(serverPort) " style="verticalAlign=middle;endArrow=block;shadow=0;strokeWidth=1;labelBorderColor=#CCCCCC;fontSize=9;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1096.9999999999995" y="2034" as="sourcePoint" />
-            <mxPoint x="747" y="2034" as="targetPoint" />
+            <mxPoint x="866" y="2032" as="targetPoint" />
             <Array as="points" />
           </mxGeometry>
         </mxCell>
@@ -918,16 +918,11 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="1gG3ntM72JU_8PpS5YJa-278" value="if the Depot Layout is Legal message* is ServerMessageOK, if&amp;nbsp;&lt;br&gt;its illegal message* is ServerMessageError" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=9;strokeColor=#000000;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="1294.81" y="2004" width="265" height="30" as="geometry" />
+        <mxCell id="1gG3ntM72JU_8PpS5YJa-280" value="Classes that don&#39;t communicate directly with the network are ignored (ex. classes that do Legality checks of events)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1177" y="1137" width="470" height="14" as="geometry" />
         </mxCell>
-        <mxCell id="1gG3ntM72JU_8PpS5YJa-279" value="" style="verticalAlign=middle;endArrow=open;dashed=1;endSize=8;shadow=0;strokeWidth=1;sketch=0;align=center;labelBorderColor=#CCCCCC;fontSize=9;entryX=1.019;entryY=0.627;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="1gG3ntM72JU_8PpS5YJa-278">
-          <mxGeometry x="0.0004" relative="1" as="geometry">
-            <mxPoint x="1227" y="2019.4" as="targetPoint" />
-            <mxPoint x="1241.81" y="1929" as="sourcePoint" />
-            <Array as="points" />
-            <mxPoint as="offset" />
-          </mxGeometry>
+        <mxCell id="1gG3ntM72JU_8PpS5YJa-281" value="Classes that don&#39;t communicate directly with the network are ignored (ex. classes that do Legality checks of events)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1177" y="2307" width="470" height="14" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
