@@ -73,9 +73,6 @@ class it.polimi.ingsw.psp12.controller.Game {
 + void discardsToFaith(PlayerBoard,int)
 - void checkPope()
 }
-class it.polimi.ingsw.psp12.model.singlePlayer.ActionPileTest {
-+ void getFirst()
-}
 class it.polimi.ingsw.psp12.controller.Player {
 + NetInterface net
 + PlayerBoard playerBoard
@@ -188,15 +185,6 @@ class it.polimi.ingsw.psp12.model.singlePlayer.PcPlayerBoard {
 + int getDarkFaith()
 + void addFaith(int)
 }
-class it.polimi.ingsw.psp12.model.TestPlayerBoard {
-~ PlayerBoard pb
-~ Resource[] cost
-~ Production production
-~ DevCard newCard
-~ DevCard newCard2
-+ void testAddDevCard()
-+ void testPlayerView()
-}
 class it.polimi.ingsw.psp12.model.LeaderProduction {
 - Production production
 - Resource choice
@@ -298,22 +286,6 @@ class it.polimi.ingsw.psp12.network.messages.ServerMessageError {
 class it.polimi.ingsw.psp12.ClientCLI {
 + {static} void main(String[])
 }
-class it.polimi.ingsw.psp12.model.LeaderCardViewTest {
-~ Resource[] cost
-~ Production production
-~ LeaderCard lead1
-~ LeaderCard lead2
-~ LeaderCard lead3
-~ LeaderCard lead4
-+ void leaderCardView()
-}
-class it.polimi.ingsw.psp12.model.TestDepot {
-~ Depot depot
-~ Resource resource
-+ void testDeposit()
-+ void testExtract()
-+ void testDepotView()
-}
 class it.polimi.ingsw.psp12.view.gui.menus.ConnectMenu {
 - int[] info
 ~ JTextField address
@@ -331,9 +303,6 @@ class it.polimi.ingsw.psp12.network.components.Sender {
 + void send(String)
 + void close()
 }
-class it.polimi.ingsw.psp12.model.TestStrongbox {
-+ void testContains()
-}
 class it.polimi.ingsw.psp12.network.messages.ServerMessageTurn {
 - boolean mainAction
 + <<Create>> ServerMessageTurn(boolean)
@@ -341,29 +310,6 @@ class it.polimi.ingsw.psp12.network.messages.ServerMessageTurn {
 }
 abstract class it.polimi.ingsw.psp12.network.messages.ClientMessage {
 + boolean resolve(Controller)
-}
-class it.polimi.ingsw.psp12.model.DevCardBoardTest {
-~ Resource[] r1
-~ Resource[] r2
-~ Resource[] r3
-~ Resource[] r4
-~ Production p1
-~ Production p2
-~ Production p3
-~ DevCard d1
-~ DevCard d2
-~ DevCard d3
-~ DevCardDeck[][] board
-~ DevCardBoard dcb
-+ void DevCardBordViewTest()
-}
-class it.polimi.ingsw.psp12.model.TestMarket {
-~ Market market
-~ Marble[][] testMarketBoard
-~ Marble testSideMarble
-+ void trySetSideMarbleWithCorrectValue()
-+ void trySetMarketBoardWithCorrectValues()
-+ void tryTakeResources()
 }
 class it.polimi.ingsw.psp12.view.gui.menus.DefaultProductionMenu {
 - Resource resource
@@ -538,11 +484,6 @@ abstract class it.polimi.ingsw.psp12.network.Message {
 # MessageType type
 + MessageType getType()
 }
-class it.polimi.ingsw.psp12.view.TestViewHelper {
-+ void TestS2SDevCard()
-+ void TestS2SLeader()
-+ void TestDevBoard()
-}
 class it.polimi.ingsw.psp12.view.gui.menus.ArrangeMenu {
 - Resource choice
 - JButton[] buttons
@@ -595,9 +536,6 @@ class it.polimi.ingsw.psp12.view.gui.menus.GUIActionManager {
 + ClientNetInterface connect()
 + void close()
 }
-class it.polimi.ingsw.psp12.network.SerializerTest {
-+ void testSerialize()
-}
 class it.polimi.ingsw.psp12.model.LeaderCardDeck {
 - Stack<LeaderCard> deck
 + <<Create>> LeaderCardDeck(LeaderCard[])
@@ -639,16 +577,10 @@ class it.polimi.ingsw.psp12.model.PlayerBoard {
 + int getDevCardsNumber()
 + int getTotalVP()
 }
-class it.polimi.ingsw.psp12.model.TestDownPrice {
-+ void TestPriceReduction()
-}
 class it.polimi.ingsw.psp12.view.ViewHelper {
 + {static} String displayS2S(String,String)
 + {static} String displayS2S(String[])
 + {static} String displayS2S(String,String,String)
-}
-class it.polimi.ingsw.psp12.view.gui.TestFrameAndPanels {
-+ {static} void main(String[])
 }
 class it.polimi.ingsw.psp12.network.messages.ServerMessageMarketReturn {
 - Collection<Resource> resources
@@ -707,9 +639,6 @@ class it.polimi.ingsw.psp12.model.LeaderDepot {
 + void toggleActive(Depot)
 + Resource getRequirements()
 + String view()
-}
-class it.polimi.ingsw.psp12.model.TestProduction {
-+ void tryProduceWithCorrectInput()
 }
 class it.polimi.ingsw.psp12.view.gui.menus.OfflineMenu {
 + <<Create>> OfflineMenu()
@@ -773,31 +702,10 @@ class it.polimi.ingsw.psp12.model.LeaderCard {
 + String view()
 + String getPath()
 }
-class it.polimi.ingsw.psp12.controller.TestController {
-~ LeaderCard[] leaders
-~ PlayerBoard pb
-~ DevCardDeck[][] board
-~ DevCardBoard dcb
-~ Market market
-~ Controller controller
-+ void TestSellLeader()
-+ void TestActivateLeader()
-+ void TestBuyDevCard()
-+ void TestProduce()
-}
 class it.polimi.ingsw.psp12.network.messages.ClientMessageChosenLeaders {
 - int[] positions
 + <<Create>> ClientMessageChosenLeaders(int,int)
 + int[] getPositions()
-}
-class it.polimi.ingsw.psp12.model.DevCardTest {
-~ Resource[] r1
-~ Resource[] r2
-~ Resource[] r3
-~ Production p1
-~ DevCard d1
-+ void getProduction()
-+ void devCardView()
 }
 class it.polimi.ingsw.psp12.network.messages.ServerMessageTwoMarbleLeaders {
 ~ Resource one
