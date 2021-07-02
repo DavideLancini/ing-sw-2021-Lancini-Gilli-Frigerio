@@ -3,6 +3,6 @@
 ### Davide Lancini, Andrea Gilli, Davide Frigerio
 
 ## Funzionalità Implementate
-### Regole Complete + CLI + GUI + Socket + 2 FA ()
+### Regole Complete + CLI + GUI + Socket + 2 FA (partite multiple, partite in locale)
 
 ## Istruzioni
