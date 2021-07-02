@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-07-02T13:15:35.624Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.102 Safari/537.36" etag="lxiEO0iwOAcuqBssoavo" version="14.6.6" type="github">
+<mxfile host="app.diagrams.net" modified="2021-07-02T13:19:06.111Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.102 Safari/537.36" etag="2Kq1R8viVp0KAXURXxpM" version="14.6.6" type="github">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">
     <mxGraphModel dx="2884" dy="1788" grid="0" gridSize="5" guides="1" tooltips="0" connect="1" arrows="0" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
@@ -722,7 +722,7 @@
         <mxCell id="1gG3ntM72JU_8PpS5YJa-241" value="" style="points=[];perimeter=orthogonalPerimeter;shadow=0;strokeWidth=1;" vertex="1" parent="1gG3ntM72JU_8PpS5YJa-240">
           <mxGeometry x="35" y="60" width="10" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="1gG3ntM72JU_8PpS5YJa-242" value="&lt;span style=&quot;font-size: 18px&quot;&gt;2. Take Resources&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="1gG3ntM72JU_8PpS5YJa-242" value="&lt;span style=&quot;font-size: 18px&quot;&gt;3. Take Resources&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="62" y="1794" width="1020" height="20" as="geometry" />
         </mxCell>
         <mxCell id="1gG3ntM72JU_8PpS5YJa-243" value="ClientNet&#xa;Interface" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;shadow=0;strokeWidth=1;" vertex="1" parent="1">
